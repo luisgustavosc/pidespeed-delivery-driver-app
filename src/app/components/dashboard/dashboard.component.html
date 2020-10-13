@@ -1,0 +1,210 @@
+<app-header></app-header>
+<app-sidebar></app-sidebar>
+<!-- ============================================================== -->
+<!-- wrapper  -->
+<!-- ============================================================== -->
+<div class="dashboard-wrapper">
+  <div class="dashboard-ecommerce">
+    <div class="container-fluid dashboard-content ">
+      <!-- ============================================================== -->
+      <!-- pageheader  -->
+      <!-- ============================================================== -->
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+          <div class="page-header">
+            <div class="d-flex justify-content-between align-items-center">
+              <h2 class="pageheader-title my-3">Bienvenido</h2>
+              <label class='toggle-label position-relative shadow-sm rounded-pill d-none d-lg-block'>
+                <input type='checkbox' (click)="Apertura()" [checked]="empresa.abierto === 1" class="w-100 h-100 position-absolute" />
+                <span class='back rounded-pill'>
+                  <span class='toggle rounded-pill'></span>
+                  <span class='label on d-flex align-items-center justify-content-center top-0 left-0 bottom-0'>Abierto</span>
+                  <span class='label off d-flex align-items-center justify-content-center top-0 right-0 bottom-0'>Cerrado</span>  
+                </span>
+              </label>
+            </div>
+            <div class="alert danger-alert" *ngIf="empresa.publish === 0">
+              <h3 class="m-0">Su empresa no esta visible</h3>
+            </div>
+            <form *ngIf="empresa.modDollar == 1 && empresa.tasa_pidespeed != 1" [formGroup]="precioDolar" class="d-flex w-100 w-md-50 mx-auto">
+              <mat-form-field  appearance="outline" class="w-100 mr-2" color="accent">
+                <mat-label>Precio del dólar</mat-label>
+                <input formControlName="DolarDelDia" matInput placeholder="Precio del dolar" type="number">
+              </mat-form-field>
+              <ng-container *ngIf="lazyloader; then cargando; else NoCargando"></ng-container>
+              <ng-template #NoCargando>
+                <div class="d-flex align-center justify-center">
+                  <button (click)="actualizarTasa()" mat-button class="text-primary text-center my-3">Actualizar</button>
+                </div>
+              </ng-template>
+              <ng-template #cargando>
+                <div class="lazyloader"></div>
+              </ng-template>
+            </form>
+          </div>
+        </div>
+      </div>
+      <!-- ============================================================== -->
+      <!-- end pageheader  -->
+      <!-- ============================================================== -->
+      <div class="ecommerce-widget">
+        <!-- ============================================================== -->
+        <!--  tarjetas de ingresos  -->
+        <!-- ============================================================== -->
+        <div class="row">
+          <div class="col-xl-4 col-md-6 col-sm-12 col-12">
+            <div class="card border-3">
+              <div class="card-body tarjetasDashboard">
+                <h5  class="subtitles-card text-muted">Ingresos del día</h5>
+                <div class="metric-value d-inline-block">
+                  <h1 class="mb-1">{{ventasDia | currency:"BsS. "}}</h1>
+                </div>
+                <div class="metric-label d-inline-block float-right text-success font-weight-bold">
+                  <span class=""><i class="fas fa-money-bill-wave st-icon bg-danger"></i></span><span class="ml-1"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-4 col-md-6 col-sm-12 col-12">
+            <div class="card border-3">
+              <div class="card-body tarjetasDashboard ">
+                <h5  class="subtitles-card text-muted">Ingresos - últimos 7 días</h5>
+                <div class="metric-value d-inline-block">
+                  <h1 class="mb-1">{{ventasSemana | currency:"BsS. "}}</h1>
+                </div>
+                <div class="metric-label d-inline-block float-right text-success font-weight-bold">
+                  <span class=""><i class="fas fa-money-bill-wave st-icon bg-success"></i></span><span class="ml-1"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-4 col-md-6 col-sm-12 col-12">
+            <div class="card border-3">
+              <div class="card-body tarjetasDashboard">
+                <h5  class="subtitles-card text-muted">Ingresos del mes</h5>
+                <div class="metric-value d-inline-block">
+                  <h1 class="mb-1">{{ventasMes | currency:"BsS. "}}</h1>
+                </div>
+                <div class="metric-label d-inline-block float-right text-success font-weight-bold">
+                  <span class=""><i class="fas fa-money-bill-wave st-icon bg-danger"></i></span><span class="ml-1"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+         <!-- ============================================================== -->
+        <!--  FIn tarjetas de ingresos  -->
+        <!-- ============================================================== -->
+
+        <div class="row">
+          <!-- ============================================================== -->
+          <!--  area chart  -->
+          <!-- ============================================================== -->
+          <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 col-12">
+            <div class="card">
+              <h5 class="card-header">Ventas</h5>
+              <div class="card-body">
+                <div id="c3chart_area"></div>
+              </div>
+            </div>
+          </div>
+          <!-- ============================================================== -->
+          <!--  Fin area chart  -->
+          <!-- ============================================================== -->
+          <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
+            <div class="card border-3 border-top border-secondary-green">
+              <div class="card-body tarjetasDashboard text-center bg-success">
+                <h5 class="subtitles-card text-light">Órdenes de hoy</h5>
+                <div class="metric-value d-inline-block">
+                  <h1 class="mb-1 text-light display-3">{{ordenesDia}}</h1>
+                </div>
+              </div>
+            </div>
+            <div class="card border-3 border-top border-top-primary-red">
+              <div class="card-body tarjetasDashboard text-center bg-secondary">
+                <h5 class="subtitles-card text-light">Visitas</h5>
+                <div class="metric-value d-inline-block">
+                  <h1 class="mb-1 text-light display-3">{{visitas}}</h1>
+                </div>
+              </div>
+            </div>
+          </div> 
+        </div>
+
+        <!-- ============================================================== -->
+        <!-- Ordenes recientes  -->
+        <!-- ============================================================== -->
+        <div class="row">            
+          <div class="col-xl-9 col-lg-9 col-md-9 col-sm-12 col-12">
+            <div class="card">
+              <h5 class="card-header d-flex py-4 justify-content-between align-items-center subtitles-card">Órdenes recientes </h5>
+              <div class="card-body p-0">
+                <div class="table-responsive">
+                  <table class="table text-center">
+                    <thead class="bg-light">
+                      <tr class="border-0">
+                        <th class="border-0">Orden</th>
+                        <th class="border-0">Cliente</th>
+                        <th class="border-0">Fecha del pedido</th>
+                        <th class="border-0">Estado</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let orden of ordenes; index as i">
+                        <ng-container *ngIf="i <= 4">
+                          <td>{{orden.codigo}}</td>
+                          <td class="text-capitalize">{{usuarios[i].nombre}} {{usuarios[i].apellido}}</td>
+                          <td>{{orden.fecha |date:"dd-MM-yyyy"}} - {{orden.fecha |date:"shortTime" }}</td>
+                          <td>
+                            <span *ngIf="orden.terminado == 1 && orden.entregado == 1" class="labelStatus labelStatus-success text-capitalize">Entregado</span>
+                            <span *ngIf="orden.terminado == 1 && orden.entregado == 0" class=" text-capitalize labelStatus labelStatus-warning">Por retirar</span>
+                            <span *ngIf="orden.terminado == 0 && orden.entregado == 0" class="text-capitalize labelStatus labelStatus-danger">En proceso</span>
+                          </td>
+                        </ng-container>
+                      </tr>                                                
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12">
+            <div class="card border-3 border-top border-secondary w-100">
+              <div class="card-body  text-center">
+                <h5  class="subtitles-card text-muted">Órdenes  por entregar</h5>
+                <div class="metric-value d-inline-block">
+                  <h1 class="mb-1 text-success display-3">{{terminados}}</h1>
+                </div>
+              </div>
+            </div>
+            <div class="card border-3 border-top border-top-primary w-100">
+              <div class="card-body  text-center">
+                <h5  class="subtitles-card text-muted">Órdenes  Entregadas</h5>
+                <div class="metric-value d-inline-block">
+                  <h1 class="mb-1 text-secondary display-3">{{entregados}}</h1>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- ============================================================== -->
+        <!-- Ordenes recientes  -->
+        <!-- ============================================================== -->
+      </div>
+    </div>
+  </div>
+  <!-- ============================================================== -->
+  <!-- footer -->
+  <!-- ============================================================== -->
+  <app-footer></app-footer>
+  <!-- ============================================================== -->
+  <!-- end footer -->
+  <!-- ============================================================== -->
+</div>
+<!-- ============================================================== -->
+<!-- end wrapper  -->
+<!-- ============================================================== -->
+      
+      
+      
+      

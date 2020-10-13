@@ -1,0 +1,6 @@
+{
+  "appId": "com.admin.pidespeed",
+  "appName": "admin-pidespeed",
+  "webDir": "www",
+  "npmClient": "npm"
+}

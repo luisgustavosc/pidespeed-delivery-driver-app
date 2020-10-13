@@ -1,0 +1,666 @@
+<app-header></app-header>
+<app-sidebar></app-sidebar>
+<!-- ============================================================== -->
+<!-- wrapper  -->
+<!-- ============================================================== -->
+<div class="dashboard-wrapper">
+  <div class="dashboard-ecommerce">
+    <div class="container-fluid dashboard-content ">
+      <!-- ============================================================== -->
+      <!-- pageheader  -->
+      <!-- ============================================================== -->
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+          <div class="page-header">
+            <div class="d-sm-flex justify-content-between align-items-center">
+
+              <h2 class="pageheader-title">
+                <a [routerLink]="['/products']" class="d-flex align-items-center pl-0 btn">
+                  <i class="material-icons">arrow_back</i>Volver
+                </a>
+                {{producto.nombre}} <button class="far fa-eye-slash btn text-p-medium" *ngIf="producto.publish === 0"
+                  matTooltip="Este producto NO esta visible." matTooltipClass="alertTooltip"></button>
+              </h2>
+
+              <ng-container *ngIf="lazyloader; then cargando; else NoCargando"></ng-container>
+              <ng-template #NoCargando>
+                <div>
+                  <button (click)="editarProducto()" [disabled]="!infoProducto.valid || !precioProducto.valid"
+                    class="float-right btn-custom-primary px-4 py-1" mat-raised-button>Guardar</button>
+                  <button (click)="deleteProd(producto.id)"
+                    class="float-right btn-custom-outline px-4 py-1 shadow-sm mx-2" mat-raised-button>Eliminar</button>
+                </div>
+              </ng-template>
+              <ng-template #cargando>
+                <div class="position-relative">
+                  <div class="lazyloader ml-auto"></div>
+                </div>
+              </ng-template>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- ============================================================== -->
+      <!-- end pageheader  -->
+      <!-- ============================================================== -->
+      <!-- ============================================================== -->
+      <!-- Body page  -->
+      <!-- ============================================================== -->
+      <div class="ecommerce-widget">
+        <main role="main" class="container">
+          <div class="row">
+            <div class="col-md">
+              <div class="starter-template">
+
+                <!-- ============================================================== -->
+                <!-- Links de tab  -->
+                <!-- ============================================================== -->
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                  <li class="nav-item">
+                    <a class="nav-link active linkTab" id="home-tab" data-toggle="tab" href="#infoP" role="tab"
+                      aria-controls="home" aria-selected="true">Detalle del producto</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link linkTab" id="contact-tab" data-toggle="tab" href="#precio" role="tab"
+                      aria-controls="contact" aria-selected="false">Precio</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link linkTab" id="profile-tab" data-toggle="tab" href="#imageP" role="tab"
+                      aria-controls="profile" aria-selected="false">Imagen de producto</a>
+                  </li>
+                </ul>
+                <!-- ============================================================== -->
+                <!-- Fin Links de tab  -->
+                <!-- ============================================================== -->
+                <ng-container *ngIf="espera; then cargandoProducto; else NoCargandoProducto"></ng-container>
+                <ng-template #cargandoProducto>
+                  <div class="loader-container">
+                    <div class="lazyloader"></div>
+                  </div>
+                </ng-template>
+                <ng-template #NoCargandoProducto>
+                  <div class="tab-content" id="myTabContent">
+                    <!-- ============================================================== -->
+                    <!-- Tab de informacion de producto  -->
+                    <!-- ============================================================== -->
+                    <div class="tab-pane masonry-container fade show active" id="infoP" role="tabpanel"
+                      aria-labelledby="home-tab">
+                      <div class="card-columns p-lg-4 row">
+                        <form [formGroup]="infoProducto" class="col-lg-7">
+                          <mat-form-field class="w-100" appearance="outline" color="accent">
+                            <mat-label>Nombre del producto</mat-label>
+                            <input class="text-capitalize" formControlName="nombre" matInput
+                              placeholder="Nombre del producto">
+                            <mat-error class="my-2" *ngIf="infoProducto.controls['nombre'].errors?.required">Este campo
+                              es obligatorio</mat-error>
+                          </mat-form-field>
+
+                          <mat-form-field class="w-100" appearance="outline" color="accent">
+                            <mat-label>Descripción del producto</mat-label>
+                            <textarea class="text-capitalize" formControlName="descripcion" matInput
+                              placeholder="Descripción del producto"></textarea>
+                            <mat-error class="my-2" *ngIf="infoProducto.controls['descripcion'].errors?.required">Este
+                              campo es obligatorio</mat-error>
+                          </mat-form-field>
+
+                          <mat-form-field class="w-100" appearance="outline" color="accent">
+                            <mat-label>Categoria</mat-label>
+                            <mat-select formControlName="cat" [(value)]="categoriaSelected">
+                              <mat-option *ngFor="let cat of categorias" [value]="cat.id">
+                                {{cat.nombre | titlecase}}
+                              </mat-option>
+                            </mat-select>
+                            <mat-error class="my-2" *ngIf="infoProducto.controls['cat'].errors?.required">Este campo es
+                              obligatorio</mat-error>
+                          </mat-form-field>
+
+                          <mat-form-field appearance="outline" class="w-100 pb-2" color="accent">
+                            <mat-label>Cantidad</mat-label>
+                            <input matInput type="number" formControlName="cantidad" min="0">
+                            <mat-error class="my-2" *ngIf="infoProducto.controls['cantidad'].errors?.required">Este
+                              campo es obligatorio</mat-error>
+                          </mat-form-field>
+
+                          <mat-card-actions class="px-3">
+                            <mat-checkbox #ilimitado formControlName="ilimitado">Ilimitado</mat-checkbox>
+                          </mat-card-actions>
+
+                          <mat-form-field color="accent" class="w-100 pb-3" appearance="outline">
+                            <mat-label>¿Desea que este producto sea visible?</mat-label>
+                            <mat-select formControlName="publish" [(value)]="VisibleProd">
+                              <mat-option [value]=visible>Si</mat-option>
+                              <mat-option [value]=noVisible>No</mat-option>
+                            </mat-select>
+                            <mat-error class="my-2" *ngIf="infoProducto.controls['publish'].errors?.required">Este campo
+                              es obligatorio</mat-error>
+                          </mat-form-field>
+
+                          <mat-form-field color="accent" class="w-100" appearance="outline"
+                            *ngIf="empresa.modDollar == 0">
+                            <mat-label>¿Tiene un precio adicional si es para llevar?</mat-label>
+                            <input matInput type="number" formControlName="toGo" min="0">
+                            <mat-error class="my-2" *ngIf="infoProducto.controls['toGo'].errors?.required">Este campo es
+                              obligatorio</mat-error>
+                          </mat-form-field>
+
+                          <ng-container *ngIf="empresa.modDollar == 1">
+                            <p class="mb-0">¿Tiene un precio adicional si es para llevar?</p>
+                            <mat-form-field color="accent" class="w-100" appearance="outline">
+                              <mat-label>precio para llevar en $</mat-label>
+                              <input (input)="cambioToGo($event)" matInput type="number" formControlName="toGo_dl"
+                                min="0">
+                              <mat-error class="my-2" *ngIf="infoProducto.controls['toGo_dl'].errors?.required">Este
+                                campo es obligatorio</mat-error>
+                            </mat-form-field>
+
+                            <mat-form-field color="accent" class="w-100" appearance="outline">
+                              <mat-label>precio para llevar en Bss</mat-label>
+                              <input matInput type="number" formControlName="toGo" min="0">
+                              <mat-error class="my-2" *ngIf="infoProducto.controls['toGo'].errors?.required">Este campo
+                                es obligatorio</mat-error>
+                            </mat-form-field>
+                          </ng-container>
+
+                          <mat-checkbox formControlName="toGoCond" class="w-100 d-block">¿No esta disponible para
+                            llevar?</mat-checkbox>
+                          <mat-error class="my-2" *ngIf="infoProducto.controls['toGoCond'].errors?.required">Este campo
+                            es obligatorio</mat-error>
+
+                          <mat-checkbox formControlName="acompsCond" class="w-100 d-block">¿Este producto tiene
+                            acompañantes?</mat-checkbox>
+
+                          <ng-container *ngIf="infoProducto.value.acompsCond" class="w-100" appearance="outline"
+                            color="accent">
+                            <ng-container *ngIf="acomps.length == 0; then sinAccompAgg; else ConAccompAgg">
+                            </ng-container>
+                            <ng-template #sinAccompAgg>
+                              <mat-error class="text-center">No tienes acompañamientos disponibles.
+                                <button class="" mat-button type="button" [routerLink]="['/products/accompaniments']"
+                                  data-dismiss="modal">Crear
+                                  acompañamiento</button>
+                              </mat-error>
+                            </ng-template>
+
+                            <ng-template #ConAccompAgg>
+                              <mat-form-field color="accent" class="w-100 pb-3" appearance="outline">
+                                <mat-label>Escoge los acompañantes</mat-label>
+                                <mat-select multiple formControlName="acomps" [(value)]="acompSelected"
+                                  (ngModelChange)="verificarValor()">
+                                  <mat-option *ngFor="let acomp of acomps" [value]="acomp.id">
+                                    {{acomp.nombre | titlecase}}
+                                  </mat-option>
+                                </mat-select>
+                                <mat-error class="my-2" *ngIf="infoProducto.controls['acomps'].errors?.required">Este
+                                  campo es obligatorio</mat-error>
+                              </mat-form-field>
+
+                              <ng-container *ngIf="this.infoProducto.value.acomps.includes(1)">
+
+                                <mat-form-field color="accent" class="w-100 pb-1" appearance="outline">
+                                  <mat-label>Escoge los Siropes</mat-label>
+                                  <mat-select multiple formControlName="siropes">
+                                    <mat-option *ngFor="let sirope of siropes" [value]="sirope.id">
+                                      {{sirope.nombre | titlecase}}
+                                    </mat-option>
+                                  </mat-select>
+                                  <mat-error class="my-2" *ngIf="infoProducto.controls['siropes'].errors?.required">Este
+                                    campo es obligatorio</mat-error>
+                                </mat-form-field>
+
+                                <mat-form-field color="accent" class="w-100 pb-1" appearance="outline">
+                                  <mat-label>Cantidad de Siropes</mat-label>
+                                  <input matInput type="number" formControlName="cantidadAcomp0" min="1">
+                                  <mat-error class="my-2"
+                                    *ngIf="infoProducto.controls['cantidadAcomp0'].errors?.required">Este campo es
+                                    obligatorio</mat-error>
+                                </mat-form-field>
+                                <hr>
+                              </ng-container>
+
+                              <ng-container *ngIf="this.infoProducto.value.acomps.includes(2)">
+
+                                <mat-form-field color="accent" class="w-100 pb-1" appearance="outline">
+                                  <mat-label>Escoge los toppings</mat-label>
+                                  <mat-select multiple formControlName="toppings">
+                                    <mat-option *ngFor="let topping of toppings" [value]="topping.id">
+                                      {{topping.nombre | titlecase}}
+                                    </mat-option>
+                                  </mat-select>
+                                  <mat-error class="my-2" *ngIf="infoProducto.controls['toppings'].errors?.required">
+                                    Este campo es obligatorio</mat-error>
+                                </mat-form-field>
+
+                                <mat-form-field color="accent" class="w-100 pb-1" appearance="outline">
+                                  <mat-label>Cantidad de Toppings</mat-label>
+                                  <input matInput type="number" formControlName="cantidadAcomp1" min="1">
+                                  <mat-error class="my-2"
+                                    *ngIf="infoProducto.controls['cantidadAcomp1'].errors?.required">Este campo es
+                                    obligatorio</mat-error>
+                                </mat-form-field>
+                                <hr>
+                              </ng-container>
+                              <ng-container *ngIf="this.infoProducto.value.acomps.includes(3)">
+
+                                <mat-form-field color="accent" class="w-100 pb-1" appearance="outline">
+                                  <mat-label>Escoge los bebidas</mat-label>
+                                  <mat-select multiple formControlName="bebidas">
+                                    <mat-option *ngFor="let bebida of bebidas" [value]="bebida.id">
+                                      {{bebida.nombre | titlecase}}
+                                    </mat-option>
+                                  </mat-select>
+                                  <mat-error class="my-2" *ngIf="infoProducto.controls['bebidas'].errors?.required">Este
+                                    campo es obligatorio</mat-error>
+                                </mat-form-field>
+
+                                <mat-form-field color="accent" class="w-100 pb-1" appearance="outline">
+                                  <mat-label>Cantidad de Bebidas</mat-label>
+                                  <input matInput type="number" formControlName="cantidadAcomp2" min="1">
+                                  <mat-error class="my-2"
+                                    *ngIf="infoProducto.controls['cantidadAcomp2'].errors?.required">Este campo es
+                                    obligatorio</mat-error>
+                                </mat-form-field>
+                                <hr>
+                              </ng-container>
+                            </ng-template>
+                          </ng-container>
+
+                          <mat-checkbox formControlName="adicionalCond" class="w-100 d-block">¿Este producto tiene
+                            adicionales?</mat-checkbox>
+                          <mat-error class="my-2" *ngIf="infoProducto.controls['adicionalCond'].errors?.required">Este
+                            campo es obligatorio</mat-error>
+
+                          <ng-container *ngIf="infoProducto.value.adicionalCond" class="w-100" appearance="outline"
+                            color="accent">
+                            <ng-container *ngIf="adicionales.length == 0; then sinAdicionales; else ConAdicionales">
+                            </ng-container>
+                            <ng-template #sinAdicionales>
+                              <mat-checkbox disabled formControlName="adicionalCond" class="w-100 d-block">¿Este
+                                producto contiene adicionales?</mat-checkbox>
+                              <mat-error class="text-center">No tienes Adicionales disponibles.<button mat-button
+                                  type="button" [routerLink]="['/products/aditional']" data-dismiss="modal">Crear
+                                  Adicional</button></mat-error>
+                            </ng-template>
+                            <ng-template #ConAdicionales>
+                              <mat-form-field color="accent" class="w-100 pb-3" appearance="outline">
+                                <mat-label>Escoge los adicionales</mat-label>
+                                <mat-select multiple formControlName="adicionales">
+                                  <mat-option *ngFor="let adicional of adicionales" [value]="adicional.id">
+                                    {{adicional.nombre | titlecase}}
+                                  </mat-option>
+                                </mat-select>
+                                <mat-error class="my-2" *ngIf="infoProducto.controls['adicionales'].errors?.required">
+                                  Este campo es obligatorio</mat-error>
+                              </mat-form-field>
+                            </ng-template>
+                          </ng-container>
+
+                          <mat-checkbox formControlName="tamanoCond" class="w-100 d-block">¿Este producto tiene
+                            diferentes tamaños?</mat-checkbox>
+
+                          <ng-container *ngIf="infoProducto.value.tamanoCond" class="w-100" appearance="outline"
+                            color="accent">
+                            <ng-container *ngIf="tamanos.length == 0; then sinTamanos; else ConTamanos"></ng-container>
+                            <ng-template #sinTamanos>
+                              <mat-error class="text-center">No tienes Tamaños disponibles.
+                                <button class="" mat-button type="button" [routerLink]="['/products/size']">Crear
+                                  Tamaño</button>
+                              </mat-error>
+                            </ng-template>
+                            <ng-template #ConTamanos>
+                              <mat-form-field class="w-100 pb-3" appearance="outline" color="accent">
+                                <mat-label>Escoge los Tamaños</mat-label>
+                                <mat-select multiple formControlName="tamano" [(value)]="tamanoSelected"
+                                  (ngModelChange)="modificarTamanos()">
+                                  <mat-option *ngFor="let tamano of tamanos" [value]="tamano.id">
+                                    {{tamano.nombre | titlecase}}
+                                  </mat-option>
+                                </mat-select>
+                                <mat-error class="my-2" *ngIf="infoProducto.controls['tamano'].errors?.required">Este
+                                  campo es obligatorio</mat-error>
+                              </mat-form-field>
+                            </ng-template>
+                          </ng-container>
+
+                          <mat-checkbox formControlName="saboresCond" class="w-100 d-block my-2">¿Este producto tiene
+                            diferentes sabores?</mat-checkbox>
+                          <mat-error class="my-2" *ngIf="infoProducto.controls['saboresCond'].errors?.required">Este
+                            campo es obligatorio</mat-error>
+
+                          <ng-container *ngIf="infoProducto.value.saboresCond" class="w-100" appearance="outline"
+                            color="accent">
+                            <ng-container *ngIf="sabores.length == 0; then sinAccompAgg; else ConAccompAgg">
+                            </ng-container>
+                            <ng-template #sinAccompAgg>
+                              <mat-error class="text-center">No tienes sabores disponibles. <button class="" mat-button
+                                  type="button" [routerLink]="['/products/sabores']" data-dismiss="modal">Crear
+                                  sabor</button></mat-error>
+                            </ng-template>
+                            <ng-template #ConAccompAgg>
+                              <mat-form-field color="accent" class="w-100 pb-3" appearance="outline">
+                                <mat-label>Escoge los sabores</mat-label>
+                                <mat-select multiple formControlName="sabores" (ngModelChange)="modificarSabores()">
+                                  <mat-option *ngFor="let sabor of sabores; let i = index" class="precioSelect"
+                                    [value]="sabor.id">
+                                    {{sabor.nombre | titlecase}}
+                                  </mat-option>
+                                </mat-select>
+                                <mat-error class="my-2" *ngIf="infoProducto.controls['sabores'].errors?.required">Este
+                                  campo es obligatorio</mat-error>
+                              </mat-form-field>
+
+                              <mat-card-actions class="px-3">
+                                <mat-checkbox #mismoPrecioCond formControlName="mismoPrecioCond">Todos los sabores
+                                  tienen el mismo precio</mat-checkbox>
+                                <mat-error class="my-2"
+                                  *ngIf="infoProducto.controls['mismoPrecioCond'].errors?.required">Este campo es
+                                  obligatorio</mat-error>
+                              </mat-card-actions>
+                            </ng-template>
+                          </ng-container>
+                        </form>
+                      </div>
+                    </div>
+                    <!-- ============================================================== -->
+                    <!-- Fin Tab de informacion de producto  -->
+                    <!-- ============================================================== -->
+
+                    <!-- ============================================================== -->
+                    <!-- Tab de precio  -->
+                    <!-- ============================================================== -->
+                    <div class="tab-pane fade masonry-container" id="precio" role="tabpanel"
+                      aria-labelledby="contact-tab">
+                      <div *ngIf="empresa.modDollar == 1">
+                        <div class="alert danger-alert" *ngIf="empresa.tasa == 0 && empresa.tasa_pidespeed != 1">
+                          <h3 class="m-0">No ha asignado una tasa de cambio, se usará la tasa general de pidespeed
+                            ({{tasa}} Bss)</h3>
+                        </div>
+                        <div class="alert danger-alert" *ngIf="empresa.tasa_pidespeed == 1">
+                          <h3 class="m-0">La tasa actual de pidespeed es {{tasa}} Bss</h3>
+                        </div>
+                      </div>
+                      <div class="card-group mt-2 p-lg-4 row">
+                        <form [formGroup]="precioProducto" class="col-lg-7">
+                          <mat-error class="my-2"
+                            *ngIf="infoProducto.value.tamanoCond && infoProducto.value.tamano.length == 0">
+                            Debes escoger un tamaño
+                          </mat-error>
+                          <mat-error class="my-2"
+                            *ngIf="infoProducto.value.saboresCond && infoProducto.value.sabores.length == 0">
+                            Debes escoger un sabor
+                          </mat-error>
+                          <!-- Cuando la empres SI trabaja con dolares -->
+                          <ng-container *ngIf="!infoProducto.value.saboresCond">
+                            <mat-form-field *ngIf="!infoProducto.value.tamanoCond && empresa.modDollar == 1"
+                              appearance="outline" class="w-100" color="accent">
+                              <mat-label>Precio</mat-label>
+                              <span matSuffix>$ &nbsp;</span>
+                              <input (input)="cambio($event,'no')" formControlName="precioUnico_dl" matInput
+                                placeholder="Precio" type="number" min="0">
+                              <mat-error class="my-2"
+                                *ngIf="precioProducto.controls['precioUnico_dl'].errors?.required">Este campo es
+                                obligatorio </mat-error>
+                            </mat-form-field>
+                          </ng-container>
+
+                          <ng-container *ngIf="!infoProducto.value.saboresCond">
+                            <mat-form-field *ngIf="!infoProducto.value.tamanoCond && empresa.modDollar == 1"
+                              appearance="outline" class="w-100" color="accent">
+                              <mat-label>Precio al cambio</mat-label>
+                              <span matSuffix>BsS &nbsp;</span>
+                              <input formControlName="precioUnico" matInput placeholder="Precio" type="number" min="0">
+                              <mat-error class="my-2" *ngIf="precioProducto.controls['precioUnico'].errors?.required">
+                                Este campo es obligatorio</mat-error>
+                            </mat-form-field>
+                          </ng-container>
+                          <!-- Cuando la empres NO trabaja con dolares -->
+                          <ng-container *ngIf="!infoProducto.value.saboresCond">
+                            <mat-form-field *ngIf="!infoProducto.value.tamanoCond && empresa.modDollar == 0"
+                              appearance="outline" class="w-100" color="accent">
+                              <mat-label>Precio</mat-label>
+                              <span matSuffix>BsS &nbsp;</span>
+                              <input formControlName="precioUnico" matInput placeholder="Precio" type="number" min="0">
+                              <mat-error class="my-2" *ngIf="precioProducto.controls['precioUnico'].errors?.required">
+                                Este campo es obligatorio</mat-error>
+                            </mat-form-field>
+                          </ng-container>
+
+                          <!-- Cuando la empres SI trabaja con dolares con tamaños-->
+                          <div *ngIf="infoProducto.value.tamanoCond">
+                            <div class="w-100" *ngIf="empresa.modDollar == 1">
+                              <ng-container formArrayName="tamanos_dl"
+                                *ngFor="let tamanoSelected of tamanos_dl.controls;  let i = index">
+                                <div [formGroupName]="i">
+                                  <mat-form-field appearance="outline" class="w-100" color="accent">
+                                    <mat-label>Precio {{tamanoSelected.value.nombre}}</mat-label>
+                                    <span matSuffix style="font-size: 22px;">$ &nbsp;</span>
+                                    <input matInput formControlName="precio" (input)="cambio($event,i)"
+                                      class="precioTamano_dl" id="precioTamano$-{{tamanoSelected.id}}"
+                                      placeholder="Precio" type="number" pattern="^[0-9.]+" min="0">
+                                    <mat-error class="my-2"
+                                      *ngIf="tamanos_dl.controls[i].controls.precio.errors?.required">Este campo es
+                                      obligatorio</mat-error>
+                                  </mat-form-field>
+                                </div>
+                              </ng-container>
+
+                              <ng-container formArrayName="tamanos"
+                                *ngFor="let tamanoSelected of tamanosForm.controls;  let i = index">
+                                <div [formGroupName]="i">
+                                  <mat-form-field appearance="outline" class="w-100" color="accent">
+                                    <mat-label>Precio {{tamanoSelected.value.nombre}} al cambio</mat-label>
+                                    <span matSuffix style="font-size: 22px;">BsS &nbsp;</span>
+                                    <input matInput formControlName="precio" class="precioTamano"
+                                      id="precioTamano-{{tamanoSelected.id}}" placeholder="Precio al cambio"
+                                      type="number" pattern="^[0-9.]+" min="0">
+                                    <mat-error class="my-2"
+                                      *ngIf="tamanosForm.controls[i].controls.precio.errors?.required">Este campo es
+                                      obligatorio</mat-error>
+                                  </mat-form-field>
+                                </div>
+                              </ng-container>
+                            </div>
+
+                            <!-- Cuando la empres NO trabaja con dolares con tamaños -->
+                            <div *ngIf="empresa.modDollar == 0">
+                              <ng-container formArrayName="tamanos"
+                                *ngFor="let tamanoSelected of tamanosForm.controls;  let i = index">
+                                <div [formGroupName]="i">
+                                  <mat-form-field appearance="outline" class="w-100" color="accent">
+                                    <mat-label>Precio {{tamanoSelected.value.nombre}}</mat-label>
+                                    <span matSuffix style="font-size: 22px;">BsS &nbsp;</span>
+                                    <input matInput formControlName="precio" class="precioTamano"
+                                      id="precioTamano-{{tamanoSelected.id}}" placeholder="Precio al cambio"
+                                      type="number" pattern="^[0-9.]+" min="0">
+                                    <mat-error class="my-2"
+                                      *ngIf="tamanosForm.controls[i].controls.precio.errors?.required">
+                                      Este campo es obligatorio
+                                    </mat-error>
+                                  </mat-form-field>
+                                </div>
+                              </ng-container>
+                            </div>
+                          </div>
+
+                          <!-- Cuando la empres SI trabaja con dolares con sabores -->
+                          <div *ngIf="infoProducto.value.saboresCond && !infoProducto.value.mismoPrecioCond">
+                            <div class="w-100" *ngIf="empresa.modDollar == 1">
+                              <ng-container formArrayName="sabores_dl"
+                                *ngFor="let saborSelected of sabores_dl.controls;  let i = index">
+                                <div [formGroupName]="i">
+                                  <mat-form-field appearance="outline" class="w-100" color="accent">
+                                    <mat-label>Precio {{saborSelected.value.nombre}}</mat-label>
+                                    <span matSuffix style="font-size: 22px;">$ &nbsp;</span>
+                                    <input matInput formControlName="precio" (input)="cambio($event,i)"
+                                      class="precioSabor_dl" id="precioSabor$-{{saborSelected.id}}" placeholder="Precio"
+                                      type="number" pattern="^[0-9.]+" min="0">
+                                    <mat-error class="my-2"
+                                      *ngIf="sabores_dl.controls[i].controls.precio.errors?.required">Este campo es
+                                      obligatorio</mat-error>
+                                  </mat-form-field>
+                                </div>
+                              </ng-container>
+
+                              <ng-container formArrayName="sabores"
+                                *ngFor="let saborSelected of saboresForm.controls;  let i = index">
+                                <div [formGroupName]="i">
+                                  <mat-form-field appearance="outline" class="w-100" color="accent">
+                                    <mat-label>Precio {{saborSelected.value.nombre}} al cambio</mat-label>
+                                    <span matSuffix style="font-size: 22px;">BsS &nbsp;</span>
+                                    <input matInput formControlName="precio" class="precioSabor"
+                                      id="precioSabor-{{saborSelected.id}}" placeholder="Precio al cambio" type="number"
+                                      pattern="^[0-9.]+" min="0">
+                                    <mat-error class="my-2"
+                                      *ngIf="saboresForm.controls[i].controls.precio.errors?.required">Este campo es
+                                      obligatorio</mat-error>
+                                  </mat-form-field>
+                                </div>
+                              </ng-container>
+                            </div>
+
+                            <!-- Cuando la empres NO trabaja con dolares con sabores -->
+                            <div *ngIf="empresa.modDollar == 0">
+                              <ng-container formArrayName="sabores"
+                                *ngFor="let saborSelected of saboresForm.controls;  let i = index">
+                                <div [formGroupName]="i">
+                                  <mat-form-field appearance="outline" class="w-100" color="accent">
+                                    <mat-label>Precio {{saborSelected.value.nombre}}</mat-label>
+                                    <span matSuffix style="font-size: 22px;">BsS &nbsp;</span>
+                                    <input matInput formControlName="precio" class="precioSabor"
+                                      id="precioSabor-{{saborSelected.id}}" placeholder="Precio al cambio" type="number"
+                                      pattern="^[0-9.]+" min="0">
+                                    <mat-error class="my-2"
+                                      *ngIf="saboresForm.controls[i].controls.precio.errors?.required">Este campo es
+                                      obligatorio</mat-error>
+                                  </mat-form-field>
+                                </div>
+                              </ng-container>
+                            </div>
+                          </div>
+
+                          <!-- Cuando la empres SI trabaja con dolares con sabores del mismo precio -->
+                          <mat-form-field
+                            *ngIf="infoProducto.value.saboresCond && infoProducto.value.mismoPrecioCond && empresa.modDollar == 1"
+                            appearance="outline" class="w-100" color="accent">
+                            <mat-label>Precio</mat-label>
+                            <span matSuffix>$ &nbsp;</span>
+                            <input (input)="cambio($event,'no')" formControlName="precioUnico_dl" matInput
+                              placeholder="Precio" type="number" pattern="^[0-9.]+" min="0">
+                            <mat-error class="my-2" *ngIf="precioProducto.controls['precioUnico_dl'].errors?.required">
+                              Este campo es obligatorio</mat-error>
+                          </mat-form-field>
+
+                          <mat-form-field
+                            *ngIf="infoProducto.value.saboresCond && infoProducto.value.mismoPrecioCond && empresa.modDollar == 1"
+                            appearance="outline" class="w-100" color="accent">
+                            <mat-label>Precio al cambio</mat-label>
+                            <span matSuffix>BsS &nbsp;</span>
+                            <input formControlName="precioUnico" matInput placeholder="Precio" type="number"
+                              pattern="^[0-9.]+" min="0">
+                            <mat-error class="my-2" *ngIf="precioProducto.controls['precioUnico'].errors?.required">Este
+                              campo es obligatorio</mat-error>
+                          </mat-form-field>
+
+                          <!-- Cuando la empres NO trabaja con dolares con sabores del mismo precio -->
+                          <mat-form-field
+                            *ngIf="infoProducto.value.saboresCond && infoProducto.value.mismoPrecioCond && empresa.modDollar == 0"
+                            appearance="outline" class="w-100" color="accent">
+                            <mat-label>Precio</mat-label>
+                            <span matSuffix style="font-size: 22px;">BsS &nbsp;</span>
+                            <input formControlName="precioUnico" matInput placeholder="Precio" type="number"
+                              pattern="^[0-9.]+" min="0">
+                            <mat-error class="my-2" *ngIf="precioProducto.controls['precioUnico'].errors?.required">Este
+                              campo es obligatorio</mat-error>
+                          </mat-form-field>
+                        </form>
+                      </div>
+                    </div>
+
+                    <!-- ============================================================== -->
+                    <!-- Tab de imagen  -->
+                    <!-- ============================================================== -->
+                    <div class="tab-pane fade masonry-container" id="imageP" role="tabpanel"
+                      aria-labelledby="profile-tab">
+                      <div class="card-group p-lg-4 row">
+                        <div class="text-center w-100">
+                          <p>Tamaño recomendado: 800px por 800px</p>
+                        </div>
+                        <div class="container">
+                          <div class="row justify-content-around align-items-center">
+                            <div
+                              class="col-sm-12 col-md-6 col-xl-4 shadow-sm mx-lg-3 my-2 rounded border-light-grey cursor-pointer mw-362p">
+                              <div class="row">
+                                <div
+                                  class="col-8 py-4 px-sm-2 px-lg-0 d-flex flex-column align-items-center justify-content-center bg-white h-150p text-center">
+                                  <h4 class="h6 text-capitalize">{{infoProducto.value.nombre | titlecase}}</h4>
+                                  <p *ngIf="!infoProducto.value.tamanoCond && !infoProducto.value.saboresCond"
+                                    style="color: #5a5a5a">
+                                    Precio:&nbsp;{{ precioProducto.value.precioUnico | currency:"BsS. " }}</p>
+                                  <p *ngIf="infoProducto.value.tamanoCond && !infoProducto.value.saboresCond"
+                                    style="color: #5a5a5a">A partir de:&nbsp;{{ precioMenor | currency:"BsS. "}}</p>
+                                  <p *ngIf="!infoProducto.value.tamanoCond && infoProducto.value.saboresCond && infoProducto.value.mismoPrecioCond"
+                                    style="color: #5a5a5a">Precio:&nbsp;{{ precioMenor | currency:"BsS. " }}</p>
+                                  <p *ngIf="!infoProducto.value.tamanoCond && infoProducto.value.saboresCond && !infoProducto.value.mismoPrecioCond"
+                                    style="color: #5a5a5a">A partir de:&nbsp;{{ precioMenor | currency:"BsS. " }}</p>
+                                </div>
+                                <div class="col-4 px-0 h-150p">
+                                  <ng-container *ngIf="imageChangedEvent; then fotoEditando; else fotoDefault">
+                                  </ng-container>
+                                  <ng-template #fotoEditando>
+                                    <img [src]="croppedImage" class="w-100 h-100 rounded-right object-fit-cover" />
+                                  </ng-template>
+                                  <ng-template #fotoDefault>
+                                    <img src="https://ssl.pidespeed.com/{{producto.img}}"
+                                      class="w-100 h-100 rounded-right object-fit-cover" alt="{{ producto.nombre}}" />
+                                  </ng-template>
+                                </div>
+                              </div>
+                            </div>
+
+                            <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4 mt-4 mt-lg-0">
+                              <input type="file" (change)="fileChangeEvent($event)" />
+                            </div>
+                          </div>
+                          <!-- Aspecto real: 3/4 y resizeToWidth="120" resizeToHeight="150" -->
+                          <image-cropper *ngIf="imageChangedEvent" [imageChangedEvent]="imageChangedEvent"
+                            resizeToWidth="800" resizeToHeight="800" [canvasRotation]="canvasRotation"
+                            [transform]="transform" [maintainAspectRatio]="true" [imageQuality]="100"
+                            [aspectRatio]="1 / 1" format="{{typeImage}}" (imageCropped)="imageCropped($event)"
+                            (imageLoaded)="imageLoaded()" (cropperReady)="cropperReady()"
+                            (loadImageFailed)="loadImageFailed()"></image-cropper>
+                        </div>
+                      </div>
+                      <div *ngIf="imageChangedEvent" class="d-flex justify-content-center my-4">
+                        <button (click)="rotateRight()" class="mx-2" mat-mini-fab>
+                          <mat-icon>rotate_left</mat-icon>
+                        </button>
+                        <button (click)="rotateLeft()" class="mx-2" mat-mini-fab>
+                          <mat-icon>rotate_right</mat-icon>
+                        </button>
+                      </div>
+                    </div>
+                    <!-- ============================================================== -->
+                    <!-- Fin Tab de imagen  -->
+                    <!-- ============================================================== -->
+                  </div>
+                </ng-template>
+              </div>
+            </div>
+          </div>
+        </main>
+      </div>
+      <!-- ============================================================== -->
+      <!--End body page  -->
+      <!-- ============================================================== -->
+    </div>
+  </div>
+  <!-- ============================================================== -->
+  <!-- footer -->
+  <!-- ============================================================== -->
+  <app-footer></app-footer>
+  <!-- ============================================================== -->
+  <!-- end footer -->
+  <!-- ============================================================== -->
+</div>
+<!-- ============================================================== -->
+<!-- end wrapper  -->
+<!-- ============================================================== -->

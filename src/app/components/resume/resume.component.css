@@ -1,0 +1,17 @@
+.mat-form-field {
+  display: inline-block;
+  position: relative;
+  text-align: left;
+  width: 200px !important;
+}
+
+.itemsOnTab:hover {
+  cursor: pointer;
+  background: rgb(243, 243, 243);
+}
+
+@media screen and (max-width:992px) {
+  table {
+    width: 900px;
+  }
+}

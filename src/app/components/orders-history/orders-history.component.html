@@ -1,0 +1,253 @@
+<app-header></app-header>
+<app-sidebar></app-sidebar>
+<!-- ============================================================== -->
+<!-- wrapper  -->
+<!-- ============================================================== -->
+<div class="dashboard-wrapper">
+ <div class="dashboard-ecommerce">
+   <div class="container-fluid dashboard-content ">
+     <!-- ============================================================== -->
+     <!-- pageheader  -->
+     <!-- ============================================================== -->
+     <div class="row">
+       <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+         <div class="page-header row">
+           <h2 class="pageheader-title col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+             <a [routerLink]="['/orders']" class="d-flex align-items-center pl-0 btn">
+               <i class="material-icons">arrow_back</i>Volver
+             </a>
+             Historial de órdenes
+           </h2>
+           <div class="d-flex w-100 w-md-50 mx-auto">
+             <mat-form-field class="w-100 mr-2" appearance="outline" color="accent">
+               <mat-label>Buscar...</mat-label>
+               <input matInput id="buscador" (input)="buscar()">
+             </mat-form-field>
+           </div>
+         </div>
+       </div>
+     </div>
+     <!-- ============================================================== -->
+     <!-- end pageheader  -->
+     <!-- ============================================================== -->
+     <!-- ============================================================== -->
+     <!-- Body page  -->
+     <!-- ============================================================== -->
+     <div class="ecommerce-widget">
+       <!-- ============================================================== -->
+       <!-- recent orders  -->
+       <!-- ============================================================== -->
+       <div class="contenedorDelMenu">
+         <div>
+           <h3 style="font-size: 28px;" class="text-capitalize py-4">{{fActual | mes}} {{fActual[2]}}</h3>
+           <div  class="row">
+             <ng-container *ngFor="let orden of historial" >
+               
+               <div *ngIf="orden.mes[1] == fActual[0]" data-toggle="modal"
+               [attr.data-target]="'#order'+orden.id" class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12">
+               <div class="card">
+                 <div class="card-body">
+                   <div class="metric-label d-inline-block float-right text-success font-weight-bold">
+                     <span><i class="fas fa-clipboard-check"></i></span>&nbsp;<span>Entregado</span>
+                   </div>
+                   <h5 class="text-primary" style="font-size: 18px">Orden:{{orden.codigo}}</h5>
+                   <div class="metric-value d-inline-block">
+                     <h1 class="mb-1">{{orden.precio | currency:"BsS. "}}</h1>
+                   </div>
+                   <div class="d-flex justify-content-between align-items-center">
+                     <div *ngIf="toGo[i] == 0" class="metric-label text-primary mt-1 d-inline-block float-right borde rounded-pill py-1 px-2 lead font-weight-bold">
+                       <span><i class="fas fa-utensils"></i></span>
+                     </div>
+                     
+                     <div *ngIf="toGo[i] != 0 && delivery[i] == 0" class="metric-label text-primary mt-1 d-inline-block float-right border rounded-pill py-1 px-2 lead font-weight-bold">
+                       <span><i class="fas fa-shopping-bag"></i></span>
+                     </div>
+                     
+                     <div *ngIf="toGo[i] != 0 && delivery[i] != 0" class="metric-label text-primary mt-1 d-inline-block float-right border rounded-pill py-1 px-2 lead font-weight-bold">
+                       <span><i class="fas fa-shipping-fast"></i></span>
+                     </div>
+                     
+                     <div class="metric-label mt-1 d-inline-block float-right font-weight-bold">
+                       <span><i class="fas fa-calendar-day"></i> </span><span>
+                         {{orden.mes | date:'medium'}}</span>
+                       </div>
+                     </div>
+                   </div>
+                   <div id="sparkline-revenue"></div>
+                 </div>
+               </div>
+             </ng-container>
+             
+             <h3 *ngIf="sinVentas">Aún no hay ordenes en este mes</h3>
+           </div>
+           <mat-accordion *ngFor="let mes of meses">
+             <mat-expansion-panel>
+               <mat-expansion-panel-header>
+                 <mat-panel-title>
+                   {{mes | mes}} {{mes[2]}}
+                 </mat-panel-title>
+               </mat-expansion-panel-header>
+               <div >
+                 <div class="row" >
+                   <ng-container *ngFor="let orden of historial; index as i">
+                     <div *ngIf="orden.mes[1] == mes[0]"  class="px-0 px-md-2 col-12 col-md-6 col-lg-4"  data-toggle="modal"
+                     [attr.data-target]="'#order'+orden.id" >
+                     <div class="card">
+                       <div class="card-body">
+                         <div class="metric-label d-inline-block float-right text-success font-weight-bold">
+                           <span><i class="fas fa-clipboard-check"></i></span>&nbsp;<span>Entregado</span>
+                         </div>
+                         <h5 class="text-primary" style="font-size: 18px">Orden:{{orden.codigo}}</h5>
+                         <div class="metric-value d-inline-block">
+                           <h1 class="mb-1">{{orden.precio | currency:"BsS. "}}</h1>
+                         </div>
+                         <div class="d-flex justify-content-between align-items-center">
+                           <div *ngIf="toGo[i] == 0" class="metric-label text-primary mt-1 d-inline-block float-right borde rounded-pill py-1 px-2 lead font-weight-bold">
+                             <span><i class="fas fa-utensils"></i></span>
+                           </div>
+                           
+                           <div *ngIf="toGo[i] != 0 && delivery[i] == 0" class="metric-label text-primary mt-1 d-inline-block float-right border rounded-pill py-1 px-2 lead font-weight-bold">
+                             <span><i class="fas fa-shopping-bag"></i></span>
+                           </div>
+                           
+                           <div *ngIf="toGo[i] != 0 && delivery[i] != 0" class="metric-label text-primary mt-1 d-inline-block float-right border rounded-pill py-1 px-2 lead font-weight-bold">
+                             <span><i class="fas fa-shipping-fast"></i></span>
+                           </div>
+                           
+                           <div class="metric-label mt-1 d-inline-block float-right font-weight-bold">
+                             <span><i class="fas fa-calendar-day"></i> </span><span>
+                               {{orden.mes | date:'medium'}}</span>
+                             </div>
+                           </div>
+                         </div>
+                         <div id="sparkline-revenue"></div>
+                       </div>
+                     </div>
+                   </ng-container>
+                 </div>
+               </div>
+             </mat-expansion-panel>
+           </mat-accordion>
+         </div>
+         
+         <!-- Modal -->
+         <div *ngFor="let orden of ordenes; index as i">
+           <div class="modal fade" id="order{{historial[i].id}}" tabindex="-1" role="dialog"
+           aria-hidden="true">
+           <div class="modal-dialog modal-lg" role="document">
+             <div class="modal-content">
+               <div class="modal-header">
+                 <h5 class="modal-title">Detalles de la orden</h5>
+                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                   <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                 </button>
+               </div>
+               <div class="modal-body">
+                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 p-0">
+                   <div class="card">
+                     <div class="card-body p-0">
+                       <div class="table-responsive">
+                         <table class="table">
+                           <thead class="bg-light">
+                             <tr class="border-0">
+                               <th class="border-0">Nombre</th>
+                               <th class="border-0">Teléfono</th>
+                               <th class="border-0">Cédula</th>
+                               <th class="border-0">Correo </th>
+                             </tr>
+                           </thead>
+                           <tbody>
+                             <tr>
+                               <td>{{usuario[i].nombre}}</td>
+                               <td>{{usuario[i].telefono}}</td>
+                               <td>{{usuario[i].cedula}}</td>
+                               <td>{{usuario[i].email}}</td>
+                             </tr>
+                           </tbody>
+                         </table>
+                       </div>
+                     </div>
+                   </div>
+                 </div>
+                 <mat-card class="p-0">
+                   <mat-card-title>Resumen de pedido - {{historial[i].codigo}}</mat-card-title>
+                   <div *ngFor="let detalles of orden">
+                     <mat-accordion>
+                       <mat-expansion-panel>
+                         <mat-expansion-panel-header class="h-auto px-2">
+                           <mat-panel-title class="text-capitalize">
+                             {{detalles[0].nombre}}
+                           </mat-panel-title>
+                           <mat-panel-description>
+                             Cantidad: {{detalles[0].cantidad}}
+                           </mat-panel-description>
+                         </mat-expansion-panel-header>
+                         <ul class="pl-2">
+                           <ng-container *ngFor="let item of detalles; index as indice">
+                             <ng-container *ngIf="indice > 0">        
+                               <li *ngIf="item.cost != ''">
+                                 {{item.nombre}} - {{item.cost | currency:"BsS. "}}
+                               </li>
+                               <li *ngIf="cost == ''">
+                                 {{item.nombre}}
+                               </li>
+                             </ng-container>
+                           </ng-container>
+                         </ul>
+                       </mat-expansion-panel>
+                     </mat-accordion>
+                   </div>
+                   <mat-card class="d-flex m-0 p-0 justify-content-between align-items-center">
+                     <table class="table">
+                       <tbody>
+                         <tr *ngIf="toGo[i] == 0" class="border-bottom">
+                           <td colspan="1" class="p-0 py-2"><h3 class="m-0">Total:</h3></td>
+                           <td colspan="2" class="p-0 py-2 text-right"><h3 class="m-0">{{historial[i].precio | currency:"BsS. "}}</h3></td>
+                         </tr>   
+                         <ng-container *ngIf="toGo[i] != 0">
+                           <tr>
+                             <td colspan="1" class="p-0 py-1"><h4 class="m-0">Sub-total:</h4></td>
+                             <td colspan="2" class="p-0 py-1 text-right"><h4>{{(orden.precio * 1) - toGo[i] | currency:"BsS. "}}</h4></td>
+                           </tr>     
+                           <tr>
+                             <td colspan="1" class="p-0 py-1"><h4 class="m-0">Costo para llevar:</h4></td>
+                             <td colspan="2" class="p-0 py-1 text-right"><h4>{{toGo[i] | currency:"BsS. "}}</h4></td>
+                           </tr>
+                           <tr *ngIf="delivery[i] != 0">
+                             <td colspan="1" class="p-0 py-1"><h4 class="m-0">A domicilio:</h4></td>
+                             <td colspan="2" class="p-0 py-1 text-right"><h4>{{delivery[i] | currency:"BsS. "}}</h4></td>
+                           </tr>      
+                           <tr>
+                             <td colspan="1" class="p-0 py-1"><h3 class="m-0">Total:</h3></td>
+                             <td colspan="2" class="p-0 py-1 text-right"><h3 class="m-0">{{historial[i].precio | currency:"BsS. "}}</h3></td>
+                           </tr> 
+                         </ng-container>                       
+                       </tbody>
+                     </table>
+                   </mat-card>
+                 </mat-card>
+               </div>
+             </div>
+           </div>
+         </div>
+       </div>
+       <!-- ============================================================== -->
+       <!-- end recent orders  -->
+     </div>
+     <!-- ============================================================== -->
+     <!--End body page  -->
+     <!-- ============================================================== -->
+     
+   </div>
+ </div>
+ <!-- ============================================================== -->
+ <!-- footer -->
+ <!-- ============================================================== -->
+ <app-footer></app-footer>
+ <!-- ============================================================== -->
+ <!-- end footer -->
+ <!-- ============================================================== -->
+</div>
+<!-- ============================================================== -->
+<!-- end wrapper  -->
+<!-- ============================================================== -->

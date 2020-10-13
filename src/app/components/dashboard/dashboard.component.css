@@ -1,0 +1,109 @@
+@media screen and (max-width:992px) {
+  table {
+    width: 900px;
+  }
+}
+.lazyloader {
+  content: '';
+  /* position: absolute; */
+  width: 42px;
+  height: 40px;
+  left: 0;
+  right: 0;
+  top: 10px;
+  bottom: 0;
+  margin: auto;
+  -webkit-animation: loader-rotation .8s infinite linear;
+  animation: loader-rotation .8s infinite linear;
+  border-left: 3px solid rgba(182, 114, 114, 0.15);
+  border-right: 3px solid rgba(182, 114, 114, 0.15);
+  border-bottom: 3px solid rgba(182, 114, 114, 0.15);
+  border-top: 3px solid var(--RojoPrincipal);
+  border-radius: 100%;
+}
+
+.formPrecioDolar{
+margin: 0 auto;
+width: 100%;
+}
+
+@media (min-width: 576px) { .formPrecioDolar{
+  margin: 0 auto;
+  width: 80%;
+  } }
+
+@media (min-width: 768px) { .formPrecioDolar{
+  margin: 0 auto;
+  width: 50%;
+  } }
+
+
+
+@-webkit-keyframes loader-rotation {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+@keyframes loader-rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+
+.toggle-label {
+  width: 12rem;
+  height: 2.5rem;
+}
+.toggle-label input[type=checkbox] { 
+  opacity: 0;
+}
+.toggle-label input[type=checkbox]+.back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #fb4a55;
+  transition: background 150ms linear;  
+}
+.toggle-label input[type=checkbox]:checked+.back {
+  background: #2ed8b6; /*green*/
+}
+
+.toggle-label input[type=checkbox]+.back .toggle {
+  display: block;
+  position: absolute;
+  content: ' ';
+  background: #fff;
+  width: 50%; 
+  height: 100%;
+  transition: margin 150ms linear;
+}
+.toggle-label input[type=checkbox]:checked+.back .toggle {
+  margin-left: 100px;
+}
+.toggle-label .label {
+  position: absolute;
+  width: 50%;
+  color: #ddd;
+  text-align: center;
+  font-size: 16px;
+}
+
+.toggle-label input[type=checkbox]:checked+.back .label.on {
+  color: #fff;
+}
+.toggle-label input[type=checkbox]+.back .label.off {
+  color: #fff;
+}
+.toggle-label input[type=checkbox]:checked+.back .label.off {
+  color: #ddd;
+}

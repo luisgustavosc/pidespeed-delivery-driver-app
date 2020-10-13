@@ -1,0 +1,882 @@
+<app-header></app-header>
+<app-sidebar></app-sidebar>
+<!-- ============================================================== -->
+<!-- wrapper  -->
+<!-- ============================================================== -->
+<div class="dashboard-wrapper">
+  <div class="dashboard-ecommerce">
+    <div class="container-fluid dashboard-content ">
+      <!-- ============================================================== -->
+      <!-- pageheader  -->
+      <!-- ============================================================== -->
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+          <div class="page-header">
+            <div class="d-sm-flex justify-content-between align-items-center">
+              <h2 class="pageheader-title">{{empresa.nombre}}</h2>
+              <ng-container *ngIf="lazyloader; then cargando; else NoCargando"></ng-container>
+              <ng-template #NoCargando>
+                <ng-container *ngIf="!espera">
+                  <button (click)="save()" [disabled]="!datosForm.valid && !imageForm.valid" class="float-right
+                    btn-custom-primary px-4 py-1" mat-raised-button>Guardar</button>
+                </ng-container>
+              </ng-template>
+              <ng-template #cargando>
+                <div class="position-relative">
+                  <div class="lazyloader-btn ml-auto"></div>
+                </div>
+              </ng-template>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- ============================================================== -->
+      <!-- end pageheader  -->
+      <!-- ============================================================== -->
+      <!-- ============================================================== -->
+      <!-- Body page  -->
+      <!-- ============================================================== -->
+      <div class="ecommerce-widget">
+        <main role="main" class="container">
+          <div class="row">
+            <div class="col-md">
+              <div class="starter-template">
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                  <li class="nav-item">
+                    <a class="nav-link active linkTab" id="home-tab" data-toggle="tab" href="#info" role="tab"
+                      aria-controls="home" aria-selected="true">Información básica</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link linkTab" id="profile-tab" data-toggle="tab" href="#view" role="tab"
+                      aria-controls="profile" aria-selected="false">Imagen y logo</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link linkTab" id="contact-tab" data-toggle="tab" href="#horario" role="tab"
+                      aria-controls="contact" aria-selected="false">Horario</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link linkTab" id="contact-tab" data-toggle="tab" href="#contacto" role="tab"
+                      aria-controls="contact" aria-selected="false">Contacto</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link linkTab" id="contact-tab" data-toggle="tab" href="#cuenta" role="tab"
+                      aria-controls="contact" aria-selected="false">Cuenta</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link linkTab" [routerLink]="['/zonas']" role="tab" aria-controls="contact"
+                      aria-selected="false">Zonas a domicilio</a>
+                  </li>
+                </ul>
+                <ng-container *ngIf="espera; then cargandoProfile; else NoCargandoProfile"></ng-container>
+                <ng-template #cargandoProfile>
+                  <div class="loader-container">
+                    <div class="lazyloader"></div>
+                  </div>
+                </ng-template>
+                <ng-template #NoCargandoProfile>
+                <!-- tab content starts here -->
+                <div class="tab-content" id="myTabContent">
+                  <!-- content 1 - Informacion -->
+                  <div class="tab-pane masonry-container fade show active" id="info" role="tabpanel" dby="home-tab">
+                    <div class="container px-0">
+                      <form [formGroup]="datosForm" class="w-100 w-lg-75 pt-3 pt-lg-5">
+                        <mat-form-field color="accent" class="d-block" appearance="outline">
+                          <mat-label>Nombre</mat-label>
+                          <input class="text-capitalize" disabled matInput [value]="empresa.nombre">
+                        </mat-form-field>
+                        <mat-form-field color="accent" class="d-block" appearance="outline">
+                          <mat-label>RIF:</mat-label>
+                          <input type="number" disabled matInput [value]="empresa.rif">
+                        </mat-form-field>
+                        <mat-form-field color="accent" class="d-block" appearance="outline">
+                          <mat-label>Tipo de Empresa</mat-label>
+                          <input class="text-capitalize" disabled matInput [value]="categoria">
+                        </mat-form-field>
+                        <!-- <mat-form-field color="accent" class="d-block" appearance="outline">
+                            <mat-label>Subcategoria</mat-label>
+                            <input class="text-capitalize" disabled matInput [value]="subcategoria">
+                          </mat-form-field> -->
+                        <mat-form-field color="accent" class="d-block" appearance="outline">
+                          <mat-label>Correo electrónico</mat-label>
+                          <input class="text-capitalize" disabled matInput [value]="empresa.email">
+                        </mat-form-field>
+                        <mat-form-field color="accent" class="d-block" appearance="outline">
+                          <mat-label>Teléfono</mat-label>
+                          <input matInput type="tel" [value]="empresa.telefono" disabled matInput>
+                        </mat-form-field>
+                        <mat-form-field color="accent" class="d-block" appearance="outline">
+                          <mat-label>Dirección</mat-label>
+                          <textarea class="text-capitalize" matInput formControlName="direccion" rows="5"></textarea>
+                          <mat-error class="mt-2" *ngIf="datosForm.controls['direccion'].errors?.required">
+                            Este campo es obligatorio
+                          </mat-error>
+                        </mat-form-field>
+                        <div class="text-right">
+                          <button *ngIf="empresa.coordenadas == '' && !ubicacionPermitida" data-toggle="modal"
+                            data-target="#save-direccion" (click)="mapa()"
+                            class="text-primary mb-3 mt-2 w-100 w-sm-auto" mat-stroked-button>
+                            Agregar dirección en Google maps
+                          </button>
+                          <button *ngIf="empresa.coordenadas != '' || ubicacionPermitida" data-toggle="modal"
+                            data-target="#save-direccion" (click)="mapa('editar')"
+                            class="text-primary mb-3 mt-2 w-100 w-sm-auto" mat-stroked-button>
+                            Editar dirección en Google maps
+                          </button>
+                        </div>
+                        <mat-form-field color="accent" class="d-block" appearance="outline">
+                          <mat-label>Palabras Claves</mat-label>
+                          <textarea class="text-capitalize" matInput formControlName="keywords"
+                            placeholder="restaurante,comida..."></textarea>
+                        </mat-form-field>
+                        <mat-form-field color="accent" class="d-block" appearance="outline">
+                          <mat-label>¿Desea que su empresa sea visible?</mat-label>
+                          <mat-select formControlName="publish" [(value)]="selected">
+                            <mat-option [value]=publico>
+                              Sí
+                            </mat-option>
+                            <mat-option [value]=noPublico>
+                              No
+                            </mat-option>
+                          </mat-select>
+                          <mat-error class="mt-2" *ngIf="datosForm.controls['publish'].errors?.required">
+                            Este campo es obligatorio
+                          </mat-error>
+                        </mat-form-field>
+
+                        <div class="container overflow-x-auto">
+                          <mat-checkbox formControlName="mensajeCond" class="w-100 d-block">¿Quieres colocar un mensaje
+                            o descripción importante sobre tu empresa? <button data-toggle="modal" class="text-primary"
+                              data-target="#mensajeCarrito" mat-button>Explicame
+                            </button>
+                          </mat-checkbox>
+                          <mat-form-field color="accent" class="w-100 pb-3" appearance="outline"
+                            *ngIf="datosForm.value.mensajeCond">
+                            <mat-label>Estado o descripción importante</mat-label>
+                            <textarea class="text-capitalize" #mensajeCarrito maxlength="200"
+                              formControlName="mensajeCarrito" matInput rows="5"></textarea>
+                            <mat-error class="mt-2" *ngIf="datosForm.controls['mensajeCarrito'].errors?.required">
+                              Este campo es obligatorio
+                            </mat-error>
+                            <mat-hint align="end">{{mensajeCarrito.value.length}} / 200</mat-hint>
+                          </mat-form-field>
+                          <mat-checkbox formControlName="modDolar" class="w-100 d-block">¿Quieres trabajar con la
+                            modalidad de dólar al cambio? <button data-toggle="modal" class="text-primary"
+                              data-target="#modalidadDolar" mat-button>¿Qué es esto?
+                            </button>
+                          </mat-checkbox>
+                          <mat-checkbox *ngIf="datosForm.value.modDolar" formControlName="precioRedondeado"
+                            class="w-100 d-block">¿Quieres que Pidespeed redondee el precio final del producto?
+                            <button data-toggle="modal" class="text-primary" data-target="#redondeado"
+                              mat-button>Explícame
+                            </button></mat-checkbox>
+                          <!-- <mat-checkbox *ngIf="datosForm.value.modDolar" formControlName="precioDolarPorPideSpeed" class="w-100 d-block">¿Quieres que Pidespeed maneje el precio del dólar?
+                          <button data-toggle="modal" class="text-primary" data-target="#tasaPidespeed" mat-button
+                          >Explícame
+                        </button></mat-checkbox> -->
+                          <mat-checkbox formControlName="enLocal" class="w-100 d-block">¿Se puede comer en tu local?
+                          </mat-checkbox>
+                        </div>
+                      </form>
+                      <!-- Modal -->
+                      <div class="modal fade" id="mensajeCarrito" tabindex="-1" role="dialog" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title">Estado o descripción importante</h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                              <p>Este mensaje se mostrará en un ícono junto al nombre de tu empresa para indicar alguna
+                                información importante acerca de su funcionamiento, estado, o simplemente informar a tus
+                                clientes sobre algunas condiciones momentáneas o permanentes que deban tomar en cuenta
+                                cuando realicen sus pedidos. Esta descripción o mensaje solo se mostrará si existe un
+                                valor en él, de lo contrario no aparecerá ningún ícono.</p>
+                              <div class="border">
+                                <img src="https://ssl.pidespeed.com/web/mensaje_carrito.png" class="img-fluid"
+                                  alt="Mensaje de carrito">
+                              </div>
+                            </div>
+                            <div class="modal-footer">
+                              <button class="text-primary" mat-button data-dismiss="modal"
+                                aria-label="Close">Entendido</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- Modal -->
+                      <!-- Modal -->
+                      <div class="modal fade" id="modalidadDolar" tabindex="-1" role="dialog" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title">Modalidad dólar al cambio</h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                              <p>Esta modalidad permite que los precios de los productos se actualicen mediante la tasa
+                                del dólar actual y un precio en dólares fijo, esto facilita la actualización constante
+                                de los precios.</p>
+                              <p>Al activar esta modalidad aparecerá dentro de crear y editar productos la posibilidad
+                                de agregar un precio en dólares que puede ser modificado cuando se necesite, dicho valor
+                                será multiplicado por el precio del dólar para establecer el precio en Bolívares de
+                                forma automática.</p>
+                              <p>Dicha tasa del precio del dólar puede ser establecida por usted mismo o por pidespeed
+                              </p>
+                            </div>
+                            <div class="modal-footer">
+                              <button class="text-primary" mat-button data-dismiss="modal"
+                                aria-label="Close">Entendido</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- Modal -->
+                      <div class="modal fade" id="redondeado" tabindex="-1" role="dialog" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title">Redondeo del precio final</h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                              <p>Para facilitar el manejo de los precios pagados en bolívares al realizar la conversión
+                                de dólar a bolívares se establece redondear este valor, ajustandolo a un número entero
+                                más manejable para todos, de acuerdo al siguiente criterio:</p>
+                              <p>Al realizar la multiplicación de los precios establecidos por la tasa del dólar
+                                acordada, el resultado será redondeado tomando en consideración la ley de matemática. Si
+                                el número siguiente es mayor a 5 se redondea por encima, si es menor a 5 se redondea por
+                                debajo y si es igual a 5 su valor se mantiene. Este ajuste se realizará con la centena
+                                del número resultante</p>
+                              <p>Ejemplo:</p>
+                              <p>1) 91.350 - 91.000</p>
+                              <p>2) 91.750 - 92.000</p>
+                              <p>3) 91.500 - 91.500</p>
+                            </div>
+                            <div class="modal-footer">
+                              <button class="text-primary" mat-button data-dismiss="modal"
+                                aria-label="Close">Entendido</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- Modal -->
+                      <div class="modal fade" id="tasaPidespeed" tabindex="-1" role="dialog" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title">Tasa manejada por Pidespeed</h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                              <p>En la plataforma trabajamos con la tasa de DolarToday y la mantenemos actualizada
+                                diariamente</p>
+                              <p>Si lo deseas, tus productos se pueden mantener actualizados al día automáticamente con
+                                la tasa general de pidespeed, por el contrario si deseas llevar tu propia tasa tendrás
+                                un campo en el Inicio para modificarla</p>
+                              <p>Al cambiar el valor de tu tasa automáticamente serán actualizados los precios de los
+                                productos respecto a su precio establecido en dólares</p>
+                            </div>
+                            <div class="modal-footer">
+                              <button class="text-primary" mat-button data-dismiss="modal"
+                                aria-label="Close">Entendido</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- !Modal Guardar direccion -->
+                      <div class="modal fade" id="save-direccion" tabindex="-1" role="dialog" aria-hidden="true">
+                        <div class="modal-dialog modal-lg" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title">Información de la dirección</h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                              <div id="map" style="width:100%;height:400px"></div>
+                              <div class="modal-footer">
+                                <ng-container *ngIf="lazyloader; then cargandoSaveAddress; else NoCargandoSaveAddress">
+                                </ng-container>
+                                <ng-template #NoCargandoSaveAddress>
+                                  <button class="btnmodal" mat-button type="button" [disabled]="!ubicacionPermitida"
+                                    data-dismiss="modal">Guardar</button>
+                                </ng-template>
+                                <ng-template #cargandoSaveAddress>
+                                  <div class="position-relative d-flex justify-content-end align-items-center">
+                                    <div class="lazyloader"></div>
+                                  </div>
+                                </ng-template>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- !Fin Guardar direccion -->
+                    </div>
+                  </div>
+                  <!-- content 2 - imagen y logo -->
+                  <div class="tab-pane fade masonry-container" id="view" role="tabpanel">
+                    <div class="card-group">
+                      <div class="d-lg-flex py-5 w-100">
+                        <form [formGroup]="imageForm" id="imageForm" class="mx-lg-5" enctype="multipart/form-data">
+                          <mat-form-field color="accent" class="w-100" appearance="outline">
+                            <mat-label>Título</mat-label>
+                            <input class="text-capitalize" #titulo disabled matInput [value]="empresa.nombre">
+                            <mat-error class="mt-2" *ngIf="datosForm.controls['publish'].errors?.required">
+                              Este campo es obligatorio
+                            </mat-error>
+                          </mat-form-field>
+                          <mat-form-field color="accent" class="w-100" appearance="outline">
+                            <mat-label>Descripción</mat-label>
+                            <textarea class="text-capitalize" #description maxlength="60" formControlName="description"
+                              matInput [value]="empresa.descripcion" rows="5"></textarea>
+                            <mat-error class="mt-2" *ngIf="imageForm.controls['description'].errors?.required">
+                              Este campo es obligatorio
+                            </mat-error>
+                            <mat-hint align="end">{{description.value.length}} / 60</mat-hint>
+                          </mat-form-field>
+                        </form>
+
+                        <div class="shadow mt-3 mx-1 rounded px-0 pb-2 mw-370p bg-white">
+                          <div class="col-12 p-0 h-150p overflow-hidden">
+                            <ng-container *ngIf="imageChangedEvent; then fotoEditando; else fotoDefault">
+                            </ng-container>
+                            <ng-template #fotoEditando>
+                              <img class="w-100 h-100 rounded-top object-fit-cover" [src]="croppedImage"
+                                alt="portada empresa">
+                            </ng-template>
+                            <ng-template #fotoDefault>
+                              <img class="w-100 h-100 rounded-top object-fit-cover" src="{{URL_SERVER}}{{empresa.img}}"
+                                alt="imagen de portada de {{empresa.nombre}}">
+                            </ng-template>
+                          </div>
+                          <div class="col-12">
+                            <div class="row h-100p">
+                              <div class="col-3 align-self-center">
+                                <img id="logoEmpresa" class="img-fluid" src="{{URL_SERVER}}{{empresa.logo}}"
+                                  alt="logo de {{empresa.nombre}}">
+                              </div>
+                              <div class="col-9 py-3 align-self-center">
+                                <h5>{{titulo.value | titlecase}}</h5>
+                                <p class="text-grey text-p-small">{{description.value | titlecase}}</p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <!-- Our File Inputs -->
+                      <div style="display: grid;" class="d-lg-flex justify-content-around w-100">
+                        <div class="wrap-custom-file">
+                          <input name="cap" id="cap" (click)="compressLogoFile()" #fileInput
+                            accept=".gif, .jpg, .png" />
+                          <label for="cap">
+                            <span>Seleccione su logo</span>
+                            <i class="fa fa-plus-circle"></i>
+                          </label>
+                        </div>
+                        <input type="file" (change)="fileChangeEvent($event)" />
+                      </div>
+                      <!--  resizeToWidth="359"
+                      resizeToHeight="250" -->
+                      <image-cropper *ngIf="imageChangedEvent" [imageChangedEvent]="imageChangedEvent"
+                        [maintainAspectRatio]="true" [imageQuality]="100" [aspectRatio]="21/ 9"
+                        [canvasRotation]="canvasRotation" [transform]="transform" format="{{typeImage}}"
+                        (imageCropped)="imageCropped($event)" (imageLoaded)="imageLoaded()"
+                        (cropperReady)="cropperReady()" (loadImageFailed)="loadImageFailed()"></image-cropper>
+                    </div>
+
+                    <div *ngIf="imageChangedEvent" class="d-flex justify-content-center my-4">
+                      <button (click)="rotateRight()" class="mx-2" mat-mini-fab>
+                        <mat-icon>rotate_left</mat-icon>
+                      </button>
+                      <button (click)="rotateLeft()" class="mx-2" mat-mini-fab>
+                        <mat-icon>rotate_right</mat-icon>
+                      </button>
+                    </div>
+
+                    <!-- <ul class="w-fit-content">
+                      <li class="small">Tamaño recomendado de imagen de portada: 359px por 250px (relación de aspecto: 3 / 2)</li>
+                      <li class="small">Tamaño recomendado de imagen de logotipo: 60px por 60px (relación de aspecto: 1 / 1)</li>
+                    </ul> -->
+
+                  </div>
+                  <!-- content 3 - Horiario -->
+                  <div class="tab-pane fade masonry-container" id="horario" role="tabpanel">
+                    <mat-error class="text-warning mt-4 text-center lead">El horario será manejado en formato de 24h o
+                      militar</mat-error>
+
+                    <div class="card-group">
+                      <mat-card
+                        class="d-lg-flex justify-content-around align-items-center p-3 p-lg-0 my-2 w-100 mat-card text-center text-lg-left">
+                        <mat-card-title>
+                          Lunes
+                        </mat-card-title>
+                        <form [formGroup]="lunes" class="d-lg-flex justify-content-around  align-items-center">
+                          <mat-card-content class="d-lg-flex  justify-content-around align-items-center">
+                            <div class="m-3">
+                              <mat-form-field color="accent" class="w-100" appearance="outline">
+                                <mat-label>Apertura</mat-label>
+                                <div *ngIf="horarioAct[1].inicio">
+                                  <input formControlName="apertura" matInput placeholder="24hr format"
+                                    aria-label="Abres" [ngxTimepicker]="AbiertoLunes" [format]="24" readonly
+                                    [value]="horarioAct[1].inicio">
+                                </div>
+                                <div *ngIf="!horarioAct[1].inicio">
+                                  <input formControlName="apertura" matInput placeholder="24hr format"
+                                    aria-label="Abres" [ngxTimepicker]="AbiertoLunes" [format]="24" readonly>
+                                </div>
+                                <ngx-material-timepicker #AbiertoLunes></ngx-material-timepicker>
+                              </mat-form-field>
+                            </div>
+                            <div class="m-3">
+                              <mat-form-field color="accent" class="w-100" appearance="outline">
+                                <mat-label>Cierre</mat-label>
+                                <div *ngIf="horarioAct[1].fin">
+                                  <input formControlName="cierre" matInput placeholder="24hr format"
+                                    aria-label="Cierras" [ngxTimepicker]="CerradoLunes" [format]="24" readonly
+                                    [value]="horarioAct[1].fin">
+                                </div>
+                                <div *ngIf="!horarioAct[1].fin">
+                                  <input formControlName="cierre" matInput placeholder="24hr format"
+                                    aria-label="Cierras" [ngxTimepicker]="CerradoLunes" [format]="24" readonly>
+                                </div>
+                                <ngx-material-timepicker #CerradoLunes></ngx-material-timepicker>
+                              </mat-form-field>
+                            </div>
+                          </mat-card-content>
+                          <mat-card-actions>
+                            <mat-checkbox #lunesLaborable formControlName="noLaborable">No laborable
+                            </mat-checkbox>
+                          </mat-card-actions>
+                        </form>
+                      </mat-card>
+                      <mat-card
+                        class="d-lg-flex justify-content-around align-items-center p-3 p-lg-0 my-2 w-100 mat-card text-center text-lg-left">
+                        <mat-card-title>
+                          Martes
+                        </mat-card-title>
+                        <form [formGroup]="martes" class="d-lg-flex  justify-content-around  align-items-center">
+                          <mat-card-content class="d-lg-flex   justify-content-around align-items-center">
+                            <div class="m-3">
+                              <mat-form-field color="accent" class="w-100" appearance="outline">
+                                <mat-label>Apertura</mat-label>
+                                <div *ngIf="horarioAct[2].inicio">
+                                  <input formControlName="apertura" matInput placeholder="24hr format"
+                                    aria-label="Abres" [ngxTimepicker]="AbiertoMartes" [format]="24" readonly
+                                    [value]="horarioAct[2].inicio">
+                                </div>
+                                <div *ngIf="!horarioAct[2].inicio">
+                                  <input formControlName="apertura" matInput placeholder="24hr format"
+                                    aria-label="Abres" [ngxTimepicker]="AbiertoMartes" [format]="24" readonly>
+                                </div>
+                                <ngx-material-timepicker #AbiertoMartes></ngx-material-timepicker>
+                              </mat-form-field>
+                            </div>
+                            <div class="m-3">
+                              <mat-form-field color="accent" class="w-100" appearance="outline">
+                                <mat-label>Cierre</mat-label>
+                                <div *ngIf="horarioAct[2].fin">
+                                  <input formControlName="cierre" matInput placeholder="24hr format"
+                                    aria-label="Cierras" [ngxTimepicker]="CerradoMartes" [format]="24" readonly
+                                    [value]="horarioAct[2].fin">
+                                </div>
+                                <div *ngIf="!horarioAct[2].fin">
+                                  <input formControlName="cierre" matInput placeholder="24hr format"
+                                    aria-label="Cierras" [ngxTimepicker]="CerradoMartes" [format]="24" readonly>
+                                </div>
+                                <ngx-material-timepicker #CerradoMartes></ngx-material-timepicker>
+                              </mat-form-field>
+                            </div>
+                          </mat-card-content>
+                          <mat-card-actions>
+                            <mat-checkbox #martesLaborable formControlName="noLaborable">No laborable
+                            </mat-checkbox>
+                          </mat-card-actions>
+                        </form>
+                      </mat-card>
+                      <mat-card
+                        class="d-lg-flex justify-content-around align-items-center p-3 p-lg-0 my-2 w-100 mat-card text-center text-lg-left">
+                        <mat-card-title>
+                          Miércoles
+                        </mat-card-title>
+                        <form [formGroup]="miercoles" class="d-lg-flex justify-content-around  align-items-center">
+                          <mat-card-content class="d-lg-flex  justify-content-around align-items-center">
+                            <div class="m-3">
+                              <mat-form-field color="accent" class="w-100" appearance="outline">
+                                <mat-label>Apertura</mat-label>
+                                <div *ngIf="horarioAct[3].inicio">
+                                  <input formControlName="apertura" matInput placeholder="24hr format"
+                                    aria-label="Abres" [ngxTimepicker]="AbiertoMiercoles" [format]="24" readonly
+                                    [value]="horarioAct[3].inicio">
+                                </div>
+                                <div *ngIf="!horarioAct[3].inicio">
+                                  <input formControlName="apertura" matInput placeholder="24hr format"
+                                    aria-label="Abres" [ngxTimepicker]="AbiertoMiercoles" [format]="24" readonly>
+                                </div>
+                                <ngx-material-timepicker #AbiertoMiercoles></ngx-material-timepicker>
+                              </mat-form-field>
+                            </div>
+                            <div class="m-3">
+                              <mat-form-field color="accent" class="w-100" appearance="outline">
+                                <mat-label>Cierre</mat-label>
+                                <div *ngIf="horarioAct[3].fin">
+                                  <input formControlName="cierre" matInput placeholder="24hr format"
+                                    aria-label="Cierras" [ngxTimepicker]="CerradoMiercoles" [format]="24" readonly
+                                    [value]="horarioAct[3].fin">
+                                </div>
+                                <div *ngIf="!horarioAct[3].fin">
+                                  <input formControlName="cierre" matInput placeholder="24hr format"
+                                    aria-label="Cierras" [ngxTimepicker]="CerradoMiercoles" [format]="24" readonly>
+                                </div>
+                                <ngx-material-timepicker #CerradoMiercoles></ngx-material-timepicker>
+                              </mat-form-field>
+                            </div>
+                          </mat-card-content>
+                          <mat-card-actions>
+                            <mat-checkbox #miercolesLaborable formControlName="noLaborable">No laborable
+                            </mat-checkbox>
+                          </mat-card-actions>
+                        </form>
+                      </mat-card>
+                      <mat-card
+                        class="d-lg-flex justify-content-around align-items-center p-3 p-lg-0 my-2 w-100 mat-card text-center text-lg-left">
+                        <mat-card-title>
+                          Jueves
+                        </mat-card-title>
+                        <form [formGroup]="jueves" class="d-lg-flex justify-content-around  align-items-center">
+                          <mat-card-content class="d-lg-flex  justify-content-around align-items-center">
+                            <div class="m-3">
+                              <mat-form-field color="accent" class="w-100" appearance="outline">
+                                <mat-label>Apertura</mat-label>
+                                <div *ngIf="horarioAct[4].inicio">
+                                  <input formControlName="apertura" matInput placeholder="24hr format"
+                                    aria-label="Abres" [ngxTimepicker]="AbiertoJueves" [format]="24" readonly
+                                    [value]="horarioAct[4].inicio">
+                                </div>
+                                <div *ngIf="!horarioAct[4].inicio">
+                                  <input formControlName="apertura" matInput placeholder="24hr format"
+                                    aria-label="Abres" [ngxTimepicker]="AbiertoJueves" [format]="24" readonly>
+                                </div>
+                                <ngx-material-timepicker #AbiertoJueves></ngx-material-timepicker>
+                              </mat-form-field>
+                            </div>
+                            <div class="m-3">
+                              <mat-form-field color="accent" class="w-100" appearance="outline">
+                                <mat-label>Cierre</mat-label>
+                                <div *ngIf="horarioAct[4].fin">
+                                  <input formControlName="cierre" matInput placeholder="24hr format"
+                                    aria-label="Cierras" [ngxTimepicker]="CerradoJueves" [format]="24" readonly
+                                    [value]="horarioAct[4].fin">
+                                </div>
+                                <div *ngIf="!horarioAct[4].fin">
+                                  <input formControlName="cierre" matInput placeholder="24hr format"
+                                    aria-label="Cierras" [ngxTimepicker]="CerradoJueves" [format]="24" readonly>
+                                </div>
+                                <ngx-material-timepicker #CerradoJueves></ngx-material-timepicker>
+                              </mat-form-field>
+                            </div>
+                          </mat-card-content>
+                          <mat-card-actions>
+                            <mat-checkbox #JuevesLaborable formControlName="noLaborable">No laborable
+                            </mat-checkbox>
+                          </mat-card-actions>
+                        </form>
+                      </mat-card>
+                      <mat-card
+                        class="d-lg-flex justify-content-around align-items-center p-3 p-lg-0 my-2 w-100 mat-card text-center text-lg-left">
+                        <mat-card-title>
+                          Viernes
+                        </mat-card-title>
+                        <form [formGroup]="viernes" class="d-lg-flex justify-content-around  align-items-center">
+                          <mat-card-content class="d-lg-flex  justify-content-around align-items-center">
+                            <div class="m-3">
+                              <mat-form-field color="accent" class="w-100" appearance="outline">
+                                <mat-label>Apertura</mat-label>
+                                <div *ngIf="horarioAct[5].inicio">
+                                  <input formControlName="apertura" matInput placeholder="24hr format"
+                                    aria-label="Abres" [ngxTimepicker]="AbiertoViernes" [format]="24" readonly
+                                    [value]="horarioAct[5].inicio">
+                                </div>
+                                <div *ngIf="!horarioAct[5].inicio">
+                                  <input formControlName="apertura" matInput placeholder="24hr format"
+                                    aria-label="Abres" [ngxTimepicker]="AbiertoViernes" [format]="24" readonly>
+                                </div>
+                                <ngx-material-timepicker #AbiertoViernes></ngx-material-timepicker>
+                              </mat-form-field>
+                            </div>
+                            <div class="m-3">
+                              <mat-form-field color="accent" class="w-100" appearance="outline">
+                                <mat-label>Cierre</mat-label>
+                                <div *ngIf="horarioAct[5].fin">
+                                  <input formControlName="cierre" matInput placeholder="24hr format"
+                                    aria-label="Cierras" [ngxTimepicker]="CerradoViernes" [format]="24" readonly
+                                    [value]="horarioAct[5].fin">
+                                </div>
+                                <div *ngIf="!horarioAct[5].fin">
+                                  <input formControlName="cierre" matInput placeholder="24hr format"
+                                    aria-label="Cierras" [ngxTimepicker]="CerradoViernes" [format]="24" readonly>
+                                </div>
+                                <ngx-material-timepicker #CerradoViernes></ngx-material-timepicker>
+                              </mat-form-field>
+                            </div>
+                          </mat-card-content>
+                          <mat-card-actions>
+                            <mat-checkbox #ViernesLaborable formControlName="noLaborable">No laborable
+                            </mat-checkbox>
+                          </mat-card-actions>
+                        </form>
+                      </mat-card>
+                      <mat-card
+                        class="d-lg-flex justify-content-around align-items-center p-3 p-lg-0 my-2 w-100 mat-card text-center text-lg-left">
+                        <mat-card-title>
+                          Sábado
+                        </mat-card-title>
+                        <form [formGroup]="sabado" class="d-lg-flex justify-content-around  align-items-center">
+                          <mat-card-content class="d-lg-flex  justify-content-around align-items-center">
+                            <div class="m-3">
+                              <mat-form-field color="accent" class="w-100" appearance="outline">
+                                <mat-label>Apertura</mat-label>
+                                <div *ngIf="horarioAct[6].inicio">
+                                  <input formControlName="apertura" matInput placeholder="24hr format"
+                                    aria-label="Abres" [ngxTimepicker]="AbiertoSabado" [format]="24" readonly
+                                    [value]="horarioAct[6].inicio">
+                                </div>
+                                <div *ngIf="!horarioAct[6].inicio">
+                                  <input formControlName="apertura" matInput placeholder="24hr format"
+                                    aria-label="Abres" [ngxTimepicker]="AbiertoSabado" [format]="24" readonly>
+                                </div>
+                                <ngx-material-timepicker #AbiertoSabado></ngx-material-timepicker>
+                              </mat-form-field>
+                            </div>
+                            <div class="m-3">
+                              <mat-form-field color="accent" class="w-100" appearance="outline">
+                                <mat-label>Cierre</mat-label>
+                                <div *ngIf="horarioAct[6].fin">
+                                  <input formControlName="cierre" matInput placeholder="24hr format"
+                                    aria-label="Cierras" [ngxTimepicker]="CerradoSabado" [format]="24" readonly
+                                    [value]="horarioAct[6].fin">
+                                </div>
+                                <div *ngIf="!horarioAct[6].fin">
+                                  <input formControlName="cierre" matInput placeholder="24hr format"
+                                    aria-label="Cierras" [ngxTimepicker]="CerradoSabado" [format]="24" readonly>
+                                </div>
+                                <ngx-material-timepicker #CerradoSabado></ngx-material-timepicker>
+                              </mat-form-field>
+                            </div>
+                          </mat-card-content>
+                          <mat-card-actions>
+                            <mat-checkbox #SabadoLaborable formControlName="noLaborable">No laborable
+                            </mat-checkbox>
+                          </mat-card-actions>
+                        </form>
+                      </mat-card>
+                      <mat-card
+                        class="d-lg-flex justify-content-around align-items-center p-3 p-lg-0 my-2 w-100 mat-card text-center text-lg-left">
+                        <mat-card-title>
+                          Domingo
+                        </mat-card-title>
+                        <form [formGroup]="domingo" class="d-lg-flex justify-content-around  align-items-center">
+                          <mat-card-content class="d-lg-flex  justify-content-around align-items-center">
+                            <div class="m-3">
+                              <mat-form-field color="accent" class="w-100" appearance="outline">
+                                <mat-label>Apertura</mat-label>
+                                <div *ngIf="horarioAct[0].inicio">
+                                  <input formControlName="apertura" matInput placeholder="24hr format"
+                                    aria-label="Abres" [ngxTimepicker]="AbiertoDomingo" [format]="24" readonly
+                                    [value]="horarioAct[0].inicio">
+                                </div>
+                                <div *ngIf="!horarioAct[0].inicio">
+                                  <input formControlName="apertura" matInput placeholder="24hr format"
+                                    aria-label="Abres" [ngxTimepicker]="AbiertoDomingo" [format]="24" readonly>
+                                </div>
+                                <ngx-material-timepicker #AbiertoDomingo></ngx-material-timepicker>
+                              </mat-form-field>
+                            </div>
+                            <div class="m-3">
+                              <mat-form-field color="accent" class="w-100" appearance="outline">
+                                <mat-label>Cierre</mat-label>
+                                <div *ngIf="horarioAct[0].fin">
+                                  <input formControlName="cierre" matInput placeholder="24hr format"
+                                    aria-label="Cierras" [ngxTimepicker]="CerradoDomingo" [format]="24" readonly
+                                    [value]="horarioAct[0].fin">
+                                </div>
+                                <div *ngIf="!horarioAct[0].fin">
+                                  <input formControlName="cierre" matInput placeholder="24hr format"
+                                    aria-label="Cierras" [ngxTimepicker]="CerradoDomingo" [format]="24" readonly>
+                                </div>
+                                <ngx-material-timepicker #CerradoDomingo></ngx-material-timepicker>
+                              </mat-form-field>
+                            </div>
+                          </mat-card-content>
+                          <mat-card-actions>
+                            <mat-checkbox #DomingoLaborable formControlName="noLaborable">No laborable
+                            </mat-checkbox>
+                          </mat-card-actions>
+                        </form>
+                      </mat-card>
+                    </div>
+                  </div>
+                  <!-- content 4 - Contacto-->
+                  <div class="tab-pane fade masonry-container" id="contacto" role="tabpanel">
+                    <div class="card-columns row">
+                      <form [formGroup]="datosForm" class="mx-lg-4 py-4 row">
+                        <mat-form-field appearance="outline" class="w-100 col-lg-8" color="accent">
+                          <mat-label>Instagram</mat-label>
+                          <input type="text" formControlName="instagram" placeholder="Usuario de Instagram" matInput>
+                        </mat-form-field>
+                        <mat-form-field appearance="outline" class="w-100 col-lg-8" color="accent">
+                          <mat-label>Teléfono</mat-label>
+                          <input type="tel" matInput maxlength="10" placeholder="(412)-123-1234"
+                            formControlName="telefono">
+                          <mat-error
+                            *ngIf="datosForm.controls['telefono'].errors?.minlength || datosForm.controls['telefono'].errors?.pattern">
+                            No es un número de teléfono válido
+                          </mat-error>
+                          <mat-error *ngIf="datosForm.get('telefono').errors?.zeroIswrong">
+                            El número no puede iniciar con cero, ej: (412) 123 1234
+                          </mat-error>
+                        </mat-form-field>
+                      </form>
+                    </div>
+                  </div>
+                  <!-- content 5 - Cuenta-->
+                  <div class="tab-pane fade masonry-container" id="cuenta" role="tabpanel">
+                    <div class="card-columns row">
+                      <form [formGroup]="accountForm" class="mx-lg-4 py-4 row">
+                        <mat-form-field appearance="outline" class="w-100 col-lg-8" color="accent">
+                          <mat-label>Usuario</mat-label>
+                          <input formControlName="user" matInput>
+                        </mat-form-field>
+                        <mat-form-field appearance="outline" class="w-100 col-lg-8" color="accent">
+                          <mat-label>Contraseña</mat-label>
+                          <input disabled formControlName="password" matInput type="password">
+                        </mat-form-field>
+                        <button data-toggle="modal" data-target="#changePasswordModal" mat-stroked-button
+                          class="text-primary my-3 mx-auto" (click)="enviarCod()">Cambiar
+                          contraseña
+                        </button>
+                      </form>
+
+                      <!-- Modal -->
+                      <div class="modal fade" id="changePasswordModal" tabindex="-1" role="dialog" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title">Cambio de contraseña</h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                              </button>
+                            </div>
+                            <ng-container *ngIf="!setPasswordVar; then CodToChange; else PasswordFom">
+                            </ng-container>
+                            <ng-template #CodToChange>
+                              <div class="modal-body">
+                                <form [formGroup]="checkPasswordForm" class="row">
+                                  <span class="mx-3">Le hemos enviado un correo electrónico con un código para
+                                    autorizar el cambio
+                                    de su contraseña. Por favor
+                                    colóquelo
+                                    en el siguiente campo.</span>
+                                  <mat-form-field class="col-12" appearance="outline" color="accent">
+                                    <mat-label>Código</mat-label>
+                                    <input formControlName="code" matInput maxlength="20"
+                                      placeholder="Ingresa el Código" type="text">
+                                    <mat-error class="my-2"
+                                      *ngIf="checkPasswordForm.controls['code'].errors?.required ">
+                                      Este campo es obligatorio
+                                    </mat-error>
+                                  </mat-form-field>
+                                </form>
+                              </div>
+                              <div class="modal-footer">
+                                <button (click)="validateCodeAccess()" [disabled]="!checkPasswordForm.valid"
+                                  class="btnmodal btnmodal-confirm" mat-button>Siguiente</button>
+                                <button class="btnmodal" mat-button type="button" data-dismiss="modal">Cancelar</button>
+                              </div>
+                            </ng-template>
+                            <ng-template #PasswordFom>
+                              <div class="modal-body">
+                                <form [formGroup]="passwordsForm" class="row">
+                                  <mat-form-field class="col-12" appearance="outline" color="accent"
+                                    hintLabel="Entre 8 y 20 caracteres">
+                                    <mat-label>Contraseña</mat-label>
+                                    <input formControlName="password" matInput maxlength="20"
+                                      placeholder="Ingresa tu contraseña" [type]="!hide ? 'password' : 'text'">
+                                    <mat-error class="my-2" *ngIf="passwordsForm.controls['password'].errors?.required">
+                                      Este
+                                      campo
+                                      es
+                                      obligatorio
+                                    </mat-error>
+                                    <mat-error class="my-2"
+                                      *ngIf="passwordsForm.controls['password'].errors?.minlength">
+                                      Minimo
+                                      8
+                                      caracteres
+                                    </mat-error>
+                                    <button mat-icon-button matSuffix (click)="hide = !hide"
+                                      [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                                      <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                                    </button>
+                                  </mat-form-field>
+                                  <mat-form-field class="col-12" appearance="outline" color="accent">
+                                    <mat-label>Confirmar contraseña</mat-label>
+                                    <input formControlName="confirmPassword" [errorStateMatcher]="matcher" matInput
+                                      maxlength="20" placeholder="Ingresa tu contraseña"
+                                      [type]="!hide ? 'password' : 'text'">
+                                    <mat-error class="my-2" *ngIf="cpwd.hasError('invalid')">
+                                      Las contraseñas no coinciden
+                                    </mat-error>
+                                    <button mat-icon-button matSuffix (click)="hide = !hide"
+                                      [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                                      <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                                    </button>
+                                  </mat-form-field>
+                                </form>
+                              </div>
+                              <div class="modal-footer">
+                                <button [disabled]="!passwordsForm.valid"
+                                  class="float-right btn-custom-primary px-4 py-1" mat-raised-button
+                                  (click)="cambiarPass()">Guardar</button>
+                                <button class="btnmodal" mat-button type="button" data-dismiss="modal">Cancelar</button>
+                              </div>
+                            </ng-template>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </ng-template>
+              </div>
+            </div>
+          </div>
+        </main>
+        <!-- /.container -->
+      </div>
+      <!-- ============================================================== -->
+      <!--End body page  -->
+      <!-- ============================================================== -->
+    </div>
+  </div>
+  <!-- ============================================================== -->
+  <!-- footer -->
+  <!-- ============================================================== -->
+  <app-footer></app-footer>
+  <!-- ============================================================== -->
+  <!-- end footer -->
+  <!-- ============================================================== -->
+</div>
+<!-- ============================================================== -->
+<!-- end wrapper  -->
+<!-- ============================================================== -->

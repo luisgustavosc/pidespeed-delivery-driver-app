@@ -1,0 +1,137 @@
+
+.overflow-x-auto{
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.h-250p{
+  height: 250px;
+}
+.h-100p{
+  height: 100px;
+}
+.mw-370p{
+  max-width: 370px;
+}
+
+.mat-card:not([class*=mat-elevation-z]) {
+  box-shadow: 0 .125rem .25rem rgba(0,0,0,.075)!important;
+}
+
+#imageForm {
+  width: 60%;
+}
+
+.linkTab {
+  text-decoration: none;
+  transition: .3s;
+  position: relative;
+  border: 0;
+  background: #fafafa;
+  font-size: 16px;
+  color: #908f8f;
+}
+
+.linkTab::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  height: 2px;
+  background: var(--RojoPrincipal);
+  width: 0;
+  bottom: -3px;
+  transition: .3s;
+}
+
+.linkTab:hover::after,
+.linkTab.active::after {
+  width: 100% !important;
+  color: var(--RojoPrincipal) !important;
+}
+
+.nav-tabs .nav-link.active {
+  color: #495057;
+  background: #fafafa;
+  border-color: #dee2e6 #dee2e6 #fff;
+}
+
+.linkTab:hover {
+  color: #333 !important;
+}
+
+
+.btnmodal {
+  color: var(--RojoPrincipal);
+  font-size: 18px;
+  float: right;
+}
+@media screen and (max-width:768px) {
+  #myTab{
+    display: grid;
+    grid-gap: 5px;
+  }
+  
+  .alert {
+    width: 100%;
+  }
+  #imageForm {
+    width: 100%;
+  }
+  .cardRestaurante {
+    width: auto;
+  }
+}
+.containerLazyLoader{
+  position: fixed;
+  z-index: 9999;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+}
+.lazyloader {
+  content: '';
+  position: absolute; 
+  z-index: 99999;
+  width: 50px;
+  height: 50px;
+  left: 0;
+  right: 0;
+  top: 0px;
+  bottom: 0;
+  margin: auto;
+  -webkit-animation: loader-rotation .8s infinite linear;
+  animation: loader-rotation .8s infinite linear;
+  border-left: 3px solid rgba(255, 255, 255, 0.7);
+  border-right: 3px solid rgba(255, 255, 255, 0.7);
+  border-bottom: 3px solid rgba(255, 255, 255, 0.7);
+  border-top: 3px solid var(--RojoPrincipal);
+  border-radius: 100%;
+}
+
+@-webkit-keyframes loader-rotation {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+@keyframes loader-rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.shadow_card {
+  box-shadow: 0 .125rem .25rem rgba(0,0,0,.075)!important;
+}
+.bg-grey-dark {
+  background: #eaeaea!important
+}

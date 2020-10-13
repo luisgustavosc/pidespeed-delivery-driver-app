@@ -1,0 +1,261 @@
+<app-header></app-header>
+<app-sidebar></app-sidebar>
+<!-- ============================================================== -->
+<!-- wrapper  -->
+<!-- ============================================================== -->
+<div class="dashboard-wrapper">
+  <div class="dashboard-ecommerce">
+    <div class="container-fluid dashboard-content ">
+      <!-- ============================================================== -->
+      <!-- pageheader  -->
+      <!-- ============================================================== -->
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+          <div class="page-header">
+            <div class="d-sm-flex justify-content-between">
+              <h2 class="pageheader-title">Productos </h2>
+              <div>
+                <button class="btn-custom-outline px-4 py-1 mr-3 my-1 ml-1" mat-raised-button data-toggle="modal"
+                  data-target="#catModal">Tus categorias</button>
+                <button class="btn-custom-primary px-4 py-1 m-1" mat-raised-button
+                  [routerLink]="[ '/products/add']">Nuevo producto</button>
+              </div>
+            </div>
+            <div class="d-flex w-100 w-md-50 mx-auto">
+              <mat-form-field class="w-100 mr-2" appearance="outline" color="accent">
+                <mat-label>Buscar...</mat-label>
+                <input matInput id="buscador" (input)="buscar()">
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- ============================================================== -->
+      <!-- end pageheader  -->
+      <!-- ============================================================== -->
+      <!-- ============================================================== -->
+      <!-- Body page  -->
+      <!-- ============================================================== -->
+      <div class="ecommerce-widget">
+        <!-- ============================================================== -->
+        <!-- Productos  -->
+        <!-- ============================================================== -->
+        <ng-container *ngIf="lazyloaderProducto; then cargandoProducto; else NoCargandoProducto"></ng-container>
+        <ng-template #cargandoProducto>
+          <div class="loader-container">
+            <div class="lazyloader"></div>
+          </div>
+        </ng-template>
+        <ng-template #NoCargandoProducto>
+          <div *ngFor="let categoria of categorias">
+            <h3 class="text-capitalize pt-4">{{ categoria.nombre | titlecase }}</h3>
+            <div class="row">
+              <ng-container *ngFor="let producto of productos">
+                <div *ngIf="
+                    producto.categoria_product_id ===
+                    categoria.categoria_product_id
+                    "
+                  class="col-sm-12 col-md-4 shadow-sm mx-3 my-2 rounded border-light-grey cursor-pointer mw-362p itemMenu">
+                  <div class="row card-producto">
+                    <div
+                      class="col-8 py-4  px-sm-2 px-lg-0 d-flex flex-column align-items-center justify-content-center bg-white h-150p position-relative text-center">
+                      <div class="position-absolute bottom-0 left-0 d-flex">
+                        <button (click)="deleteProd(producto.id)" class="fas fa-trash btn text-grey"
+                          matTooltip="Eliminar producto" matTooltipClass="alertTooltip"></button>
+                        <button (click)="updatePublish(producto.id, producto.publish)"
+                          [ngClass]="producto.publish === 1 ? 'fa-eye text-success' : 'fa-eye-slash text-danger'"
+                          class="btn far"></button>
+                        <button (click)="editarAgotado(producto.id, producto.cantidad)"
+                          [ngClass]="producto.cantidad != 0 || producto.cantidad === -1 ? 'text-success' : 'text-danger'"
+                          class="btn fas fa-boxes"></button>
+                      </div>
+                      <h4 class="h6 text-capitalize">{{ producto.nombre }}</h4>
+                      <p class="m-0" *ngIf="producto.precio == 0 " style="color: #5a5a5a">Precio:
+                        &nbsp;{{ producto.precio1 | currency:"BsS. " }}</p>
+                      <p class="m-0" *ngIf="producto.precio == 1 " style="color: #5a5a5a">A partir de:
+                        &nbsp;{{ producto.precio1 | currency:"BsS. "}}</p>
+                      <!-- <button mat-button data-toggle="modal" data-target="#precioProducto" (click)="editarPrecio(producto.id)">Editar precios</button> -->
+                    </div>
+                    <div class="col-4 px-0 h-150p position-relative">
+                      <div
+                        class="position-absolute top-0 left-0 bottom-0 right-0 d-flex flex-column align-items-center justify-content-center bg-hover-grey">
+                        <button [routerLink]="[ '/products/edit', producto.id ]"
+                          class="fas fa-pen btn text-white rounded-circle border p-3 m-1 text-p-medium"></button>
+                      </div>
+                      <img src="https://ssl.pidespeed.com/{{producto.img}}"
+                        class="w-100 h-100 rounded-right object-fit-cover" alt="{{ producto.nombre}}" />
+                    </div>
+                  </div>
+                </div>
+              </ng-container>
+            </div>
+          </div>
+        </ng-template>
+
+        <!-- ?Modal de editar precio -->
+        <div *ngFor="let producto of productos" class="modal fade" id="precioProducto" tabindex="-1" role="dialog"
+          aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Editar Precio</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <form [formGroup]="precioProducto" class="px-3">
+
+                  <!-- !Cuando la empres SI trabaja con dolares, UN solo Tamano -->
+                  <div *ngIf="producto.tamanos_ids == '' || empresa.modDollar === 1">
+                    <mat-form-field appearance="outline" class="w-100" color="accent">
+                      <mat-label>Precio</mat-label>
+                      <span matSuffix>$ &nbsp;</span>
+                      <input (input)="cambio($event,'no')" formControlName="precioUnico_dl" matInput
+                        placeholder="Precio" type="number">
+                      <mat-error class="my-2" *ngIf="precioProducto.controls['precioUnico_dl'].errors?.required">
+                        Este
+                        campo
+                        es
+                        obligatorio
+                      </mat-error>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" class="w-100" color="accent">
+                      <mat-label>Precio al cambio</mat-label>
+                      <span matSuffix>BsS &nbsp;</span>
+                      <input formControlName="precioUnico" matInput placeholder="Precio" type="number">
+                      <mat-error class="my-2" *ngIf="precioProducto.controls['precioUnico'].errors?.required">
+                        Este
+                        campo
+                        es
+                        obligatorio
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+
+                  <!-- !Cuando la empres NO trabaja con dolares, UN solo tamano -->
+                  <mat-form-field *ngIf="producto.tamanos_ids === '' && empresa.modDollar == 0" appearance="outline"
+                    class="w-100" color="accent">
+                    <mat-label>Precio</mat-label>
+                    <span matSuffix>BsS &nbsp;</span>
+                    <input formControlName="precioUnico" matInput placeholder="Precio" type="number">
+                    <mat-error class="my-2" *ngIf="precioProducto.controls['precioUnico'].errors?.required">
+                      Este
+                      campo
+                      es
+                      obligatorio
+                    </mat-error>
+                  </mat-form-field>
+
+                  <!-- !Cuando la empres SI trabaja con dolares, Varios tamanos -->
+                  <div *ngIf="producto.tamanos_ids != ''">
+                    <div class="row">
+                      <div *ngIf="empresa.modDollar == 1" class="w-100">
+                        <ng-container *ngFor="let tamano of tamanos" class="col">
+                          <ng-container *ngFor="let tamanoSelected of arrayTamanosSelected;  let i = index">
+                            <mat-form-field *ngIf="tamano.id.toString() === tamanoSelected" appearance="outline"
+                              class="w-100" color="accent">
+                              <mat-label>Precio {{tamano.nombre}}</mat-label>
+                              <span matSuffix style="font-size: 22px;">$ &nbsp;</span>
+                              <input (input)="cambio($event,i)" formControlName="precio{{i}}_dl" matInput
+                                placeholder="Precio" type="number">
+                            </mat-form-field>
+                          </ng-container>
+                        </ng-container>
+                      </div>
+
+                      <div *ngIf="empresa.modDollar == 1" class="w-100">
+                        <ng-container *ngFor="let tamano of tamanos" class="col">
+                          <ng-container *ngFor="let tamanoSelected of arrayTamanosSelected;  let i = index">
+                            <mat-form-field *ngIf="tamano.id.toString() === tamanoSelected" appearance="outline"
+                              class="w-100" color="accent">
+                              <mat-label>Precio {{tamano.nombre}} al cambio</mat-label>
+                              <span matSuffix style="font-size: 22px;">BsS &nbsp;</span>
+                              <input formControlName="precio{{i}}" matInput placeholder="Precio" type="number">
+                            </mat-form-field>
+                          </ng-container>
+                        </ng-container>
+                      </div>
+
+                      <!-- !Cuando la empres NO trabaja con dolares, Varios tamanos -->
+                      <div *ngIf="empresa.modDollar === 0" class="w-100">
+                        <ng-container *ngFor="let tamano of tamanos" class="col">
+                          <ng-container *ngFor="let tamanoSelected of arrayTamanosSelected;  let i = index">
+                            <mat-form-field *ngIf="tamano.id.toString() === tamanoSelected" appearance="outline"
+                              class="w-100" color="accent">
+                              <mat-label>Precio {{tamano.nombre}} al cambio</mat-label>
+                              <span matSuffix style="font-size: 22px;">BsS &nbsp;</span>
+                              <input formControlName="precio{{i}}" matInput placeholder="Precio" type="number">
+                            </mat-form-field>
+                          </ng-container>
+                        </ng-container>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button class="text-primary" mat-button data-dismiss="modal" aria-label="Close">Cancelar</button>
+                <button class="text-primary" mat-button (click)="actualizarPrecios()">Guardar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Modal categorias -->
+        <div class="modal fade" id="catModal" tabindex="-1" role="dialog" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Configuración del orden de las categorías</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <p class="mb-2">Puedes modificar el orden en el que deseas que se muestren en tu perfil</p>
+                <div class="d-flex justify-content-center">
+                  <div cdkDropList class="categorias-list" (cdkDropListDropped)="drop($event)">
+                    <div class="categorias-box" *ngFor="let cat of categorias" cdkDrag>
+                      <div class="categorias-custom-placeholder" *cdkDragPlaceholder></div>
+                      {{ cat.nombre }}
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button class="btnmodal" mat-button type="button" data-dismiss="modal">Cancelar</button>
+                  <ng-container *ngIf="lazyloader; then cargando; else NoCargando"></ng-container>
+                  <ng-template #NoCargando>
+                    <button class="btnmodal btnmodal-confirm" mat-button type="button"
+                      (click)="guardarOrdenCat()">Guardar</button>
+                  </ng-template>
+                  <ng-template #cargando>
+                    <div class="position-relative">
+                      <div class="lazyloader"></div>
+                    </div>
+                  </ng-template>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- modal categorias -->
+
+          <!-- ============================================================== -->
+          <!-- end recent orders  -->
+        </div>
+        <!-- ============================================================== -->
+        <!--End body page  -->
+        <!-- ============================================================== -->
+      </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- footer -->
+    <!-- ============================================================== -->
+    <app-footer></app-footer>
+    <!-- ============================================================== -->
+    <!-- end footer -->
+    <!-- ============================================================== -->
+  </div>
+  <!-- ============================================================== -->
+  <!-- end wrapper  -->
+  <!-- ============================================================== -->

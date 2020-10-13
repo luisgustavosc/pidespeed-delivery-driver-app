@@ -1,0 +1,318 @@
+<app-header></app-header>
+<app-sidebar></app-sidebar>
+<!-- ============================================================== -->
+<!-- wrapper  -->
+<!-- ============================================================== -->
+<div class="dashboard-wrapper">
+  <div class="dashboard-ecommerce">
+    <div class="dashboard-content ">
+      <!-- ============================================================== -->
+      <!-- Body page  -->
+      <!-- ============================================================== -->
+      <div class="ecommerce-widget">
+        <div class="fade-animation">
+          <div class="container d-flex justify-content-between justify-content-md-start border-md-bottom py-2">
+            <a [routerLink]="['/preview/profile']" class="d-block d-md-none text-grey text-hover-red d-flex justify-content-center align-items-center">
+              <i class="material-icons font-icon-md">arrow_back</i>
+            </a>
+            <a [routerLink]="['/preview/profile']" class="lead d-none d-md-flex align-items-center btn btn-outline-grey btn-md btn-rounded px-4 w-fit-content">
+              <i class="material-icons">arrow_back</i>Volver
+            </a>
+            <div>
+              <img [routerLink]="['/home']" src="https://ssl.pidespeed.com/web/3.png" alt="Logo de pidespeed" width=215>
+            </div>
+          </div>
+          
+          <div class="row no-gutters px-lg-5">
+            <div class="col-12 col-lg-4">
+              <div class="carousel slide" data-ride="carousel" class="mt-md-3">
+                <div id="lightgallery" class="carousel-inner">
+                  <div class="carousel-item cursor-pointer active h-30vh h-md-55vh position-relative" data-src=""
+                  data-sub-html="">
+                    <div *ngIf="producto.cantidad == 0"class="position-absolute d-flex justify-content-center align-items-center  bg-absolute-transparent-black">
+                      <p class="m-0 text-white lead">Agotado</p>
+                    </div>
+                    <img src="https://ssl.pidespeed.com/{{producto.img}}" class="d-block w-100 h-30vh h-lg-55vh img-fluid" alt="imagen de portada de {{producto.nombre}}">
+                  </div>
+                </div>
+              </div>
+              <div class="pt-4">
+                <h2 class="text-center px-1 text-capitalize m-auto">{{ producto.nombre }}</h2>
+                <p class="p-2 text-center text-capitalize m-auto text-p-small">{{ producto.descripcion }}</p>
+                <div class="text-center mt-4 pb-4">
+                  <h6>Disponible:</h6>
+                  <div class="row mx-auto justify-content-center">
+                    <div class="col-4">
+                      <img [ngClass]="{'modDisabled': producto.en_local == '0'}" class="img-fluid" src="https://ssl.pidespeed.com/web/comer.png" width="50px" alt="tenedor y cuchara">
+                      <p [ngClass]="{'text-danger': producto.en_local == '0'}" class="m-0 text-success text-p-small mt-2">
+                        En el local
+                      </p>
+                    </div>
+                    <div class="col-4">
+                      <img [ngClass]="{'modDisabled': producto.to_go == '0'}" class="img-fluid" src="https://ssl.pidespeed.com/web/bolso.png" width="50px" alt="bolsa de compras">
+                      <p [ngClass]="{'text-danger': producto.to_go == '0'}" class="m-0 py-2 text-success text-p-small mt-2">
+                        Para llevar
+                        <br>
+                        <ng-container *ngIf="producto.to_go == '1'">
+                          <span class="font-weight-bold font-size-default">+ Gratis</span>
+                        </ng-container>
+                        <ng-container *ngIf="producto.to_go > '1'" >
+                          <span class="font-weight-bold">+ {{ producto.to_go | currency:"BsS. "}}</span>
+                        </ng-container>
+                      </p>
+                    </div>
+                    <div class="col-4">
+                      <img [ngClass]="{'modDisabled': empresa.delivery === '0' || producto.to_go == 0}" class="img-fluid" src="https://ssl.pidespeed.com/web/entrega-de-comida.png" width="50px" alt="moto">
+                      <p [ngClass]="{'text-danger': empresa.delivery === '0' || producto.to_go == 0}" class="m-0 py-2 text-success text-p-small mt-2">
+                        A Domicilio
+                        <br>
+                        <ng-container *ngIf="empresa.delivery == '1' && producto.to_go != 0">
+                          <span class="font-weight-bold font-size-default">+ Gratis</span>
+                        </ng-container>
+                        <!-- <ng-container *ngIf="producto.delivery > '1' && producto.to_go != 0">
+                          <span class="font-weight-bold">+ {{ producto.delivery | currency:"BsS. "}}</span>
+                        </ng-container> -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="col-12 col-lg-8">
+              <div class="container mt-3 pb-5 mb-5">
+                <div *ngIf="HorarioDisponible" class="alert danger-alert">
+                  <mat-error>{{empresa.nombre || titlecase}} se encuentra cerrada
+                    <small class="d-block">No puedes realizar pedidos</small>
+                  </mat-error>
+                </div>
+                <div class="row pt-lg-5">
+                  <div class="col-lg-6">
+                    <form [formGroup]="detallesProducto" *ngIf="producto != ''" (ngSubmit)="AddCarrito()">
+                      <div class="w-100 px-3 text-center" *ngIf="producto.tamanos != 0">
+                        <mat-label class="text-center">Escoge un Tamaño</mat-label>
+                        <div class="radioInputsCards mb-4 mx-auto row no-gutters justify-content-center align-items-center"> 
+                          <ng-container *ngFor="let tamano of tamanos">
+                            <div class="col-5 col-md-3 col-lg-4 mx-2">
+                              <input type="radio" formControlName="tamano" id="tamano{{tamano.id}}" [value]="{
+                                id: tamano.id,
+                                nombre: tamano.nombre,
+                                precio: tamano.precio
+                              }" (click)="putPrecioTamano(tamano.precio, producto.nombre, tamano.nombre)"/>
+                              <label for="tamano{{tamano.id}}">{{tamano.nombre}}</label>
+                            </div>
+                          </ng-container>
+                        </div>
+                      </div>
+                  
+                  <div class="w-100 px-3 text-center" *ngIf="producto.sabores != 0">
+                    <mat-label class="text-center">Escoge uno</mat-label>
+                    <div class="radioInputsCards mb-4 mx-auto row no-gutters justify-content-center align-items-center"> 
+                      <ng-container *ngFor="let sabor of sabores">
+                        <div class="col-5 col-md-3 col-lg-4 mx-2">
+                          <input type="radio" formControlName="sabor" id="sabor{{sabor.id}}" [value]="{
+                            id: sabor.id,
+                            nombre: sabor.nombre,
+                            precio: sabor.precio
+                          }" (click)="putPrecioSabor(sabor.precio, producto.nombre, sabor.nombre)"/>
+                          <label for="sabor{{sabor.id}}">{{sabor.nombre}}</label>
+                        </div>
+                      </ng-container>
+                    </div>
+                  </div>
+                  
+                  <div class="row justify-content-center align-items-center flex-column" *ngIf="producto.sirope != 0">
+                    <ng-container *ngIf="siropesLength == 1">
+                      <mat-form-field appearance="outline" color="accent" class="w-100 w-lg-75 px-3">
+                        <mat-label>Escoge un sirope</mat-label>
+                        <mat-select formControlName="sirope">
+                          <mat-option class="text-capitalize" *ngFor="let sirope of siropes" [value]="{
+                            id: sirope.id,
+                            nombre: sirope.nombre
+                          }">{{ sirope.nombre }}
+                        </mat-option>
+                      </mat-select>
+                      <mat-error *ngIf="detallesProducto.controls['sirope'].errors?.required">Tienes que escoger un sirope
+                      </mat-error>
+                    </mat-form-field>
+                  </ng-container>
+                  <ng-container *ngIf="siropesLength > 1">
+                    <mat-form-field class="w-100 w-md-75 px-3" appearance="outline" color="accent">
+                      <mat-label>Escoge un sirope</mat-label>
+                      <mat-select formControlName="sirope" multiple maxlength={{siropesLength}}>
+                        <mat-option class="text-capitalize" *ngFor="let sirope of siropes" [value]="{
+                          id: sirope.id,
+                          nombre: sirope.nombre
+                        }">{{ sirope.nombre }}
+                      </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="detallesProducto.controls['sirope'].errors?.required">Tienes que escoger
+                      siropes
+                    </mat-error>
+                    <mat-error *ngIf="detallesProducto.controls['sirope'].errors?.maxlength">Solo puedes escoger
+                      {{siropesLength}} sirope
+                    </mat-error>
+                  </mat-form-field>
+                </ng-container>
+              </div>
+              
+              <div class="row justify-content-center align-items-center flex-column" *ngIf="producto.topping != 0">
+                <ng-container *ngIf="toppingsLength == 1">
+                  <mat-form-field class="w-100 w-md-75 px-3" appearance="outline" color="accent">
+                    <mat-label>Escoge un topping</mat-label>
+                    <mat-select formControlName="topping">
+                      <mat-option class="text-capitalize" *ngFor="let topping of toppings" [value]="{
+                        id: topping.id,
+                        nombre: topping.nombre
+                      }">
+                      {{ topping.nombre }}</mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="detallesProducto.controls['sirope'].errors?.required">Tienes que escoger un topping
+                    </mat-error>
+                  </mat-form-field>
+                </ng-container>
+                <ng-container *ngIf="toppingsLength > 1">
+                  <mat-form-field class="w-100 w-md-75 px-3" appearance="outline" color="accent">
+                    <mat-label>Escoge un topping</mat-label>
+                    <mat-select  formControlName="topping" multiple maxlength={{toppingsLength}}>
+                      <mat-option class="text-capitalize" *ngFor="let topping of toppings" [value]="{
+                        id: topping.id,
+                        nombre: topping.nombre
+                      }">
+                      {{ topping.nombre }}</mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="detallesProducto.controls['topping'].errors?.required">Tienes que escoger
+                      toppings
+                    </mat-error>
+                    <mat-error *ngIf="detallesProducto.controls['topping'].errors?.maxlength">Solo puedes escoger
+                      {{toppingsLength}} topping
+                    </mat-error>
+                  </mat-form-field>
+                </ng-container>
+              </div>
+              
+              <div class="row justify-content-center align-items-center flex-column" *ngIf="producto.bebida != 0">
+                <ng-container *ngIf="bebidasLength == 1">
+                  <mat-form-field class="w-100 w-md-75 px-3" appearance="outline" color="accent">
+                    <mat-label>Escoge una bebida</mat-label>
+                    <mat-select formControlName="bebida">
+                      <mat-optgroup class="text-capitalize" *ngFor="let tipoBebida of bebidas" [label]="tipoBebida.nombre">
+                        <mat-option class="text-capitalize" *ngFor="let bebida of tipoBebida.bebidas" [value]="{
+                          id: bebida.id,
+                          nombre: bebida.nombre
+                        }">
+                        {{ bebida.nombre }}</mat-option>
+                      </mat-optgroup>
+                    </mat-select>
+                    <mat-error *ngIf="detallesProducto.controls['bebida'].errors?.required">Tienes que escoger una bebida
+                    </mat-error>
+                  </mat-form-field>
+                </ng-container>
+                <ng-container *ngIf="bebidasLength > 1">
+                  <mat-form-field class="w-100 w-md-75 px-3" appearance="outline" color="accent">
+                    <mat-label>Escoge una bebida</mat-label>
+                    <mat-select formControlName="bebida" multiple maxlength={{bebidasLength}}>
+                      <mat-optgroup class="text-capitalize" *ngFor="let tipoBebida of bebidas" [label]="tipoBebida.nombre">
+                        <mat-option class="text-capitalize" *ngFor="let bebida of tipoBebida.bebidas" [value]="{
+                          id: bebida.id,
+                          nombre: bebida.nombre
+                        }">
+                        {{ bebida.nombre }}</mat-option>
+                      </mat-optgroup>
+                    </mat-select>
+                    <mat-error *ngIf="detallesProducto.controls['bebida'].errors?.required">Tienes que escoger
+                      bebidas
+                    </mat-error>
+                    <mat-error *ngIf="detallesProducto.controls['bebida'].errors?.maxlength">Solo puedes escoger
+                      {{bebidasLength}} bebida
+                    </mat-error>
+                  </mat-form-field>
+                </ng-container>
+              </div>
+              
+              <div class="row justify-content-center align-items-center flex-column" *ngIf="producto.add != 0">
+                <label class="text-left lead mt-4">Adicionales</label>
+                <mat-form-field class="w-100 w-md-75 px-3" appearance="outline" color="accent">
+                  <mat-label>Adicionales</mat-label>
+                  <mat-select formControlName="adicional" multiple>
+                    <mat-optgroup class="text-capitalize" *ngFor="let adicional of CategoriaAdicional" [label]="adicional.name">
+                      <mat-option class="text-capitalize" *ngFor="let add of adicional.adicional[0]" [value]="[{
+                        idAd: adicional.id,
+                        id: add.id,
+                        nombreAd: adicional.name,
+                        nombre: add.nombre,
+                        precio: adicional.precio
+                      }]" (click)="putAdicionalesPrecio()">
+                      {{ add.nombre }} <span class="text-right">{{ adicional.precio | currency:"BsS. "
+                      }}</span>
+                    </mat-option>
+                  </mat-optgroup>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            
+            <div class="row justify-content-center align-items-center flex-column">
+              <label class="text-left lead mt-2">Instrucciones adicionales</label>
+              <mat-form-field class="w-100 w-md-75 px-3" appearance="outline" color="accent">
+                <textarea formControlName="instrucciones" matInput placeholder="Deja instrucciones de tu pedido"></textarea>
+              </mat-form-field>
+            </div>
+            
+            <div class="text-lg-right mx-3 position-fixed bottom-0 left-0 right-0 mb-3 ml--lg-auto " style="z-index: 999;">
+              <button [disabled]='!detallesProducto.valid || HorarioDisponible || producto.cantidad == 0' data-toggle="modal" data-target="#addCarrito"
+              mat-stroked-button style="z-index: 999;" class="btn-custom-md btn-red w-100 w-lg-25 py-2" type="submit">
+              Añadir al carrito
+            </button>
+          </div>
+          
+        </form>
+        </div>
+        <div class="mb-3 col-lg-6 pt-4 ">
+          <table mat-table [dataSource]="transactions" class="mat-elevation-z8 w-100 shadow-sm">
+            <!-- Item Column -->
+            <ng-container matColumnDef="item">
+              <th mat-header-cell *matHeaderCellDef class="text-p-small"> Resumen de artículo </th>
+              <td mat-cell *matCellDef="let transaction"> {{transaction.item}} </td>
+              <td mat-footer-cell *matFooterCellDef class="font-weight-bold"> Total </td>
+            </ng-container>
+            <!-- Cost Column -->
+            <ng-container matColumnDef="cost">
+              <th mat-header-cell *matHeaderCellDef class="text-p-small"> Precio </th>
+              <td class="p-0" mat-cell *matCellDef="let transaction"> {{transaction.cost | currency:"BsS. "}} </td>
+              <td class="p-0" mat-footer-cell *matFooterCellDef class="font-weight-bold">
+                {{getTotalCost() * cantidad | currency:"BsS. "}}
+              </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
+          </table>
+          <div class="row justify-content-center align-items-center mt-3 rounded shadow-sm px-5 py-3 mr-auto ml-auto w-100">
+            <button [disabled]="cantidad <= 1" (click)="cantidad = cantidad - 1"
+            class="fas fa-minus w-100 col-4 text-grey btn elad"></button>
+            <p class="text-center m-0 lead">{{cantidad}}</p>
+            <button (click)="cantidad = cantidad + 1" class="fas fa-plus  w-100 col-4 text-grey btn"></button>
+          </div>
+        </div>
+        </div>
+        </div>
+        </div>
+          </div>
+        </div>
+      </div>
+      <!-- ============================================================== -->
+      <!--End body page  -->
+      <!-- ============================================================== -->
+    </div>
+  </div>
+  <!-- ============================================================== -->
+  <!-- footer -->
+  <!-- ============================================================== -->
+  <app-footer></app-footer>
+  <!-- ============================================================== -->
+  <!-- end footer -->
+  <!-- ============================================================== -->
+</div>
+<!-- ============================================================== -->
+<!-- end wrapper  -->
+<!-- ============================================================== -->
+

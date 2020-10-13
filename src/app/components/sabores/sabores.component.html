@@ -1,0 +1,168 @@
+<app-header></app-header>
+<app-sidebar></app-sidebar>
+<!-- ============================================================== -->
+<!-- wrapper  -->
+<!-- ============================================================== -->
+<div class="dashboard-wrapper">
+  <div class="dashboard-ecommerce">
+    <div class="container-fluid dashboard-content ">
+      <!-- ============================================================== -->
+      <!-- pageheader  -->
+      <!-- ============================================================== -->
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+          <div class="page-header">
+            <h2 class="pageheader-title">Sabores </h2>
+          </div>
+        </div>
+      </div>
+      <!-- ============================================================== -->
+      <!-- end pageheader  -->
+      <!-- ============================================================== -->
+      <!-- ============================================================== -->
+      <!-- Body page  -->
+      <!-- ============================================================== -->
+      <div class="ecommerce-widget">
+        <div class="contenedorAddt row">
+          <div class="col-xl-12 col-lg-12 col-md-12s col-sm-12 col-12">
+            <div class="card">
+              <h5 class="card-header d-flex justify-content-between align-items-center subtitles-card">
+                Sabores 
+                <button data-toggle="modal" class="float-right" data-target="#add" mat-icon-button style="background: #feeff0">
+                  <mat-icon>add</mat-icon>
+                </button>
+              </h5>
+              <div class="card-body p-0">
+                <div class="table-responsive">
+                  <table class="table">
+                    <thead class="bg-light">
+                      <tr class="border-0">
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Publico</th>
+                        <th scope="col">Acciones</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let sabor of sabores">
+                        <td>{{sabor.nombre | titlecase}}</td>
+                        <td *ngIf="sabor.publish == 1">Si</td>
+                        <td *ngIf="sabor.publish == 0">No</td>
+                        <td class="d-flex">
+                          <button (click)="getSaborToUpdate(sabor.id)" data-toggle="modal" data-target="#edit" mat-icon-button>
+                            <mat-icon>edit</mat-icon>
+                          </button>
+                          <button mat-icon-button (click)="deleteSabor(sabor.id)">
+                            <mat-icon>delete</mat-icon>
+                          </button>
+                          <button (click)="updatePublish(sabor.id, sabor.publish)" [ngClass]="sabor.publish === 1 ? 'fa-eye text-success' : 'fa-eye-slash text-danger'" class="btn far"></button>                         
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ============================================================== -->
+        <!-- Modal agregar  -->
+        <!-- ============================================================== -->
+        <div class="modal fade" id="add" tabindex="-1" role="dialog" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Agregar Sabor</h5>
+                <button type="button" class="close" (click)="resetForm(agregarSaborForm)" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <form [formGroup]="agregarSaborForm">
+                  <mat-form-field class="w-100" appearance="outline" color="accent">
+                    <mat-label>Nombre</mat-label>
+                    <input class="text-capitalize" formControlName="nombre" matInput>
+                    <mat-error class="my-2" *ngIf="agregarSaborForm.controls['nombre'].errors?.required">Este campo es obligatorio</mat-error>
+                  </mat-form-field>
+                  <mat-form-field color="accent" class="w-100" appearance="outline">
+                    <mat-label>Desea que sea visible</mat-label>
+                    <mat-select formControlName="publish" [(value)]="visibleAdi">
+                      <mat-option [value]=visible>
+                        Si
+                      </mat-option>
+                      <mat-option [value]=noVisible>
+                        No
+                      </mat-option>
+                    </mat-select>
+                    <mat-error class="my-2" *ngIf="agregarSaborForm.controls['publish'].errors?.required">Este campo es obligatorio</mat-error>
+                  </mat-form-field>
+                  <button class="btnmodal btnmodal-confirm" (click)="createSabor(); resetForm(agregarSaborForm)" [disabled]="!agregarSaborForm.valid" mat-button type="button">Guardar</button>
+                  <button class="btnmodal" mat-button type="button" (click)="resetForm(agregarSaborForm)" data-dismiss="modal">Cancelar</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- ============================================================== -->
+        <!-- Fin Modal agregar  -->
+        <!-- ============================================================== -->
+
+        <!-- ============================================================== -->
+        <!-- Modal Editar  -->
+        <!-- ============================================================== -->
+        <div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Editar Sabor</h5>
+                <button type="button" class="close" (click)="resetForm(editarSaborForm)" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <form [formGroup]="editarSaborForm">
+                  <mat-form-field class="w-100" appearance="outline" color="accent">
+                    <mat-label>Nombre</mat-label>
+                    <input class="text-capitalize" formControlName="nombre" matInput>
+                    <mat-error class="my-2" *ngIf="editarSaborForm.controls['nombre'].errors?.required">Este campo es obligatorio</mat-error>
+                  </mat-form-field>
+
+                  <mat-form-field color="accent" class="w-100" appearance="outline">
+                    <mat-label>Desea que sea visible</mat-label>
+                    <mat-select formControlName="publish" [(value)]="visibleAdi">
+                      <mat-option [value]=visible>
+                        Si
+                      </mat-option>
+                      <mat-option [value]=noVisible>
+                        No
+                      </mat-option>
+                    </mat-select>
+                    <mat-error class="my-2" *ngIf="editarSaborForm.controls['publish'].errors?.required">Este campo es obligatorio</mat-error>
+                  </mat-form-field>
+                  <button class="btnmodal btnmodal-confirm" mat-button type="button" (click)="updateSabor(); resetForm(editarSaborForm)" [disabled]="!editarSaborForm.valid">Guardar</button>
+                  <button class="btnmodal" mat-button type="button" (click)="resetForm(editarSaborForm)" data-dismiss="modal">Cancelar</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- ============================================================== -->
+        <!-- Fin Modal agregar  -->
+        <!-- ============================================================== -->
+      </div>
+      <!-- ============================================================== -->
+      <!--End body page  -->
+      <!-- ============================================================== -->
+    </div>
+  </div>
+  <!-- ============================================================== -->
+  <!-- footer -->
+  <!-- ============================================================== -->
+  <app-footer></app-footer>
+  <!-- ============================================================== -->
+  <!-- end footer -->
+  <!-- ============================================================== -->
+</div>
+<!-- ============================================================== -->
+<!-- end wrapper  -->
+<!-- ============================================================== -->

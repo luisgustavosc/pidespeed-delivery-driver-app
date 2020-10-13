@@ -1,0 +1,410 @@
+<app-header></app-header>
+<app-sidebar [cantidadPendientes]="ordersCantidadPendiente"></app-sidebar>
+<!-- ============================================================== -->
+<!-- wrapper  -->
+<!-- ============================================================== -->
+<div class="dashboard-wrapper">
+  <div class="dashboard-ecommerce">
+    <div class="container-fluid dashboard-content ">
+      <!-- ============================================================== -->
+      <!-- pageheader  -->
+      <!-- ============================================================== -->
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+          <div class="page-header">
+            <div class="d-sm-flex justify-content-between">
+              <h2 class="pageheader-title">Órdenes </h2>
+              <button [routerLink]="[ '/orders/history']" class="btn-custom-outline px-4 py-1 shadow-sm" mat-raised-button>Historial de órdenes</button>
+            </div>
+            <div class="d-flex w-100 w-md-50 mx-auto">
+              <mat-form-field class="w-100 mr-2" appearance="outline" color="accent">
+                <mat-label>Buscar...</mat-label>
+                <input matInput id="buscador" (input)="buscar()">
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- ============================================================== -->
+      <!-- end pageheader  -->
+      <!-- ============================================================== -->
+      <!-- ============================================================== -->
+      <!-- Body page  -->
+      <!-- ============================================================== -->
+      <div class="ecommerce-widget">
+        <!-- ============================================================== -->
+        <!-- recent orders  -->
+        <!-- ============================================================== -->
+        <mat-tab-group>
+          <mat-tab label="Pedidos por hacer">
+            <div *ngIf="pendientes != ''">
+              <div  class="row overflow-hidden pt-2 px-1">
+                <div *ngFor="let order of pendientes; index as i"  class="px-0 px-md-2 col-12 col-md-6 col-lg-4" data-toggle="modal" [attr.data-target]="'#order'+order.id">
+                  <div class="card">
+                    <div class="card-body">
+                      <div class="metric-label d-inline-block float-right text-brand font-weight-bold">
+                        <span><i class="far fa-clock"></i></span>&nbsp;<span>Pendiente</span>
+                      </div>
+                      <h5 class="text-primary" style="font-size: 18px">Orden: {{order.codigo}}</h5>
+                      <div class="metric-value d-inline-block">
+                        <h1 class="mb-1">{{order.precio | currency:"BsS. "}}</h1>
+                      </div>
+                      <div class="d-flex justify-content-between align-items-center">
+                        <div *ngIf="order.to_go == 0" class="metric-label text-primary mt-1 d-inline-block float-right borde rounded-pill py-1 px-2 lead font-weight-bold">
+                          <span><i class="fas fa-utensils"></i></span>
+                        </div>
+                        <div *ngIf="order.to_go != 0 && order.delivery == 0" class="metric-label text-primary mt-1 d-inline-block float-right border rounded-pill py-1 px-2 lead font-weight-bold">
+                          <span><i class="fas fa-shopping-bag"></i></span>
+                        </div>
+                        <div *ngIf="order.to_go != 0 && order.delivery != 0" class="metric-label text-primary mt-1 d-inline-block float-right border rounded-pill py-1 px-2 lead font-weight-bold">
+                          <span><i class="fas fa-shipping-fast"></i></span>
+                        </div>
+                        <div class="metric-label mt-1 d-inline-block float-right font-weight-bold">
+                          <span><i class="fas fa-calendar-day"></i> </span><span>
+                            {{order.fecha1}}</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div id="sparkline-revenue"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div *ngIf="pendientes == ''">
+                <p>No hay órdenes pendientes</p>
+              </div>
+            </mat-tab>
+            <mat-tab label="Pedidos por entregar">
+              <div *ngIf="terminados != ''">
+                <div class="row overflow-hidden pt-2 px-1" >
+                  <div *ngFor="let order of terminados; index as i"  class="px-0 px-md-2 col-12 col-md-6 col-lg-4" data-toggle="modal" [attr.data-target]="'#terminados'+order.id">
+                    <div class="card">
+                      <div class="card-body">
+                        <div class="metric-label d-inline-block float-right text-success font-weight-bold">
+                          <span><i class="fas fa-clipboard-check"></i></span>&nbsp;<span>Terminado</span>
+                        </div>
+                        <h5 class="text-primary" style="font-size: 18px">Orden: {{order.codigo}}</h5>
+                        <div class="metric-value d-inline-block">
+                          <h1 class="mb-1">{{order.precio | currency:"BsS. "}}</h1>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center">
+                          <div *ngIf="toGoTerminados[i] == 0" class="metric-label text-primary mt-1 d-inline-block float-right borde rounded-pill py-1 px-2 lead font-weight-bold">
+                            <span><i class="fas fa-utensils"></i></span>
+                          </div>
+                          <div *ngIf="toGoTerminados[i] != 0 && deliveryTerminados[i] == 0" class="metric-label text-primary mt-1 d-inline-block float-right border rounded-pill py-1 px-2 lead font-weight-bold">
+                            <span><i class="fas fa-shopping-bag"></i></span>
+                          </div>
+                          <div *ngIf="toGoTerminados[i] != 0 && deliveryTerminados[i] != 0" class="metric-label text-primary mt-1 d-inline-block float-right border rounded-pill py-1 px-2 lead font-weight-bold">
+                            <span><i class="fas fa-shipping-fast"></i></span>
+                          </div>
+                          <div class="metric-label mt-1 d-inline-block float-right font-weight-bold">
+                            <span><i class="fas fa-calendar-day"></i> </span><span>
+                              {{order.fecha1}}</span>
+                            </div>
+                          </div>
+                        </div>
+                        <div id="sparkline-revenue"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div *ngIf="terminados == ''">
+                  <p>No hay órdenes por entregar</p>
+                </div>
+              </mat-tab>
+            </mat-tab-group>
+            
+            <!-- Modal -->
+            <div *ngFor="let orden of ordenes; index as i">
+              <div class="modal fade pendientes" id="order{{orden.id}}" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog modal-lg" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header d-flex justify-content-center align-items-center">
+                      <h4 *ngIf="toGo[i] == 0" class="d-block d-lg-inline-block border text-primary rounded-pill py-2 px-3 text-center"><i class="pr-2 fas fa-utensils"></i> Comer en el local</h4>
+                      <h4 *ngIf="toGo[i] != 0 && delivery[i] != 0" class="d-block d-lg-inline-block border text-primary rounded-pill py-2 px-3 text-center"><i class="pr-2 fas fa-shipping-fast"></i> Entrega a domicilio</h4>
+                      <h4 *ngIf="toGo[i] != 0 && delivery[i] == 0" class="d-block d-lg-inline-block border text-primary rounded-pill py-2 px-3 text-center"><i class="pr-2 fas fa-shopping-bag"></i> Para llevar</h4>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 p-0">
+                        <div class="card">
+                          <div class="card-body p-0">
+                            <div class="table-responsive">
+                              <table class="table">
+                                <thead class="bg-light">
+                                  <tr class="border-0">
+                                    <th class="border-0">Nombre</th>
+                                    <th class="border-0">Teléfono</th>
+                                    <th class="border-0">Cédula</th>
+                                    <th class="border-0">Correo </th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr>
+                                    <td>{{usuario[i].nombre}}</td>
+                                    <td>{{usuario[i].telefono}}</td>
+                                    <td>{{usuario[i].cedula}}</td>
+                                    <td>{{usuario[i].email}}</td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <mat-card class="p-0">
+                        <mat-card-title>Resumen de pedido - {{orden.codigo}}</mat-card-title>
+                        <ng-container *ngFor="let detalles of orden">
+                          <mat-accordion>
+                            <mat-expansion-panel class="p-0">
+                              <mat-expansion-panel-header class="h-auto p-2">
+                                <mat-panel-title>
+                                  {{detalles[0].nombre}}
+                                </mat-panel-title>
+                                <mat-panel-description>
+                                  Cantidad: {{detalles[0].cantidad}}
+                                </mat-panel-description>
+                              </mat-expansion-panel-header>
+                              <ul class="pl-2">
+                                <ng-container *ngFor="let item of detalles; index as indice">
+                                  <ng-container *ngIf="indice > 0">
+                                    <li *ngIf="item.cost != ''">
+                                      {{item.nombre}} - {{item.cost | currency:"BsS. "}}</li>
+                                      <li *ngIf="item.cost == ''">
+                                        {{item.nombre}}
+                                      </li>
+                                    </ng-container>
+                                  </ng-container>
+                                </ul>
+                              </mat-expansion-panel>
+                            </mat-accordion>
+                          </ng-container>
+                          <mat-card class="d-flex m-0 p-0 justify-content-between align-items-center">
+                            <table class="table">
+                              <tbody>
+                                <tr *ngIf="toGo[i] == 0" class="border-bottom">
+                                  <td colspan="1" class="p-0 py-2 h3">Total:</td>
+                                  <td colspan="2" class="p-0 py-2 text-right h3">{{orden.precio | currency:"BsS. "}}</td>
+                                </tr>   
+                                <ng-container  *ngIf="toGo[i] != 0">
+                                  <tr>
+                                    <td colspan="1" class="p-0 py-1 h4">Sub-total:</td>
+                                    <td colspan="2" class="p-0 py-1 text-right h4">{{(orden.precio * 1) - precioToGo[i] | currency:"BsS. "}}</td>
+                                  </tr>     
+                                  <tr>
+                                    <td colspan="1" class="p-0 py-1 h4">Costo para llevar:</td>
+                                    <td colspan="2" class="p-0 py-1 text-right h4">{{precioToGo[i] | currency:"BsS. "}}</td>
+                                  </tr>
+                                  <tr *ngIf="delivery[i] != 0">
+                                    <td colspan="1" class="p-0 py-1 h4">A domicilio:</td>
+                                    <td colspan="2" class="p-0 py-1 text-right h4">{{precioDelivery[i] | currency:"BsS. "}}</td>
+                                  </tr>      
+                                  <tr>
+                                    <td colspan="1" class="p-0 py-1 h3">Total:</td>
+                                    <td colspan="2" class="p-0 py-1 text-right h3">{{orden.precio | currency:"BsS. "}}</td>
+                                  </tr> 
+                                </ng-container>                       
+                              </tbody>
+                            </table>
+                          </mat-card>
+                        </mat-card>
+                        <mat-accordion *ngIf="delivery[i] != 0">
+                          <mat-expansion-panel class="mt-3 mt-lg-0">
+                            <mat-expansion-panel-header class="px-2" (click)="mapa(i,coordenadas[i],'pendientes')">
+                              <mat-panel-title>
+                                Dirección de entrega
+                              </mat-panel-title>
+                              <mat-panel-description>
+                                Google Maps
+                              </mat-panel-description>
+                            </mat-expansion-panel-header>
+                            <div *ngIf="descripcionDelivery" class="text-center py-3">
+                              <p class="mb-0">{{ descripcionDelivery }}</p>
+                            </div>
+                            <div class="text-center py-3">
+                              <a href="https://maps.google.com/?q={{coordenadas[i]}}" target="_blank" mat-button class="mx-1 btn">Ir a Google Maps</a>
+                            </div>
+                            <div id="map{{i}}" style="width:100%; height: 350px; background: #000;">
+                              
+                            </div>
+                          </mat-expansion-panel>
+                        </mat-accordion>
+                      </div>
+                      <div class="modal-footer">
+                        <ng-container *ngIf="lazyloader; then cargando; else NoCargando"></ng-container>
+                        <ng-template #NoCargando>
+                          <button type="button" class="btn-custom-outline btn-custom-sm px-4 py-1 shadow-sm" mat-raised-button
+                          (click)="terminado(orden.id, orden.codigo, usuario[i].nombre, usuario[i].email, usuario[i].id )">Pedido terminado</button>
+                        </ng-template>
+                        
+                        <ng-template #cargando>
+                          <div class="position-relative">
+                            <div class="lazyloader"></div>
+                          </div>
+                        </ng-template>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Modal -->
+              <div *ngFor="let orden of ordenesTerminadas; index as i">
+                <div class="modal fade terminados" id="terminados{{orden.id}}" tabindex="-1" role="dialog"
+                aria-hidden="true">
+                <div class="modal-dialog modal-lg" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h4 *ngIf="toGoTerminados[i] == 0" class="d-block d-lg-inline-block border text-primary rounded-pill py-2 px-3 text-center"><i class="pr-2 fas fa-utensils"></i> Comer en el local</h4>
+                      <h4 *ngIf="toGoTerminados[i] != 0 && deliveryTerminados[i] != 0" class="d-block d-lg-inline-block border text-primary rounded-pill py-2 px-3 text-center"><i class="pr-2 fas fa-shipping-fast"></i> Entrega a domicilio</h4>
+                      <h4 *ngIf="toGoTerminados[i] != 0 && deliveryTerminados[i] == 0" class="d-block d-lg-inline-block border text-primary rounded-pill py-2 px-3 text-center"><i class="pr-2 fas fa-shopping-bag"></i> Para llevar</h4>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <div class="col-xl-12 col-lg-12 col-md-6 col-sm-12 col-12 p-0">
+                        <div class="card">
+                          <div class="card-body p-0">
+                            <div class="table-responsive">
+                              <table class="table">
+                                <thead class="bg-light">
+                                  <tr class="border-0">
+                                    <th class="border-0">Nombre</th>
+                                    <th class="border-0">Teléfono</th>
+                                    <th class="border-0">Cédula</th>
+                                    <th class="border-0">Correo </th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr>
+                                    <td>{{usuarioTerminados[i].nombre}}</td>
+                                    <td>{{usuarioTerminados[i].telefono}}</td>
+                                    <td>{{usuarioTerminados[i].cedula}}</td>
+                                    <td>{{usuarioTerminados[i].email}}</td>
+                                  </tr> 
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <mat-card class="p-0">
+                        <mat-card-title>Resumen de pedido - {{orden.codigo}}</mat-card-title>
+                        <div *ngFor="let detalles of orden">
+                          <mat-accordion>
+                            <mat-expansion-panel class="p-0">
+                              <mat-expansion-panel-header class="h-auto p-2">
+                                <mat-panel-title>
+                                  {{detalles[0].nombre}}
+                                </mat-panel-title>
+                                <mat-panel-description>
+                                  Cantidad: {{detalles[0].cantidad}}
+                                </mat-panel-description>
+                              </mat-expansion-panel-header>
+                              <ul class="pl-2">
+                                <ng-container *ngFor="let item of detalles; index as indice">
+                                  <ng-container *ngIf="indice > 0">
+                                    <li *ngIf="item.cost != ''">
+                                      {{item.nombre}} - {{item.cost | currency:"BsS. "}}</li>
+                                      <li *ngIf="item.cost == ''">
+                                        {{item.nombre}}
+                                      </li>
+                                    </ng-container>
+                                  </ng-container>
+                                </ul>
+                              </mat-expansion-panel>
+                            </mat-accordion>
+                          </div>
+                          
+                          <mat-card class="d-flex m-0 p-0 justify-content-between align-items-center">
+                            <table class="table">
+                              <tbody>
+                                <tr *ngIf="toGoTerminados[i] == 0" class="border-bottom">
+                                  <td colspan="1" class="p-0 py-2 h3">Total:</td>
+                                  <td colspan="2" class="p-0 py-2 text-right h3">{{orden.precio | currency:"BsS. "}}</td>
+                                </tr>   
+                                <ng-container *ngIf="toGoTerminados[i] != 0">
+                                  <tr>
+                                    <td colspan="1" class="p-0 py-1 h4">Sub-total:</td>
+                                    <td colspan="2" class="p-0 py-1 text-right h4">{{(orden.precio * 1) - precioToGoTerminados[i] | currency:"BsS. "}}</td>
+                                  </tr>     
+                                  <tr>
+                                    <td colspan="1" class="p-0 py-1 h4">Costo para llevar:</td>
+                                    <td colspan="2" class="p-0 py-1 text-right h4">{{precioToGoTerminados[i] | currency:"BsS. "}}</td>
+                                  </tr>
+                                  <tr *ngIf="deliveryTerminados[i] != 0">
+                                    <td colspan="1" class="p-0 py-1 h4">A domicilio:</td>
+                                    <td colspan="2" class="p-0 py-1 text-right h4">{{precioDeliveryTerminados[i] | currency:"BsS. "}}</td>
+                                  </tr>         
+                                  <tr>
+                                    <td colspan="1" class="p-0 py-1 h3">Total:</td>
+                                    <td colspan="2" class="p-0 py-1 text-right h3">{{orden.precio | currency:"BsS. "}}</td>
+                                  </tr> 
+                                </ng-container>                       
+                              </tbody>
+                            </table>
+                          </mat-card>
+                        </mat-card>
+                        <mat-accordion *ngIf="toGoTerminados[i] != 0 && deliveryTerminados[i] != 0">
+                          <mat-expansion-panel class="mt-3 mt-lg-0">
+                            <mat-expansion-panel-header class="px-2" (click)="mapa(i,coordenadasTerminados[i],'terminados')">
+                              <mat-panel-title>
+                                Dirección de entrega
+                              </mat-panel-title>
+                              <mat-panel-description>
+                                Google Maps
+                              </mat-panel-description>
+                            </mat-expansion-panel-header>
+                            <div *ngIf="descripcionDeliveryTerminados" class="text-center py-3">
+                              <p class="mb-0">{{ descripcionDeliveryTerminados }}</p>
+                            </div>
+                            <div class="text-center py-3">
+                              <a href="https://maps.google.com/?q={{coordenadasTerminados[i]}}" target="_blank" mat-button class="mx-1 btn">Ir a Google Maps</a>
+                            </div>
+                            <div id="mapT{{i}}" style="width:100%; height: 350px; background: #000;">
+                            </div>
+                          </mat-expansion-panel>
+                        </mat-accordion>
+                      </div>
+                      <div class="modal-footer">
+                        <ng-container *ngIf="lazyloader; then cargando; else NoCargando"></ng-container>
+                        <ng-template #NoCargando>
+                          <button type="button" class="btn-custom-outline btn-custom-sm px-4 py-1 shadow-sm" mat-raised-button
+                          (click)="entregado(orden.id)">Pedido Entregado</button>
+                        </ng-template>
+                        
+                        <ng-template #cargando>
+                          <div class="position-relative">
+                            <div class="lazyloader"></div>
+                          </div>
+                        </ng-template>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- ============================================================== -->
+              <!-- end recent orders  -->
+            </div>
+            <!-- ============================================================== -->
+            <!--End body page  -->
+            <!-- ============================================================== -->
+            
+          </div>
+        </div>
+        <!-- ============================================================== -->
+        <!-- footer -->
+        <!-- ============================================================== -->
+        <app-footer></app-footer>
+        <!-- ============================================================== -->
+        <!-- end footer -->
+        <!-- ============================================================== -->
+      </div>
+      <!-- ============================================================== -->
+      <!-- end wrapper  -->
+      <!-- ============================================================== -->
+      
