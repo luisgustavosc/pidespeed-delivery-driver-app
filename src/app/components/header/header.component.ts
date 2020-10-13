@@ -12,7 +12,7 @@ import Swal from "sweetalert2";
 @Component({
   selector: "app-header",
   templateUrl: "./header.component.html",
-  styleUrls: ["./header.component.css"]
+  styleUrls: ["./header.component.scss"]
 })
 export class HeaderComponent implements OnInit {
   empresa:any;

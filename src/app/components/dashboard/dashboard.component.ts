@@ -11,7 +11,7 @@ declare var c3: any;
 @Component({
 	selector: "app-dashboard",
 	templateUrl: "./dashboard.component.html",
-	styleUrls: ["./dashboard.component.css"]
+	styleUrls: ["./dashboard.component.scss"]
 })
 export class DashboardComponent implements OnInit {
 	lazyloader: boolean = false;
@@ -40,14 +40,14 @@ export class DashboardComponent implements OnInit {
 		public profileService: ProfileService,
 		public ordersService: OrdersService
 		) {}
-		
+
 		ngOnInit() {
 			this.getEmpresa();
 			this.precioDolar.patchValue({
 				DolarDelDia: this.empresa.tasa
 			});
 		}
-		
+
 		actualizarTasa(){
 			let tasa = this.precioDolar.value.DolarDelDia;
 			if (tasa == 0){
@@ -111,7 +111,7 @@ export class DashboardComponent implements OnInit {
 					});
 					return;
 				});
-				
+
 				this.productosService.getProductos(this.empresa.ruta).subscribe((productos: any) => {
 					productos.forEach((item,index) => {
 						let precioFinal1 = 0;
@@ -218,7 +218,7 @@ export class DashboardComponent implements OnInit {
 				});
 			}
 		}
-		
+
 		grafica(ventaArray) {
 			if ($("#c3chart_area").length) {
 				var chart = c3.generate({
@@ -243,7 +243,7 @@ export class DashboardComponent implements OnInit {
 				});
 			}
 		}
-		
+
 		getEmpresa() {
 			this.empresa = this.profileService.getCurrentUser();
 			let fechaMomentAct = moment().format("L").split("/");
@@ -284,7 +284,7 @@ export class DashboardComponent implements OnInit {
 					let fecha = venta.fecha.split("T");
 					var mes = fecha[0].split("-")[1];
 					var dia = fecha[0].split("-")[2];
-					
+
 					if (venta.pagado != 0) {
 						if (fecha[0] >= fechaSemanaPas) {
 							ventasSemana += venta.total;
@@ -294,15 +294,15 @@ export class DashboardComponent implements OnInit {
 						}
 						ventasTotales += venta.total;
 					}
-					
+
 					if (fechaAct == fecha[0]) {
 						ventasDia += venta.total;
 					}
-					
+
 					if (venta.pagado == 0) {
 						noPagado += venta.total;
 					}
-					
+
 					if (fecha[0] == fechaAct) {
 						diaAct.push(venta);
 					}
@@ -330,7 +330,7 @@ export class DashboardComponent implements OnInit {
 				this.ventasMes = ventasMes - (ventasMes * this.empresa.porcentaje) / 100;
 				this.ventasTotales = ventasTotales - (ventasTotales * this.empresa.porcentaje) / 100;
 				this.ventasDia = ventasDia - (ventasDia * this.empresa.porcentaje) / 100;
-				
+
 				let ventaArray = [
 					"ventas",
 					dia6.length,
@@ -349,7 +349,7 @@ export class DashboardComponent implements OnInit {
 					confirmButtonText: "Aceptar"
 				});
 			});
-			
+
 			this.ordersService.getOrdenes(this.empresa.id).subscribe((ordenes: any) => {
 				this.ordenes = ordenes;
 				let ordenesDia = [];
@@ -363,15 +363,15 @@ export class DashboardComponent implements OnInit {
 					if (fecha[0] == fechaAct) {
 						ordenesDia.push(orden);
 					}
-					
+
 					if (orden.terminado == 1) {
 						terminados.push(orden);
 					}
-					
+
 					if (orden.entregado == 1) {
 						entregados.push(orden);
 					}
-					
+
 					this.dashboardService.getUsuario(orden.usuario_id).subscribe((usuario: any) => {
 						this.usuarios[index] = (usuario);
 					},
@@ -392,7 +392,7 @@ export class DashboardComponent implements OnInit {
 					confirmButtonText: "Aceptar"
 				});
 			});
-			
+
 			this.dashboardService.getEmpresa(this.empresa.ruta).subscribe((empresa: any) => {
 				this.visitas = empresa.visitas;
 			},
@@ -403,7 +403,7 @@ export class DashboardComponent implements OnInit {
 				});
 			});
 		}
-		
+
 		Apertura(){
 			this.empresa = this.profileService.getCurrentUser();
 			if(this.empresa.abierto === 0) {
@@ -415,7 +415,7 @@ export class DashboardComponent implements OnInit {
 					abierto: 0,
 				};
 			}
-			
+
 			this.profileService.updateProfile(this.empresaAbierta, this.empresa.id).subscribe((empresa: any) => {
 				//si empresa.message == "ok" mostrar que todo correcto
 				if (empresa.message == "ok") {
@@ -441,7 +441,7 @@ export class DashboardComponent implements OnInit {
 						confirmButtonText: "Aceptar"
 					});
 				}
-				
+
 				this.empresa.abierto = this.empresaAbierta.abierto;
 				this.profileService.setCurrentEmpresa(this.empresa);
 			},
@@ -454,4 +454,3 @@ export class DashboardComponent implements OnInit {
 			});
 		}
 	}
-	

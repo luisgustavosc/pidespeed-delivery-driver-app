@@ -9,14 +9,14 @@ import Swal from "sweetalert2";
 @Component({
     selector: "app-sidebar",
     templateUrl: "./sidebar.component.html",
-    styleUrls: ["./sidebar.component.css"]
+    styleUrls: ["./sidebar.component.scss"]
 })
 export class SidebarComponent implements OnInit {
     @Input() cantidadPendientes: number;
     empresa:any;
     public URL_SERVER: string = "https://ssl.pidespeed.com/";
     empresaAbierta: any;
-    
+
     constructor(private authService: AuthService,
         private router: Router,
         public profileService: ProfileService,
@@ -24,7 +24,7 @@ export class SidebarComponent implements OnInit {
         private cdRef: ChangeDetectorRef,
         private webService: WebSocketService
     ) {}
-        
+
     ngOnInit() {
         this.empresa = this.profileService.getCurrentUser();
         this.getPendientes();
@@ -39,7 +39,7 @@ export class SidebarComponent implements OnInit {
         // *Escontrar forma de refrescar componente hijo sin recargar
         window.location.reload();
     }
-    
+
     getPendientes() {
         this.ordersService.getPendientes(this.empresa.id).subscribe((pendientes: any) => {
             if (window.location.pathname != '/orders') {
@@ -48,7 +48,7 @@ export class SidebarComponent implements OnInit {
             this.cdRef.detectChanges();
         });
     }
-    
+
     onLogOut() {
         Swal.fire({
             title: "¿Seguro que quieres la cerrar sesion?",
@@ -65,7 +65,7 @@ export class SidebarComponent implements OnInit {
             }
         });
     }
-    
+
     Apertura(){
         this.empresa = this.profileService.getCurrentUser();
         if (this.empresa.abierto === 0) {
@@ -77,7 +77,7 @@ export class SidebarComponent implements OnInit {
                 abierto: 0,
             };
         }
-        
+
         this.profileService.updateProfile(this.empresaAbierta, this.empresa.id).subscribe((empresa: any) => {
             //si empresa.message == "ok" mostrar que todo correcto
             if (empresa.message == "ok") {
@@ -117,4 +117,3 @@ export class SidebarComponent implements OnInit {
         });
     }
 }
-    

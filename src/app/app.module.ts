@@ -30,31 +30,9 @@ import { HorariosPipe } from "./pipes/horarios.pipe";
 */
 import { AppComponent } from "./app.component";
 import { DashboardComponent } from "./components/dashboard/dashboard.component";
-import { ProductsComponent } from "./components/products/products.component";
 import { HeaderComponent } from "./components/header/header.component";
 import { SidebarComponent } from "./components/sidebar/sidebar.component";
-import { AddProductComponent } from "./components/add-product/add-product.component";
-import { EditProductComponent } from "./components/edit-product/edit-product.component";
-import { OrdersComponent } from "./components/orders/orders.component";
-import { InvoiceComponent } from "./components/invoice/invoice.component";
-import { ProfileComponent } from "./components/profile/profile.component";
-import { FooterComponent } from "./components/footer/footer.component";
 import { LoginComponent } from "./components/login/login.component";
-import { AccompanimentsComponent } from "./components/accompaniments/accompaniments.component";
-import { AdditionalComponent } from "./components/additional/additional.component";
-import { TamanosComponent } from "./components/tamanos/tamanos.component";
-import { ResumeComponent } from "./components/resume/resume.component";
-import { ReceiptComponent } from "./components/receipt/receipt.component";
-import { OrdersHistoryComponent } from "./components/orders-history/orders-history.component";
-import { HelpComponent } from './components/help/help.component';
-import { FaqComponent } from './components/faq/faq.component';
-import { ForgottenPasswordComponent } from './components/forgotten-password/forgotten-password.component';
-import { TermsComponent } from './components/terms/terms.component';
-import { Error404Component } from './components/error404/error404.component';
-import { SaboresComponent } from './components/sabores/sabores.component';
-import { ZonasComponent } from './components/zonas/zonas.component';
-import { PreviewProfileComponent } from './components/preview-profile/preview-profile.component';
-import { PreviewProductComponent } from './components/preview-product/preview-product.component';
 import { Error503Component } from "./components/error503/error503.component";
 
 /**
@@ -79,32 +57,10 @@ export function jwtTokenAdminGetter() {
     declarations: [
         AppComponent,
         DashboardComponent,
-        ProductsComponent,
         HeaderComponent,
         SidebarComponent,
-        AddProductComponent,
-        EditProductComponent,
-        OrdersComponent,
-        InvoiceComponent,
-        ProfileComponent,
-        FooterComponent,
         LoginComponent,
-        AccompanimentsComponent,
-        AdditionalComponent,
-        TamanosComponent,
-        ResumeComponent,
         MesPipe,
-        ReceiptComponent,
-        OrdersHistoryComponent,
-        HelpComponent,
-        FaqComponent,
-        ForgottenPasswordComponent,
-        TermsComponent,
-        Error404Component,
-        SaboresComponent,
-        ZonasComponent,
-        PreviewProfileComponent,
-        PreviewProductComponent,
         HorariosPipe
     ],
     imports: [

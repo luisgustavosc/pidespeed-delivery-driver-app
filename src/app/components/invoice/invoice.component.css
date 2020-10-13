@@ -1,9 +1,0 @@
-#yearInvo {
-  width: 130px !important;
-}
-
-@media screen and (max-width:992px) {
-  table {
-    width: 900px;
-  }
-}
