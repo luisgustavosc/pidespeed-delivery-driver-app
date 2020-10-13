@@ -1,0 +1,38 @@
+.lazyloader {
+  content: '';
+  /* position: absolute; */
+  width: 50px;
+  height: 50px;
+  left: 0;
+  right: 0;
+  top: 10px;
+  bottom: 0;
+  margin: auto;
+  -webkit-animation: loader-rotation .8s infinite linear;
+  animation: loader-rotation .8s infinite linear;
+  border-left: 3px solid rgba(182, 114, 114, 0.15);
+  border-right: 3px solid rgba(182, 114, 114, 0.15);
+  border-bottom: 3px solid rgba(182, 114, 114, 0.15);
+  border-top: 3px solid var(--RojoPrincipal);
+  border-radius: 100%;
+}
+
+@-webkit-keyframes loader-rotation {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+@keyframes loader-rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}

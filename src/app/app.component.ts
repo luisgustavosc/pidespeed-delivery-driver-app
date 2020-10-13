@@ -10,7 +10,7 @@ import Swal from "sweetalert2";
 @Component({
     selector: "app-root",
     templateUrl: "./app.component.html",
-    styleUrls: ["./app.component.css"]
+    styleUrls: ["./app.component.scss"]
 })
 export class AppComponent implements OnInit, OnDestroy {
     subscription: Subscription;
@@ -21,20 +21,20 @@ export class AppComponent implements OnInit, OnDestroy {
     async ngOnInit() {
 
         //ACCIONES DE LA NOTIFICACION
-        LocalNotifications.registerActionTypes({
-            types: [
-                {
-                    id: 'Foreground',
-                    actions: [
-                        {
-                            id: 'activeForeground',
-                            title: 'Ver más',
-                            foreground: true
-                        }
-                    ]
-                }
-            ]
-        })
+        // LocalNotifications.registerActionTypes({
+        //     types: [
+        //         {
+        //             id: 'Foreground',
+        //             actions: [
+        //                 {
+        //                     id: 'activeForeground',
+        //                     title: 'Ver más',
+        //                     foreground: true
+        //                 }
+        //             ]
+        //         }
+        //     ]
+        // })
 
         //VERIFICAR CONEXION A INTERNET
         let status = await Network.getStatus();

@@ -10,37 +10,23 @@
   necesaria para la mejor experiencia de ventas en un solo espacio." />
   <base href="/">
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <!-- icon in the highest resolution we need it for -->
-  <link rel="icon" sizes="192x192" href="https://ssl.pidespeed.com/web/6.png" />
-
-  <!-- reuse same icon for Safari -->
-  <link rel="apple-touch-icon" href="https://ssl.pidespeed.com/web/6.png" />
-
-  <!-- multiple icons for IE -->
-  <meta name="msapplication-square310x310logo" content="https://ssl.pidespeed.com/web/6.png" />
-
-  <!-- Chrome, Firefox OS and Opera -->
-  <meta name="theme-color" content="#FF414D" />
-
-  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-
+  <!-- Fonts -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
   <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet">
 
-
-  <link rel="stylesheet"
-  href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/3.8.95/css/materialdesignicons.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.3.0/css/flag-icon.min.css">
+   <!-- Material icons -->
+  <link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/3.8.95/css/materialdesignicons.min.css">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <!-- Flag-icon -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.3.0/css/flag-icon.min.css">
+
+  <!-- Animate CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
-  <link rel="stylesheet" href="assets/css/style.css">
-  <link rel="stylesheet" href="assets/css/main.css">
-  <link rel="stylesheet" href="assets/css/c3.css">
+
+  <!-- Gallery -->
   <link rel="stylesheet" href="https://cdn.rawgit.com/sachinchoolur/lightgallery.js/master/dist/css/lightgallery.css">
+
   <!-- inline spinner styles to be able to display spinner right away -->
   <style type="text/css">
     body,
@@ -48,50 +34,46 @@
       height: 100%;
     }
 
-  .lazyloader {
-    content: '';
-    /* position: absolute; */
-    width: 50px;
-    height: 50px;
-    left: 0;
-    right: 0;
-    top: 10px;
-    bottom: 0;
-    margin: auto;
-    -webkit-animation: loader-rotation .8s infinite linear;
-    animation: loader-rotation .8s infinite linear;
-    border-left: 3px solid rgba(182, 114, 114, 0.15);
-    border-right: 3px solid rgba(182, 114, 114, 0.15);
-    border-bottom: 3px solid rgba(182, 114, 114, 0.15);
-    border-top: 3px solid var(--RojoPrincipal);
-    border-radius: 100%;
-}
+    .lazyloader {
+      content: '';
+      /* position: absolute; */
+      width: 50px;
+      height: 50px;
+      left: 0;
+      right: 0;
+      top: 10px;
+      bottom: 0;
+      margin: auto;
+      -webkit-animation: loader-rotation .8s infinite linear;
+      animation: loader-rotation .8s infinite linear;
+      border-left: 3px solid rgba(182, 114, 114, 0.15);
+      border-right: 3px solid rgba(182, 114, 114, 0.15);
+      border-bottom: 3px solid rgba(182, 114, 114, 0.15);
+      border-top: 3px solid var(--RojoPrincipal);
+      border-radius: 100%;
+    }
 
-@-webkit-keyframes loader-rotation {
-  0% {
-    -webkit-transform: rotate(0deg);
-  }
+    @-webkit-keyframes loader-rotation {
+      0% {
+        -webkit-transform: rotate(0deg);
+      }
 
-  100% {
-    -webkit-transform: rotate(360deg);
-  }
-}
+      100% {
+        -webkit-transform: rotate(360deg);
+      }
+    }
 
-.loader-container {
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
+    .loader-container {
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
   </style>
 </head>
 
 <body>
-  <!-- ============================================================== -->
-  <!-- main wrapper -->
-  <!-- ============================================================== -->
   <div class="dashboard-main-wrapper">
     <app-root>
       <div class="loader-container">
@@ -99,46 +81,42 @@
       </div>
     </app-root>
   </div>
-  <!-- ============================================================== -->
-  <!-- end main wrapper  -->
-  <!-- ============================================================== -->
+
+  <!-- Maps -->
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCQ0IxAaOXk6WKtG3JKLpQZnEhAwtwtUSo&language=es-419&region=VE"></script>
 
+  <!-- JQuery -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-  integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
-</script>
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+    </script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
-</script>
+  <!-- JQuery -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+    </script>
 
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
-</script>
+  <!-- Boostrap  -->
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+    </script>
 
-<!-- Galeria  -->
-<script src="https://cdn.rawgit.com/sachinchoolur/lightgallery.js/master/dist/js/lightgallery.js"></script>
-<script src="https://cdn.rawgit.com/sachinchoolur/lg-pager.js/master/dist/lg-pager.js"></script>
-<script src="https://cdn.rawgit.com/sachinchoolur/lg-autoplay.js/master/dist/lg-autoplay.js"></script>
-<script src="https://cdn.rawgit.com/sachinchoolur/lg-share.js/master/dist/lg-share.js"></script>
-<script src="https://cdn.rawgit.com/sachinchoolur/lg-fullscreen.js/master/dist/lg-fullscreen.js"></script>
-<script src="https://cdn.rawgit.com/sachinchoolur/lg-zoom.js/master/dist/lg-zoom.js"></script>
-<script src="https://cdn.rawgit.com/sachinchoolur/lg-hash.js/master/dist/lg-hash.js"></script>
-<script src="https://cdn.jsdelivr.net/picturefill/2.3.1/picturefill.min.js"></script>
-<!-- Fin Galeria  -->
-<script src="assets/js/bootstrap.bundle.js"></script>
-<script src="assets/js/jquery.slimscroll.js"></script>
-<script src="assets/js/c3.min.js"></script>
-<script src="assets/js/d3-5.4.0.min.js"></script>
-<script src="assets/js/C3chartjs.js"></script>
-<script src="assets/js/main-js.js"></script>
+  <!-- Galeria  -->
+  <script src="https://cdn.rawgit.com/sachinchoolur/lightgallery.js/master/dist/js/lightgallery.js"></script>
+  <script src="https://cdn.rawgit.com/sachinchoolur/lg-pager.js/master/dist/lg-pager.js"></script>
+  <script src="https://cdn.rawgit.com/sachinchoolur/lg-autoplay.js/master/dist/lg-autoplay.js"></script>
+  <script src="https://cdn.rawgit.com/sachinchoolur/lg-share.js/master/dist/lg-share.js"></script>
+  <script src="https://cdn.rawgit.com/sachinchoolur/lg-fullscreen.js/master/dist/lg-fullscreen.js"></script>
+  <script src="https://cdn.rawgit.com/sachinchoolur/lg-zoom.js/master/dist/lg-zoom.js"></script>
+  <script src="https://cdn.rawgit.com/sachinchoolur/lg-hash.js/master/dist/lg-hash.js"></script>
+  <script src="https://cdn.jsdelivr.net/picturefill/2.3.1/picturefill.min.js"></script>
 
-<script src="https://www.cloudformatter.com/Resources/Pages/CSS2Pdf/Script/xepOnline.jqPlugin.js"></script>
+  <!-- Plugin to convert HTML to PDF  -->
+  <script src="https://www.cloudformatter.com/Resources/Pages/CSS2Pdf/Script/xepOnline.jqPlugin.js"></script>
 
-<!-- Logrocket script-->
-<script src="https://cdn.lr-ingest.io/LogRocket.min.js" crossorigin="anonymous"></script>
-<script>window.LogRocket && window.LogRocket.init('4oq7sw/empresaspidespeed');</script>
+  <!-- Logrocket script-->
+  <script src="https://cdn.lr-ingest.io/LogRocket.min.js" crossorigin="anonymous"></script>
+  <script>window.LogRocket && window.LogRocket.init('4oq7sw/empresaspidespeed');</script>
 
 </body>
 

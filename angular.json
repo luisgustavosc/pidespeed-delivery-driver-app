@@ -29,13 +29,18 @@
             ],
             "styles": [
               {
-                "input": "src/material-theme.scss"
-              },
-              {
-                "input": "src/styles.scss"
+                "input": "src/scss/main.scss"
               }
             ],
-            "scripts": [],
+            "scripts": [
+              "./node_modules/bootstrap/dist/js/bootstrap.min.js",
+              "src/assets/js/bootstrap.bundle.js",
+              "src/assets/js/jquery.slimscroll.js",
+              "src/assets/js/c3.min.js",
+              "src/assets/js/d3-5.4.0.min.js",
+              "src/assets/js/C3chartjs.js",
+              "src/assets/js/main-js.js"
+            ],
             "allowedCommonJsDependencies": [
               "socket.io-client",
               "socket.io-parser",
@@ -116,13 +121,18 @@
             ],
             "styles": [
               {
-                "input": "src/material-theme.scss"
-              },
-              {
-                "input": "src/styles.scss"
+                "input": "src/scss/main.scss"
               }
             ],
-            "scripts": []
+            "scripts": [
+              "./node_modules/bootstrap/dist/js/bootstrap.min.js",
+              "src/assets/js/bootstrap.bundle.js",
+              "src/assets/js/jquery.slimscroll.js",
+              "src/assets/js/c3.min.js",
+              "src/assets/js/d3-5.4.0.min.js",
+              "src/assets/js/C3chartjs.js",
+              "src/assets/js/main-js.js"
+            ]
           },
           "configurations": {
             "ci": {

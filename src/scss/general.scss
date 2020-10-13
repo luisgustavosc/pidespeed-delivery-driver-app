@@ -1,0 +1,272 @@
+/* You can add global styles to this file, and also import other style files */
+
+:root {
+  --RojoPrincipal: #ff414d;
+  --SegundoRojoOscuro: #f13b46;
+  --TercerRojoOscuro: #ea313c;
+  --BlancoRojo: #dab1b4;
+  --fuentePrincipal: "Poppins", sans-serif;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--fuentePrincipal), "Helvetica Neue", sans-serif;
+}
+
+/* .sidebar-dark::-webkit-scrollbar {
+  display: none;
+} */
+
+.ecommerce-widget,
+.componentContainer {
+  animation: fadeIn 1.2s ease;
+}
+
+.sidebar-dark::-webkit-scrollbar {
+  width: 8px;
+  background-color: #f13b46;
+}
+
+.sidebar-dark::-webkit-scrollbar-thumb {
+  background-color: #ff505bba;
+  border-radius: 20px;
+}
+
+@media screen and (min-width: 991px) {
+  .w-lg-25 {
+    width: 25% !important;
+  }
+}
+
+ul {
+  list-style: square;
+}
+.border-primary {
+  border-color: var(--RojoPrincipal) !important;
+}
+
+.slimScrollDiv {
+  height: auto !important;
+}
+
+.menu-list {
+  height: auto !important;
+}
+
+.fixed-top {
+  left: 264px !important;
+}
+
+.bg-absolute-transparent-black {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #0000007a;
+}
+
+.tarjetasDashboard {
+  height: 150px;
+}
+
+.border-light-grey {
+  border: 1px solid #eaeaea;
+}
+
+.cursor-pointer:hover {
+  cursor: pointer;
+}
+
+.text-grey {
+  color: #333;
+}
+
+.text-p-medium {
+  font-size: 1.25rem;
+}
+
+.text-p-small {
+  font-size: 0.85rem;
+}
+@media (max-width: 767.98px) {
+  .text-p-medium {
+    font-size: 1.05rem;
+  }
+
+  .text-p-small {
+    font-size: 0.8rem;
+  }
+}
+
+.top-0 {
+  top: 0 !important;
+}
+
+.left-0 {
+  left: 0;
+}
+
+.right-0 {
+  right: 0;
+}
+
+.bottom-0 {
+  bottom: 0;
+}
+
+.alertTooltip {
+  font-size: 13px;
+  background: #000;
+}
+
+.alert {
+  width: 100%;
+  margin: 20px auto;
+  padding: 10px;
+  position: relative;
+  border-radius: 5px;
+}
+
+@media screen and (min-width: 991px) {
+  .alert {
+    width: 60%;
+  }
+}
+
+.alert h3 {
+  color: var(--RojoPrincipal);
+}
+
+.danger-alert {
+  border: 1px solid var(--RojoPrincipal);
+  border-left: 5px solid var(--RojoPrincipal);
+}
+
+.st-icon {
+  color: #fff;
+  font-size: 23px;
+  padding: 40px 40px 20px 20px;
+  border-radius: 50%;
+  position: absolute;
+  top: -30px;
+  right: -30px;
+  transition: all 0.3s ease-in-out;
+}
+
+.tarjetasDashboard:hover .st-icon {
+  font-size: 40px;
+}
+
+.labelStatus {
+  border-radius: 4px;
+  font-size: 14px;
+  padding: 4px 7px;
+  margin-right: 5px;
+  font-weight: 400;
+}
+
+.labelStatus-danger {
+  background: linear-gradient(45deg, #fb4a55, #ef8087);
+  color: #fff !important;
+}
+
+.labelStatus-danger-outline {
+  border: 1px solid #fb4a55;
+  color: #fb4a55 !important;
+}
+
+.labelStatus-success {
+  background: linear-gradient(45deg, #2ed8b6, #59e0c5);
+  color: #fff !important;
+}
+
+.labelStatus-warning {
+  background: linear-gradient(45deg, #ffb64d, #ffcb80);
+  color: #fff;
+}
+
+.buttonIcon {
+  padding: 10px;
+  color: #fff;
+  border-radius: 50%;
+  border: none;
+}
+
+.subtitles-card {
+  font-size: 18px;
+}
+
+.logo {
+  font-size: 32px;
+  text-align: center;
+  color: #ff414d;
+  margin: 10px;
+}
+
+.dashboard-header .navbar {
+  -webkit-box-shadow: 0px 1px 2px 1px rgba(154, 154, 204, 0.22);
+  -moz-box-shadow: 0px 1px 2px 1px rgba(154, 154, 204, 0.22);
+  box-shadow: 0px 1px 2px 1px rgba(154, 154, 204, 0.22);
+  padding: 0px;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+  min-height: 60px;
+  background-color: #ffffff;
+}
+
+.info-sidebar {
+  display: flex;
+  position: relative;
+  align-items: center;
+  padding: 35px 0px;
+  flex-direction: column;
+  height: 175px;
+  background: var(--SegundoRojoOscuro);
+  color: #fff;
+}
+
+.info-sidebar h2 {
+  color: #fff;
+}
+
+.info-sidebar img {
+  height: 95px;
+  width: 95px;
+  position: absolute;
+  bottom: -40px;
+  border: 6px solid #fff;
+  object-fit: contain;
+}
+
+.table-tr {
+  height: 60px;
+}
+
+.table-tr:hover {
+  cursor: pointer;
+  background: #f7f7f7;
+}
+
+.swal2-styled.swal2-confirm {
+  background-color: var(--RojoPrincipal) !important;
+  border-radius: 23px !important;
+}
+
+.swal2-styled.swal2-cancel {
+  color: var(--RojoPrincipal) !important;
+  border-radius: 25px !important;
+  border: 1px solid var(--RojoPrincipal) !important;
+  background-color: #fff !important;
+}
+
+.object-fit-cover {
+  object-fit: cover;
+}
+.object-fit-contain {
+  object-fit: contain;
+}

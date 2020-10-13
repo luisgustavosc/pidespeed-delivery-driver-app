@@ -1,0 +1,216 @@
+/* ======================
+# Type settings
+====================== */
+$font-family: "Poppins", sans-serif;
+$font-size: 1rem !default;
+$font-size-medium: ($font-size - .12rem);
+$fa-font: 'FontAwesome';
+$fa-font-5: 'Font Awesome 5 Free';
+$fa-font-brand: 'Font Awesome 5 Brands';
+
+/* ======================
+# Color palette
+====================== */
+$white: #fff;
+$black: #000;
+
+$theme-colors: () !default;
+$theme-colors: map-merge((
+'white': $white,
+'white-smoke': #f5f5f5,
+'alice-blue': #f1f5fa,
+'blue-gray': #edf2f5,
+'whisper': #ececec,
+'light-gray': #cbcbcb,
+'nobel': #a3a3a3,
+'bright-gray': #4a5360,
+'gray': #363636,
+'midnight': #23303f,
+'space-gray': #202a35,
+'graphite': #1f2124,
+'dodger-blue': #041b33,
+'pale-blue': #caeefa,
+'turquoise': #3dcae0,
+'pacific-blue': #008ee2,
+'info': #17a2b8,
+'tw-blue': #55acee,
+'blue': #1aafff,
+'spring': #179de5,
+'in-blue': #007ab6,
+'link':#0369d7,
+'fb-blue': #415e9b,
+'git-blue': #071224,
+'dark-blue': #142336,
+'aws-blue': #0d1d2d,
+'old-green': #20d15f,
+'green': #149241,
+'dark-green': #24a736,
+'lime': #6a9e2e,
+'purple': #765ee8,
+'dark-purple': #5764ad,
+'scarlet': #a94442,
+'red': #ff414d,
+'red2': #f13b46,
+'red3': #ea313c,
+'coral': #ff8282,
+'orange': #ec7211,
+'dark-orange': #f15e03,
+'light-orange': #ff910e,
+'enterprise' : #4f84ff,
+'black': $black,
+), $theme-colors);
+
+$browser-gray: theme-color('whisper');
+$device-gray: #55606d;
+
+$pink: #f7008a;
+$red: #eb2123;
+$dark-red: #bd1719;
+$maroon: #521173;
+
+$dark-purple: #452eb3;
+$space-purple: #351bab;
+
+$orange: #ff910e;
+$dark-orange: #e2800b;
+$light-orange: #f3ac3b;
+
+$dark-yellow: #A79500;
+
+$blue: #1aafff;
+$pale-blue: #96cae0;
+
+$green: #82E70D;
+
+/* ======================
+# Dashboard Variables
+====================== */
+$clay: #212b34;
+$alto: #d4d2d2;
+$alto-border: #dedede;
+$gray-border: rgba(212,210,210,.3);
+$icon-gray: #8a8a8a;
+$gallery-gray: #eee;
+$gallery-light-gray: #f7f7f7;
+$boulder-gray: #757575;
+$dove-gray: #666565;
+$mine-shaft: #222;
+
+$accent-blue: #3498db;
+$royal-blue: #1e5ee8;
+
+/* ================================
+# Bootstrap classes for colors
+================================ */
+// Generate `.bg-*` color utilities
+@each $color, $value in $theme-colors {
+  @include bg-variant('.bg-#{$color}', $value, true);
+
+  // Generate `.text-*` color utilities
+  @include text-emphasis-variant(".text-#{$color}", $value, true);
+
+  // Generate `.btn-*` color utilities
+  .btn-#{$color} {
+    @include button-variant($value, $value);
+  }
+
+  // Generate `.btn-*` color utilities
+  .btn-outline-#{$color} {
+    @include button-outline-variant($value);
+  }
+
+  // Generate `.border-*` color utilities
+  .border-#{$color} {
+    border-color: $value !important;
+  }
+
+  // Generate `.bg-hover*` color utilities
+  .bg-hover-#{$color} {
+    &:hover {
+      background-color: #{$value};
+    }
+  }
+
+  // Generate `.text-hover*` color utilities
+  .text-hover-#{$color} {
+    &:hover {
+      color: #{$value};
+    }
+  }
+}
+
+/* ================================
+# Bootstrap Height and Width Classes
+================================ */
+// This variable affects the `.h-*` and `.w-*` classes.
+// Iterate for what you need.
+$sizes: () !default;
+@for $i from 1 through 1000 {
+  @if $i <= 100 {
+    @if $i%5 == 0 {
+      $holdingArrayPercent: (
+      // Escape the Percentage Sign
+      '#{$i}': #{$i}#{'%'}
+      );
+      $sizes: map-merge($sizes, $holdingArrayPercent);
+      $holdingArrayPixels: (
+      '#{$i}p': #{$i}px
+      );
+      $sizes: map-merge($sizes, $holdingArrayPixels);
+    }
+  }
+  @if $i%10 == 0 {
+    $holdingArrayPixels: (
+    '#{$i}p': #{$i}px
+    );
+    $sizes: map-merge($sizes, $holdingArrayPixels);
+  }
+}
+
+// We make our own for MD Screen Size Width/Heights
+$sizesMd: () !default;
+$sizesMd: map-merge($sizes, $sizesMd);
+
+@media (min-width: 768px) {
+  @each $prop, $abbrev in (width: w-md, height: h-md) {
+    @each $size, $length in $sizesMd {
+        html .#{$abbrev}-#{$size} { #{$prop}: $length !important;
+      }
+    }
+  }
+}
+
+// We make our own for LG Screen Size Width/Heights
+$sizesLg: () !default;
+$sizesLg: map-merge($sizes, $sizesLg);
+
+@media (min-width: 991px) {
+  @each $prop, $abbrev in (width: w-lg, height: h-lg) {
+    @each $size, $length in $sizesLg {
+      html .#{$abbrev}-#{$size} { #{$prop}: $length !important; }
+    }
+  }
+}
+
+// We make our own for XL Screen Size Width/Heights
+$sizesXL: () !default;
+$sizesXL: map-merge($sizes, $sizesLg);
+
+@media (min-width: 1200px) {
+  @each $prop, $abbrev in (width: w-xl, height: h-xl) {
+    @each $size, $length in $sizesLg {
+      html .#{$abbrev}-#{$size} { #{$prop}: $length !important; }
+    }
+  }
+}
+
+// Loop through each breakpoint and provide classes for the sizes within the sizes map from previous loop
+@each $breakpoint-key, $breakpoint in $grid-breakpoints {
+  @media (min-width: #{$breakpoint}) {
+    @each $prop, $abbrev in (width: w-#{$breakpoint-key}, height: h-#{$breakpoint-key}) {
+      @each $size, $length in $sizes {
+        html .#{$abbrev}-#{$size} { #{$prop}: #{$length} !important;}
+      }
+    }
+  }
+}
