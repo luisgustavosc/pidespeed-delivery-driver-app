@@ -1,0 +1,41 @@
+Planteamiento de la app
+
+- sistema de varios usuarios donde cada integrante tenga acceso
+- sistema de niveles y permisos dependiendo del nivel del usuario
+- capacidad de agregar los comercios afiliados junto
+- organización de los pedidos para saber:
+	*que pedidos estan pendientes
+	*que usuarios estan libres
+	*cuanto tiempo tiene un pedido tomado
+	*en que estado se encuentra el pedido(si ya entregaron los precios)
+- cuantos pedidos a tomado cada usuario en el dia (preguntar si requiere otro conteo) *opcional
+- sistema de facturación y resumen para mostrar los ingresos a traves de la plataforma y el pago de sus servicios de delivery
+- sistema de zonas para evitar ir a zonas no deseadas
+- usar la distancia del usuario hasta el local para determinar el precio del delivery (preguntar)
+
+A mediano plazo
+- sistema de localización para mostrar el pedido a los trabajadores mas cercanos unicamente
+- usar la localización en tiempo real para saber en donde se encuentra cada usuario, su ruta y al punto donde se dirigen
+
+Luego de comentar todo cerrar los detalles finales para saber que se debe implementar
+anotar lo mas escencial y lo que se puede ir desarrollando luego de estar en funcionamiento
+
+anotaciones finales
+precio .80 por cada delivery (hablar con luis)
+
+- anotaciones
+Home:
+- se va la grafica
+- tabla de usuarios activos y debajo tabla de ordenes perdientes
+pestañas:
+- ubicación y detalles generaled de repartidos activos
+- detalle de repartidores (con acciones)
+' detalle de empresas (con acciones)
+- configuración:
+   *repartidores
+   *empresas afiliadas a ellos
+   * administradores (opcional)
+
+si da click en usuarios activos, lleva al mapa con la ubicacion y pequeños detalles de cada uno
+en cada detalle puede ver mas detalles o ver todos los usuarios
+al crear empresas debemos verificar que no esten afiliadas a pidespeed para aprobar

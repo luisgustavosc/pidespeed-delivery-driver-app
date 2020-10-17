@@ -1,0 +1,10 @@
+.btn {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  border-radius: .3rem;
+  font-size: 1rem;
+}
+.btn.disabled, .btn:disabled {
+  opacity: 0.65;
+  box-shadow: none !important;
+}

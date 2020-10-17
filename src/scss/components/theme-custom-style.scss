@@ -154,16 +154,9 @@
 
 /* 0.1. Body / Typography
    ========================================================================== */
-:root {
-  --RojoPrincipal: #FF414D;
-  --SegundoRojoOscuro: #f13b46;
-  --TercerRojoOscuro: #ea313c;
-  --BlancoRojo: #dab1b4;
-  --fuentePrincipal: 'Muli', sans-serif;
-}
 
 body {
-  font-family: var(--fuentePrincipal);
+  font-family: $font-family;
   font-style: normal;
   font-weight: normal;
   font-size: 14px;
@@ -177,7 +170,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: var(--fuentePrincipal);
+  font-family: $font-family;
 
 }
 
@@ -212,15 +205,6 @@ p:last-child {
   margin: 0px;
 }
 
-a {
-  color: #71748d;
-}
-
-a:hover {
-  color: #ff407b;
-  text-decoration: none;
-}
-
 a:hover {
   outline: 0;
   text-decoration: none;
@@ -242,14 +226,6 @@ ul li {}
 /*--------------------
  Form
 ---------------------*/
-
-label {
-  display: inline-block;
-  max-width: 100%;
-  margin-bottom: 5px;
-  font-size: 15px;
-  color: #71748d;
-}
 
 .form-control {
   display: block;
@@ -2436,7 +2412,7 @@ Pageheader
   padding: 31px 15px;
   text-align: center;
   left: 10px;
-  font-family: var(--fuentePrincipal);
+  font-family: $font-family;
   color: #fff;
 }
 
@@ -2504,7 +2480,7 @@ Pageheader
   font-size: 16px;
   color: #3d405c;
 
-  font-family: var(--fuentePrincipal);
+  font-family: $font-family;
   line-height: 1;
 }
 
@@ -2771,7 +2747,7 @@ input[type=radio] {
   text-align: center;
   color: #333;
   font-size: 13px;
-  font-family: var(--fuentePrincipal);
+  font-family: $font-family;
 
   line-height: 1.6;
   -webkit-transform: translateX(-100%);
@@ -4744,7 +4720,7 @@ Pills vertical
   color: #a0a0a0;
   padding: 25px 10px;
   background: #fff;
-  font-family: var(--fuentePrincipal);
+  font-family: $font-family;
 
 }
 
@@ -4777,7 +4753,7 @@ tr.group,
 tr.group:hover {
   background-color: #5969ff !important;
   color: #fff;
-  font-family: var(--fuentePrincipal);
+  font-family: $font-family;
   font-size: 18px;
 }
 
@@ -5754,7 +5730,7 @@ Vertical Timeline - by CodyHouse.co
   height: 7em;
   font-size: 0.75em;
   line-height: 1.333333em;
-  font-family: var(--fuentePrincipal);
+  font-family: $font-family;
   padding: 5px;
   box-sizing: border-box;
   -moz-box-sizing: border-box;

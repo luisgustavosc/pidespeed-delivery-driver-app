@@ -2,9 +2,9 @@ import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
 
 // Componentes
-import { DashboardComponent } from "src/app/components/dashboard/dashboard.component";
-import { LoginComponent } from "src/app/components/login/login.component";
-import { Error503Component } from "./components/error503/error503.component";
+import { DashboardComponent } from "src/app/components/pages/dashboard/dashboard.component";
+import { LoginComponent } from "src/app/components/pages/login/login.component";
+import { Error503Component } from "src/app/components/pages/error503/error503.component";
 
 // Servicio de bloqueo de rutas
 import { AuthGuard } from "src/app/guards/auth/auth.guard";

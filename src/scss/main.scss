@@ -1,5 +1,9 @@
-// Bootstrap
+// Node Dependencies
 @import "../../node_modules/bootstrap/scss/bootstrap";
+@import "../../node_modules/animate.css/animate.min";
+
+@import "variables";
+@import "theme";
 
 // Theme styles
 @import "components/c3.scss";
@@ -7,8 +11,6 @@
 
 // Our Styles
 @import "material-theme";
-@import "variables";
-@import "theme";
 @import "custom-material-styles";
 @import "general";
 
@@ -16,3 +18,5 @@
 @import "components/file-input";
 @import "components/lazyloader";
 @import "components/time-picker";
+@import "components/buttons";
+@import "components/nav";

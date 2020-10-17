@@ -1,0 +1,138 @@
+<!-- ============================================================== -->
+<!-- Menu Movil  -->
+<!-- ============================================================== -->
+<div id="menuMovil" class="position-relative overflow-hidden d-none z-index-10">
+  <div class="position-fixed top-54p right-0 left-0 bottom-0 container bg-red2">
+    <nav class="navbar navbar-expand-lg">
+      <div class="collapse navbar-collapse show" id="navbarNav">
+        <ul class="navbar-nav flex-column">
+          <li class="nav-divider">
+            Menu
+          </li>
+          <li class="nav-item">
+            <a [routerLink]="['']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-link ">
+              <span class="material-icons">home</span> Inicio
+            </a>
+          </li>
+          <li class="nav-item">
+            <a
+              [class.active]="rla?.isActive"
+              routerLinkActive="active"
+              class="nav-link"
+              data-toggle="collapse"
+              aria-expanded="false"
+              data-target="#repartidores-submenu"
+              aria-controls="repartidores-submenu">
+              <span class="material-icons">groups</span>
+              Repartidores
+            </a>
+            <div id="repartidores-submenu" class="collapse submenu">
+              <ul class="nav flex-column">
+                <li class="nav-item">
+                  <a class="nav-link" [routerLink]="[ '/products']" #rla="routerLinkActive" routerLinkActive="active">Ver Repartidores</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" [routerLink]="[ '/products/accompaniments']" routerLinkActive="active">Ubicación</a>
+                </li>
+              </ul>
+            </div>
+          </li>
+          <li class="nav-item ">
+            <a [routerLink]="[ '/orders']" routerLinkActive="active" class="nav-link text-capitalize">
+              <span class="material-icons">
+                list_alt
+              </span>
+              <span matBadge="{{ cantidadPendientes }}" matBadgeColor="white">Órdenes </span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a
+              [class.active]="rlaInvoice?.isActive"
+              routerLinkActive="active"
+              class="nav-link"
+              data-toggle="collapse"
+              aria-expanded="false"
+              data-target="#invoices-submenu"
+              aria-controls="invoices-submenu">
+              <span class="material-icons">
+                receipt
+              </span>
+              Facturación
+            </a>
+            <div id="invoices-submenu" class="collapse submenu">
+              <ul class="nav flex-column">
+                <li class="nav-item">
+                  <a class="nav-link" [routerLink]="[ '/invoice/resume']" routerLinkActive="active">Resumen</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" [routerLink]="[ '/invoice']" #rlaInvoice="routerLinkActive" routerLinkActive="active">Recibos</a>
+                </li>
+              </ul>
+            </div>
+          </li>
+          <li class="nav-item d-lg-none">
+            <a [routerLink]="[ '/profile']" class="nav-link">
+              <span class="material-icons">
+                admin_panel_settings
+              </span>
+              Cuenta
+            </a>
+          </li>
+          <li class="nav-item">
+            <a
+              [class.active]="rlaInvoice?.isActive"
+              routerLinkActive="active"
+              class="nav-link"
+              data-toggle="collapse"
+              aria-expanded="false"
+              data-target="#settings-submenu"
+              aria-controls="settings-submenu">
+              <span class="material-icons">
+                settings
+              </span>
+              Configuración
+            </a>
+            <div id="settings-submenu" class="collapse submenu">
+              <ul class="nav flex-column">
+                <li class="nav-item">
+                  <a class="nav-link" [routerLink]="[ '/invoice/resume']" routerLinkActive="active">Repartidores</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" [routerLink]="[ '/invoice']" #rlaInvoice="routerLinkActive" routerLinkActive="active">Empresas afiliadas</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" [routerLink]="[ '/invoice']" #rlaInvoice="routerLinkActive" routerLinkActive="active">Administradores</a>
+                </li>
+              </ul>
+            </div>
+          </li>
+          <li class="nav-item d-lg-none">
+            <a (click)="onLogOut()" class="nav-link">
+              <span class="material-icons">
+                power_settings_new
+              </span>
+              Cerrar sesión
+            </a>
+          </li>
+        </ul>
+        <ul class="list-unstyled d-flex justify-content-center social_icons_nav mt-4">
+          <li class="mx-3"><a class="fab fa-facebook-f text-white btn" target="_blank" href="https://www.facebook.com/pidespeed/"></a></li>
+          <li class="mx-3"><a class="fab fa-instagram text-white btn" target="_blank" href="https://www.instagram.com/pidespeed/"></a></li>
+          <li class="mx-3"><a class="fab fa-whatsapp text-white btn" target="_blank" href="https://api.whatsapp.com/send?phone=584124282595"></a></li>
+          <li class="mx-3"><a class="far fa-envelope text-white btn" target="_blank" href="mailto:pidespeed@gmail.com"></a></li>
+        </ul>
+        <div class="mt-4">
+            <a [routerLink]="[ '/help']" class="btn text-white d-flex align-items-center justify-content-center">
+              <span class="material-icons mr-2">
+                help_outline
+              </span>
+              Ayuda
+            </a>
+        </div>
+      </div>
+    </nav>
+  </div>
+</div>
+<!-- ============================================================== -->
+<!-- Menu Movil  -->
+<!-- ============================================================== -->

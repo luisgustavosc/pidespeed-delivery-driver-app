@@ -1,7 +1,7 @@
 import { Component, OnInit, NgModule } from "@angular/core";
 import { AuthService } from "src/app/services/auth/auth.service";
 import { Router } from "@angular/router";
-import { ProfileService } from "../../services/profile/profile.service";
+import { ProfileService } from "src/app/services/profile/profile.service";
 import Swal from "sweetalert2";
 
 /* @NgModule({

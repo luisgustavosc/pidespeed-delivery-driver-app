@@ -1,0 +1,35 @@
+<div class="text-center mt-5 container">
+  <div class="d-flex justify-content-center w-100 my-4">
+    <img src="https://ssl.pidespeed.com/web/3.png" alt="Pidespeed" class="w-xs-200p">
+  </div>
+  <h1 class="text-black h4">Ingresa a tu cuenta</h1>
+  <form [formGroup]="loginForm">
+    <mat-form-field appearance="outline" color="accent" class="w-100 w-md-75">
+      <mat-label>Usuario</mat-label>
+      <input formControlName="user" matInput>
+      <mat-error *ngIf="loginForm.controls['user'].errors?.required" class="mt-2">Este campo es obligatorio
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" color="accent" class="w-100 w-md-75">
+      <mat-label>Contraseña</mat-label>
+      <input formControlName="password" matInput [type]="!hide ? 'password' : 'text'">
+      <mat-error *ngIf="loginForm.controls['password'].errors?.required" class="mt-2">Este campo es obligatorio
+      </mat-error>
+      <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+        [attr.aria-pressed]="hide">
+        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+    </mat-form-field>
+
+    <ng-container *ngIf="lazyloader; then cargando; else NoCargando"></ng-container>
+    <ng-template #NoCargando>
+      <button [disabled]='!loginForm.valid' type="submit" (click)="onLogin()" class="btn btn-red btn-shadow-red w-100">Iniciar sesión</button>
+    </ng-template>
+    <ng-template #cargando>
+      <div class="lazyloader"></div>
+    </ng-template>
+    <a class="text-midnight d-block text-center my-3" [routerLink]="[ '/forgotten-password']">Olvidé mi contraseña</a>
+  </form>
+</div>
+

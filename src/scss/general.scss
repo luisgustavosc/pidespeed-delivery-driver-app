@@ -1,13 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
 
-:root {
-  --RojoPrincipal: #ff414d;
-  --SegundoRojoOscuro: #f13b46;
-  --TercerRojoOscuro: #ea313c;
-  --BlancoRojo: #dab1b4;
-  --fuentePrincipal: "Poppins", sans-serif;
-}
-
 html,
 body {
   height: 100%;
@@ -15,7 +7,7 @@ body {
 
 body {
   margin: 0;
-  font-family: var(--fuentePrincipal), "Helvetica Neue", sans-serif;
+  font-family: $font-family, "Helvetica Neue", sans-serif;
 }
 
 /* .sidebar-dark::-webkit-scrollbar {
@@ -37,17 +29,8 @@ body {
   border-radius: 20px;
 }
 
-@media screen and (min-width: 991px) {
-  .w-lg-25 {
-    width: 25% !important;
-  }
-}
-
 ul {
   list-style: square;
-}
-.border-primary {
-  border-color: var(--RojoPrincipal) !important;
 }
 
 .slimScrollDiv {
@@ -105,6 +88,10 @@ ul {
 
 .top-0 {
   top: 0 !important;
+}
+
+.top-54p {
+  top:54px;
 }
 
 .left-0 {
@@ -267,6 +254,19 @@ ul {
 .object-fit-cover {
   object-fit: cover;
 }
+
 .object-fit-contain {
   object-fit: contain;
 }
+
+/* Animation css */
+.fade-animation{
+  animation: fadeIn .8s ease;
+}
+.fade-animation-in-right {
+  animation: fadeInRight .2s linear ;
+}
+.fade-animation-out-right {
+  animation: fadeOutRight .2s linear ;
+}
+/* End Animation css */

@@ -28,12 +28,14 @@ import { HorariosPipe } from "./pipes/horarios.pipe";
 /**
 * Componentes
 */
-import { AppComponent } from "./app.component";
-import { DashboardComponent } from "./components/dashboard/dashboard.component";
-import { HeaderComponent } from "./components/header/header.component";
-import { SidebarComponent } from "./components/sidebar/sidebar.component";
-import { LoginComponent } from "./components/login/login.component";
-import { Error503Component } from "./components/error503/error503.component";
+import { AppComponent } from "src/app/app.component";
+import { DashboardComponent } from "src/app/components/pages/dashboard/dashboard.component";
+import { HeaderComponent } from "src/app/components/common/header/header.component";
+import { SidebarComponent } from "src/app/components/common/sidebar/sidebar.component";
+import { LoginComponent } from "src/app/components/pages/login/login.component";
+import { Error503Component } from "src/app/components/pages/error503/error503.component";
+import { NavComponent } from "src/app/components/common/nav/nav.component";
+import { MobileMenuComponent } from "src/app/components/common/mobile-menu/mobile-menu.component";
 
 /**
 * Servicios
@@ -60,6 +62,9 @@ export function jwtTokenAdminGetter() {
         HeaderComponent,
         SidebarComponent,
         LoginComponent,
+        Error503Component,
+        NavComponent,
+        MobileMenuComponent,
         MesPipe,
         HorariosPipe
     ],
