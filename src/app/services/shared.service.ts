@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BottomNavModel } from "src/app/model/bottomNav";
+import Swal from "sweetalert2";
 
 @Injectable({
     providedIn: 'root'
@@ -38,11 +39,36 @@ export class SharedService {
 
     constructor() { }
 
-    getConfigBottomNavData() {
+    getConfigBottomNavData(): Array<BottomNavModel>  {
         return this.configBottomNavData;
     }
 
-    getRepartidoresBottomNavData() {
+    getRepartidoresBottomNavData(): Array<BottomNavModel> {
         return this.repartidoresBottomNavData;
+    }
+
+    /**
+     * Este metodo abre el Swal alert
+     * y recibe el id del item que se quiere eliminar y
+     * la funcion para borrar ese item
+     *
+     * @param {Number} $id
+     * @param {Function} $delete
+     * @returns {Void}
+     */
+    getSwalToDelete($id: number, $delete: Function) {
+        Swal.fire({
+            title: "¿Seguro que quieres hacerlo?",
+            text: "Esta acción no se puede deshacer.",
+            showCancelButton: true,
+            confirmButtonText: "Aceptar",
+            cancelButtonText: "Cancelar"
+        }).then(result => {
+            if (result.value) {
+                // Accion para eliminar.
+                $delete($id);
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+            }
+        });
     }
 }

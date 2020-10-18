@@ -10,10 +10,35 @@ export class ConfigEmpresasComponent implements OnInit {
     protected pageTitle: string = 'Configuración de Empresas';
     protected bottomNavData: Array<BottomNavModel>;
 
-    constructor(public sharedService: SharedService) {
+    constructor(protected sharedService: SharedService) {
         this.bottomNavData = sharedService.getConfigBottomNavData();
     }
 
     ngOnInit() { }
+
+    /**
+     *  Ocultar empresa por su Id
+     *
+     * @param {Number} $id
+     * @return {Boolean}
+     */
+    hideCompany = ($id: number): Boolean => {
+        alert('Haz Ocultado la Empresa con el ' + $id);
+        if ($id) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     *  Eliminar Empresa por su Id
+     *
+     * @param {Number} $id
+     * @return {Void}
+     */
+    deleteCompany = ($id: number): void => {
+        // TODO: Codigo para borrar un Empresa
+        alert('Haz BORRADO al Empresa con el ' + $id)
+    }
 
 }

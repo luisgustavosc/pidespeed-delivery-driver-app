@@ -9,6 +9,7 @@ import { RepartidoresComponent } from "src/app/components/pages/repartidores/rep
 import { RepartidoresUbicacionComponent } from "src/app/components/pages/repartidores-ubicacion/repartidores-ubicacion.component";
 import { ConfigRepartidoresComponent } from "src/app/components/pages/config.repartidores/config.repartidores.component";
 import { ConfigEmpresasComponent } from "src/app/components/pages/config-empresas/config-empresas.component";
+import { ConfigAdminsComponent } from "src/app/components/pages/config-admins/config-admins.component";
 
 // Servicio de bloqueo de rutas
 import { AuthGuard } from "src/app/guards/auth/auth.guard";
@@ -47,7 +48,7 @@ const routes: Routes = [
     },
     {
         path: "configuracion/administradores",
-        component: ConfigRepartidoresComponent,
+        component: ConfigAdminsComponent,
         canActivate: [AuthGuard]
     },
     {
