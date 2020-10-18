@@ -1,12 +1,9 @@
 <app-nav [pageTitle]='pageTitle' [isVisibleGoBackButton]='true'></app-nav>
-<!-- ============================================================== -->
-<!-- wrapper  -->
-<!-- ============================================================== -->
+
 <div class="dashboard-wrapper">
   <div class="container mt-5 pt-5">
     <app-user-row [rowTitle]="'Juan Lopez'" [rowSubtitle]="'Disponible'" [rowStatus]="'activo'"></app-user-row>
   </div>
 </div>
-<!-- ============================================================== -->
-<!-- end wrapper  -->
-<!-- ============================================================== -->
+
+<app-bottom-nav [data]='bottomNavData'></app-bottom-nav>

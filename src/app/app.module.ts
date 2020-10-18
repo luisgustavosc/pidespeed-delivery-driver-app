@@ -54,6 +54,7 @@ import { OrdersService } from "src/app/services/orders/orders.service"
 import { ProfileService } from "src/app/services/profile/profile.service";
 import { ProductosService } from "src/app/services/productos/productos.service";
 import { WebSocketService } from "src/app/services/webSocket/web-socket.service";
+import { SharedService } from "src/app/services/shared.service"
 import * as Sentry from '@sentry/angular';
 
 export function jwtTokenGetter() {
@@ -129,6 +130,7 @@ export function jwtTokenAdminGetter() {
         ProductosService,
         WebSocketService,
         NgxImageCompressService,
+        SharedService
     ],
     bootstrap: [AppComponent]
 })
