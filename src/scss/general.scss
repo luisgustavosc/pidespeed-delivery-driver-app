@@ -129,16 +129,16 @@ ul {
 }
 
 .alert h3 {
-  color: var(--RojoPrincipal);
+  color: theme-color('red');
 }
 
 .danger-alert {
-  border: 1px solid var(--RojoPrincipal);
-  border-left: 5px solid var(--RojoPrincipal);
+  border: 1px solid theme-color('red');
+  border-left: 5px solid theme-color('red');
 }
 
 .st-icon {
-  color: #fff;
+  color: $white;
   font-size: 23px;
   padding: 40px 40px 20px 20px;
   border-radius: 50%;
@@ -162,7 +162,7 @@ ul {
 
 .labelStatus-danger {
   background: linear-gradient(45deg, #fb4a55, #ef8087);
-  color: #fff !important;
+  color: $white !important;
 }
 
 .labelStatus-danger-outline {
@@ -172,17 +172,17 @@ ul {
 
 .labelStatus-success {
   background: linear-gradient(45deg, #2ed8b6, #59e0c5);
-  color: #fff !important;
+  color: $white !important;
 }
 
 .labelStatus-warning {
   background: linear-gradient(45deg, #ffb64d, #ffcb80);
-  color: #fff;
+  color: $white;
 }
 
 .buttonIcon {
   padding: 10px;
-  color: #fff;
+  color: $white;
   border-radius: 50%;
   border: none;
 }
@@ -206,7 +206,7 @@ ul {
   -webkit-transition: all 0.3s ease;
   transition: all 0.3s ease;
   min-height: 60px;
-  background-color: #ffffff;
+  background-color: $white;
 }
 
 .info-sidebar {
@@ -216,12 +216,12 @@ ul {
   padding: 35px 0px;
   flex-direction: column;
   height: 175px;
-  background: var(--SegundoRojoOscuro);
-  color: #fff;
+  background: theme-color('red2');
+  color: $white;
 }
 
 .info-sidebar h2 {
-  color: #fff;
+  color: $white;
 }
 
 .info-sidebar img {
@@ -229,7 +229,7 @@ ul {
   width: 95px;
   position: absolute;
   bottom: -40px;
-  border: 6px solid #fff;
+  border: 6px solid $white;
   object-fit: contain;
 }
 
@@ -243,15 +243,15 @@ ul {
 }
 
 .swal2-styled.swal2-confirm {
-  background-color: var(--RojoPrincipal) !important;
+  background-color: theme-color('red') !important;
   border-radius: 23px !important;
 }
 
 .swal2-styled.swal2-cancel {
-  color: var(--RojoPrincipal) !important;
+  color: theme-color('red') !important;
   border-radius: 25px !important;
-  border: 1px solid var(--RojoPrincipal) !important;
-  background-color: #fff !important;
+  border: 1px solid theme-color('red') !important;
+  background-color: $white !important;
 }
 
 .object-fit-cover {

@@ -1,8 +1,16 @@
 <app-nav [pageTitle]='pageTitle' [isVisibleGoBackButton]='true'></app-nav>
 
 <div class="dashboard-wrapper">
-  <div class="container mt-5 pt-5">
-    <app-user-row [rowTitle]="'Juan Lopez'" [rowSubtitle]="'Disponible'" [rowStatus]="'activo'"></app-user-row>
+  <div class="mt-5 pt-5">
+    <app-user-row
+      [dataId]="10"
+      [rowTitle]="'Juan Lopez'"
+      [rowSubtitle]="'Disponible'"
+      [hasActions]="true"
+      [isRowDisabled]='true'
+      [deleteAction]='deleteRepartidor'
+      [disabledAction]='disableRepartidor'>
+    </app-user-row>
   </div>
 </div>
 

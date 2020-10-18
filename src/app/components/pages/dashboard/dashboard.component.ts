@@ -4,7 +4,6 @@ import { ProfileService } from "src/app/services/profile/profile.service";
 import { OrdersService } from "src/app/services/orders/orders.service";
 import * as moment from 'moment';
 import { ProductosService } from "src/app/services/productos/productos.service";
-import Swal from "sweetalert2";
 import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({

@@ -8,7 +8,7 @@ import { BottomNavModel } from "src/app/model/bottomNav";
 })
 export class BottomNavComponent implements OnInit {
 
-    @Input() data: Array<BottomNavModel>;
+    @Input() protected data: Array<BottomNavModel>;
 
     constructor() { }
 

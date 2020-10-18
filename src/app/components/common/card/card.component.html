@@ -34,9 +34,9 @@
 </div>
 
 <!-- ============================================================== -->
-<!-- Cards con scroll horizontal  TYPE: 3 -->
+<!-- Cards con scroll horizontal en Dashboard y con acciones en Config empresas  TYPE: 3 -->
 <!-- ============================================================== -->
-<div *ngIf="cardType === 3" class="card-body p-2">
+<div *ngIf="cardType === 3" class="card-body p-2 {{ isDisabled ? 'bg-whisper' : 'bg-white'}}">
   <div *ngIf="hasActions" class="row no-gutters mx-auto">
     <div class="col-9">
       <div class="w-100 h-xs-55p border-rounded-md" style="background-image: url('https://ssl.pidespeed.com/empresas/vecchio-pizza-18-portada'); background-position: center; background-size: cover;">
@@ -47,15 +47,15 @@
         <mat-icon class="font-20">more_vert</mat-icon>
       </button>
       <mat-menu #menu="matMenu">
-        <button mat-menu-item>
-          <mat-icon>visibility_off</mat-icon>
-          <span>Ocultar</span>
+        <button *ngIf="dataId" mat-menu-item (click)="disabled(dataId)">
+          <mat-icon>{{ isDisabled ? 'visibility_on' : 'visibility_off' }}</mat-icon>
+          <span>{{ isDisabled ? 'Publicar' : 'Ocultar' }}</span>
         </button>
         <button mat-menu-item>
           <mat-icon>create</mat-icon>
           <span>Editar</span>
         </button>
-        <button mat-menu-item>
+        <button *ngIf="dataId" mat-menu-item (click)="delete(dataId)">
           <mat-icon>delete</mat-icon>
           <span>Eliminar</span>
         </button>

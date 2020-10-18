@@ -1,3 +1,17 @@
-<p>
-  config-admins works!
-</p>
+<app-nav [pageTitle]='pageTitle' [isVisibleGoBackButton]='true'></app-nav>
+
+<div class="dashboard-wrapper">
+  <div class="mt-5 pt-5">
+    <app-user-row
+      [dataId]="10"
+      [rowTitle]="'Juan Lopez'"
+      [rowSubtitle]="'Disponible'"
+      [hasActions]="true"
+      [isRowDisabled]='false'
+      [deleteAction]='deleteAdmin'
+      [disabledAction]='disableAdmin'>
+    </app-user-row>
+  </div>
+</div>
+
+<app-bottom-nav [data]='bottomNavData'></app-bottom-nav>
