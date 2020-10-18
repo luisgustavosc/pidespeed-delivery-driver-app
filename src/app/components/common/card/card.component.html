@@ -1,0 +1,75 @@
+<!-- ============================================================== -->
+<!-- Cards usadas en para info de precios o visitas  TYPE: 1 -->
+<!-- ============================================================== -->
+<div *ngIf="cardType === 1 " class="card border-3 w-100" [ngClass]="{'border-top border-': config.borderColor}">
+  <div class="card-body text-center" [ngClass]="{'bg-': config.bgColor}">
+    <h5  class="subtitles-card text-muted">{{ config.title }}</h5>
+    <div class="metric-value d-inline-block">
+      <p class="mb-1" [ngClass]="{'h3': config.descriptionLg}">{{ config.description }}</p>
+    </div>
+    <div *ngIf="config.icon" class="metric-label d-inline-block float-right font-weight-bold">
+      <span class="st-icon bg- material-icons">{{ config.icon }}</span>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================== -->
+<!-- Cards usadas en ordenes activas (DASHBOARD)  TYPE: 2 -->
+<!-- ============================================================== -->
+<div *ngIf="cardType === 2" class="card mb-2 border-3 w-100 border-top h-xs-145p" [ngClass]="isPidespeedOrder ? 'border-red2' : 'border-cyan'">
+  <div class="card-body">
+    <div class="d-flex align-items-center">
+      <img *ngIf="isPidespeedOrder" src="https://ssl.pidespeed.com/web/6.png" class="w-xs-20p mr-2" alt="">
+      <span *ngIf="!isPidespeedOrder" class="material-icons mr-2 font-20">
+        shopping_basket
+      </span>
+      <small>Algun motivo</small>
+    </div>
+    <h5  class="h6 mb-2 mt-3">{{ cardTitle }}</h5>
+    <div class="d-flex align-items-center">
+      <img src="https://generated.photos/vue-static/home/hero/6.png" class="w-xs-25p mr-2" alt="">
+      <small class="mb-0">{{ cardSubtitle }}</small>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================== -->
+<!-- Cards con scroll horizontal  TYPE: 3 -->
+<!-- ============================================================== -->
+<div *ngIf="cardType === 3" class="card-body p-2">
+  <div *ngIf="hasActions" class="row no-gutters mx-auto">
+    <div class="col-9">
+      <div class="w-100 h-xs-55p border-rounded-md" style="background-image: url('https://ssl.pidespeed.com/empresas/vecchio-pizza-18-portada'); background-position: center; background-size: cover;">
+      </div>
+    </div>
+    <div class="col-3 pl-2 d-flex flex-column">
+      <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Opciones sobre la empresa">
+        <mat-icon class="font-20">more_vert</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item>
+          <mat-icon>visibility_off</mat-icon>
+          <span>Ocultar</span>
+        </button>
+        <button mat-menu-item>
+          <mat-icon>create</mat-icon>
+          <span>Editar</span>
+        </button>
+        <button mat-menu-item>
+          <mat-icon>delete</mat-icon>
+          <span>Eliminar</span>
+        </button>
+      </mat-menu>
+    </div>
+    <div class="col-12">
+      <p class="mb-0 mt-2 font-{{ titleTextSize }}">{{ cardTitle }}</p>
+      <small *ngIf="cardSubtitle" class="mb-0 text-nobel">{{ cardSubtitle }}</small>
+    </div>
+  </div>
+  <div *ngIf="!hasActions">
+    <img src="https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" class="img-fluid border-rounded-md" alt="">
+    <p class="mb-0 mt-2 font-{{ titleTextSize }} font-medium font-medium">{{ cardTitle }}</p>
+    <small *ngIf="cardSubtitle" class="mb-0 text-nobel">{{ cardSubtitle }}</small>
+  </div>
+</div>
+

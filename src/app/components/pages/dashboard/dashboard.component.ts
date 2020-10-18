@@ -14,6 +14,7 @@ declare var c3: any;
 	styleUrls: ["./dashboard.component.scss"]
 })
 export class DashboardComponent implements OnInit {
+    pageTitle: string = 'Inicio';
 	lazyloader: boolean = false;
 	empresa: any;
 	noPagado: any;
@@ -32,7 +33,17 @@ export class DashboardComponent implements OnInit {
 	precioDolar = new FormGroup({
 		DolarDelDia: new FormControl("")
 	});
-	empresaAbierta: { abierto: number; };
+    empresaAbierta: { abierto: number; };
+
+    config: Object = {
+        type: 2,
+        title: '',
+        description: '',
+        bgColor: 'red2',
+        iconBg: null,
+        borderColor: null,
+        icon: null,
+    }
 
 	constructor(
 		public productosService: ProductosService,

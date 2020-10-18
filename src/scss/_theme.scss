@@ -66,7 +66,7 @@ $fa-font-brand: 'Font Awesome 5 Brands';
 // Iterate for what you need.
 $sizes: () !default;
 @for $i from 1 through 1000 {
-  @if $i <= 100 {
+  @if $i <= 200 {
     @if $i%5 == 0 {
       $holdingArrayPercent: (
       // Escape the Percentage Sign

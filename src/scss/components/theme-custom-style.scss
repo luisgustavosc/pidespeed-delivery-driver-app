@@ -164,6 +164,8 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+// Usar default de bootstrap
+/*
 h1,
 h2,
 h3,
@@ -204,6 +206,7 @@ p {
 p:last-child {
   margin: 0px;
 }
+*/
 
 a:hover {
   outline: 0;
@@ -907,7 +910,7 @@ Borders
   margin: .25rem;
   background-color: #fbfbfd;
 }
-
+/*
 .border {
   border: 1px solid #e6e6f2 !important;
 }
@@ -927,54 +930,54 @@ Borders
 .border-right {
   border-right: 1px solid #e6e6f2 !important
 }
-
+*/
 
 /*-----------------------
  Color
 -------------------------*/
 
 .text-primary {
-  color: #f13b46 !important;
+  color: #f13b46;
 }
 
 .text-brand {
-  color: #ffc750 !important;
+  color: #ffc750;
 }
 
 .text-secondary {
-  color: #fb4a55 !important
+  color: #fb4a55
 }
 
 .text-success {
-  color: #2ed8b6 !important;
+  color: #2ed8b6;
 }
 
 .text-danger {
-  color: #ef172c !important;
+  color: #ef172c;
 }
 
 .text-warning {
-  color: #ffc108 !important;
+  color: #ffc108;
 }
 
 .text-info {
-  color: #25d5f2 !important;
+  color: #25d5f2;
 }
 
 .text-light {
-  color: #ffffff !important;
+  color: #ffffff;
 }
 
 .text-dark {
-  color: #5c3d3d !important;
+  color: #5c3d3d;
 }
 
 .text-gray {
-  color: #868aa5 !important;
+  color: #868aa5;
 }
 
 .text-muted {
-  color: #796363 !important;
+  color: #796363;
 }
 
 .rating-color {
@@ -2010,7 +2013,7 @@ Container / Wrapper
   position: relative;
   left: 0;
   margin-left: 264px;
-  min-height: 870px !important;
+ // min-height: 870px !important;
 }
 
 .dashboard-content {

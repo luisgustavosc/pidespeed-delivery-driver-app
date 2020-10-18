@@ -8,7 +8,6 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { AppRoutingModule } from "./app-routing.module";
-import { Router } from "@angular/router";
 
 /**
 * Packages
@@ -28,14 +27,22 @@ import { HorariosPipe } from "./pipes/horarios.pipe";
 /**
 * Componentes
 */
+// Pages
 import { AppComponent } from "src/app/app.component";
 import { DashboardComponent } from "src/app/components/pages/dashboard/dashboard.component";
-import { HeaderComponent } from "src/app/components/common/header/header.component";
-import { SidebarComponent } from "src/app/components/common/sidebar/sidebar.component";
 import { LoginComponent } from "src/app/components/pages/login/login.component";
 import { Error503Component } from "src/app/components/pages/error503/error503.component";
+import { RepartidoresComponent } from "src/app/components/pages/repartidores/repartidores.component";
+import { RepartidoresUbicacionComponent } from "src/app/components/pages/repartidores-ubicacion/repartidores-ubicacion.component";
+import { ConfigRepartidoresComponent } from "src/app/components/pages/config.repartidores/config.repartidores.component";
+import { ConfigEmpresasComponent } from "src/app/components/pages/config-empresas/config-empresas.component";
+import { ConfigAdminsComponent } from "src/app/components/pages/config-admins/config-admins.component";
+// Common
 import { NavComponent } from "src/app/components/common/nav/nav.component";
 import { MobileMenuComponent } from "src/app/components/common/mobile-menu/mobile-menu.component";
+import { CardComponent } from "src/app/components/common/card/card.component";
+import { UserRowComponent } from "src/app/components/common/user-row/user-row.component";
+import { BottomNavComponent } from "src/app/components/common/bottom-nav/bottom-nav.component";
 
 /**
 * Servicios
@@ -59,14 +66,20 @@ export function jwtTokenAdminGetter() {
     declarations: [
         AppComponent,
         DashboardComponent,
-        HeaderComponent,
-        SidebarComponent,
         LoginComponent,
         Error503Component,
         NavComponent,
         MobileMenuComponent,
+        RepartidoresComponent,
+        CardComponent,
+        BottomNavComponent,
+        RepartidoresUbicacionComponent,
+        ConfigRepartidoresComponent,
+        ConfigEmpresasComponent,
+        ConfigAdminsComponent,
+        UserRowComponent,
         MesPipe,
-        HorariosPipe
+        HorariosPipe,
     ],
     imports: [
         BrowserModule,

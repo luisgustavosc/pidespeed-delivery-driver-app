@@ -3,8 +3,8 @@
 <!-- ============================================================== -->
 <div id="menuMovil" class="position-relative overflow-hidden d-none z-index-10">
   <div class="position-fixed top-54p right-0 left-0 bottom-0 container bg-red2">
-    <nav class="navbar navbar-expand-lg">
-      <div class="collapse navbar-collapse show" id="navbarNav">
+    <nav class="navbar navbar-expand-lg p-0">
+      <div class="collapse navbar-collapse show w-100" id="navbarNav">
         <ul class="navbar-nav flex-column">
           <li class="nav-divider">
             Menu
@@ -14,7 +14,7 @@
               <span class="material-icons">home</span> Inicio
             </a>
           </li>
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a
               [class.active]="rla?.isActive"
               routerLinkActive="active"
@@ -29,13 +29,19 @@
             <div id="repartidores-submenu" class="collapse submenu">
               <ul class="nav flex-column">
                 <li class="nav-item">
-                  <a class="nav-link" [routerLink]="[ '/products']" #rla="routerLinkActive" routerLinkActive="active">Ver Repartidores</a>
+                  <a class="nav-link" [routerLink]="[ '/repartidores']" #rla="routerLinkActive" routerLinkActive="active">Ver Repartidores</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" [routerLink]="[ '/products/accompaniments']" routerLinkActive="active">Ubicación</a>
                 </li>
               </ul>
             </div>
+          </li> -->
+          <li class="nav-item ">
+            <a [routerLink]="[ '/repartidores']" routerLinkActive="active" class="nav-link text-capitalize">
+              <span class="material-icons">groups</span>
+              Repartidores
+            </a>
           </li>
           <li class="nav-item ">
             <a [routerLink]="[ '/orders']" routerLinkActive="active" class="nav-link text-capitalize">
@@ -95,13 +101,13 @@
             <div id="settings-submenu" class="collapse submenu">
               <ul class="nav flex-column">
                 <li class="nav-item">
-                  <a class="nav-link" [routerLink]="[ '/invoice/resume']" routerLinkActive="active">Repartidores</a>
+                  <a class="nav-link" [routerLink]="[ '/configuracion/repartidores']" routerLinkActive="active">Repartidores</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" [routerLink]="[ '/invoice']" #rlaInvoice="routerLinkActive" routerLinkActive="active">Empresas afiliadas</a>
+                  <a class="nav-link" [routerLink]="[ '/configuracion/empresas']" #rlaInvoice="routerLinkActive" routerLinkActive="active">Empresas afiliadas</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" [routerLink]="[ '/invoice']" #rlaInvoice="routerLinkActive" routerLinkActive="active">Administradores</a>
+                  <a class="nav-link" [routerLink]="[ '/configuracion/administradores']" #rlaInvoice="routerLinkActive" routerLinkActive="active">Administradores</a>
                 </li>
               </ul>
             </div>

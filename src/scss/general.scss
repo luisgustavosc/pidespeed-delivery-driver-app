@@ -8,6 +8,9 @@ body {
 body {
   margin: 0;
   font-family: $font-family, "Helvetica Neue", sans-serif;
+  width: 100vw !important;
+  overflow-x: hidden;
+  position: relative;
 }
 
 /* .sidebar-dark::-webkit-scrollbar {
@@ -57,8 +60,8 @@ ul {
   height: 150px;
 }
 
-.border-light-grey {
-  border: 1px solid #eaeaea;
+.border-rounded-md {
+  border-radius: 10px;
 }
 
 .cursor-pointer:hover {
@@ -270,3 +273,22 @@ ul {
   animation: fadeOutRight .2s linear ;
 }
 /* End Animation css */
+
+/* Shadows */
+.custom-shadow-sm {
+  box-shadow: 0px 0px 10px 1px rgba(154, 154, 204, 0.22)
+}
+/* End Shadows */
+
+/* Scrolling */
+.scroll_x {
+  width: 100%;
+  height: fit-content;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+  & > div {
+    display: inline-block;
+  }
+}
+/* End Scrolling */

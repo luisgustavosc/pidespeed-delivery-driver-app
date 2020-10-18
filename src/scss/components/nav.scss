@@ -5,8 +5,16 @@
   left: 0;
   right: 0;
   top: 0;
+  overflow-x: hidden;
+  width: 100vw;
   /* background: rgba(0, 0, 0, 0.95) !important; */
-
+  .go_back_button {
+    position: absolute;
+    left: 10px;
+    top: 6px;
+    transform: scale(1.2);
+    color: $white;
+  }
   #menuApp {
     width: 55px;
     height: 55px;
