@@ -1,7 +1,7 @@
 <div class="position-fixed bottom-0 left-0 right-0 w-100 z-index-2">
   <div class="h-xs-65p custom-shadow-sm">
     <div class="row align-items-center h-100">
-      <div *ngFor="let button of data" class="col-6">
+      <div *ngFor="let button of data" class="col-{{ data.length === 2 ? '6' : '4' }}">
         <a [routerLink]="[button.link]" routerLinkActive="text-graphite" [routerLinkActiveOptions]="{exact: true}" class="text-nobel d-flex flex-column align-items-center justify-content-center">
           <span class="material-icons d-block">
             {{ button.icon }}

@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { BottomNavModel } from "src/app/model/bottomNav";
 
 @Component({
     selector: 'app-bottom-nav',
@@ -7,7 +8,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class BottomNavComponent implements OnInit {
 
-    @Input() data: Array<Object>;
+    @Input() data: Array<BottomNavModel>;
 
     constructor() { }
 
