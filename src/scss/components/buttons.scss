@@ -4,6 +4,12 @@
   border-radius: .3rem;
   font-size: 1rem;
 }
+.btn-modal {
+  min-width: 64px;
+  line-height: 36px;
+  padding: 0 16px;
+  border-radius: 4px;
+}
 .btn.disabled, .btn:disabled {
   opacity: 0.65;
   box-shadow: none !important;

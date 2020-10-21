@@ -51,7 +51,7 @@
           <mat-icon>{{ isDisabled ? 'visibility_on' : 'visibility_off' }}</mat-icon>
           <span>{{ isDisabled ? 'Publicar' : 'Ocultar' }}</span>
         </button>
-        <button mat-menu-item>
+        <button mat-menu-item data-toggle="modal" data-target="#AppModal">
           <mat-icon>create</mat-icon>
           <span>Editar</span>
         </button>
@@ -71,5 +71,8 @@
     <p class="mb-0 mt-2 font-{{ titleTextSize }} font-medium font-medium">{{ cardTitle }}</p>
     <small *ngIf="cardSubtitle" class="mb-0 text-nobel">{{ cardSubtitle }}</small>
   </div>
+  <ng-container *ngIf="hasActions">
+    <app-modal-form [formType]='formType'></app-modal-form>
+  </ng-container>
 </div>
 

@@ -1,18 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { BottomNavModel } from "src/app/model/bottomNav";
-import { SharedService } from "src/app/services/shared.service";
+import { FormService } from "src/app/services/form/form.service";
+import { BottomNavService } from "src/app/services/bottomNav/bottom-nav.service";
+
 @Component({
     selector: 'app-config-admins',
     templateUrl: './config-admins.component.html',
     styleUrls: ['./config-admins.component.scss'],
 })
 export class ConfigAdminsComponent implements OnInit {
-    protected pageTitle: string = 'Configuración de Administradores';
-    protected bottomNavData: Array<BottomNavModel>;
+    private pageTitle: string = 'Configuración de Usuarios';
+    private bottomNavData: Array<BottomNavModel> = this.bottomNavService.getConfigBottomNavData();
+    private userFormType: string = this.formService.getUserFormType();
 
-    constructor(public sharedService: SharedService) {
-        this.bottomNavData = sharedService.getConfigBottomNavData();
-    }
+    constructor(private formService: FormService, private bottomNavService: BottomNavService ) { }
 
     ngOnInit() { }
 

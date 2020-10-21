@@ -37,12 +37,17 @@ import { RepartidoresUbicacionComponent } from "src/app/components/pages/reparti
 import { ConfigRepartidoresComponent } from "src/app/components/pages/config.repartidores/config.repartidores.component";
 import { ConfigEmpresasComponent } from "src/app/components/pages/config-empresas/config-empresas.component";
 import { ConfigAdminsComponent } from "src/app/components/pages/config-admins/config-admins.component";
+
 // Common
 import { NavComponent } from "src/app/components/common/nav/nav.component";
 import { MobileMenuComponent } from "src/app/components/common/mobile-menu/mobile-menu.component";
 import { CardComponent } from "src/app/components/common/card/card.component";
 import { UserRowComponent } from "src/app/components/common/user-row/user-row.component";
 import { BottomNavComponent } from "src/app/components/common/bottom-nav/bottom-nav.component";
+import { ModalFormComponent } from "src/app/components/common/modal-form/modal-form.component"
+import { RepartidorFormComponent } from "src/app/components/common/forms/repartidor-form/repartidor-form.component"
+import { CompanyFormComponent } from "src/app/components/common/forms/company-form/company-form.component"
+import { UserFormComponent } from "src/app/components/common/forms/user-form/user-form.component"
 
 /**
 * Servicios
@@ -54,7 +59,6 @@ import { OrdersService } from "src/app/services/orders/orders.service"
 import { ProfileService } from "src/app/services/profile/profile.service";
 import { ProductosService } from "src/app/services/productos/productos.service";
 import { WebSocketService } from "src/app/services/webSocket/web-socket.service";
-import { SharedService } from "src/app/services/shared.service"
 import * as Sentry from '@sentry/angular';
 
 export function jwtTokenGetter() {
@@ -81,6 +85,10 @@ export function jwtTokenAdminGetter() {
         UserRowComponent,
         MesPipe,
         HorariosPipe,
+        ModalFormComponent,
+        CompanyFormComponent,
+        RepartidorFormComponent,
+        UserFormComponent,
     ],
     imports: [
         BrowserModule,
@@ -129,8 +137,7 @@ export function jwtTokenAdminGetter() {
         ProfileService,
         ProductosService,
         WebSocketService,
-        NgxImageCompressService,
-        SharedService
+        NgxImageCompressService
     ],
     bootstrap: [AppComponent]
 })

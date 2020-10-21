@@ -1,0 +1,35 @@
+<div class="modal fade" id="AppModal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content border-0 p-3">
+      <div class="d-flex align-items-center justify-content-between position-relative">
+        <div>
+          <h4 class="mb-0">{{ modalTitle ? modalTitle : 'Titulo aqui' }}</h4>
+          <p>{{ modalDescription ? modalDescription : 'Descripcion aqui'}}</p>
+        </div>
+        <button type="button" class="close position-absolute top-0 right-0" data-dismiss="modal" aria-label="Close">
+          <span class="material-icons">
+            close
+          </span>
+        </button>
+      </div>
+      <div class="modal-body p-0">
+        <app-company-form *ngIf="isCompanyFormType"></app-company-form>
+        <app-user-form *ngIf="isUserFormType"></app-user-form>
+        <app-repartidor-form *ngIf="isRepartidorFormType"></app-repartidor-form>
+
+        <div class="modal-footer p-0 border-0 mt-4">
+          <ng-container *ngIf="lazyloader; then submitting; else ready"></ng-container>
+          <ng-template #ready>
+            <button class="btn-modal text-nobel" mat-button data-dismiss="modal">Cancelar</button>
+            <button class="btn btn-modal btn-red2 btn-shadow-red2">Guardar</button>
+          </ng-template>
+          <ng-template #submitting>
+            <div class="position-relative d-flex justify-content-end align-items-center">
+              <div class="lazyloader"></div>
+            </div>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

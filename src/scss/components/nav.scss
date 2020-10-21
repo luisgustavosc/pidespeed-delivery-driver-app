@@ -37,10 +37,10 @@
   -moz-transform: rotate(0deg);
   -o-transform: rotate(0deg);
   transform: rotate(0deg);
-  -webkit-transition: .5s ease-in-out;
-  -moz-transition: .5s ease-in-out;
-  -o-transition: .5s ease-in-out;
-  transition: .5s ease-in-out;
+  -webkit-transition: 0.5s ease-in-out;
+  -moz-transition: 0.5s ease-in-out;
+  -o-transition: 0.5s ease-in-out;
+  transition: 0.5s ease-in-out;
   cursor: pointer;
 
   span {
@@ -56,10 +56,10 @@
     -moz-transform: rotate(0deg);
     -o-transform: rotate(0deg);
     transform: rotate(0deg);
-    -webkit-transition: .25s ease-in-out;
-    -moz-transition: .25s ease-in-out;
-    -o-transition: .25s ease-in-out;
-    transition: .25s ease-in-out;
+    -webkit-transition: 0.25s ease-in-out;
+    -moz-transition: 0.25s ease-in-out;
+    -o-transition: 0.25s ease-in-out;
+    transition: 0.25s ease-in-out;
 
     &:nth-child(1) {
       top: 0px;
@@ -95,18 +95,28 @@
     }
   }
 }
- /* End Hamburger Menu */
+/* End Hamburger Menu */
 
 /* Mobile menu */
 .navbar {
-  border-top: 2px solid theme-color('red4');
+  border-top: 2px solid theme-color("red4");
+  overflow: auto;
+  align-items: start;
+
+  /* Hide Scroll bar */
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+
   .navbar-nav {
     .nav-divider {
       color: #ffffffc9;
       font-size: 12px;
       letter-spacing: 1px;
       font-size: 14px;
-      border-bottom: 2px solid theme-color('red4');
+      border-bottom: 2px solid theme-color("red4");
     }
 
     .nav-link {
@@ -117,8 +127,8 @@
       position: relative;
       &[data-toggle="collapse"] {
         &:after {
-          transition: transform .35s ease, opacity .35s ease;
-          opacity: .5;
+          transition: transform 0.35s ease, opacity 0.35s ease;
+          opacity: 0.5;
         }
         &::after {
           display: inline-block;
@@ -141,11 +151,13 @@
         }
       }
 
-      &:hover, &:focus {
-        background-color: theme-color('red4');
+      &:hover,
+      &:focus {
+        background-color: theme-color("red4");
       }
-      &:focus, &.active {
-        background-color: theme-color('red4');
+      &:focus,
+      &.active {
+        background-color: theme-color("red4");
       }
       span {
         margin-right: 9px;
@@ -156,7 +168,7 @@
     }
 
     .nav-item {
-      transition: .4s ease;
+      transition: 0.4s ease;
       margin: 2px 5px;
       &:hover {
         cursor: pointer;
@@ -169,7 +181,7 @@
     }
   }
   .submenu {
-    background-color: theme-color('red4');
+    background-color: theme-color("red4");
     text-align: center;
     .nav {
       display: -ms-flexbox;
@@ -181,19 +193,20 @@
       list-style: none;
 
       .nav-item {
-        transition: .4s ease;
+        transition: 0.4s ease;
         margin: 2px 5px;
         .nav-link {
           padding: 12px 0;
           justify-content: center !important;
           border-radius: 10px;
           font-size: 15px;
-          &:active, &:focus {
+          &:active,
+          &:focus {
             justify-content: center !important;
             border-radius: 10px;
           }
           &:hover {
-            background-color: theme-color('red2');
+            background-color: theme-color("red2");
           }
         }
       }
@@ -206,7 +219,6 @@
 .social_icons_nav {
   a {
     font-size: 22px;
-
   }
 }
 /* Social Icons */

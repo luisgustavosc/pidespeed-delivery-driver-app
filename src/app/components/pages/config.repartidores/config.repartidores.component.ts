@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BottomNavModel } from "src/app/model/bottomNav";
-import { SharedService } from "src/app/services/shared.service";
+import { BottomNavService } from "src/app/services/bottomNav/bottom-nav.service";
+import { FormService } from "src/app/services/form/form.service";
 
 @Component({
     selector: 'app-config.repartidores',
@@ -8,11 +9,12 @@ import { SharedService } from "src/app/services/shared.service";
     styleUrls: ['./config.repartidores.component.scss'],
 })
 export class ConfigRepartidoresComponent implements OnInit {
-    protected pageTitle: string = 'Configuración de Repartidores';
-    protected bottomNavData: Array<BottomNavModel>;
+    private pageTitle: string = 'Configuración de Repartidores';
+    private bottomNavData: Array<BottomNavModel>;
+    private repartidorFormType: string = this.formService.getRepartidorFormType();
 
-    constructor(public sharedService: SharedService) {
-        this.bottomNavData = sharedService.getConfigBottomNavData();
+    constructor(private bottomNavService: BottomNavService, private formService: FormService) {
+        this.bottomNavData = this.bottomNavService.getConfigBottomNavData();
     }
 
     ngOnInit() { }

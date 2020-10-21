@@ -1,0 +1,17 @@
+<form [formGroup]="formGroup">
+  <mat-form-field color="accent" class="w-100" appearance="outline">
+    <mat-label>Título</mat-label>
+    <input class="text-capitalize" formControlName="title" matInput>
+    <mat-error class="mt-2" *ngIf="formGroup.controls['title'].errors?.required">
+      Este campo es obligatorio
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field color="accent" class="w-100" appearance="outline">
+    <mat-label>Descripción</mat-label>
+    <textarea class="text-capitalize" maxlength="60" #description formControlName="description" matInput rows="3"></textarea>
+    <mat-error class="mt-2" *ngIf="formGroup.controls['description'].errors?.required">
+      Este campo es obligatorio
+    </mat-error>
+    <mat-hint align="end">{{description.value.length}} / 60</mat-hint>
+  </mat-form-field>
+</form>

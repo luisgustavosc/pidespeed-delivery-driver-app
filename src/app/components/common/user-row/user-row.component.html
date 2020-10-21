@@ -16,7 +16,7 @@
           <mat-icon>{{ isDisabled ? 'location_on' : 'location_off' }}</mat-icon>
           <span>{{ isDisabled ? 'Activar' : 'Desactivar' }}</span>
         </button>
-        <button mat-menu-item>
+        <button mat-menu-item data-toggle="modal" data-target="#AppModal">
           <mat-icon>create</mat-icon>
           <span>Editar</span>
         </button>
@@ -26,6 +26,9 @@
         </button>
       </mat-menu>
     </ng-container>
-    <small *ngIf="rowStatus" class="text-capitalize" [ngClass]="rowStatus === 'activo' ? 'text-green' : rowStatus === 'inactivo' ? 'text-red' : 'text-warning'" ><b>{{ rowStatus }}</b></small>
+    <small *ngIf="rowStatus" class="text-capitalize" [ngClass]="rowStatus === 'activo' ? 'text-green' : rowStatus === 'inactivo' ? 'text-red' : 'text-warning'"><b>{{ rowStatus }}</b></small>
   </div>
 </div>
+<ng-container *ngIf="hasActions">
+  <app-modal-form [formType]='formType'></app-modal-form>
+</ng-container>
