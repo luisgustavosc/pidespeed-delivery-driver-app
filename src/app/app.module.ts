@@ -51,6 +51,7 @@ import { UserFormComponent } from "src/app/components/common/forms/user-form/use
 import { MatInputFieldComponent } from "src/app/components/common/forms/field/mat-input-field/mat-input-field.component"
 import { MatSelectFieldComponent } from "src/app/components/common/forms/field/mat-select-field/mat-select-field.component"
 import { MatTextareaFieldComponent } from "src/app/components/common/forms/field/mat-textarea-field/mat-textarea-field.component"
+import { FloatingButtonComponent } from "src/app/components/common/button/floating-button/floating-button.component"
 
 /**
 * Servicios
@@ -94,7 +95,8 @@ export function jwtTokenAdminGetter() {
         UserFormComponent,
         MatInputFieldComponent,
         MatSelectFieldComponent,
-        MatTextareaFieldComponent
+        MatTextareaFieldComponent,
+        FloatingButtonComponent
     ],
     imports: [
         BrowserModule,
