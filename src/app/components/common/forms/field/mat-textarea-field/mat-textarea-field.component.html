@@ -1,0 +1,11 @@
+<ng-container [formGroup]="form">
+  <mat-form-field color="accent" class="w-100" appearance="outline">
+    <mat-label>{{ label }}</mat-label>
+    <textarea maxlength="60" #appTextArea formControlName="{{ fieldName }}" matInput
+      rows="3"></textarea>
+    <mat-error class="mt-2" *ngIf="form.controls[fieldName].errors?.required">
+      Este campo es obligatorio
+    </mat-error>
+    <mat-hint align="end">{{appTextArea.value.length}} / 60</mat-hint>
+  </mat-form-field>
+</ng-container>

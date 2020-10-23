@@ -8,7 +8,7 @@ import { FormControl, Validators, FormGroup } from "@angular/forms";
 })
 export class CompanyFormComponent implements OnInit {
     private formGroup = new FormGroup({
-        title: new FormControl("", Validators.required),
+        name: new FormControl("", Validators.required),
         description: new FormControl("", Validators.required),
         image: new FormControl("", Validators.required),
         imageLogo: new FormControl("", Validators.required)

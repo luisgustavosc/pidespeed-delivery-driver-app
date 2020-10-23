@@ -9,6 +9,7 @@ import { FormControl, Validators, FormGroup } from "@angular/forms";
 export class RepartidorFormComponent implements OnInit {
     private formGroup = new FormGroup({
         name: new FormControl("", Validators.required),
+        last_name: new FormControl("", Validators.required),
         username: new FormControl("", Validators.required),
         password: new FormControl("", Validators.required),
         image: new FormControl("", Validators.required),

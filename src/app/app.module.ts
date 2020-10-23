@@ -48,6 +48,9 @@ import { ModalFormComponent } from "src/app/components/common/modal-form/modal-f
 import { RepartidorFormComponent } from "src/app/components/common/forms/repartidor-form/repartidor-form.component"
 import { CompanyFormComponent } from "src/app/components/common/forms/company-form/company-form.component"
 import { UserFormComponent } from "src/app/components/common/forms/user-form/user-form.component"
+import { MatInputFieldComponent } from "src/app/components/common/forms/field/mat-input-field/mat-input-field.component"
+import { MatSelectFieldComponent } from "src/app/components/common/forms/field/mat-select-field/mat-select-field.component"
+import { MatTextareaFieldComponent } from "src/app/components/common/forms/field/mat-textarea-field/mat-textarea-field.component"
 
 /**
 * Servicios
@@ -89,6 +92,9 @@ export function jwtTokenAdminGetter() {
         CompanyFormComponent,
         RepartidorFormComponent,
         UserFormComponent,
+        MatInputFieldComponent,
+        MatSelectFieldComponent,
+        MatTextareaFieldComponent
     ],
     imports: [
         BrowserModule,
@@ -113,6 +119,7 @@ export function jwtTokenAdminGetter() {
             }
         })
     ],
+    exports: [ MaterialModule ],
     providers: [
         // {
         //     provide: ErrorHandler,

@@ -1,0 +1,9 @@
+<ng-container [formGroup]="form">
+  <mat-form-field color="accent" class="w-100" appearance="outline">
+    <mat-label>{{ label }}</mat-label>
+    <mat-select formControlName="{{ fieldName }}">
+      <mat-option value=visible>Si</mat-option>
+    </mat-select>
+    <mat-error class="my-2" *ngIf="form.controls[fieldName].errors?.required">Este campo es obligatorio</mat-error>
+  </mat-form-field>
+</ng-container>

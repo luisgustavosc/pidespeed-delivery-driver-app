@@ -10,12 +10,10 @@ import { FormService } from "src/app/services/form/form.service";
 })
 export class ConfigRepartidoresComponent implements OnInit {
     private pageTitle: string = 'Configuración de Repartidores';
-    private bottomNavData: Array<BottomNavModel>;
+    private bottomNavData: Array<BottomNavModel> =this.bottomNavService.getConfigBottomNavData();
     private repartidorFormType: string = this.formService.getRepartidorFormType();
 
-    constructor(private bottomNavService: BottomNavService, private formService: FormService) {
-        this.bottomNavData = this.bottomNavService.getConfigBottomNavData();
-    }
+    constructor(private bottomNavService: BottomNavService, private formService: FormService) { }
 
     ngOnInit() { }
 
