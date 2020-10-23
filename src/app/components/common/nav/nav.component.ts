@@ -6,9 +6,9 @@ import { Component, OnInit, Input } from '@angular/core';
     styleUrls: ['./nav.component.scss'],
 })
 export class NavComponent implements OnInit {
-    @Input() protected pageTitle: string;
-    @Input() protected isVisibleGoBackButton: boolean = false;
-    @Input() protected goBackUrl?: string = null
+    @Input() private pageTitle: string;
+    @Input() private isVisibleGoBackButton: boolean = false;
+    @Input() private goBackUrl?: string = null
 
     constructor() { }
 

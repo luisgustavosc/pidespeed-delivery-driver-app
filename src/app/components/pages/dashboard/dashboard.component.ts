@@ -12,7 +12,7 @@ import { FormGroup, FormControl } from '@angular/forms';
     styleUrls: ["./dashboard.component.scss"]
 })
 export class DashboardComponent implements OnInit {
-    protected pageTitle: string = 'Inicio';
+    private pageTitle: string = 'Inicio';
 
     constructor(
         public productosService: ProductosService,

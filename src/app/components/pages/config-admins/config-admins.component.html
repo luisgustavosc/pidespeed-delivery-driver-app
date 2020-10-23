@@ -5,11 +5,12 @@
     <app-user-row
       [dataId]="10"
       [rowTitle]="'Juan Lopez'"
-      [rowSubtitle]="'Disponible'"
+      [rowSubtitle]="'Administrador'"
       [hasActions]="true"
-      [isRowDisabled]='false'
+      [isDisabled]='false'
       [deleteAction]='deleteAdmin'
-      [disabledAction]='disableAdmin'>
+      [disabledAction]='disableAdmin'
+      [formType]='userFormType'>
     </app-user-row>
   </div>
 </div>

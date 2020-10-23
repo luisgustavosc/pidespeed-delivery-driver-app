@@ -15,41 +15,42 @@ import { ConfigAdminsComponent } from "src/app/components/pages/config-admins/co
 import { AuthGuard } from "src/app/guards/auth/auth.guard";
 import { SesionActivaGuard } from "src/app/guards/sesion-activa/sesion-activa.guard";
 
+// TODO: revisar. Comentado guard por un error en el navegador
 const routes: Routes = [
     {
         path: "",
         component: DashboardComponent,
-        canActivate: [AuthGuard]
+        //canActivate: [AuthGuard]
     },
     {
         path: "login",
         component: LoginComponent,
-        canActivate: [AuthGuard]
+        //canActivate: [AuthGuard]
     },
     {
         path: "repartidores",
         component: RepartidoresComponent,
-        canActivate: [AuthGuard]
+        //canActivate: [AuthGuard]
     },
     {
         path: "repartidores/ubicacion",
         component: RepartidoresUbicacionComponent,
-        canActivate: [AuthGuard]
+        //canActivate: [AuthGuard]
     },
     {
         path: "configuracion/repartidores",
         component: ConfigRepartidoresComponent,
-        canActivate: [AuthGuard]
+        //canActivate: [AuthGuard]
     },
     {
         path: "configuracion/empresas",
         component: ConfigEmpresasComponent,
-        canActivate: [AuthGuard]
+        //canActivate: [AuthGuard]
     },
     {
         path: "configuracion/administradores",
         component: ConfigAdminsComponent,
-        canActivate: [AuthGuard]
+        //canActivate: [AuthGuard]
     },
     {
         path: "error503",

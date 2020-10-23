@@ -1,19 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { BottomNavModel } from "src/app/model/bottomNav";
-import { SharedService } from "src/app/services/shared.service"
+import { BottomNavService } from "src/app/services/bottomNav/bottom-nav.service";
 @Component({
     selector: 'app-repartidores',
     templateUrl: './repartidores.component.html',
     styleUrls: ['./repartidores.component.scss'],
 })
 export class RepartidoresComponent implements OnInit {
-    protected pageTitle = 'Repartidores';
-    protected bottomNavData: Array<BottomNavModel>;
+    private pageTitle = 'Repartidores';
+    private bottomNavData: Array<BottomNavModel>;
 
-    constructor(public sharedService: SharedService) {
-        this.bottomNavData = sharedService.repartidoresBottomNavData;
+    constructor(private bottomNavService: BottomNavService) {
+        this.bottomNavData = this.bottomNavService.getRepartidoresBottomNavData();
     }
-
 
     ngOnInit() { }
 

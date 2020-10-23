@@ -86,7 +86,7 @@
           </li>
           <li class="nav-item">
             <a
-              [class.active]="rlaInvoice?.isActive"
+              [class.active]="rlaConfig?.isActive"
               routerLinkActive="active"
               class="nav-link"
               data-toggle="collapse"
@@ -101,13 +101,13 @@
             <div id="settings-submenu" class="collapse submenu">
               <ul class="nav flex-column">
                 <li class="nav-item">
-                  <a class="nav-link" [routerLink]="[ '/configuracion/repartidores']" routerLinkActive="active">Repartidores</a>
+                  <a class="nav-link" [routerLink]="[ '/configuracion/repartidores']" #rlaConfig="routerLinkActive" routerLinkActive="active">Repartidores</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" [routerLink]="[ '/configuracion/empresas']" #rlaInvoice="routerLinkActive" routerLinkActive="active">Empresas afiliadas</a>
+                  <a class="nav-link" [routerLink]="[ '/configuracion/empresas']" #rlaConfig="routerLinkActive" routerLinkActive="active">Empresas afiliadas</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" [routerLink]="[ '/configuracion/administradores']" #rlaInvoice="routerLinkActive" routerLinkActive="active">Administradores</a>
+                  <a class="nav-link" [routerLink]="[ '/configuracion/administradores']" #rlaConfig="routerLinkActive" routerLinkActive="active">Administradores</a>
                 </li>
               </ul>
             </div>

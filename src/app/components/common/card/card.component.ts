@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { SharedService } from "src/app/services/shared.service";
+import { ActionService } from "src/app/services/action/action.service";
 
 @Component({
     selector: 'app-card',
@@ -7,25 +7,27 @@ import { SharedService } from "src/app/services/shared.service";
     styleUrls: ['./card.component.scss'],
 })
 export class CardComponent implements OnInit {
-    @Input() protected dataId?: number = null;
-    @Input() protected cardType: number;
-    @Input() protected isPidespeedOrder: boolean;
-    @Input() protected cardTitle?: string = null;
-    @Input() protected cardSubtitle?: string = null;
-    @Input() protected titleTextSize: number = 12;
-    @Input() protected hasActions: boolean = false;
-    @Input() protected isCardDisabled: boolean = false;
-    @Input() protected deleteAction: (id: number) => void;
-    @Input() protected disabledAction: (id: number) => boolean;
-    @Input() protected editAction: (id: number) => void;
+    // All cards
+    @Input() private cardType: number;
+    @Input() private cardTitle?: string = null;
+    @Input() private cardSubtitle?: string = null;
 
-    protected isDisabled: boolean = false;
+    // Card type 2
+    @Input() private isPidespeedOrder: boolean;
 
-    constructor(protected sharedService: SharedService) { }
+    // Card type 3
+    @Input() private dataId?: number = null;
+    @Input() private titleTextSize: number = 12;
+    @Input() private hasActions: boolean = false;
+    @Input() private isDisabled: boolean = false;
+    @Input() private deleteAction: (id: number) => void;
+    @Input() private disabledAction: (id: number) => boolean;
+    @Input() private editAction: (id: number) => void;
+    @Input() private formType: string;
 
-    ngOnInit() {
-        this.isDisabled = this.isCardDisabled;
-    }
+    constructor(private actionService: ActionService) { }
+
+    ngOnInit() { }
 
     /**
      * Accion para Desactivar:
@@ -50,6 +52,6 @@ export class CardComponent implements OnInit {
      * @return {Void}
      */
     delete($id: number): void {
-        this.sharedService.getSwalToDelete($id, this.deleteAction);
+        this.actionService.getSwalToDelete($id, this.deleteAction);
     }
 }
