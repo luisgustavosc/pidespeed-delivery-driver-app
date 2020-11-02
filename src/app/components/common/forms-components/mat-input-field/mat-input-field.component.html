@@ -4,16 +4,16 @@
     <input formControlName="{{ fieldName }}"  matInput [type]="inputType">
     <!-- Errors -->
     <mat-error class="mt-2" *ngIf="form.controls[fieldName].errors?.required">
-      Este campo es obligatorio
+      Este campo es obligatorio.
     </mat-error>
-    <mat-error *ngIf="form.controls[fieldName].errors?.pattern">
-      No es un nombre válido
+    <mat-error class="mt-2" *ngIf="form.controls[fieldName].errors?.pattern">
+      No es un {{ label }} válido.
     </mat-error>
-    <mat-error *ngIf="form.controls[fieldName].errors?.minlength">
-      Su nombre de usuario debe tener al menos 4 caracteres
+    <mat-error class="mt-2" *ngIf="form.controls[fieldName].errors?.minlength">
+      Su {{ label }} debe tener al menos {{ minLength }} caracteres.
     </mat-error>
-    <mat-error *ngIf="form.controls[fieldName].errors?.maxlength">
-      Su nombre de usuario no puede tener mas de 20 caracteres
+    <mat-error class="mt-2" *ngIf="form.controls[fieldName].errors?.maxlength">
+      Su {{ label }} no puede tener mas de {{ maxLength }} caracteres.
     </mat-error>
     <!-- Password Visibility -->
     <button *ngIf="isPasswordMode" mat-icon-button matSuffix (click)="updatePasswordVisibility()" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="isPasswordVisible">
