@@ -1,57 +1,44 @@
 import { Component, OnInit } from "@angular/core";
-import Swal from "sweetalert2";
+import { ActionService } from "src/app/services/action/action.service";
 import { Router } from "@angular/router";
-import { Subscription } from "rxjs";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { AuthService } from "src/app/services/auth/auth.service";
+import { Subscribable, Subscription } from 'rxjs';
 @Component({
-  selector: "app-login",
-  templateUrl: "./login.component.html",
-  styleUrls: ["./login.component.scss"]
+    selector: "app-login",
+    templateUrl: "./login.component.html",
+    styleUrls: ["./login.component.scss"]
 })
 export class LoginComponent implements OnInit {
-    hide = false;
-    subscription: Subscription;
-    emailPattern: any = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    lazyloader: boolean = false;
-    loginForm = new FormGroup({
+    public isLoading: boolean = false;
+    private loginForm = new FormGroup({
         user: new FormControl("", [Validators.required]),
         password: new FormControl("", [Validators.required])
     });
-    constructor(private authService: AuthService, private router: Router) {}
 
-    ngOnInit() {
-        if (this.authService.getCurrentUser() && !this.authService.checktoken(this.authService.getAccessToken()) && !this.authService.checktoken(this.authService.getAdminToken())) {
-            this.router.navigate(["/"]);
-        }
-    }
+    constructor(private authService: AuthService, private router: Router, private actionService: ActionService) { }
 
-    refresh(): void {
-        window.location.reload();
-    }
+    ngOnInit() { }
 
-    onLogin(): void {
-        this.lazyloader = true;
-        this.authService.login(this.loginForm.value).subscribe((data: any) => {
-            if (data.message == "ok") {
-                this.authService.saveToken(data.token, data.tokenAdmin);
-                this.authService.setUser(data.user);
-                this.lazyloader = false;
-                this.refresh();
+    onLogin = (): void => {
+        this.isLoading = true;
+        this.authService.login(this.loginForm.value).subscribe((res: any) => {
+            if (res) {
+                this.isLoading = false;
+            }
+            if (res.message == "ok") {
+                this.authService.saveToken(res.token, res.tokenAdmin);
+                this.authService.setUser(res.user);
+                //TODO: remover cuando se solucione el problema de guard.
+                this.router.navigate(["/"]);
+                //window.location.reload();
             } else {
-                this.lazyloader = false;
-                Swal.fire({
-                    title: "Usuario o contraseña incorrecto",
-                    confirmButtonText: "Aceptar"
-                });
+                this.actionService.getErrorSwal("Usuario o contraseña incorrecto", null);
             }
         },
-        err => {
-            this.lazyloader = false;
-            Swal.fire({
-                title: "Ha ocurrido un error",
-                confirmButtonText: "Aceptar"
+            err => {
+                this.isLoading = false;
+                this.actionService.getErrorSwal();
             });
-        });
     }
 }

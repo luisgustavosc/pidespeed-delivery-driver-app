@@ -32,4 +32,21 @@ export class ActionService {
             }
         });
     }
+
+    /**
+     * Este metodo abre el Swal alert para notificar un error.
+     * recibe el mensaje que se quiera mostrar al usuario (opcional)
+     *
+     * @param {String} $title
+     * @param {String} $message
+     * @returns {Void}
+     */
+    public getErrorSwal($title: string = 'Ha ocurrido un error inesperado', $message: string = 'Inténtelo de nuevo más tarde') {
+        Swal.fire({
+            title: $title,
+            text: $message,
+            icon: "error",
+            confirmButtonText: "Aceptar"
+        });
+    }
 }

@@ -48,10 +48,11 @@ import { ModalFormComponent } from "src/app/components/common/modal-form/modal-f
 import { RepartidorFormComponent } from "src/app/components/common/forms/repartidor-form/repartidor-form.component"
 import { CompanyFormComponent } from "src/app/components/common/forms/company-form/company-form.component"
 import { UserFormComponent } from "src/app/components/common/forms/user-form/user-form.component"
-import { MatInputFieldComponent } from "src/app/components/common/forms/field/mat-input-field/mat-input-field.component"
-import { MatSelectFieldComponent } from "src/app/components/common/forms/field/mat-select-field/mat-select-field.component"
-import { MatTextareaFieldComponent } from "src/app/components/common/forms/field/mat-textarea-field/mat-textarea-field.component"
+import { MatInputFieldComponent } from "src/app/components/common/forms-components/mat-input-field/mat-input-field.component"
+import { MatSelectFieldComponent } from "src/app/components/common/forms-components/mat-select-field/mat-select-field.component"
+import { MatTextareaFieldComponent } from "src/app/components/common/forms-components/mat-textarea-field/mat-textarea-field.component"
 import { FloatingButtonComponent } from "src/app/components/common/button/floating-button/floating-button.component"
+import { SubmitButtonComponent } from "src/app/components/common/button/submit-button/submit-button.component"
 
 /**
 * Servicios
@@ -96,7 +97,8 @@ export function jwtTokenAdminGetter() {
         MatInputFieldComponent,
         MatSelectFieldComponent,
         MatTextareaFieldComponent,
-        FloatingButtonComponent
+        FloatingButtonComponent,
+        SubmitButtonComponent
     ],
     imports: [
         BrowserModule,

@@ -1,6 +1,6 @@
+@import "shared/colors";
+
 .lazyloader {
-  content: '';
-  /* position: absolute; */
   width: 50px;
   height: 50px;
   left: 0;
@@ -13,7 +13,7 @@
   border-left: 3px solid rgba(182, 114, 114, 0.15);
   border-right: 3px solid rgba(182, 114, 114, 0.15);
   border-bottom: 3px solid rgba(182, 114, 114, 0.15);
-  border-top: 3px solid var(--RojoPrincipal);
+  border-top: 3px solid theme-color('red');
   border-radius: 100%;
 }
 
