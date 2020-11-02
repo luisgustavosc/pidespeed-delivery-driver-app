@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, Validators, FormGroup } from "@angular/forms";
+import { Validators, FormGroup, FormBuilder } from "@angular/forms";
+import { FormService } from "src/app/services/form/form.service";
 
 @Component({
     selector: 'app-repartidor-form',
@@ -7,17 +8,46 @@ import { FormControl, Validators, FormGroup } from "@angular/forms";
     styleUrls: ['./repartidor-form.component.scss'],
 })
 export class RepartidorFormComponent implements OnInit {
-    private formGroup = new FormGroup({
-        name: new FormControl("", Validators.required),
-        last_name: new FormControl("", Validators.required),
-        username: new FormControl("", Validators.required),
-        password: new FormControl("", Validators.required),
-        image: new FormControl("", Validators.required),
-        isActive: new FormControl("", Validators.required),
-    });
+    private formGroup: FormGroup;
 
-    constructor() { }
+    constructor(private fb: FormBuilder, private formService: FormService) { }
 
-    ngOnInit() { }
-
+    ngOnInit() {
+        this.formGroup = this.fb.group({
+            name: ["", [
+                Validators.required,
+                Validators.pattern(this.formService.getSpanishLettersPattern())
+            ]],
+            last_name: ["", [
+                Validators.required,
+                Validators.pattern(this.formService.getSpanishLettersPattern())
+            ]],
+            email: ["", [
+                Validators.required,
+                Validators.compose([
+                    Validators.required,
+                    Validators.pattern(this.formService.getEmailPattern())
+                ]),
+            ]],
+            phone: ["", [
+                Validators.required,
+                Validators.maxLength(11),
+                Validators.minLength(11),
+                Validators.pattern(this.formService.getNumericPattern())
+            ]],
+            username: ["", [
+                Validators.required,
+                Validators.pattern(this.formService.getUsernamePattern()),
+                Validators.minLength(4),
+                Validators.maxLength(20)
+            ]],
+            password: ["", [
+                Validators.required,
+                Validators.minLength(8),
+                Validators.maxLength(20)
+            ]],
+            image: ["", [Validators.required]],
+            isActive: [""],
+        });
+    }
 }
