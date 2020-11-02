@@ -1,0 +1,27 @@
+<ng-container [formGroup]="form">
+  <mat-form-field color="accent" class="w-100" appearance="outline">
+    <mat-label>{{ label }}</mat-label>
+    <input formControlName="{{ fieldName }}"  matInput [type]="inputType">
+    <!-- Errors -->
+    <mat-error class="mt-2" *ngIf="form.controls[fieldName].errors?.required">
+      Este campo es obligatorio
+    </mat-error>
+    <mat-error *ngIf="form.controls[fieldName].errors?.pattern">
+      No es un nombre válido
+    </mat-error>
+    <mat-error *ngIf="form.controls[fieldName].errors?.minlength">
+      Su nombre de usuario debe tener al menos 4 caracteres
+    </mat-error>
+    <mat-error *ngIf="form.controls[fieldName].errors?.maxlength">
+      Su nombre de usuario no puede tener mas de 20 caracteres
+    </mat-error>
+    <!-- Password Visibility -->
+    <button *ngIf="isPasswordMode" mat-icon-button matSuffix (click)="updatePasswordVisibility()" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="isPasswordVisible">
+      <mat-icon>{{ isPasswordVisible ? 'visibility' : 'visibility_off' }}</mat-icon>
+    </button>
+  </mat-form-field>
+</ng-container>
+
+
+<!-- TODO: agregar luego input mode -->
+<!-- inputmode="{{ InputModeType ? InputModeType : ''}}"  -->
