@@ -2,11 +2,11 @@ import { Injectable } from '@angular/core';
 import Swal from "sweetalert2";
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class ActionService {
 
-  constructor() { }
+    constructor() { }
 
     /**
      * Este metodo abre el Swal alert
