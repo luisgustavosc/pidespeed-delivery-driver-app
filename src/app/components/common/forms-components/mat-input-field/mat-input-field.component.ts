@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { FormGroup } from "@angular/forms";
+import { FormControl, FormGroup } from "@angular/forms";
 
 @Component({
     selector: 'app-mat-input-field',
@@ -14,6 +14,7 @@ export class MatInputFieldComponent implements OnInit {
     @Input() private InputModeType?: 'text' | 'decimal' | 'numeric' | 'tel' | 'search' | 'email' | 'url' = null;
     @Input() private maxLength?: number = null;
     @Input() private minLength?: number = null;
+    @Input() private notBlank: boolean = false;
 
     // Only use for Password Type
     private isPasswordVisible: boolean = false;
@@ -27,6 +28,12 @@ export class MatInputFieldComponent implements OnInit {
         }
     }
 
+    /**
+     * Only use for Password Type.
+     * Toggle para poder ver el password al hacer click en
+     * en el icono en el input
+     *
+     */
     private updatePasswordVisibility() {
         this.isPasswordVisible = !this.isPasswordVisible;
 
@@ -37,4 +44,16 @@ export class MatInputFieldComponent implements OnInit {
         }
     }
 
+    /**
+     * Esto no permite que se escriban espacios en
+     * blanco dentro del campo.
+     *
+     * @param {string} fieldName
+     * @param {FormControl} form
+     */
+    private trimField(fieldName: string, form: FormControl) {
+        if (this.notBlank) {
+            form.get(fieldName).setValue(form.get(fieldName).value.trim());
+        }
+    }
 }

@@ -1,7 +1,7 @@
 <ng-container [formGroup]="form">
   <mat-form-field color="accent" class="w-100" appearance="outline">
     <mat-label>{{ label }}</mat-label>
-    <input formControlName="{{ fieldName }}"  matInput [type]="inputType">
+    <input formControlName="{{ fieldName }}"  matInput [type]="inputType" (input)="trimField(fieldName, form)">
     <!-- Errors -->
     <mat-error class="mt-2" *ngIf="form.controls[fieldName].errors?.required">
       Este campo es obligatorio.
