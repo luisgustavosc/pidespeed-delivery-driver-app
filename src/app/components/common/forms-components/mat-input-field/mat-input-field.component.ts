@@ -51,7 +51,7 @@ export class MatInputFieldComponent implements OnInit {
      * @param {string} fieldName
      * @param {FormControl} form
      */
-    private trimField(fieldName, form: FormControl) {
+    private trimField(fieldName: string, form: FormControl) {
         if (this.notBlank) {
             form.get(fieldName).setValue(form.get(fieldName).value.trim());
         }
