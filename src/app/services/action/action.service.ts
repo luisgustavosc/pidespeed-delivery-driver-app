@@ -17,7 +17,7 @@ export class ActionService {
      * @param {Function} $delete
      * @returns {Void}
      */
-    public getSwalToDelete($id: number, $delete: Function) {
+    public getSwalToDelete($id: number, $delete: Function): void {
         Swal.fire({
             title: "¿Seguro que quieres hacerlo?",
             text: "Esta acción no se puede deshacer.",
@@ -41,7 +41,7 @@ export class ActionService {
      * @param {String} $message
      * @returns {Void}
      */
-    public getErrorSwal($title: string = 'Ha ocurrido un error inesperado', $message: string = 'Inténtelo de nuevo más tarde') {
+    public getErrorSwal($title: string = 'Ha ocurrido un error inesperado', $message: string = 'Inténtelo de nuevo más tarde'): void {
         Swal.fire({
             title: $title,
             text: $message,
