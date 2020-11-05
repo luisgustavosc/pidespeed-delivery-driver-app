@@ -2,6 +2,8 @@
   <mat-form-field color="accent" class="w-100" appearance="outline">
     <mat-label>{{ label }}</mat-label>
     <input formControlName="{{ fieldName }}"  matInput [type]="inputType" (input)="trimField(fieldName, form)">
+    <!-- Pistas -->
+    <mat-hint *ngIf="hint">{{ hint }}</mat-hint>
     <!-- Errors -->
     <mat-error class="mt-2" *ngIf="form.controls[fieldName].errors?.required">
       Este campo es obligatorio.
