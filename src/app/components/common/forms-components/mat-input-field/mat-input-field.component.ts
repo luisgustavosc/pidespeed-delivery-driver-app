@@ -15,6 +15,7 @@ export class MatInputFieldComponent implements OnInit {
     @Input() private maxLength?: number = null;
     @Input() private minLength?: number = null;
     @Input() private notBlank: boolean = false;
+    @Input() private hint?: string = null;
 
     // Only use for Password Type
     private isPasswordVisible: boolean = false;
