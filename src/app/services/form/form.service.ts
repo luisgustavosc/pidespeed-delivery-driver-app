@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
-import { PatternValidator } from '@angular/forms';
+import { AbstractControl } from "@angular/forms";
+import { of } from 'rxjs/internal/observable/of';
+import { catchError, map, retry } from 'rxjs/operators';
+import { ActionService } from "src/app/services/action/action.service";
 
 @Injectable({
     providedIn: 'root'
@@ -13,7 +16,7 @@ export class FormService {
     private numericPattern: RegExp = /[0-9]/;
     private usernamePattern: RegExp = /[a-z0-9-*_@$\s]+/;
 
-    constructor() { }
+    constructor(private actionService: ActionService) { }
 
     public getCompanyFormType(): string {
         return this.companyFormType;
@@ -53,5 +56,49 @@ export class FormService {
 
     public getUsernamePattern(): RegExp {
         return this.usernamePattern;
+    }
+
+    /**
+     *  Validacion para mostrar un error por un dato ya existente.
+     *
+     * Por alguna razon los parametros de la funcion no vienen
+     * en el orden correcto. la funcion se declara en este order:
+     *
+     * this.formService.validateExistingData.bind(this, this.service.getUserByEmail, 'email');
+     *  1. this = $control,
+     *  2. this.service = $fetchData,
+     * '3. 'email' = $fieldName,
+     *
+     * ej:
+     *      username: ["", [
+     *          Validators.required,
+     *      ],
+     *        this.formService.validateExistingData.bind(this, this.service.getUserByEmail, 'email');
+     *      ]
+     *
+     * y se retorna en el orden siguiente:
+     *
+     * @param {Function} $fetchData
+     * @param {string} fieldName
+     * @param {AbstractControl} control
+     * @returns {Boolean | Null}
+     */
+    public validateExistingData($fetchData: Function, $fieldName: string, $control: AbstractControl): boolean | null {
+        console.log($fetchData)
+        const dataToValidate = {
+            field: $fieldName,
+            value: $control.value
+        };
+        return $fetchData(dataToValidate).pipe(
+            map((response: any) => {
+                if (response.length)
+                    return {
+                        isNotAvailable: true
+                    };
+                // Return null for no errors
+                return null;
+            }),
+            catchError(err => of(this.actionService.getErrorSwal()))
+        );
     }
 }
