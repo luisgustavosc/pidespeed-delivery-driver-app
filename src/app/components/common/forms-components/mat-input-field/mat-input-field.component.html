@@ -2,6 +2,8 @@
   <mat-form-field color="accent" class="w-100" appearance="outline">
     <mat-label>{{ label }}</mat-label>
     <input formControlName="{{ fieldName }}"  matInput [type]="inputType" (input)="trimField(fieldName, form)">
+    <!-- Pistas -->
+    <mat-hint *ngIf="hint">{{ hint }}</mat-hint>
     <!-- Errors -->
     <mat-error class="mt-2" *ngIf="form.controls[fieldName].errors?.required">
       Este campo es obligatorio.
@@ -14,6 +16,9 @@
     </mat-error>
     <mat-error class="mt-2" *ngIf="form.controls[fieldName].errors?.maxlength">
       Su {{ label }} no puede tener mas de {{ maxLength }} caracteres.
+    </mat-error>
+    <mat-error *ngIf="form.get(fieldName).errors?.isNotAvailable">
+      {{ label }} ya está en uso. Prueba con otro.
     </mat-error>
     <!-- Password Visibility -->
     <button *ngIf="isPasswordMode" mat-icon-button matSuffix (click)="updatePasswordVisibility()" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="isPasswordVisible">
