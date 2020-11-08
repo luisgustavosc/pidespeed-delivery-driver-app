@@ -10,6 +10,9 @@ import { RepartidoresUbicacionComponent } from "src/app/components/pages/reparti
 import { ConfigRepartidoresComponent } from "src/app/components/pages/config-repartidores/config-repartidores.component";
 import { ConfigEmpresasComponent } from "src/app/components/pages/config-empresas/config-empresas.component";
 import { ConfigAdminsComponent } from "src/app/components/pages/config-admins/config-admins.component";
+import { ConfigUpdateRepartidorComponent } from "src/app/components/pages/config-update/config-update-repartidor/config-update-repartidor.component";
+import { ConfigUpdateEmpresaComponent } from "src/app/components/pages/config-update/config-update-empresa/config-update-empresa.component";
+import { ConfigUpdateAdminComponent } from "src/app/components/pages/config-update/config-update-admin/config-update-admin.component";
 
 // Servicio de bloqueo de rutas
 import { AuthGuard } from "src/app/guards/auth/auth.guard";
@@ -48,8 +51,38 @@ const routes: Routes = [
         //canActivate: [AuthGuard]
     },
     {
-        path: "configuracion/administradores",
+        path: "configuracion/admins",
         component: ConfigAdminsComponent,
+        //canActivate: [AuthGuard]
+    },
+    {
+        path: "configuracion/repartidores/add",
+        component: ConfigUpdateRepartidorComponent,
+        //canActivate: [AuthGuard]
+    },
+    {
+        path: "configuracion/empresas/add",
+        component: ConfigUpdateEmpresaComponent,
+        //canActivate: [AuthGuard]
+    },
+    {
+        path: "configuracion/admins/add",
+        component: ConfigUpdateAdminComponent,
+        //canActivate: [AuthGuard]
+    },
+    {
+        path: "configuracion/repartidores/:id",
+        component: ConfigUpdateRepartidorComponent,
+        //canActivate: [AuthGuard]
+    },
+    {
+        path: "configuracion/empresas/:id",
+        component: ConfigUpdateEmpresaComponent,
+        //canActivate: [AuthGuard]
+    },
+    {
+        path: "configuracion/admins/:id",
+        component: ConfigUpdateAdminComponent,
         //canActivate: [AuthGuard]
     },
     {

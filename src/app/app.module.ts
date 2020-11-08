@@ -37,6 +37,9 @@ import { RepartidoresUbicacionComponent } from "src/app/components/pages/reparti
 import { ConfigRepartidoresComponent } from "src/app/components/pages/config-repartidores/config-repartidores.component";
 import { ConfigEmpresasComponent } from "src/app/components/pages/config-empresas/config-empresas.component";
 import { ConfigAdminsComponent } from "src/app/components/pages/config-admins/config-admins.component";
+import { ConfigUpdateRepartidorComponent } from "src/app/components/pages/config-update/config-update-repartidor/config-update-repartidor.component";
+import { ConfigUpdateEmpresaComponent } from "src/app/components/pages/config-update/config-update-empresa/config-update-empresa.component";
+import { ConfigUpdateAdminComponent } from "src/app/components/pages/config-update/config-update-admin/config-update-admin.component";
 
 // Common
 import { NavComponent } from "src/app/components/common/nav/nav.component";
@@ -45,14 +48,14 @@ import { CardComponent } from "src/app/components/common/card/card.component";
 import { UserRowComponent } from "src/app/components/common/user-row/user-row.component";
 import { BottomNavComponent } from "src/app/components/common/bottom-nav/bottom-nav.component";
 import { ModalFormComponent } from "src/app/components/common/modal-form/modal-form.component"
-import { RepartidorFormComponent } from "src/app/components/common/forms/repartidor-form/repartidor-form.component"
-import { CompanyFormComponent } from "src/app/components/common/forms/company-form/company-form.component"
-import { UserFormComponent } from "src/app/components/common/forms/user-form/user-form.component"
-import { MatInputFieldComponent } from "src/app/components/common/forms-components/mat-input-field/mat-input-field.component"
-import { MatSelectFieldComponent } from "src/app/components/common/forms-components/mat-select-field/mat-select-field.component"
-import { MatTextareaFieldComponent } from "src/app/components/common/forms-components/mat-textarea-field/mat-textarea-field.component"
-import { FloatingButtonComponent } from "src/app/components/common/button/floating-button/floating-button.component"
-import { SubmitButtonComponent } from "src/app/components/common/button/submit-button/submit-button.component"
+import { RepartidorFormComponent } from "src/app/components/common/forms/repartidor-form/repartidor-form.component";
+import { CompanyFormComponent } from "src/app/components/common/forms/company-form/company-form.component";
+import { UserFormComponent } from "src/app/components/common/forms/user-form/user-form.component";
+import { MatInputFieldComponent } from "src/app/components/common/forms-components/mat-input-field/mat-input-field.component";
+import { MatSelectFieldComponent } from "src/app/components/common/forms-components/mat-select-field/mat-select-field.component";
+import { MatTextareaFieldComponent } from "src/app/components/common/forms-components/mat-textarea-field/mat-textarea-field.component";
+import { FloatingButtonComponent } from "src/app/components/common/button/floating-button/floating-button.component";
+import { SubmitButtonComponent } from "src/app/components/common/button/submit-button/submit-button.component";
 
 /**
 * Servicios
@@ -98,7 +101,10 @@ export function jwtTokenAdminGetter() {
         MatSelectFieldComponent,
         MatTextareaFieldComponent,
         FloatingButtonComponent,
-        SubmitButtonComponent
+        SubmitButtonComponent,
+        ConfigUpdateRepartidorComponent,
+        ConfigUpdateEmpresaComponent,
+        ConfigUpdateAdminComponent
     ],
     imports: [
         BrowserModule,

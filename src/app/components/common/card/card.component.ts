@@ -24,6 +24,8 @@ export class CardComponent implements OnInit {
     @Input() private disabledAction: (id: number) => boolean;
     @Input() private editAction: (id: number) => void;
     @Input() private formType: string;
+    @Input() private EditRedirectTo?: string = null;
+    @Input() private hasModal: boolean = false;
 
     constructor(private actionService: ActionService) { }
 

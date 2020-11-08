@@ -6,10 +6,11 @@ import { Component, Input, OnInit } from '@angular/core';
     styleUrls: ['./floating-button.component.scss'],
 })
 export class FloatingButtonComponent implements OnInit {
-    @Input() private bgColor: string = 'bg-red2';
+    @Input() private bgColor: string = 'red2';
     @Input() private icon: string = 'add';
     @Input() private hasModal: boolean = false;
-    @Input()  private formType: string | null;
+    @Input()  private formType: string | null =  null;
+    @Input()  private link: string | null = null;
 
     constructor() { }
 

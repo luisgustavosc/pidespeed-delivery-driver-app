@@ -12,6 +12,8 @@ export class UserRowComponent implements OnInit {
     @Input() private rowSubtitle: string;
     @Input() private rowStatus?: string = null;
     @Input() private hasActions: boolean = false;
+    @Input() private hasModal: boolean = false;
+    @Input() private EditRedirectTo?: string = null;
     @Input() private isDisabled: boolean = false;
     @Input() private deleteAction: (id: number) => void;
     @Input() private disabledAction: (id: number) => boolean;
