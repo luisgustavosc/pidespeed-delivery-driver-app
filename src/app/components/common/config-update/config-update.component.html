@@ -1,11 +1,11 @@
 <app-nav [pageTitle]='pageTitle' [isVisibleGoBackButton]='true' [goBackUrl]='goBackUrl'></app-nav>
 
 <div class="container">
-  <div class="mt-5 pt-5">
+  <div class="mt-5 pt-5 pb-4">
     <app-company-form *ngIf="isCompanyFormType"></app-company-form>
     <app-user-form *ngIf="isUserFormType"></app-user-form>
     <app-repartidor-form *ngIf="isRepartidorFormType"></app-repartidor-form>
 
-    <app-submit-button [buttonLabel]="'Guardar'" [isDisabled]="true" [submitAction]="" [isLoading]=""></app-submit-button>
+    <app-submit-button [buttonLabel]="'Guardar'" [isDisabled]="true" [submitAction]="" [isLoading]="false"></app-submit-button>
   </div>
 </div>

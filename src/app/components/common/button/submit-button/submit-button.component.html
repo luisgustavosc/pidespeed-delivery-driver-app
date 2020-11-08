@@ -1,4 +1,4 @@
-<ng-container *ngIf="!isLoading; then loadingTemplate; else buttonTemplate"></ng-container>
+<ng-container *ngIf="isLoading; then loadingTemplate; else buttonTemplate"></ng-container>
 <ng-template #buttonTemplate>
   <button [disabled]='isDisabled' type="submit" (click)="submitAction()" class="btn btn-red btn-shadow-red w-100 mt-3">{{ buttonLabel }}</button>
 </ng-template>
