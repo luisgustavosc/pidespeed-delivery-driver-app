@@ -103,6 +103,11 @@
   overflow: auto;
   align-items: start;
 
+  #navbarNav {
+    height: 90vh;
+    overflow-y: auto;
+  }
+
   /* Hide Scroll bar */
   &::-webkit-scrollbar {
     display: none;
