@@ -4,9 +4,9 @@ import { BottomNavService } from "src/app/services/bottomNav/bottom-nav.service"
 import { FormService } from "src/app/services/form/form.service";
 
 @Component({
-    selector: 'app-config.repartidores',
-    templateUrl: './config.repartidores.component.html',
-    styleUrls: ['./config.repartidores.component.scss'],
+    selector: 'app-config-repartidores',
+    templateUrl: './config-repartidores.component.html',
+    styleUrls: ['./config-repartidores.component.scss'],
 })
 export class ConfigRepartidoresComponent implements OnInit {
     private pageTitle: string = 'Configuración de Repartidores';

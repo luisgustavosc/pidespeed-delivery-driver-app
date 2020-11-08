@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { ConfigRepartidoresComponent } from './config.repartidores.component';
+import { ConfigRepartidoresComponent } from './config-repartidores.component';
 
 describe('ConfigRepartidoresComponent', () => {
   let component: ConfigRepartidoresComponent;
