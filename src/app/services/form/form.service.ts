@@ -12,9 +12,9 @@ export class FormService {
     private userFormType = 'user_form';
     private repartidorFormType = 'repartidor_form';
     private emailPattern: RegExp = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    private spanishLettersPattern: RegExp = /[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+/;
-    private numericPattern: RegExp = /[0-9]/;
-    private usernamePattern: RegExp = /[a-z0-9-*_@$\s]+/;
+    private spanishLettersPattern: string = "[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+"
+    private numericPattern: string ="[0-9]*";
+    private usernamePattern: string = "[a-z0-9-_.\s]+"
 
     constructor(private actionService: ActionService) { }
 
@@ -46,15 +46,15 @@ export class FormService {
         return this.emailPattern;
     }
 
-    public getSpanishLettersPattern(): RegExp {
+    public getSpanishLettersPattern(): string {
         return this.spanishLettersPattern;
     }
 
-    public getNumericPattern(): RegExp {
+    public getNumericPattern(): string {
         return this.numericPattern;
     }
 
-    public getUsernamePattern(): RegExp {
+    public getUsernamePattern(): string {
         return this.usernamePattern;
     }
 
