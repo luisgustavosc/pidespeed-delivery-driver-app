@@ -19,7 +19,7 @@ export class BottomNavService {
         {
             title: 'Usuarios',
             icon: 'supervisor_account',
-            link: '/configuracion/administradores'
+            link: '/configuracion/admins'
         }
     ];
 

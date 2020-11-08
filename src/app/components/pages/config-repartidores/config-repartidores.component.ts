@@ -6,12 +6,12 @@ import { FormService } from "src/app/services/form/form.service";
 @Component({
     selector: 'app-config-repartidores',
     templateUrl: './config-repartidores.component.html',
-    styleUrls: ['./config-repartidores.component.scss'],
 })
 export class ConfigRepartidoresComponent implements OnInit {
     private pageTitle: string = 'Configuración de Repartidores';
     private bottomNavData: Array<BottomNavModel> =this.bottomNavService.getConfigBottomNavData();
     private repartidorFormType: string = this.formService.getRepartidorFormType();
+    private currentPath: string = window.location.pathname;
 
     constructor(private bottomNavService: BottomNavService, private formService: FormService) { }
 

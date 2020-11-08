@@ -6,12 +6,12 @@ import { BottomNavService } from "src/app/services/bottomNav/bottom-nav.service"
 @Component({
     selector: 'app-config-admins',
     templateUrl: './config-admins.component.html',
-    styleUrls: ['./config-admins.component.scss'],
 })
 export class ConfigAdminsComponent implements OnInit {
     private pageTitle: string = 'Configuración de Usuarios';
     private bottomNavData: Array<BottomNavModel> = this.bottomNavService.getConfigBottomNavData();
     private userFormType: string = this.formService.getUserFormType();
+    private currentPath: string = window.location.pathname;
 
     constructor(private formService: FormService, private bottomNavService: BottomNavService ) { }
 

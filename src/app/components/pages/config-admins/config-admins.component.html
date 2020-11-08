@@ -10,10 +10,11 @@
       [isDisabled]='false'
       [deleteAction]='deleteAdmin'
       [disabledAction]='disableAdmin'
-      [formType]='userFormType'>
+      [formType]='userFormType'
+      [EditRedirectTo]="currentPath + '/2'">
     </app-user-row>
   </div>
 </div>
 
 <app-bottom-nav [data]='bottomNavData'></app-bottom-nav>
-<app-floating-button [icon]="'add'" [bgColor]="'red2'" [hasModal]='true' [formType]='userFormType'></app-floating-button>
+<app-floating-button [formType]='userFormType' [link]="currentPath + '/add'"></app-floating-button>

@@ -1,7 +1,11 @@
-<button mat-fab class="floating-button bg-{{ bgColor }}" data-toggle="modal" data-target="#AppModal">
+<button *ngIf="link" [routerLink]="[link]" mat-fab class="floating-button bg-{{ bgColor }}" >
   <mat-icon>{{ icon }}</mat-icon>
 </button>
 
-<ng-container *ngIf="hasModal">
+<ng-container *ngIf="hasModal && formType">
+  <button mat-fab class="floating-button bg-{{ bgColor }}" data-toggle="modal" data-target="#AppModal">
+    <mat-icon>{{ icon }}</mat-icon>
+  </button>
+
   <app-modal-form [formType]='formType'></app-modal-form>
 </ng-container>
