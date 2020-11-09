@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 @Component({
     selector: 'app-repartidores-ubicacion',
     templateUrl: './repartidores-ubicacion.component.html',
-    styleUrls: ['./repartidores-ubicacion.component.scss'],
 })
 export class RepartidoresUbicacionComponent implements OnInit {
     pageTitle = 'Ubicaciones';

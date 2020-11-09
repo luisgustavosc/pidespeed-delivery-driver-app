@@ -4,7 +4,6 @@ import { BottomNavService } from "src/app/services/bottomNav/bottom-nav.service"
 @Component({
     selector: 'app-repartidores',
     templateUrl: './repartidores.component.html',
-    styleUrls: ['./repartidores.component.scss'],
 })
 export class RepartidoresComponent implements OnInit {
     private pageTitle = 'Repartidores';
