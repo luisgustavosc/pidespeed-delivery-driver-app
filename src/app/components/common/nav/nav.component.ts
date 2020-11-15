@@ -14,7 +14,7 @@ export class NavComponent implements OnInit {
 
     ngOnInit() { }
 
-    showNav() {
+    toggleNav() {
         const nav = document.getElementById('menuMovil');
         const hamburgerMenu = document.querySelector('.hamburger_menu');
         const navChild = document.querySelector('#menuMovil > div');

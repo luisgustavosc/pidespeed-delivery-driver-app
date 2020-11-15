@@ -3,7 +3,7 @@
     <button *ngIf="isVisibleGoBackButton" [routerLink]="[ goBackUrl || '' ]" class="go_back_button" mat-icon-button aria-label="Go back">
       <mat-icon>arrow_back</mat-icon>
     </button>
-    <button id="menuApp" (click)="showNav()" class="navbar-toggler">
+    <button id="menuApp" (click)="toggleNav()" class="navbar-toggler">
         <div class="hamburger_menu">
           <span></span>
           <span></span>
