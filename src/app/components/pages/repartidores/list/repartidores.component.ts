@@ -6,12 +6,10 @@ import { BottomNavService } from "src/app/services/bottomNav/bottom-nav.service"
     templateUrl: './repartidores.component.html',
 })
 export class RepartidoresComponent implements OnInit {
-    private pageTitle = 'Repartidores';
-    private bottomNavData: Array<BottomNavModel>;
+    private pageTitle: string = 'Repartidores';
+    private bottomNavData: Array<BottomNavModel> = this.bottomNavService.getRepartidoresBottomNavData();
 
-    constructor(private bottomNavService: BottomNavService) {
-        this.bottomNavData = this.bottomNavService.getRepartidoresBottomNavData();
-    }
+    constructor(private bottomNavService: BottomNavService) { }
 
     ngOnInit() { }
 
