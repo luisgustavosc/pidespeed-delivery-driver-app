@@ -13,6 +13,7 @@ import { ConfigAdminsComponent } from "src/app/components/pages/config-admins/co
 import { ConfigUpdateRepartidorComponent } from "src/app/components/pages/config-update/config-update-repartidor/config-update-repartidor.component";
 import { ConfigUpdateEmpresaComponent } from "src/app/components/pages/config-update/config-update-empresa/config-update-empresa.component";
 import { ConfigUpdateAdminComponent } from "src/app/components/pages/config-update/config-update-admin/config-update-admin.component";
+import { HelpComponent } from 'src/app/components/pages/help/help.component';
 
 // Servicio de bloqueo de rutas
 import { AuthGuard } from "src/app/guards/auth/auth.guard";
@@ -28,6 +29,11 @@ const routes: Routes = [
     {
         path: "login",
         component: LoginComponent,
+        //canActivate: [AuthGuard]
+    },
+    {
+        path: "help",
+        component: HelpComponent,
         //canActivate: [AuthGuard]
     },
     {
