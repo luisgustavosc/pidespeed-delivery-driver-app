@@ -10,6 +10,7 @@ export class MatTextareaFieldComponent implements OnInit {
     @Input() private label: string;
     @Input() private fieldName: string;
     @Input() private form: FormGroup;
+    @Input() private maxLength: number =  null;
 
     constructor() { }
 
