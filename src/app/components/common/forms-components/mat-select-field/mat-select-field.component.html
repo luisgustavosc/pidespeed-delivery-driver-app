@@ -1,9 +1,16 @@
 <ng-container [formGroup]="form">
   <mat-form-field color="accent" class="w-100" appearance="outline">
     <mat-label>{{ label }}</mat-label>
-    <mat-select formControlName="{{ fieldName }}">
-      <mat-option value=visible>Si</mat-option>
+    <mat-select formControlName="{{ fieldName }}" [(value)]="optionSelected" [multiple]="isMultiple">
+      <ng-container *ngIf="isOptionsPerGroup; else elseTemplate">
+        <mat-optgroup *ngFor="let optGroup of optionsGroup" [label]="optGroup.title">
+          <mat-option *ngFor="let opt of optGroup.options" [value]="opt.value">{{ opt.title }}</mat-option>
+        </mat-optgroup>      </ng-container>
+      <ng-template #elseTemplate>
+        <mat-option *ngFor="let opt of options" [value]="opt.value">{{ opt.title }}</mat-option>
+      </ng-template>
     </mat-select>
     <mat-error class="my-2" *ngIf="form.controls[fieldName].errors?.required">Este campo es obligatorio</mat-error>
+    <mat-error class="my-2" *ngIf="form.controls[fieldName].errors?.maxlength">Solo puedes escoger {{ maxLimitToChoose }} opciones</mat-error>
   </mat-form-field>
 </ng-container>
