@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { FormControl, Validators, FormGroup } from "@angular/forms";
 
 @Component({
@@ -7,6 +7,9 @@ import { FormControl, Validators, FormGroup } from "@angular/forms";
     styleUrls: ['./user-form.component.scss'],
 })
 export class UserFormComponent implements OnInit {
+    @Output() private formGroupEmitter: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
+    @Input() private isLoading: boolean = false;
+
     private formGroup = new FormGroup({
         name: new FormControl("", Validators.required),
         last_name: new FormControl("", Validators.required),
@@ -20,4 +23,7 @@ export class UserFormComponent implements OnInit {
 
     ngOnInit() { }
 
+    onSubmit(form: FormGroup): void {
+        this.formGroupEmitter.emit(form);
+    }
 }
