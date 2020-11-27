@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormService } from "src/app/services/form/form.service";
+import { FormGroup } from "@angular/forms";
 import { ActivatedRoute } from "@angular/router";
 
 @Component({
@@ -9,9 +10,11 @@ import { ActivatedRoute } from "@angular/router";
 export class ConfigUpdateRepartidorComponent implements OnInit {
     private formType: string = this.formService.getRepartidorFormType();
     private configId: string | null = this.activeRoute.snapshot.params.id || null;
+    private formGroup: FormGroup;
+    private isLoading: boolean = false;
     private isRepartidorFormType: boolean;
     private pageTitle: string = this.configId ? 'Editar Username' : 'Agregar Repartidor';
-    private goBackUrl: string = '/configuracion/repartidores'
+    private goBackUrl: string = '/configuracion/repartidores';
 
     constructor(private formService: FormService, private activeRoute: ActivatedRoute) { }
 
@@ -19,4 +22,8 @@ export class ConfigUpdateRepartidorComponent implements OnInit {
         this.isRepartidorFormType = this.formService.isRepartidorFormType(this.formType);
     }
 
+    private getForm(form: any): void {
+        this.formGroup = form;
+        console.log(this.formGroup);
+    }
 }

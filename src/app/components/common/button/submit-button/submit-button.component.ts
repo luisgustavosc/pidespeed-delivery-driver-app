@@ -8,7 +8,6 @@ import { Component, Input, OnInit } from '@angular/core';
 export class SubmitButtonComponent implements OnInit {
     @Input() private buttonLabel: string;
     @Input() private isDisabled: boolean = false;
-    @Input() private submitAction: () => boolean;
     @Input() private isLoading: boolean = true;
 
     // TODO: Preguntar a Eduardo para revisar si se puede hacer una funcion que espere por la respuesta del submit

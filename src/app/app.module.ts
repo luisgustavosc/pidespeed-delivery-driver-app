@@ -57,6 +57,8 @@ import { MatSelectFieldComponent } from "src/app/components/common/forms-compone
 import { MatTextareaFieldComponent } from "src/app/components/common/forms-components/mat-textarea-field/mat-textarea-field.component";
 import { FloatingButtonComponent } from "src/app/components/common/button/floating-button/floating-button.component";
 import { SubmitButtonComponent } from "src/app/components/common/button/submit-button/submit-button.component";
+import { InputFileComponent } from "src/app/components/common/forms-components/input-file/input-file.component";
+import { ImageCropperComponent } from 'src/app/components/common/forms-components/image-cropper/image-cropper.component';
 
 /**
 * Servicios
@@ -107,6 +109,8 @@ export function jwtTokenAdminGetter() {
         ConfigUpdateEmpresaComponent,
         ConfigUpdateAdminComponent,
         HelpComponent,
+        InputFileComponent,
+        ImageCropperComponent,
     ],
     imports: [
         BrowserModule,

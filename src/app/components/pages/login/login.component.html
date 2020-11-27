@@ -3,10 +3,10 @@
     <img src="https://ssl.pidespeed.com/web/3.png" alt="Pidespeed" class="w-xs-200p">
   </div>
   <h1 class="text-black h4">Ingresa a tu cuenta</h1>
-  <form [formGroup]="loginForm">
+  <form [formGroup]="loginForm" (ngSubmit)="onLogin();">
     <app-mat-input-field [form]='loginForm' [label]="'Usuario'" [fieldName]="'user'"></app-mat-input-field>
     <app-mat-input-field [form]='loginForm' [label]="'Contraseña'" [fieldName]="'password'" [inputType]="'password'"></app-mat-input-field>
-    <app-submit-button [buttonLabel]="'Iniciar sesión'" [isDisabled]="!loginForm.valid" [submitAction]="onLogin" [isLoading]="isLoading"></app-submit-button>
+    <app-submit-button [buttonLabel]="'Iniciar sesión'" [isDisabled]="!loginForm.valid" [isLoading]="isLoading"></app-submit-button>
     <a class="text-midnight d-block text-center my-3 mt-4" [routerLink]="[ '/forgotten-password']">Olvidé mi contraseña</a>
   </form>
 </div>

@@ -1,16 +1,17 @@
 import { Injectable } from '@angular/core';
 import { AbstractControl } from "@angular/forms";
 import { of } from 'rxjs/internal/observable/of';
-import { catchError, map, retry } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 import { ActionService } from "src/app/services/action/action.service";
 
 @Injectable({
     providedIn: 'root'
 })
 export class FormService {
-    private companyFormType = 'company_form';
-    private userFormType = 'user_form';
-    private repartidorFormType = 'repartidor_form';
+    private companyFormType: string = 'company_form';
+    private userFormType: string = 'user_form';
+    private repartidorFormType: string = 'repartidor_form';
+    private imageCropperType: string = 'image_cropper';
     private emailPattern: RegExp = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     private spanishLettersPattern: string = "[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+"
     private numericPattern: string ="[0-9]*";
@@ -30,6 +31,10 @@ export class FormService {
         return this.repartidorFormType;
     }
 
+    public getImageCropperType(): string {
+        return this.imageCropperType;
+    }
+
     public isCompanyFormType(type: string): boolean {
         return this.companyFormType === type;
     }
@@ -40,6 +45,10 @@ export class FormService {
 
     public isRepartidorFormType(type: string): boolean {
         return this.repartidorFormType === type;
+    }
+
+    public isImageCropperType(type: string): boolean {
+        return this.imageCropperType === type;
     }
 
     public getEmailPattern(): RegExp {
