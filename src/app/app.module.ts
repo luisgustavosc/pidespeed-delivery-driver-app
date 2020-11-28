@@ -1,5 +1,5 @@
 /**
-* Angular
+* @Angular
 */
 import { APP_INITIALIZER, ErrorHandler, NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
@@ -10,7 +10,7 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { AppRoutingModule } from "./app-routing.module";
 
 /**
-* Packages
+* @Packages
 */
 import { JwtModule } from "@auth0/angular-jwt";
 import { MaterialModule } from "./material.module";
@@ -19,13 +19,13 @@ import { NgxMaterialTimepickerModule } from "ngx-material-timepicker";
 import { NgxImageCompressService } from 'ngx-image-compress';
 
 /**
-* Pipes
+* @Pipes
 */
 import { MesPipe } from "./pipes/mes.pipe";
 import { HorariosPipe } from "./pipes/horarios.pipe";
 
 /**
-* Componentes
+* @Components
 */
 // Pages
 import { AppComponent } from "src/app/app.component";
@@ -61,7 +61,7 @@ import { InputFileComponent } from "src/app/components/common/forms-components/i
 import { ImageCropperComponent } from 'src/app/components/common/forms-components/image-cropper/image-cropper.component';
 
 /**
-* Servicios
+* @Services
 */
 import { AuthService } from "src/app/services/auth/auth.service";
 import { DashboardService } from "src/app/services/dashboard/dashboard.service";

@@ -5,7 +5,6 @@ import { FormService } from "src/app/services/form/form.service";
 @Component({
     selector: 'app-modal-form',
     templateUrl: './modal-form.component.html',
-    styleUrls: ['./modal-form.component.scss'],
 })
 export class ModalFormComponent implements OnInit {
     @Input() private formType: string;

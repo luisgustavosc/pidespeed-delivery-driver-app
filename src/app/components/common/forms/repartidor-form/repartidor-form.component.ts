@@ -5,7 +5,6 @@ import { FormService } from "src/app/services/form/form.service";
 @Component({
     selector: 'app-repartidor-form',
     templateUrl: './repartidor-form.component.html',
-    styleUrls: ['./repartidor-form.component.scss'],
 })
 export class RepartidorFormComponent implements OnInit {
     @Output() private formGroupEmitter: EventEmitter<any> = new EventEmitter<any>();

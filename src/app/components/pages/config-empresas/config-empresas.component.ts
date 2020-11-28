@@ -17,8 +17,6 @@ export class ConfigEmpresasComponent implements OnInit {
     ngOnInit() { }
 
     /**
-     *  Ocultar empresa por su Id
-     *
      * @param {Number} $id
      * @return {Boolean}
      */
@@ -31,8 +29,6 @@ export class ConfigEmpresasComponent implements OnInit {
     }
 
     /**
-     *  Eliminar Empresa por su Id
-     *
      * @param {Number} $id
      * @return {Void}
      */

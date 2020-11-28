@@ -6,7 +6,6 @@ import { MatSelectOptionsGroup } from 'src/app/model/matSelectOptionsGroup';
 @Component({
     selector: 'app-mat-select-field',
     templateUrl: './mat-select-field.component.html',
-    styleUrls: ['./mat-select-field.component.scss'],
 })
 export class MatSelectFieldComponent implements OnInit {
     @Input() private label: string;

@@ -18,8 +18,6 @@ export class ConfigRepartidoresComponent implements OnInit {
     ngOnInit() { }
 
     /**
-     *  Desactivar repartidor por su Id
-     *
      * @param {Number} $id
      * @return {Boolean}
      */
@@ -34,8 +32,6 @@ export class ConfigRepartidoresComponent implements OnInit {
     }
 
     /**
-     *  Eliminar repartidor por su Id
-     *
      * @param {Number} $id
      * @return {Void}
      */

@@ -18,8 +18,6 @@ export class ConfigAdminsComponent implements OnInit {
     ngOnInit() { }
 
     /**
-     *  Desactivar Admin por su Id
-     *
      * @param {Number} $id
      * @return {Boolean}
      */
@@ -34,8 +32,6 @@ export class ConfigAdminsComponent implements OnInit {
     }
 
     /**
-     *  Eliminar Admin por su Id
-     *
      * @param {Number} $id
      * @return {Void}
      */

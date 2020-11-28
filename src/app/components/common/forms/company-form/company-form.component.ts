@@ -3,7 +3,6 @@ import { Validators, FormGroup, FormBuilder } from "@angular/forms";
 @Component({
     selector: 'app-company-form',
     templateUrl: './company-form.component.html',
-    styleUrls: ['./company-form.component.scss'],
 })
 export class CompanyFormComponent implements OnInit {
     private formGroup: FormGroup;

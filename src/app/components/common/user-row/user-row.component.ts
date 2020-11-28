@@ -4,7 +4,6 @@ import { ActionService } from "src/app/services/action/action.service";
 @Component({
     selector: 'app-user-row',
     templateUrl: './user-row.component.html',
-    styleUrls: ['./user-row.component.scss'],
 })
 export class UserRowComponent implements OnInit {
     @Input() private dataId?: number = null;
@@ -25,11 +24,6 @@ export class UserRowComponent implements OnInit {
     ngOnInit() { }
 
     /**
-     * Accion para Desactivar:
-     * ej: <app-user-row [disabledAction]='disableActionComponentParent'>
-     * Este metodo ejecutara al accion (disableActionComponentParent) que se ha
-     * creado en el componente padre
-     *
      * @param {Number} $id
      * @return {Void}
      */
@@ -38,11 +32,6 @@ export class UserRowComponent implements OnInit {
     }
 
     /**
-     * Accion para Eliminar:
-     * ej: <app-user-row [deleteAction]='deleteActionComponentParent'>
-     * Este metodo ejecutara al accion (deleteActionComponentParent) que se ha
-     * creado en el componente padre
-     *
      * @param {Number} $id
      * @return {Void}
      */

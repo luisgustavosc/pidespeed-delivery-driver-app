@@ -6,7 +6,6 @@ import { AuthService } from "src/app/services/auth/auth.service";
 @Component({
     selector: "app-login",
     templateUrl: "./login.component.html",
-    styleUrls: ["./login.component.scss"]
 })
 export class LoginComponent implements OnInit {
     public isLoading: boolean = false;
@@ -26,7 +25,7 @@ export class LoginComponent implements OnInit {
                 this.isLoading = false;
             }
             if (res.message == "ok") {
-                this.authService.saveToken(res.token, res.tokenAdmin);
+                this.authService.setToken(res.token, res.tokenAdmin);
                 this.authService.setUser(res.user);
                 //TODO: remover cuando se solucione el problema de guard.
                 this.router.navigate(["/"]);

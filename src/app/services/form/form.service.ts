@@ -68,24 +68,24 @@ export class FormService {
     }
 
     /**
-     *  Validacion para mostrar un error por un dato ya existente.
+     *  Validation for an existing data.
      *
-     * Por alguna razon los parametros de la funcion no vienen
-     * en el orden correcto. la funcion se declara en este order:
+     * For some reason the parameters of the function do not come
+     * in the correct order. the function is declared in this order:
      *
      * this.formService.validateExistingData.bind(this, this.service.getUserByEmail, 'email');
      *  1. this = $control,
      *  2. this.service = $fetchData,
      * '3. 'email' = $fieldName,
      *
-     * ej:
+     * how to use it:
      *      username: ["", [
      *          Validators.required,
      *      ],
      *        this.formService.validateExistingData.bind(this, this.service.getUserByEmail, 'email');
      *      ]
      *
-     * y se retorna en el orden siguiente:
+     * and it is returned in the following order:
      *
      * @param {Function} $fetchData
      * @param {string} fieldName
