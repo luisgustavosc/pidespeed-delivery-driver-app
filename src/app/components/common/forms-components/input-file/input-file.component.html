@@ -1,0 +1,28 @@
+<div class="bg-white-smoke rounded-circle overflow-hidden mx-auto w-xs-200p h-xs-200p object-fit-cover position-relative">
+  <svg *ngIf="!croppedImage" class="text-whisper" fill="currentColor" viewBox="0 0 24 24">
+    <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
+  </svg>
+  <img *ngIf="croppedImage" [src]="croppedImage" class="w-100 h-100" alt="image cropped">
+</div>
+
+<ng-container [formGroup]="form">
+  <input type="file" id="upload_image" formControlName="{{ fieldName }}" (change)="loadFile($event)" />
+</ng-container>
+
+<div class="mt-3 text-center">
+  <mat-button-toggle-group class="row mx-auto border-0" name="fontStyle" aria-label="Font Style">
+    <mat-button-toggle class="text-bright-gray col-12 border mb-2" (click)="openFileOption();">Cargar imagen</mat-button-toggle>
+    <mat-button-toggle class="text-bright-gray col-6 border" (click)="editFile();">Editar</mat-button-toggle>
+    <mat-button-toggle class="text-bright-gray col-6 border" (click)="clearPreview();">Eliminar</mat-button-toggle>
+  </mat-button-toggle-group>
+</div>
+
+<app-modal-form
+  [isHeaderVisible]="false"
+  [formType]='formType'
+  [imageEvent]="imageChangedEvent"
+  [imageURLToEdit]="imageURLToEdit"
+  [imageSettings]="imageSettings"
+  (croppedImage)="getImageCropped($event)"
+  (imgResultAfterCompress)="getImageCroppedAndCompressed($event)">
+</app-modal-form>

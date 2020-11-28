@@ -3,15 +3,13 @@ import { ActionService } from "src/app/services/action/action.service";
 import { Router } from "@angular/router";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { AuthService } from "src/app/services/auth/auth.service";
-import { Subscribable, Subscription } from 'rxjs';
 @Component({
     selector: "app-login",
     templateUrl: "./login.component.html",
-    styleUrls: ["./login.component.scss"]
 })
 export class LoginComponent implements OnInit {
     public isLoading: boolean = false;
-    private loginForm = new FormGroup({
+    private loginForm: FormGroup = new FormGroup({
         user: new FormControl("", [Validators.required]),
         password: new FormControl("", [Validators.required])
     });
@@ -27,7 +25,7 @@ export class LoginComponent implements OnInit {
                 this.isLoading = false;
             }
             if (res.message == "ok") {
-                this.authService.saveToken(res.token, res.tokenAdmin);
+                this.authService.setToken(res.token, res.tokenAdmin);
                 this.authService.setUser(res.user);
                 //TODO: remover cuando se solucione el problema de guard.
                 this.router.navigate(["/"]);
@@ -36,9 +34,9 @@ export class LoginComponent implements OnInit {
                 this.actionService.getErrorSwal("Usuario o contraseña incorrecto", null);
             }
         },
-            err => {
-                this.isLoading = false;
-                this.actionService.getErrorSwal();
-            });
+        err => {
+            this.isLoading = false;
+            this.actionService.getErrorSwal();
+        });
     }
 }

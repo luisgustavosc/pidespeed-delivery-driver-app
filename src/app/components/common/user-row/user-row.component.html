@@ -1,4 +1,4 @@
-<div class="row no-gutters mx-auto border-bottom py-3 {{ isDisabled ? 'bg-whisper' : 'bg-white'}}">
+<div class="row no-gutters mx-auto border-bottom py-3 px-2 {{ isDisabled ? 'bg-whisper' : 'bg-white'}}">
   <div class="col-2 px-1 ">
     <img src="https://generated.photos/vue-static/home/hero/6.png" class="img-fluid" alt="">
   </div>
@@ -16,10 +16,18 @@
           <mat-icon>{{ isDisabled ? 'location_on' : 'location_off' }}</mat-icon>
           <span>{{ isDisabled ? 'Activar' : 'Desactivar' }}</span>
         </button>
-        <button mat-menu-item data-toggle="modal" data-target="#AppModal">
-          <mat-icon>create</mat-icon>
-          <span>Editar</span>
-        </button>
+        <ng-container *ngIf="hasModal">
+          <button mat-menu-item data-toggle="modal" data-target="#AppModal">
+            <mat-icon>create</mat-icon>
+            <span>Editar</span>
+          </button>
+        </ng-container>
+        <ng-container *ngIf="!hasModal && EditRedirectTo">
+          <button mat-menu-item [routerLink]="[EditRedirectTo]">
+            <mat-icon>create</mat-icon>
+            <span>Editar</span>
+          </button>
+        </ng-container>
         <button *ngIf="dataId" mat-menu-item (click)="delete(dataId)">
           <mat-icon>delete</mat-icon>
           <span>Eliminar</span>
@@ -29,6 +37,6 @@
     <small *ngIf="rowStatus" class="text-capitalize" [ngClass]="rowStatus === 'activo' ? 'text-green' : rowStatus === 'inactivo' ? 'text-red' : 'text-warning'"><b>{{ rowStatus }}</b></small>
   </div>
 </div>
-<ng-container *ngIf="hasActions">
+<ng-container *ngIf="hasModal">
   <app-modal-form [formType]='formType'></app-modal-form>
 </ng-container>

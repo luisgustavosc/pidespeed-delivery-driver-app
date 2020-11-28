@@ -5,20 +5,18 @@ import { BottomNavService } from "src/app/services/bottomNav/bottom-nav.service"
 @Component({
     selector: 'app-config-empresas',
     templateUrl: './config-empresas.component.html',
-    styleUrls: ['./config-empresas.component.scss'],
 })
 export class ConfigEmpresasComponent implements OnInit {
     private pageTitle: string = 'Configuración de Empresas';
     private bottomNavData: Array<BottomNavModel> = this.bottomNavService.getConfigBottomNavData();
     private companyFormType: string = this.formService.getCompanyFormType();
+    private currentPath: string = window.location.pathname;
 
     constructor(private formService: FormService, private bottomNavService: BottomNavService ) { }
 
     ngOnInit() { }
 
     /**
-     *  Ocultar empresa por su Id
-     *
      * @param {Number} $id
      * @return {Boolean}
      */
@@ -31,8 +29,6 @@ export class ConfigEmpresasComponent implements OnInit {
     }
 
     /**
-     *  Eliminar Empresa por su Id
-     *
      * @param {Number} $id
      * @return {Void}
      */

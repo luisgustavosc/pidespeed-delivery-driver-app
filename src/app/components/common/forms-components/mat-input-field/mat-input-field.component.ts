@@ -4,7 +4,6 @@ import { FormControl, FormGroup } from "@angular/forms";
 @Component({
     selector: 'app-mat-input-field',
     templateUrl: './mat-input-field.component.html',
-    styleUrls: ['./mat-input-field.component.scss'],
 })
 export class MatInputFieldComponent implements OnInit {
     @Input() private label: string;
@@ -31,8 +30,7 @@ export class MatInputFieldComponent implements OnInit {
 
     /**
      * Only use for Password Type.
-     * Toggle para poder ver el password al hacer click en
-     * en el icono en el input
+     * Toggle password visibility by clicking on the eye icon
      *
      */
     private updatePasswordVisibility() {
@@ -46,8 +44,7 @@ export class MatInputFieldComponent implements OnInit {
     }
 
     /**
-     * Esto no permite que se escriban espacios en
-     * blanco dentro del campo.
+     * Trim field to do not allow to type blank space
      *
      * @param {string} fieldName
      * @param {FormControl} form

@@ -5,11 +5,15 @@ import { Routes, RouterModule } from "@angular/router";
 import { DashboardComponent } from "src/app/components/pages/dashboard/dashboard.component";
 import { LoginComponent } from "src/app/components/pages/login/login.component";
 import { Error503Component } from "src/app/components/pages/error503/error503.component";
-import { RepartidoresComponent } from "src/app/components/pages/repartidores/repartidores.component";
-import { RepartidoresUbicacionComponent } from "src/app/components/pages/repartidores-ubicacion/repartidores-ubicacion.component";
-import { ConfigRepartidoresComponent } from "src/app/components/pages/config.repartidores/config.repartidores.component";
+import { RepartidoresComponent } from "src/app/components/pages/repartidores/list/repartidores.component";
+import { RepartidoresUbicacionComponent } from "src/app/components/pages/repartidores/ubicacion/repartidores-ubicacion.component";
+import { ConfigRepartidoresComponent } from "src/app/components/pages/config-repartidores/config-repartidores.component";
 import { ConfigEmpresasComponent } from "src/app/components/pages/config-empresas/config-empresas.component";
 import { ConfigAdminsComponent } from "src/app/components/pages/config-admins/config-admins.component";
+import { ConfigUpdateRepartidorComponent } from "src/app/components/pages/config-update/config-update-repartidor/config-update-repartidor.component";
+import { ConfigUpdateEmpresaComponent } from "src/app/components/pages/config-update/config-update-empresa/config-update-empresa.component";
+import { ConfigUpdateAdminComponent } from "src/app/components/pages/config-update/config-update-admin/config-update-admin.component";
+import { HelpComponent } from 'src/app/components/pages/help/help.component';
 
 // Servicio de bloqueo de rutas
 import { AuthGuard } from "src/app/guards/auth/auth.guard";
@@ -25,6 +29,11 @@ const routes: Routes = [
     {
         path: "login",
         component: LoginComponent,
+        //canActivate: [AuthGuard]
+    },
+    {
+        path: "help",
+        component: HelpComponent,
         //canActivate: [AuthGuard]
     },
     {
@@ -48,8 +57,38 @@ const routes: Routes = [
         //canActivate: [AuthGuard]
     },
     {
-        path: "configuracion/administradores",
+        path: "configuracion/admins",
         component: ConfigAdminsComponent,
+        //canActivate: [AuthGuard]
+    },
+    {
+        path: "configuracion/repartidores/add",
+        component: ConfigUpdateRepartidorComponent,
+        //canActivate: [AuthGuard]
+    },
+    {
+        path: "configuracion/empresas/add",
+        component: ConfigUpdateEmpresaComponent,
+        //canActivate: [AuthGuard]
+    },
+    {
+        path: "configuracion/admins/add",
+        component: ConfigUpdateAdminComponent,
+        //canActivate: [AuthGuard]
+    },
+    {
+        path: "configuracion/repartidores/:id",
+        component: ConfigUpdateRepartidorComponent,
+        //canActivate: [AuthGuard]
+    },
+    {
+        path: "configuracion/empresas/:id",
+        component: ConfigUpdateEmpresaComponent,
+        //canActivate: [AuthGuard]
+    },
+    {
+        path: "configuracion/admins/:id",
+        component: ConfigUpdateAdminComponent,
         //canActivate: [AuthGuard]
     },
     {

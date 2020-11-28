@@ -1,7 +1,7 @@
 <!-- ============================================================== -->
 <!-- Menu Movil  -->
 <!-- ============================================================== -->
-<div id="menuMovil" class="position-relative overflow-hidden d-none z-index-10">
+<div id="menuMovil" class="position-relative overflow-hidden d-none">
   <div class="position-fixed top-54p right-0 left-0 bottom-0 container bg-red2">
     <nav class="navbar navbar-expand-lg p-0">
       <div class="collapse navbar-collapse show w-100" id="navbarNav">
@@ -107,7 +107,7 @@
                   <a class="nav-link" [routerLink]="[ '/configuracion/empresas']" #rlaConfig="routerLinkActive" routerLinkActive="active">Empresas afiliadas</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" [routerLink]="[ '/configuracion/administradores']" #rlaConfig="routerLinkActive" routerLinkActive="active">Administradores</a>
+                  <a class="nav-link" [routerLink]="[ '/configuracion/admins']" #rlaConfig="routerLinkActive" routerLinkActive="active">Administradores</a>
                 </li>
               </ul>
             </div>
@@ -120,12 +120,6 @@
               Cerrar sesión
             </a>
           </li>
-        </ul>
-        <ul class="list-unstyled d-flex justify-content-center social_icons_nav mt-4">
-          <li class="mx-3"><a class="fab fa-facebook-f text-white btn" target="_blank" href="https://www.facebook.com/pidespeed/"></a></li>
-          <li class="mx-3"><a class="fab fa-instagram text-white btn" target="_blank" href="https://www.instagram.com/pidespeed/"></a></li>
-          <li class="mx-3"><a class="fab fa-whatsapp text-white btn" target="_blank" href="https://api.whatsapp.com/send?phone=584124282595"></a></li>
-          <li class="mx-3"><a class="far fa-envelope text-white btn" target="_blank" href="mailto:pidespeed@gmail.com"></a></li>
         </ul>
         <div class="mt-4">
             <a [routerLink]="[ '/help']" class="btn text-white d-flex align-items-center justify-content-center">

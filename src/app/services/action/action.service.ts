@@ -9,9 +9,8 @@ export class ActionService {
     constructor() { }
 
     /**
-     * Este metodo abre el Swal alert
-     * y recibe el id del item que se quiere eliminar y
-     * la funcion para borrar ese item
+     * This method call the Swal alert and receives the id of the
+     * item to be removed and the function to delete that item
      *
      * @param {Number} $id
      * @param {Function} $delete
@@ -26,19 +25,17 @@ export class ActionService {
             cancelButtonText: "Cancelar"
         }).then(result => {
             if (result.value) {
-                // Accion para eliminar.
+                // Delete action.
                 $delete($id);
             } else if (result.dismiss === Swal.DismissReason.cancel) {
+                // Cancel action.
             }
         });
     }
 
     /**
-     * Este metodo abre el Swal alert para notificar un error.
-     * recibe el mensaje que se quiera mostrar al usuario (opcional)
-     *
-     * @param {String} $title
-     * @param {String} $message
+     * @param {String|Null} $title
+     * @param {String|Null} $message
      * @returns {Void}
      */
     public getErrorSwal($title: string = 'Ha ocurrido un error inesperado', $message: string = 'Inténtelo de nuevo más tarde'): void {

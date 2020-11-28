@@ -4,7 +4,6 @@ import { ActionService } from "src/app/services/action/action.service";
 @Component({
     selector: 'app-card',
     templateUrl: './card.component.html',
-    styleUrls: ['./card.component.scss'],
 })
 export class CardComponent implements OnInit {
     // All cards
@@ -24,17 +23,14 @@ export class CardComponent implements OnInit {
     @Input() private disabledAction: (id: number) => boolean;
     @Input() private editAction: (id: number) => void;
     @Input() private formType: string;
+    @Input() private EditRedirectTo?: string = null;
+    @Input() private hasModal: boolean = false;
 
     constructor(private actionService: ActionService) { }
 
     ngOnInit() { }
 
     /**
-     * Accion para Desactivar:
-     * ej: <app-card [disabledAction]='disableActionComponentParent'>
-     * Este metodo ejecutara al accion (disableActionComponentParent) que se ha
-     * creado en el componente padre
-     *
      * @param {Number} $id
      * @return {Void}
      */
@@ -43,11 +39,6 @@ export class CardComponent implements OnInit {
     }
 
     /**
-     * Accion para Eliminar:
-     * ej: <app-card [deleteAction]='deleteActionComponentParent'>
-     * Este metodo ejecutara al accion (deleteActionComponentParent) que se ha
-     * creado en el componente padre
-     *
      * @param {Number} $id
      * @return {Void}
      */

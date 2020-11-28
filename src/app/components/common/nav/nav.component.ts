@@ -3,7 +3,6 @@ import { Component, OnInit, Input } from '@angular/core';
 @Component({
     selector: 'app-nav',
     templateUrl: './nav.component.html',
-    styleUrls: ['./nav.component.scss'],
 })
 export class NavComponent implements OnInit {
     @Input() private pageTitle: string;
@@ -14,7 +13,7 @@ export class NavComponent implements OnInit {
 
     ngOnInit() { }
 
-    showNav() {
+    toggleNav() {
         const nav = document.getElementById('menuMovil');
         const hamburgerMenu = document.querySelector('.hamburger_menu');
         const navChild = document.querySelector('#menuMovil > div');
