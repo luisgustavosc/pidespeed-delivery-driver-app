@@ -44,7 +44,7 @@ export class MatInputFieldComponent implements OnInit {
     }
 
     /**
-     *  This does not allow spaces to type blank within the field.
+     * Trim field to do not allow to type blank space
      *
      * @param {string} fieldName
      * @param {FormControl} form
