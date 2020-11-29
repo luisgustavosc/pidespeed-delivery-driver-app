@@ -59,6 +59,9 @@ import { FloatingButtonComponent } from "src/app/components/common/button/floati
 import { SubmitButtonComponent } from "src/app/components/common/button/submit-button/submit-button.component";
 import { InputFileComponent } from "src/app/components/common/forms-components/input-file/input-file.component";
 import { ImageCropperComponent } from 'src/app/components/common/forms-components/image-cropper/image-cropper.component';
+import { MatCheckboxComponent } from 'src/app/components/common/forms-components/mat-checkbox/mat-checkbox.component';
+import { MatRadioComponent } from 'src/app/components/common/forms-components/mat-radio/mat-radio.component';
+import { MatSlideToggleComponent } from 'src/app/components/common/forms-components/mat-slide-toggle/mat-slide-toggle.component';
 
 /**
 * @Services
@@ -111,6 +114,9 @@ export function jwtTokenAdminGetter() {
         HelpComponent,
         InputFileComponent,
         ImageCropperComponent,
+        MatCheckboxComponent,
+        MatRadioComponent,
+        MatSlideToggleComponent
     ],
     imports: [
         BrowserModule,

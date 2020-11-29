@@ -1,0 +1,6 @@
+<ng-container [formGroup]="form">
+  <label for="{{ fieldName }}" class="d-block">{{ label }}</label>
+  <mat-radio-group  formControlName="{{ fieldName }}" [(value)]="optionSelected">
+    <mat-radio-button *ngFor="let opt of options" [value]="opt.value" class="m-2">{{ opt.title }}</mat-radio-button>
+  </mat-radio-group>
+</ng-container>

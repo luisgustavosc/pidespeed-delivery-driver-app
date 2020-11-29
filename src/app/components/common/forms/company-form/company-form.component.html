@@ -1,6 +1,7 @@
 <form [formGroup]="formGroup" (ngSubmit)="onSubmit(formGroup)">
   <app-mat-input-field [form]='formGroup' [label]="'Nombre'" [fieldName]="'name'"></app-mat-input-field>
   <app-mat-textarea-field [form]='formGroup' [label]="'Descripción'" [fieldName]="'description'" [maxLength]="60"></app-mat-textarea-field>
+  <app-mat-slide-toggle [form]='formGroup' [label]="'Es visible?'" [fieldName]="'isActive'"></app-mat-slide-toggle>
   <app-submit-button [buttonLabel]="'Guardar'" [isDisabled]="!formGroup.valid" [isLoading]="isLoading"></app-submit-button>
-  <!-- TODO: Inputs files para imagenes y isActive puede ser un checkbox o un select -->
+  <!-- TODO: Inputs file para imagenes -->
 </form>
