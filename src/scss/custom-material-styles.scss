@@ -46,11 +46,12 @@ body,
 .mat-stroked-button,
 .mat-badge-content,
 .mat-optgroup-label,
-.mat-button-toggle {
+.mat-button-toggle,
+.mat-slide-toggle-content {
   font-family: $font-family !important;
 }
 .mat-badge-content {
-  color: var(--RojoPrincipal);
+  color: theme-color('red2');
   background: #FFFFFF;
 }
 
@@ -73,7 +74,7 @@ body,
 
 .mat-tab-group.mat-primary .mat-ink-bar,
 .mat-tab-nav-bar.mat-primary .mat-ink-bar {
-  background-color: var(--RojoPrincipal) !important;
+  background-color: theme-color('red2') !important;
 }
 
 .mat-tab-body-content {
@@ -153,8 +154,23 @@ body,
 }
 
 .categorias-custom-placeholder {
-  background: var(--RojoPrincipal);
-  border: solid 3px var(--RojoPrincipal);
+  background: theme-color('red2');
+  border: solid 3px theme-color('red2');
   min-height: 60px;
   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+// Mat slide toggle
+.mat-slide-toggle {
+  .mat-slide-toggle-bar {
+    background-color: theme-color('light-gray');
+  }
+  &.mat-checked {
+    .mat-slide-toggle-bar {
+      background-color: theme-color('light-gray');
+    }
+    .mat-slide-toggle-thumb {
+      background-color: theme-color('red2');
+    }
+  }
 }
