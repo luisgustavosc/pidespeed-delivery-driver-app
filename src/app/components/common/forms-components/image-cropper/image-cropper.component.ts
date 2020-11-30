@@ -12,7 +12,6 @@ export class ImageCropperComponent implements OnInit {
     @Input() private imageEvent: Event | null = null;
     @Input() private imageSettings: imageCropperSettings;
     @Input() private imageURLToEdit: string = null;
-    @Output() private croppedImage: EventEmitter<string|null> = new EventEmitter();
     @Output() private imgResultAfterCompress: EventEmitter<string|null> = new EventEmitter();
 
     private imageCompressed: string;
@@ -25,7 +24,6 @@ export class ImageCropperComponent implements OnInit {
     ngOnInit() { }
 
     private imageCropped(event: ImageCroppedEvent, ) {
-        this.croppedImage.emit(event.base64);
         this.imageCompress.compressFile(event.base64, 50, 50).then( result => {
                 this.imageCompressed = result;
                 this.imgResultAfterCompress.emit(this.imageCompressed);

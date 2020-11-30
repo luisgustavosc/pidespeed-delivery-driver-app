@@ -20,7 +20,6 @@ export class ModalFormComponent implements OnInit {
     @Input() private imageEvent: Event | null = null; // when a new image is loaded
     @Input() private imageURLToEdit: string | null = null; // when loading an image that comes from our db
     @Input() private imageSettings: imageCropperSettings;
-    @Output() private croppedImage: EventEmitter<string|null> = new EventEmitter();
     @Output() private imgResultAfterCompress: EventEmitter<string|null> = new EventEmitter();
 
     constructor(private formService: FormService) { }
@@ -30,10 +29,6 @@ export class ModalFormComponent implements OnInit {
         this.isUserFormType = this.formService.isUserFormType(this.formType);
         this.isCompanyFormType = this.formService.isCompanyFormType(this.formType);
         this.isImageCropperType = this.formService.isImageCropperType(this.formType);
-    }
-
-    private getImageCropped(image: string): void {
-        this.croppedImage.emit(image);
     }
 
     private getImageCroppedAndCompressed(image: string): void {

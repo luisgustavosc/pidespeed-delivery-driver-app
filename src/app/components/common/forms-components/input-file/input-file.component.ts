@@ -65,9 +65,6 @@ export class InputFileComponent implements OnInit {
 
     private getImageCroppedAndCompressed(image: string): void {
         this.imgResultAfterCompress.emit(image);
-    }
-
-    private getImageCropped(image: string): void {
         this.croppedImage = image;
     }
 }
