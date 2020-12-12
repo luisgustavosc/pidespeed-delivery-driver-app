@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output,Input } from '@angular/core';
-import { Validators, FormGroup, FormBuilder } from "@angular/forms";
+import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 @Component({
     selector: 'app-company-form',
     templateUrl: './company-form.component.html',
@@ -14,14 +14,14 @@ export class CompanyFormComponent implements OnInit {
 
     ngOnInit() {
         this.formGroup = this.fb.group({
-            name: ["", [
+            name: ['', [
                 Validators.required,
             ]],
-            description: ["", [
+            description: ['', [
                 Validators.required,
                 Validators.maxLength(60),
             ]],
-            image: ["", [Validators.required]],
+            image: ['', [Validators.required]],
             isActive: [false],
         });
     }

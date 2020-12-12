@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
-import { FormControl, Validators, FormGroup } from "@angular/forms";
+import { FormControl, Validators, FormGroup } from '@angular/forms';
 
 @Component({
     selector: 'app-user-form',
@@ -10,12 +10,12 @@ export class UserFormComponent implements OnInit {
     @Input() private isLoading: boolean = false;
 
     private formGroup = new FormGroup({
-        name: new FormControl("", Validators.required),
-        last_name: new FormControl("", Validators.required),
-        role: new FormControl("", Validators.required),
-        username: new FormControl(""),
-        password: new FormControl("", Validators.required),
-        image: new FormControl("")
+        name: new FormControl('', Validators.required),
+        last_name: new FormControl('', Validators.required),
+        role: new FormControl('', Validators.required),
+        username: new FormControl(''),
+        password: new FormControl('', Validators.required),
+        image: new FormControl('')
     });
 
     constructor() { }

@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter,Input } from '@angular/core';
-import { Validators, FormGroup, FormBuilder } from "@angular/forms";
-import { FormService } from "src/app/services/form/form.service";
+import { Validators, FormGroup, FormBuilder } from '@angular/forms';
+import { FormService } from 'src/app/services/form/form.service';
 
 @Component({
     selector: 'app-repartidor-form',
@@ -16,40 +16,54 @@ export class RepartidorFormComponent implements OnInit {
 
     ngOnInit() {
         this.formGroup = this.fb.group({
-            name: ["", [
+            name: ['', [
                 Validators.required,
                 Validators.pattern(this.formService.getSpanishLettersPattern())
             ]],
-            last_name: ["", [
+            last_name: ['', [
                 Validators.required,
                 Validators.pattern(this.formService.getSpanishLettersPattern())
             ]],
-            email: ["", [
+            email: ['', [
                 Validators.required,
                 Validators.compose([
                     Validators.required,
                     Validators.pattern(this.formService.getEmailPattern())
                 ]),
             ]],
-            phone: ["", [
+            cedula: ['', [
+                Validators.required,
+                Validators.compose([
+                    Validators.required,
+                    Validators.pattern(this.formService.getNumericPattern()),
+                    Validators.minLength(7),
+                    Validators.maxLength(8),
+                ]),
+            ]],
+            phone: ['', [
                 Validators.required,
                 Validators.maxLength(11),
                 Validators.minLength(11),
                 Validators.pattern(this.formService.getNumericPattern())
             ]],
-            username: ["", [
+            username: ['', [
                 Validators.required,
                 Validators.pattern(this.formService.getUsernamePattern()),
                 Validators.minLength(4),
                 Validators.maxLength(20)
             ]],
-            password: ["", [
+            password: ['', [
                 Validators.required,
                 Validators.minLength(8),
                 Validators.maxLength(20)
             ]],
-            image: [""],
-            isActive: [""],
+            address: ['', [
+                Validators.maxLength(100),
+                Validators.pattern(this.formService.getSpanishLettersPattern())
+            ]],
+            image: ['', [Validators.required]],
+            vehicle: ['', [Validators.required]],
+            isActive: [''],
         });
     }
 

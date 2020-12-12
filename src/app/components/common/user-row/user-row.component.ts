@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ActionService } from "src/app/services/action/action.service";
+import { ActionService } from 'src/app/services/action/action.service';
 
 @Component({
     selector: 'app-user-row',
