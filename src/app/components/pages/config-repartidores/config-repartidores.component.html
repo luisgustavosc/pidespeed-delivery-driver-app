@@ -3,15 +3,17 @@
 <div class="dashboard-wrapper">
   <div class="mt-5 pt-5 pb-4">
     <app-user-row
-      [dataId]="10"
-      [rowTitle]="'Juan Lopez'"
-      [rowSubtitle]="'Disponible'"
+      *ngFor="let repartidor of repartidores"
+      rowImg="{{repartidor.img.url}}"
+      dataId="{{repartidor.id}}"
+      rowTitle="{{repartidor.nombre}} {{repartidor.apellido}}"
+      rowSubtitle="{{repartidor.statusPedido}}"
       [hasActions]="true"
       [isDisabled]='true'
       [deleteAction]='deleteRepartidor'
       [disabledAction]='disableRepartidor'
       [formType]='repartidorFormType'
-      [EditRedirectTo]="currentPath + '/2'">
+      EditRedirectTo="{{currentPath}}/{{repartidor.id}}">
     </app-user-row>
   </div>
 </div>

@@ -14,17 +14,17 @@ export class ConfigRepartidoresComponent implements OnInit {
     private bottomNavData: Array<BottomNavModel> =this.bottomNavService.getConfigBottomNavData();
     private repartidorFormType: string = this.formService.getRepartidorFormType();
     private currentPath: string = window.location.pathname;
+    repartidores;
     //public isLoading = false;
     constructor(private bottomNavService: BottomNavService, private formService: FormService, private repartidoresService: RepartidoresService , private actionService: ActionService) { }
 
     ngOnInit() {
-        console.log(123)
         this.listRepartidores();
     }
 
     listRepartidores() {
         this.repartidoresService.listRepartidores().subscribe(repartidores => {
-            console.log(repartidores)
+            this.repartidores = repartidores;
         }, err => {
             //this.isLoading = false;
             this.actionService.getErrorSwal();

@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActionService } from 'src/app/services/action/action.service';
+import { IMAGE_SERVER } from 'src/app/services/API';
 
 @Component({
     selector: 'app-user-row',
@@ -8,6 +9,7 @@ import { ActionService } from 'src/app/services/action/action.service';
 export class UserRowComponent implements OnInit {
     @Input() private dataId?: number = null;
     @Input() private rowTitle: string;
+    @Input() private rowImg: string
     @Input() private rowSubtitle: string;
     @Input() private rowStatus?: string = null;
     @Input() private hasActions: boolean = false;
@@ -18,7 +20,7 @@ export class UserRowComponent implements OnInit {
     @Input() private disabledAction: (id: number) => boolean;
     @Input() private editAction: (id: number) => void;
     @Input() private formType: string;
-
+    IMAGE_SERVER = IMAGE_SERVER;
     constructor(private actionService: ActionService) { }
 
     ngOnInit() { }

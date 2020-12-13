@@ -2,7 +2,7 @@
 
 <div class="dashboard-wrapper">
   <div class="mt-5 pt-5 pb-4">
-    <app-user-row [rowTitle]="repartidor.nombre" [rowSubtitle]="'Disponible'" [rowStatus]="'repartidor.status'"></app-user-row>
+    <app-user-row *ngFor="let repartidor of repartidores" rowImg="{{repartidor.img.url}} "rowTitle="{{repartidor.nombre}} {{repartidor.apellido}}" rowSubtitle="'{{repartidor.statusPedido}}'" rowStatus="{{repartidor.status}}"></app-user-row>
   </div>
 </div>
 

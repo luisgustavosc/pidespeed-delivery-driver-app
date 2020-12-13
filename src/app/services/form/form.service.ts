@@ -14,6 +14,7 @@ export class FormService {
     private imageCropperType: string = 'image_cropper';
     private emailPattern: RegExp = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     private spanishLettersPattern: string = "[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+"
+    private textareaPattern: string = "[a-zA-ZñÑáéíóúÁÉÍÓÚ_.#-\s]*"
     private numericPattern: string ="[0-9]*";
     private usernamePattern: string = "[a-z0-9-_.\s]+"
 
@@ -57,6 +58,10 @@ export class FormService {
 
     public getSpanishLettersPattern(): string {
         return this.spanishLettersPattern;
+    }
+
+    public getTextareaPattern(): string {
+        return this.textareaPattern;
     }
 
     public getNumericPattern(): string {

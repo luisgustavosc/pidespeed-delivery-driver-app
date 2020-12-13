@@ -10,7 +10,7 @@ import { ActionService } from 'src/app/services/action/action.service';
 export class RepartidoresComponent implements OnInit {
     private pageTitle: string = 'Repartidores';
     private bottomNavData: Array<BottomNavModel> = this.bottomNavService.getRepartidoresBottomNavData();
-
+    repartidores;
     constructor(private bottomNavService: BottomNavService, private repartidoresService: RepartidoresService , private actionService: ActionService) { }
 
     ngOnInit() {
@@ -19,6 +19,7 @@ export class RepartidoresComponent implements OnInit {
 
     listRepartidores() {
         this.repartidoresService.listRepartidores().subscribe(repartidores => {
+            this.repartidores = repartidores;
             console.log(repartidores)
         }, err => {
             //this.isLoading = false;
