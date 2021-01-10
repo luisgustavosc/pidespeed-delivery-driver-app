@@ -1,8 +1,8 @@
 import { Component, OnInit, ChangeDetectorRef, Input, EventEmitter, Output } from '@angular/core';
 import { NgxImageCompressService } from 'ngx-image-compress';
-import { ImageCroppedEvent, ImageTransform } from "ngx-image-cropper"
+import { ImageCroppedEvent, ImageTransform } from 'ngx-image-cropper'
 import { imageCropperSettings } from 'src/app/model/imageCropperSettings';
-import { ActionService } from "src/app/services/action/action.service";
+import { ActionService } from 'src/app/services/action/action.service';
 
 @Component({
     selector: 'app-image-cropper',

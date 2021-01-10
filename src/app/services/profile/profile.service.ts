@@ -1,24 +1,24 @@
-import { Injectable } from "@angular/core";
-import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { tap } from "rxjs/operators";
-import { isNullOrUndefined } from "util";
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { tap } from 'rxjs/operators';
+import { isNullOrUndefined } from 'util';
 
 let headers = new HttpHeaders({
-  "Content-Type": "application/json",
-  authorization: `bearer ${localStorage.getItem("ACCESS_TOKEN")}`
+  'Content-Type': 'application/json',
+  authorization: `bearer ${localStorage.getItem('ACCESS_TOKEN')}`
 });
 let options = { headers: headers };
 
 @Injectable({
-  providedIn: "root"
+  providedIn: 'root'
 })
 export class ProfileService {
-  AUTH_SERVER: string = "https://ssl.pidespeed.com";
+  AUTH_SERVER: string = 'https://ssl.pidespeed.com';
 
   constructor(private http: HttpClient) {}
 
   getCurrentUser() {
-    let user_string = localStorage.getItem("USER_ADMIN");
+    let user_string = localStorage.getItem('USER_ADMIN');
     if (!isNullOrUndefined(user_string)) {
       let user = JSON.parse(user_string);
       return user;
@@ -28,7 +28,7 @@ export class ProfileService {
   }
 
   setCurrentEmpresa(data) {
-    localStorage.setItem("USER_ADMIN", JSON.stringify(data));
+    localStorage.setItem('USER_ADMIN', JSON.stringify(data));
   }
 
   getCategoria(id) {
@@ -99,15 +99,15 @@ export class ProfileService {
   }
 
   public setCodigo(codigo) {
-    localStorage.setItem("codigo", JSON.stringify(codigo));
+    localStorage.setItem('codigo', JSON.stringify(codigo));
   }
 
   public getCodigo() {
-    return JSON.parse(localStorage.getItem("codigo"));
+    return JSON.parse(localStorage.getItem('codigo'));
   }
 
   public removeCodigo() {
-    localStorage.removeItem("codigo");
+    localStorage.removeItem('codigo');
   }
 
   getSubcategoria(ruta) {

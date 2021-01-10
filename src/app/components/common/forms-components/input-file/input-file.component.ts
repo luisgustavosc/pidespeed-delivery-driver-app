@@ -40,12 +40,12 @@ export class InputFileComponent implements OnInit {
     }
 
     private openFileOption(): void {
-        document.getElementById("upload_image").click();
+        document.getElementById('upload_image').click();
     }
 
     private loadFile(event): void {
         this.imageChangedEvent = event;
-        this.fileName = event.target.files[0].name.replace(/ /g, "-");
+        this.fileName = event.target.files[0].name.replace(/ /g, '-');
         this.fileType = event.target.files[0].type;
         this.imageSettings.format = this.fileType;
         $('#AppModal').modal({ backdrop: 'static', keyboard: false }, 'show');
@@ -54,7 +54,7 @@ export class InputFileComponent implements OnInit {
     private clearPreview(): void {
         this.imageChangedEvent = null;
         this.croppedImage = null;
-        (<HTMLInputElement>document.getElementById("upload_image")).value = null;
+        (<HTMLInputElement>document.getElementById('upload_image')).value = null;
     }
 
     private editFile(): void {

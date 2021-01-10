@@ -1,17 +1,23 @@
 import { Injectable } from '@angular/core';
 import * as io from 'socket.io-client'
 import { Observable } from 'rxjs'
-
+import { AuthService } from '../auth/auth.service';
 @Injectable({
   providedIn: 'root'
 })
 export class WebSocketService {
 
   socket:any;
-  server = 'https://ssl.pidespeed.com';
+  server = 'http://localhost:5000';
 
-  constructor() {
-    this.socket = io(this.server)
+  constructor(authService: AuthService) {
+    this.socket = io(this.server, {
+      path: '/socket.io',
+      query: {
+        authorization: authService.getAccessToken(),
+      },
+    })
+    console.log(this.socket)
   }
 
   listen(eventName:string) {

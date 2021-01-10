@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { BottomNavModel } from "src/app/model/bottomNav";
+import { BottomNavModel } from 'src/app/model/bottomNav';
 
 @Component({
     selector: 'app-bottom-nav',
