@@ -11,7 +11,7 @@ export class ConfigUpdateRepartidorComponent implements OnInit {
     private formType: string = this.formService.getRepartidorFormType();
     private configId: string | null = this.activeRoute.snapshot.params.id || null;
     private formGroup: FormGroup;
-    private isLoading = false;
+    private isFormLoading = false;
     private isRepartidorFormType: boolean;
     private pageTitle: string = this.configId ? 'Editar Username' : 'Agregar Repartidor';
     private goBackUrl = '/configuracion/repartidores';

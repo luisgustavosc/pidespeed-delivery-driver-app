@@ -8,7 +8,7 @@ import { AuthService } from 'src/app/services/auth/auth.service';
     templateUrl: './login.component.html',
 })
 export class LoginComponent implements OnInit {
-    public isLoading: boolean = false;
+    public isFormLoading: boolean = false;
     private loginForm: FormGroup = new FormGroup({
         user: new FormControl('', [Validators.required]),
         password: new FormControl('', [Validators.required])
@@ -19,10 +19,10 @@ export class LoginComponent implements OnInit {
     ngOnInit() { }
 
     onLogin = (): void => {
-        this.isLoading = true;
+        this.isFormLoading = true;
         this.authService.login(this.loginForm.value).subscribe((res: any) => {
             if (res) {
-                this.isLoading = false;
+                this.isFormLoading = false;
             }
             if (res.message == 'ok') {
                 this.authService.setToken(res.token, res.tokenAdmin);
@@ -32,12 +32,12 @@ export class LoginComponent implements OnInit {
                 this.router.navigate(['/']);
                 //window.location.reload();
             } else {
-                this.actionService.getErrorSwal('Usuario o contraseña incorrecto', null);
+                this.actionService.getSwalError('Usuario o contraseña incorrecto', null);
             }
         },
         err => {
-            this.isLoading = false;
-            this.actionService.getErrorSwal();
+            this.isFormLoading = false;
+            this.actionService.getSwalError();
         });
     }
 }

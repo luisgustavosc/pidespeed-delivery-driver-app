@@ -112,7 +112,7 @@ export class FormService {
                 // Return null for no errors
                 return null;
             }),
-            catchError(err => of(this.actionService.getErrorSwal()))
+            catchError(err => of(this.actionService.getSwalError()))
         );
     }
 }

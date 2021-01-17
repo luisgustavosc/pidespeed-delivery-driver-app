@@ -14,7 +14,7 @@ export class ConfigUpdateEmpresaComponent implements OnInit {
     private isCompanyFormType: boolean;
     private pageTitle: string = this.configId ? 'Editar Username' : 'Agregar Empresa';
     private goBackUrl: string = '/configuracion/empresas'
-    private isLoading: boolean = false;
+    private isFormLoading: boolean = false;
 
     constructor(private formService: FormService, private activeRoute: ActivatedRoute) { }
 

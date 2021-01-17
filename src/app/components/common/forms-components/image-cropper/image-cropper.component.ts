@@ -21,7 +21,15 @@ export class ImageCropperComponent implements OnInit {
 
     constructor(private cdRef: ChangeDetectorRef, private actionService: ActionService, private imageCompress: NgxImageCompressService) { }
 
-    ngOnInit() { }
+    ngOnInit() {
+        /*
+        * - Load image when user already have one
+        * NOTE: This does not allow the image to be loaded through the cropper
+        * when the user already has one. Delete when deciding what to do with
+        * the image when editing
+        */
+        this.imageURLToEdit = null;
+    }
 
     private imageCropped(event: ImageCroppedEvent, ) {
         this.imageCompress.compressFile(event.base64, 50, 50).then( result => {
@@ -40,7 +48,7 @@ export class ImageCropperComponent implements OnInit {
     }
 
     private loadImageFailed() {
-        this.actionService.getErrorSwal('El formato no es válido', 'La imagen debe ser png, jpg o jpeg');
+        this.actionService.getSwalError('El formato no es válido', 'La imagen debe ser png, jpg o jpeg');
     }
 
     private rotateLeft() {

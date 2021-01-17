@@ -2,8 +2,8 @@
 
 <div class="container">
   <div class="mt-5 pt-5 pb-4">
-    <app-company-form *ngIf="isCompanyFormType" (formGroupEmitter)="getForm($event)" [isLoading]="isLoading"></app-company-form>
-    <app-user-form *ngIf="isUserFormType" (formGroupEmitter)="getForm($event)" [isLoading]="isLoading"></app-user-form>
-    <app-repartidor-form *ngIf="isRepartidorFormType" (formGroupEmitter)="getForm($event)" [isLoading]="isLoading" configId="{{configId}}"></app-repartidor-form>
+    <app-company-form *ngIf="isCompanyFormType" (formGroupEmitter)="getForm($event)" [isFormLoading]="isFormLoading"></app-company-form>
+    <app-user-form *ngIf="isUserFormType" (formGroupEmitter)="getForm($event)" [isFormLoading]="isFormLoading"></app-user-form>
+    <app-repartidor-form *ngIf="isRepartidorFormType" (formGroupEmitter)="getForm($event)" [isFormLoading]="isFormLoading" configId="{{configId}}"></app-repartidor-form>
   </div>
 </div>

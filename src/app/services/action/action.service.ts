@@ -38,7 +38,7 @@ export class ActionService {
      * @param {String|Null} $message
      * @returns {Void}
      */
-    public getErrorSwal($title: string = 'Ha ocurrido un error inesperado', $message: string = 'Inténtelo de nuevo más tarde'): void {
+    public getSwalError($title: string = 'Ha ocurrido un error inesperado', $message: string = 'Inténtelo de nuevo más tarde'): void {
         Swal.fire({
             title: $title,
             text: $message,

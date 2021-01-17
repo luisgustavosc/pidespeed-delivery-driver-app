@@ -10,7 +10,7 @@ import { ActionService } from 'src/app/services/action/action.service';
 export class RepartidoresComponent implements OnInit {
     private pageTitle: string = 'Repartidores';
     private bottomNavData: Array<BottomNavModel> = this.bottomNavService.getRepartidoresBottomNavData();
-    repartidores;
+    private repartidores = null;
     constructor(private bottomNavService: BottomNavService, private repartidoresService: RepartidoresService , private actionService: ActionService) { }
 
     ngOnInit() {
@@ -22,8 +22,8 @@ export class RepartidoresComponent implements OnInit {
             this.repartidores = repartidores;
             console.log(repartidores)
         }, err => {
-            //this.isLoading = false;
-            this.actionService.getErrorSwal();
+            //this.isFormLoading = false;
+            this.actionService.getSwalError();
         })
     }
 

@@ -1,9 +1,14 @@
 <app-nav [pageTitle]='pageTitle' [isVisibleGoBackButton]='true'></app-nav>
 
-<div class="dashboard-wrapper">
-  <div class="mt-5 pt-5 pb-4">
+<div *ngIf="repartidores" class="dashboard-wrapper mt-5 pt-5 pb-4">
+  <div>
     <app-user-row *ngFor="let repartidor of repartidores" rowImg="{{repartidor.img.url}} "rowTitle="{{repartidor.nombre}} {{repartidor.apellido}}" rowSubtitle="{{repartidor.statusPedido}}" rowStatus="{{repartidor.status}}"></app-user-row>
   </div>
 </div>
+<ng-container *ngIf="!repartidores">
+  <div class="h-100vh-in-app d-flex align-items-center">
+    <div class="lazyloader"></div>
+  </div>
+</ng-container>
 
 <app-bottom-nav [data]='bottomNavData'></app-bottom-nav>

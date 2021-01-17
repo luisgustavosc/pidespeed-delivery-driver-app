@@ -6,7 +6,7 @@ import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 })
 export class CompanyFormComponent implements OnInit {
     private formGroup: FormGroup;
-    @Input() private isLoading: boolean = false;
+    @Input() private isFormLoading: boolean = false;
     // To export values ​​to a parent component
     @Output() private formGroupEmitter: EventEmitter<FormGroup> = new EventEmitter();
 

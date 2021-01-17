@@ -17,6 +17,9 @@ body {
   display: none;
 } */
 
+.h-100vh-in-app {
+  height: calc(100vh - 11rem);
+}
 .ecommerce-widget,
 .componentContainer {
   animation: fadeIn 1.2s ease;

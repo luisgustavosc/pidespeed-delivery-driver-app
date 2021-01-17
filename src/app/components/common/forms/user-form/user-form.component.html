@@ -4,6 +4,6 @@
   <app-mat-select-field [form]='formGroup' [label]="'Rol'" [fieldName]="'role'"></app-mat-select-field>
   <app-mat-input-field [form]='formGroup' [label]="'Usuario'" [fieldName]="'username'"></app-mat-input-field>
   <app-mat-input-field [form]='formGroup' [label]="'Contraseña'" [fieldName]="'password'"></app-mat-input-field>
-  <app-submit-button [buttonLabel]="'Guardar'" [isDisabled]="!formGroup.valid" [isLoading]="isLoading"></app-submit-button>
+  <app-submit-button [buttonLabel]="'Guardar'" [isDisabled]="!formGroup.valid" [isFormLoading]="isFormLoading"></app-submit-button>
   <!-- TODO: Inputs files para imagenes y isActive puede ser un checkbox o un select -->
 </form>

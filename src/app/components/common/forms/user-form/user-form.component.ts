@@ -7,7 +7,7 @@ import { FormControl, Validators, FormGroup } from '@angular/forms';
 })
 export class UserFormComponent implements OnInit {
     @Output() private formGroupEmitter: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
-    @Input() private isLoading: boolean = false;
+    @Input() private isFormLoading: boolean = false;
 
     private formGroup = new FormGroup({
         name: new FormControl('', Validators.required),

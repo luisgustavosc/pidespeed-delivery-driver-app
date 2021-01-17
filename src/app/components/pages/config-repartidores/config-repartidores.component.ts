@@ -15,7 +15,7 @@ export class ConfigRepartidoresComponent implements OnInit {
     private repartidorFormType: string = this.formService.getRepartidorFormType();
     private currentPath: string = window.location.pathname;
     repartidores;
-    //public isLoading = false;
+    //public isFormLoading = false;
     constructor(private bottomNavService: BottomNavService, private formService: FormService, private repartidoresService: RepartidoresService , private actionService: ActionService) { }
 
     ngOnInit() {
@@ -26,8 +26,8 @@ export class ConfigRepartidoresComponent implements OnInit {
         this.repartidoresService.listRepartidores().subscribe(repartidores => {
             this.repartidores = repartidores;
         }, err => {
-            //this.isLoading = false;
-            this.actionService.getErrorSwal();
+            //this.isFormLoading = false;
+            this.actionService.getSwalError();
         })
     }
     /**

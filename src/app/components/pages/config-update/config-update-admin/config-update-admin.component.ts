@@ -14,7 +14,7 @@ export class ConfigUpdateAdminComponent implements OnInit {
     private isUserFormType: boolean;
     private pageTitle: string = this.configId ? 'Editar Username' : 'Agregar Usuario';
     private goBackUrl: string = '/configuracion/admins'
-    private isLoading: boolean = false;
+    private isFormLoading: boolean = false;
 
     constructor(private formService: FormService, private activeRoute: ActivatedRoute) { }
 
