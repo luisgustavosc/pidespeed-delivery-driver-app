@@ -21,6 +21,8 @@ export class MatSelectFieldComponent implements OnInit {
     constructor() { }
 
     ngOnInit() {
+        // Examples
+        /*
         this.options = [
             {
                 'title' : 'juan',
@@ -49,7 +51,7 @@ export class MatSelectFieldComponent implements OnInit {
                 title: 'Grupo 3',
                 options: this.options
             }
-        ]
+        ]*/
     }
 
 }

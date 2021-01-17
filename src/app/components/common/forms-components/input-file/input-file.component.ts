@@ -3,6 +3,7 @@ import { FormGroup } from '@angular/forms';
 import { NgxImageCompressService } from 'ngx-image-compress';
 import { imageCropperSettings } from 'src/app/model/imageCropperSettings';
 import { FormService } from 'src/app/services/form/form.service';
+import { IMAGE_SERVER } from 'src/app/services/API';
 declare var $: any;
 
 @Component({
@@ -13,8 +14,8 @@ declare var $: any;
 export class InputFileComponent implements OnInit {
     @Input() private form: FormGroup;
     @Input() private fieldName: string;
+    @Input() private imageURLToEdit: string = null;
     private imageChangedEvent: Event = null;
-    private imageURLToEdit: string = null;
     private fileName: string;
     private fileType: string = 'png';
     private formType: string = this.formService.getImageCropperType();
@@ -32,11 +33,14 @@ export class InputFileComponent implements OnInit {
     constructor(private imageCompress: NgxImageCompressService, private cdRef: ChangeDetectorRef, private formService: FormService,) { }
 
     ngOnInit() {
-        // Image URL to edit when one already exists
-        // this.croppedImage = '';
-        // TODO: Hablar con eduardo por el problema de cors
-        // que saldra ya que viene de otro servidor las imagenes.
-        // @https://stackoverflow.com/questions/43324285/cors-errors-trying-to-convert-remote-image-to-base64-data
+        /*
+        * - Load image when user already have one
+        * NOTE: Commented for now due to CORS errors. For now we will only allow
+        * the user to upload another image, not edit the current one
+        if (this.imageURLToEdit) {
+            this.croppedImage = this.imageURLToEdit = IMAGE_SERVER + '/' + this.imageURLToEdit;
+        }*/
+        if (this.imageURLToEdit) this.croppedImage = IMAGE_SERVER + '/' + this.imageURLToEdit;
     }
 
     private openFileOption(): void {
