@@ -12,7 +12,7 @@
         <mat-icon class="font-24">more_vert</mat-icon>
       </button>
       <mat-menu #menu="matMenu">
-        <button mat-menu-item (click)="disabled(1)">
+        <button mat-menu-item (click)="disabled(dataId)">
           <mat-icon>{{ isDisabled ? 'location_on' : 'location_off' }}</mat-icon>
           <span>{{ isDisabled ? 'Activar' : 'Desactivar' }}</span>
         </button>

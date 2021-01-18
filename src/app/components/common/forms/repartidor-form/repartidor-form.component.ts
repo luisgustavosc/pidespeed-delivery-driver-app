@@ -45,11 +45,11 @@ export class RepartidorFormComponent implements OnInit {
         this.empresaId = this.authService.getCurrentUser().empresaDelivery;
         this.isPasswordVisible = this.configId ? false : true;
         this.formGroup = this.fb.group({
-            name: ['', [
+            nombre: ['', [
                 Validators.required,
                 Validators.pattern(this.formService.getSpanishLettersPattern())
             ]],
-            last_name: ['', [
+            apellido: ['', [
                 Validators.required,
                 Validators.pattern(this.formService.getSpanishLettersPattern())
             ]],
@@ -69,7 +69,7 @@ export class RepartidorFormComponent implements OnInit {
                     Validators.maxLength(8),
                 ]),
             ]],
-            phone: ['', [
+            telefono: ['', [
                 Validators.required,
                 Validators.maxLength(11),
                 Validators.minLength(10),
@@ -81,34 +81,31 @@ export class RepartidorFormComponent implements OnInit {
                 Validators.minLength(4),
                 Validators.maxLength(20)
             ]],
-            password: ['', [
-                Validators.required,
-                Validators.minLength(8),
-                Validators.maxLength(20)
-            ]],
-            address: ['', [
+            password: [''],
+            direccion: ['', [
                 Validators.maxLength(100),
             ]],
-            image: ['', [Validators.required]],
-            isActive: [''],
+            image: [''],
+            type: ['delivery'],
             vehicle_type: [''],
             vehicle_image: [''],
             empresa: [this.empresaId],
         });
         if(this.configId) this.listRepartidor();
+        this.setPasswordValidators();
     }
 
     private listRepartidor() {
         this.repartidoresService.listRepartidor(this.configId).subscribe((repartidor: any) => {
             this.repartidorImageUrl = repartidor.img.url;
             this.formGroup.patchValue({
-                name: repartidor.nombre,
-                last_name: repartidor.apellido,
+                nombre: repartidor.nombre,
+                apellido: repartidor.apellido,
                 email: repartidor.email,
                 cedula: repartidor.cedula,
-                phone: repartidor.telefono,
+                telefono: repartidor.telefono,
                 username: repartidor.username,
-                address: repartidor.direccion,
+                direccion: repartidor.direccion,
             });
             this.isDataLoaded = true;
         }, err => {
@@ -118,31 +115,31 @@ export class RepartidorFormComponent implements OnInit {
         })
     }
 
+    private setPasswordValidators() {
+        const passwordField = this.formGroup.get('password');
+        if (this.configId && !this.isPasswordVisible) {
+            passwordField.setValidators(null);
+        } else {
+            passwordField.setValidators([
+                Validators.required,
+                Validators.minLength(8),
+                Validators.maxLength(20)
+            ]);
+        }
+        passwordField.updateValueAndValidity();
+    }
+
     private getImageCroppedAndCompressed(image: string): void {
         this.imgResultAfterCompress = image;
     }
 
     private showPassword() {
         this.isPasswordVisible = !this.isPasswordVisible;
+        this.setPasswordValidators();
     }
 
     private onSubmit(form: FormGroup, image: string): void {
         form.value.image = image;
-        if(this.configId)
-            this.repartidoresService.updateRepartidor(form).subscribe(data => {
-
-            }, err => {
-                this.isFormLoading = false;
-                this.actionService.getSwalError();
-            });
-        if(!this.configId)
-            this.repartidoresService.addRepartidor(form).subscribe(data => {
-                console.log(data)
-            }, err => {
-                console.log(err)
-                this.isFormLoading = false;
-                this.actionService.getSwalError();
-            });
         this.formGroupEmitter.emit(form);
     }
 }

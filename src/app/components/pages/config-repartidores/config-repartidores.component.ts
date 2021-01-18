@@ -26,7 +26,6 @@ export class ConfigRepartidoresComponent implements OnInit {
         this.repartidoresService.listRepartidores().subscribe(repartidores => {
             this.repartidores = repartidores;
         }, err => {
-            //this.isFormLoading = false;
             this.actionService.getSwalError();
         })
     }
@@ -51,7 +50,11 @@ export class ConfigRepartidoresComponent implements OnInit {
      * @return {Void}
      */
     deleteRepartidor = ($id: number): void => {
-        // TODO: Codigo para borrar un repartidor
-        alert('Haz BORRADO al repartidor con el ' + $id)
+        this.repartidoresService.deleteRepartidor($id).subscribe(repartidores => {
+            this.actionService.openSnackBar('Se ha borrado exitosamente');
+            //this.repartidores = repartidores;
+        }, err => {
+            this.actionService.getSwalError();
+        })
     }
 }

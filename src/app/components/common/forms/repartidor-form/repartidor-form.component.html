@@ -1,12 +1,12 @@
 <form [formGroup]="formGroup" (ngSubmit)="onSubmit(formGroup, imgResultAfterCompress)">
   <ng-container *ngIf="!configId || isDataLoaded">
     <app-input-file [form]='formGroup' [fieldName]="'image'" [imageURLToEdit]="repartidorImageUrl" (imgResultAfterCompress)="getImageCroppedAndCompressed($event)"></app-input-file>
-    <app-mat-input-field [form]='formGroup' [label]="'Nombre'" [fieldName]="'name'" [notBlank]='true'></app-mat-input-field>
-    <app-mat-input-field [form]='formGroup' [label]="'Apellido'" [fieldName]="'last_name'"></app-mat-input-field>
+    <app-mat-input-field [form]='formGroup' [label]="'Nombre'" [fieldName]="'nombre'" [notBlank]='true'></app-mat-input-field>
+    <app-mat-input-field [form]='formGroup' [label]="'Apellido'" [fieldName]="'apellido'"></app-mat-input-field>
     <app-mat-input-field [form]='formGroup' [label]="'Correo'" [fieldName]="'email'"></app-mat-input-field>
     <app-mat-input-field [form]='formGroup' [label]="'Cédula'" [fieldName]="'cedula'" [minLength]="6" [maxLength]="7"></app-mat-input-field>
-    <app-mat-input-field [form]='formGroup' [label]="'Teléfono'" [fieldName]="'phone'" [inputType]="'tel'" [minLength]="10" [maxLength]="11"></app-mat-input-field>
-    <app-mat-textarea-field [form]='formGroup' [label]="'Dirección'" [fieldName]="'address'" [maxLength]="100" ></app-mat-textarea-field>
+    <app-mat-input-field [form]='formGroup' [label]="'Teléfono'" [fieldName]="'telefono'" [inputType]="'tel'" [minLength]="10" [maxLength]="11"></app-mat-input-field>
+    <app-mat-textarea-field [form]='formGroup' [label]="'Dirección'" [fieldName]="'direccion'" [maxLength]="100" ></app-mat-textarea-field>
     <app-mat-input-field [form]='formGroup' [label]="'Usuario'" [fieldName]="'username'" [minLength]="4" [maxLength]="20" [hint]="'Los nombres de usuario pueden contener letras, números, puntos, guíones(-) y pisos bajos (_).'"></app-mat-input-field>
     <button mat-button class="text-bright-gray pt-3 pl-0" *ngIf="!isPasswordVisible" (click)="showPassword()">Modificar Contraseña</button>
     <div *ngIf="isPasswordVisible" class="mt-2">

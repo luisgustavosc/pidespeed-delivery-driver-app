@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import Swal from "sweetalert2";
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Injectable({
     providedIn: 'root'
 })
 export class ActionService {
 
-    constructor() { }
+    constructor(private _snackBar: MatSnackBar) { }
 
     /**
      * This method call the Swal alert and receives the id of the
@@ -44,6 +45,18 @@ export class ActionService {
             text: $message,
             icon: "error",
             confirmButtonText: "Aceptar"
+        });
+    }
+
+    /**
+     * @param {String} message
+     * @param {String|Null} action
+     * @param {Number} durationInSeconds
+     * @returns {Void}
+     */
+    public openSnackBar(message: string, action: string = null, durationInSeconds: number = 2) {
+        this._snackBar.open(message, action, {
+          duration: durationInSeconds * 1000,
         });
     }
 }
