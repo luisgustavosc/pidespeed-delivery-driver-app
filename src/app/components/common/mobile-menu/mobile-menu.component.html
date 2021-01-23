@@ -21,15 +21,15 @@
               class="nav-link"
               data-toggle="collapse"
               aria-expanded="false"
-              data-target="#repartidores-submenu"
-              aria-controls="repartidores-submenu">
+              data-target="#delivers-submenu"
+              aria-controls="delivers-submenu">
               <span class="material-icons">groups</span>
               Repartidores
             </a>
-            <div id="repartidores-submenu" class="collapse submenu">
+            <div id="delivers-submenu" class="collapse submenu">
               <ul class="nav flex-column">
                 <li class="nav-item">
-                  <a class="nav-link" [routerLink]="[ '/repartidores']" #rla="routerLinkActive" routerLinkActive="active">Ver Repartidores</a>
+                  <a class="nav-link" [routerLink]="[ '/delivers']" #rla="routerLinkActive" routerLinkActive="active">Ver Repartidores</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" [routerLink]="[ '/products/accompaniments']" routerLinkActive="active">Ubicación</a>
@@ -38,7 +38,7 @@
             </div>
           </li> -->
           <li class="nav-item ">
-            <a [routerLink]="[ '/repartidores']" routerLinkActive="active" class="nav-link text-capitalize">
+            <a [routerLink]="[ '/delivers']" routerLinkActive="active" class="nav-link text-capitalize">
               <span class="material-icons">groups</span>
               Repartidores
             </a>
@@ -101,13 +101,13 @@
             <div id="settings-submenu" class="collapse submenu">
               <ul class="nav flex-column">
                 <li class="nav-item">
-                  <a class="nav-link" [routerLink]="[ '/configuracion/repartidores']" #rlaConfig="routerLinkActive" routerLinkActive="active">Repartidores</a>
+                  <a class="nav-link" [routerLink]="[ '/settings/delivers']" #rlaConfig="routerLinkActive" routerLinkActive="active">Repartidores</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" [routerLink]="[ '/configuracion/empresas']" #rlaConfig="routerLinkActive" routerLinkActive="active">Empresas afiliadas</a>
+                  <a class="nav-link" [routerLink]="[ '/settings/company']" #rlaConfig="routerLinkActive" routerLinkActive="active">Empresas afiliadas</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" [routerLink]="[ '/configuracion/admins']" #rlaConfig="routerLinkActive" routerLinkActive="active">Administradores</a>
+                  <a class="nav-link" [routerLink]="[ '/settings/admins']" #rlaConfig="routerLinkActive" routerLinkActive="active">Administradores</a>
                 </li>
               </ul>
             </div>

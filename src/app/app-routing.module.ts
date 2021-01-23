@@ -5,13 +5,13 @@ import { Routes, RouterModule } from '@angular/router';
 import { DashboardComponent } from 'src/app/components/pages/dashboard/dashboard.component';
 import { LoginComponent } from 'src/app/components/pages/login/login.component';
 import { Error503Component } from 'src/app/components/pages/error503/error503.component';
-import { RepartidoresComponent } from 'src/app/components/pages/repartidores/list/repartidores.component';
-import { RepartidoresUbicacionComponent } from 'src/app/components/pages/repartidores/ubicacion/repartidores-ubicacion.component';
-import { ConfigRepartidoresComponent } from 'src/app/components/pages/config-repartidores/config-repartidores.component';
-import { ConfigEmpresasComponent } from 'src/app/components/pages/config-empresas/config-empresas.component';
+import { DeliversComponent } from 'src/app/components/pages/delivers/list/delivers.component';
+import { DeliversLocationComponent } from 'src/app/components/pages/delivers/location/delivers-location.component';
+import { ConfigDeliversComponent } from 'src/app/components/pages/config-delivers/config-delivers.component';
+import { ConfigCompanyComponent } from 'src/app/components/pages/config-company/config-company.component';
 import { ConfigAdminsComponent } from 'src/app/components/pages/config-admins/config-admins.component';
-import { ConfigUpdateRepartidorComponent } from 'src/app/components/pages/config-update/config-update-repartidor/config-update-repartidor.component';
-import { ConfigUpdateEmpresaComponent } from 'src/app/components/pages/config-update/config-update-empresa/config-update-empresa.component';
+import { ConfigUpdateDeliverComponent } from 'src/app/components/pages/config-update/config-update-deliver/config-update-deliver.component';
+import { ConfigUpdateCompaniesComponent } from 'src/app/components/pages/config-update/config-update-company/config-update-company.component';
 import { ConfigUpdateAdminComponent } from 'src/app/components/pages/config-update/config-update-admin/config-update-admin.component';
 import { HelpComponent } from 'src/app/components/pages/help/help.component';
 
@@ -37,62 +37,62 @@ const routes: Routes = [
         //canActivate: [AuthGuard]
     },
     {
-        path: 'repartidores',
-        component: RepartidoresComponent,
+        path: 'delivers',
+        component: DeliversComponent,
         //canActivate: [AuthGuard]
     },
     {
-        path: 'repartidores/ubicacion',
-        component: RepartidoresUbicacionComponent,
+        path: 'delivers/location',
+        component: DeliversLocationComponent,
         //canActivate: [AuthGuard]
     },
     {
-        path: 'configuracion/repartidores',
-        component: ConfigRepartidoresComponent,
+        path: 'settings/delivers',
+        component: ConfigDeliversComponent,
         //canActivate: [AuthGuard]
     },
     {
-        path: 'configuracion/empresas',
-        component: ConfigEmpresasComponent,
+        path: 'settings/company',
+        component: ConfigCompanyComponent,
         //canActivate: [AuthGuard]
     },
     {
-        path: 'configuracion/admins',
+        path: 'settings/admins',
         component: ConfigAdminsComponent,
         //canActivate: [AuthGuard]
     },
     {
-        path: 'configuracion/repartidores/add',
-        component: ConfigUpdateRepartidorComponent,
+        path: 'settings/delivers/add',
+        component: ConfigUpdateDeliverComponent,
         //canActivate: [AuthGuard]
     },
     {
-        path: 'configuracion/empresas/add',
-        component: ConfigUpdateEmpresaComponent,
+        path: 'settings/company/add',
+        component: ConfigUpdateCompaniesComponent,
         //canActivate: [AuthGuard]
     },
     {
-        path: 'configuracion/admins/add',
+        path: 'settings/admins/add',
         component: ConfigUpdateAdminComponent,
         //canActivate: [AuthGuard]
     },
     {
-        path: 'configuracion/repartidores/:id',
-        component: ConfigUpdateRepartidorComponent,
+        path: 'settings/delivers/:id',
+        component: ConfigUpdateDeliverComponent,
         //canActivate: [AuthGuard]
     },
     {
-        path: 'configuracion/empresas/:id',
-        component: ConfigUpdateEmpresaComponent,
+        path: 'settings/company/:id',
+        component: ConfigUpdateCompaniesComponent,
         //canActivate: [AuthGuard]
     },
     {
-        path: 'configuracion/admins/:id',
+        path: 'settings/admins/:id',
         component: ConfigUpdateAdminComponent,
         //canActivate: [AuthGuard]
     },
     {
-        path: 'error503',
+        path: 'error-503',
         component: Error503Component
     }
 ];

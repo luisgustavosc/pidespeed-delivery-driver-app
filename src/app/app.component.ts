@@ -14,7 +14,7 @@ import Swal from 'sweetalert2';
 export class AppComponent implements OnInit, OnDestroy {
     subscription: Subscription;
     title = 'admin-pideSpeed';
-    empresa: any;
+    company: any;
     constructor(private router: Router, private webService: WebSocketService, private authService: AuthService) { }
 
     async ngOnInit() {
@@ -46,10 +46,10 @@ export class AppComponent implements OnInit, OnDestroy {
 
         //PERMISOS Y EJECUCION DE LA NOTIFICACION
         this.solicitarPermisos();
-        this.empresa = this.authService.getCurrentUser();
-        if (this.empresa) {
+        this.company = this.authService.getCurrentUser();
+        if (this.company) {
             this.webService.listen('pedido:actualizado').subscribe((data: any) => {
-                if (data.userId == this.empresa.id) {
+                if (data.userId == this.company.id) {
                     this.pushNoti(data);
                 }
             })
@@ -63,9 +63,9 @@ export class AppComponent implements OnInit, OnDestroy {
 
                 let taskId = BackgroundTask.beforeExit(async () => {
 
-                    if (this.empresa) {
+                    if (this.company) {
                         this.webService.listen('pedido:actualizado').subscribe((data: any) => {
-                            if (data.userId == this.empresa.id) {
+                            if (data.userId == this.company.id) {
                                 this.pushNoti(data);
                             }
                         })

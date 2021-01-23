@@ -1,0 +1,14 @@
+<app-nav [pageTitle]='pageTitle' [isVisibleGoBackButton]='true'></app-nav>
+
+<div *ngIf="delivers" class="dashboard-wrapper mt-5 pt-5 pb-4">
+  <div>
+    <app-admin-row *ngFor="let deliver of delivers" rowImg="{{deliver.img.url}} "rowTitle="{{deliver.nombre}} {{deliver.apellido}}" rowSubtitle="{{deliver.statusPedido}}" rowStatus="{{deliver.status}}"></app-admin-row>
+  </div>
+</div>
+<ng-container *ngIf="!delivers">
+  <div class="h-100vh-in-app d-flex align-items-center">
+    <div class="lazyloader"></div>
+  </div>
+</ng-container>
+
+<app-bottom-nav [data]='bottomNavData'></app-bottom-nav>

@@ -14,8 +14,8 @@
       </div>
       <div class="modal-body p-0">
         <app-company-form *ngIf="isCompanyFormType"></app-company-form>
-        <app-user-form *ngIf="isUserFormType"></app-user-form>
-        <app-repartidor-form *ngIf="isRepartidorFormType"></app-repartidor-form>
+        <app-admin-form *ngIf="isAdminFormType"></app-admin-form>
+        <app-deliver-form *ngIf="isDeliverFormType"></app-deliver-form>
         <app-image-cropper *ngIf="isImageCropperType"
           [imageEvent]="imageEvent"
           [imageURLToEdit]="imageURLToEdit"

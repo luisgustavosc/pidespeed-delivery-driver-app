@@ -4,22 +4,22 @@ import { ActivatedRoute } from "@angular/router";
 import { FormGroup } from "@angular/forms";
 
 @Component({
-    selector: 'app-config-update-admin',
+    selector: 'app-config-update-company',
     templateUrl: '../../../common/config-update/config-update.component.html',
 })
-export class ConfigUpdateAdminComponent implements OnInit {
-    private formType: string = this.formService.getAdminFormType();
+export class ConfigUpdateCompaniesComponent implements OnInit {
+    private formType: string = this.formService.getCompanyFormType();
     private configId: string | null = this.activeRoute.snapshot.params.id || null;
     private formGroup: FormGroup;
-    private isAdminFormType: boolean;
-    private pageTitle: string = this.configId ? 'Editar Username' : 'Agregar Usuario';
-    private goBackUrl: string = '/configuracion/admins'
+    private isCompanyFormType: boolean;
+    private pageTitle: string = this.configId ? 'Editar Username' : 'Agregar Empresa';
+    private goBackUrl: string = '/settings/company'
     private isFormLoading: boolean = false;
 
     constructor(private formService: FormService, private activeRoute: ActivatedRoute) { }
 
     ngOnInit() {
-        this.isAdminFormType = this.formService.isAdminFormType(this.formType);
+        this.isCompanyFormType = this.formService.isCompanyFormType(this.formType);
     }
 
     private getForm(form: FormGroup): void {

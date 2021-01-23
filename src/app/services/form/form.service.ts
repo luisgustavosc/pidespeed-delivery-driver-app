@@ -9,8 +9,8 @@ import { ActionService } from "src/app/services/action/action.service";
 })
 export class FormService {
     private companyFormType: string = 'company_form';
-    private userFormType: string = 'user_form';
-    private repartidorFormType: string = 'repartidor_form';
+    private adminFormType: string = 'admin_form';
+    private deliverFormType: string = 'deliver_form';
     private imageCropperType: string = 'image_cropper';
     private emailPattern: RegExp = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     private spanishLettersPattern: string = "[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+"
@@ -24,12 +24,12 @@ export class FormService {
         return this.companyFormType;
     }
 
-    public getUserFormType(): string {
-        return this.userFormType;
+    public getAdminFormType(): string {
+        return this.adminFormType;
     }
 
-    public getRepartidorFormType(): string {
-        return this.repartidorFormType;
+    public getDeliverFormType(): string {
+        return this.deliverFormType;
     }
 
     public getImageCropperType(): string {
@@ -40,12 +40,12 @@ export class FormService {
         return this.companyFormType === type;
     }
 
-    public isUserFormType(type: string): boolean {
-        return this.userFormType === type;
+    public isAdminFormType(type: string): boolean {
+        return this.adminFormType === type;
     }
 
-    public isRepartidorFormType(type: string): boolean {
-        return this.repartidorFormType === type;
+    public isDeliverFormType(type: string): boolean {
+        return this.deliverFormType === type;
     }
 
     public isImageCropperType(type: string): boolean {

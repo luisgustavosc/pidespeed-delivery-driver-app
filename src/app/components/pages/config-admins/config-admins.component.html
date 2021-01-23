@@ -2,7 +2,7 @@
 
 <div class="dashboard-wrapper">
   <div class="mt-5 pt-5 pb-4">
-    <app-user-row
+    <app-admin-row
       [dataId]="10"
       [rowTitle]="'Juan Lopez'"
       [rowSubtitle]="'Administrador'"
@@ -10,11 +10,11 @@
       [isDisabled]='false'
       [deleteAction]='deleteAdmin'
       [disabledAction]='disableAdmin'
-      [formType]='userFormType'
+      [formType]='adminFormType'
       [EditRedirectTo]="currentPath + '/2'">
-    </app-user-row>
+    </app-admin-row>
   </div>
 </div>
 
 <app-bottom-nav [data]='bottomNavData'></app-bottom-nav>
-<app-floating-button [formType]='userFormType' [link]="currentPath + '/add'"></app-floating-button>
+<app-floating-button [formType]='adminFormType' [link]="currentPath + '/add'"></app-floating-button>

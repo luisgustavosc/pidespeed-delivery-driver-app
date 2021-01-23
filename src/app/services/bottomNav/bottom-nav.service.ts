@@ -9,30 +9,30 @@ export class BottomNavService {
         {
             title: 'Repartidores',
             icon: 'groups',
-            link: '/configuracion/repartidores'
+            link: '/settings/delivers'
         },
         {
             title: 'Empresas',
             icon: 'store',
-            link: '/configuracion/empresas'
+            link: '/settings/company'
         },
         {
             title: 'Usuarios',
             icon: 'supervisor_account',
-            link: '/configuracion/admins'
+            link: '/settings/admins'
         }
     ];
 
-    private repartidoresBottomNavData: Array<BottomNavModel> = [
+    private deliverBottomNavData: Array<BottomNavModel> = [
         {
             title: 'Repartidores',
             icon: 'groups',
-            link: '/repartidores'
+            link: '/delivers'
         },
         {
             title: 'Ubicación',
             icon: 'near_me',
-            link: '/repartidores/ubicacion'
+            link: '/delivers/location'
         }
     ];
 
@@ -42,7 +42,7 @@ export class BottomNavService {
         return this.configBottomNavData;
     }
 
-    public getRepartidoresBottomNavData(): Array<BottomNavModel> {
-        return this.repartidoresBottomNavData;
+    public getDeliverBottomNavData(): Array<BottomNavModel> {
+        return this.deliverBottomNavData;
     }
 }

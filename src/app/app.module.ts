@@ -32,13 +32,13 @@ import { AppComponent } from 'src/app/app.component';
 import { DashboardComponent } from 'src/app/components/pages/dashboard/dashboard.component';
 import { LoginComponent } from 'src/app/components/pages/login/login.component';
 import { Error503Component } from 'src/app/components/pages/error503/error503.component';
-import { RepartidoresComponent } from 'src/app/components/pages/repartidores/list/repartidores.component';
-import { RepartidoresUbicacionComponent } from 'src/app/components/pages/repartidores/ubicacion/repartidores-ubicacion.component';
-import { ConfigRepartidoresComponent } from 'src/app/components/pages/config-repartidores/config-repartidores.component';
-import { ConfigEmpresasComponent } from 'src/app/components/pages/config-empresas/config-empresas.component';
+import { DeliversComponent } from 'src/app/components/pages/delivers/list/delivers.component';
+import { DeliversLocationComponent } from 'src/app/components/pages/delivers/location/delivers-location.component';
+import { ConfigDeliversComponent } from 'src/app/components/pages/config-delivers/config-delivers.component';
+import { ConfigCompanyComponent } from 'src/app/components/pages/config-company/config-company.component';
 import { ConfigAdminsComponent } from 'src/app/components/pages/config-admins/config-admins.component';
-import { ConfigUpdateRepartidorComponent } from 'src/app/components/pages/config-update/config-update-repartidor/config-update-repartidor.component';
-import { ConfigUpdateEmpresaComponent } from 'src/app/components/pages/config-update/config-update-empresa/config-update-empresa.component';
+import { ConfigUpdateDeliverComponent } from 'src/app/components/pages/config-update/config-update-deliver/config-update-deliver.component';
+import { ConfigUpdateCompaniesComponent } from 'src/app/components/pages/config-update/config-update-company/config-update-company.component';
 import { ConfigUpdateAdminComponent } from 'src/app/components/pages/config-update/config-update-admin/config-update-admin.component';
 import { HelpComponent } from 'src/app/components/pages/help/help.component';
 
@@ -46,12 +46,12 @@ import { HelpComponent } from 'src/app/components/pages/help/help.component';
 import { NavComponent } from 'src/app/components/common/nav/nav.component';
 import { MobileMenuComponent } from 'src/app/components/common/mobile-menu/mobile-menu.component';
 import { CardComponent } from 'src/app/components/common/card/card.component';
-import { UserRowComponent } from 'src/app/components/common/user-row/user-row.component';
+import { AdminRowComponent } from 'src/app/components/common/admin-row/admin-row.component';
 import { BottomNavComponent } from 'src/app/components/common/bottom-nav/bottom-nav.component';
 import { ModalFormComponent } from 'src/app/components/common/modal-form/modal-form.component'
-import { RepartidorFormComponent } from 'src/app/components/common/forms/repartidor-form/repartidor-form.component';
+import { DeliverFormComponent } from 'src/app/components/common/forms/deliver-form/deliver-form.component';
 import { CompanyFormComponent } from 'src/app/components/common/forms/company-form/company-form.component';
-import { UserFormComponent } from 'src/app/components/common/forms/user-form/user-form.component';
+import { AdminFormComponent } from 'src/app/components/common/forms/admin-form/admin-form.component';
 import { MatInputFieldComponent } from 'src/app/components/common/forms-components/mat-input-field/mat-input-field.component';
 import { MatSelectFieldComponent } from 'src/app/components/common/forms-components/mat-select-field/mat-select-field.component';
 import { MatTextareaFieldComponent } from 'src/app/components/common/forms-components/mat-textarea-field/mat-textarea-field.component';
@@ -89,27 +89,27 @@ export function jwtTokenAdminGetter() {
         Error503Component,
         NavComponent,
         MobileMenuComponent,
-        RepartidoresComponent,
+        DeliversComponent,
         CardComponent,
         BottomNavComponent,
-        RepartidoresUbicacionComponent,
-        ConfigRepartidoresComponent,
-        ConfigEmpresasComponent,
+        DeliversLocationComponent,
+        ConfigDeliversComponent,
+        ConfigCompanyComponent,
         ConfigAdminsComponent,
-        UserRowComponent,
+        AdminRowComponent,
         MesPipe,
         HorariosPipe,
         ModalFormComponent,
         CompanyFormComponent,
-        RepartidorFormComponent,
-        UserFormComponent,
+        DeliverFormComponent,
+        AdminFormComponent,
         MatInputFieldComponent,
         MatSelectFieldComponent,
         MatTextareaFieldComponent,
         FloatingButtonComponent,
         SubmitButtonComponent,
-        ConfigUpdateRepartidorComponent,
-        ConfigUpdateEmpresaComponent,
+        ConfigUpdateDeliverComponent,
+        ConfigUpdateCompaniesComponent,
         ConfigUpdateAdminComponent,
         HelpComponent,
         InputFileComponent,

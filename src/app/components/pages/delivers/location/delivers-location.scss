@@ -1,0 +1,17 @@
+.google-maps-container {
+  height: calc(100vh - 65px);
+}
+
+#delivers_btn {
+  position: fixed;
+  top: 90px;
+  right: 0;
+  z-index: 1;
+}
+
+#delivers_list {
+  > div {
+    top: 140px;
+    overflow-y: auto;
+  }
+}

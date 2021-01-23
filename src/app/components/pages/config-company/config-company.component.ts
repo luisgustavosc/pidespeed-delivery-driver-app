@@ -2,15 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { BottomNavModel } from "src/app/model/bottomNav";
 import { FormService } from "src/app/services/form/form.service";
 import { BottomNavService } from "src/app/services/bottomNav/bottom-nav.service";
-
 @Component({
-    selector: 'app-config-admins',
-    templateUrl: './config-admins.component.html',
+    selector: 'app-config-company',
+    templateUrl: './config-company.component.html',
 })
-export class ConfigAdminsComponent implements OnInit {
-    private pageTitle: string = 'Configuración de Usuarios';
+export class ConfigCompanyComponent implements OnInit {
+    private pageTitle: string = 'Configuración de Empresas';
     private bottomNavData: Array<BottomNavModel> = this.bottomNavService.getConfigBottomNavData();
-    private adminFormType: string = this.formService.getAdminFormType();
+    private companyFormType: string = this.formService.getCompanyFormType();
     private currentPath: string = window.location.pathname;
 
     constructor(private formService: FormService, private bottomNavService: BottomNavService ) { }
@@ -21,10 +20,8 @@ export class ConfigAdminsComponent implements OnInit {
      * @param {Number} $id
      * @return {Boolean}
      */
-    disableAdmin = ($id: number): Boolean => {
-        // TODO: Codigo para Desactivar un Admin?
-        // Esto basicamente lo desactivaria para que no pueda acceder a su panel u acciones?
-        alert('Haz DESACTIVADO al Admin con el ' + $id);
+    hideCompany = ($id: number): Boolean => {
+        alert('Haz Ocultado la Empresa con el ' + $id);
         if ($id) {
             return true;
         }
@@ -35,8 +32,9 @@ export class ConfigAdminsComponent implements OnInit {
      * @param {Number} $id
      * @return {Void}
      */
-    deleteAdmin = ($id: number): void => {
-        // TODO: Codigo para borrar un Admin
-        alert('Haz BORRADO al Admin con el ' + $id)
+    deleteCompany = ($id: number): void => {
+        // TODO: Codigo para borrar un Empresa
+        alert('Haz BORRADO al Empresa con el ' + $id)
     }
+
 }

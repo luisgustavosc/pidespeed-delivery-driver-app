@@ -22,7 +22,7 @@ export class DashboardService {
     );
   }
 
-  getEmpresa(ruta) {
+  getCompany(ruta) {
     return this.http.get(
       `${this.AUTH_SERVER}/api/empresas/one/${ruta}`,
       options
