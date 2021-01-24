@@ -115,4 +115,32 @@ export class FormService {
             catchError(err => of(this.actionService.getSwalError()))
         );
     }
+
+    /**
+     *
+     * @param {String} image
+     * @param {String} folder
+     * @param {Boolean} update
+     * @param {String|Null} id
+     */
+    public processImage(image: string, folder: string, update: boolean, id: string = null) {
+        const base64Parts = image.split(',');
+        const imageMapped = {
+            filename: this.getRandomName(),
+            filetype: base64Parts[0].split('/')[1].replace(';base64', ''),
+            value: base64Parts[1],
+            folder: folder,
+            update: update,
+            id: id
+        }
+
+        return imageMapped;
+    }
+
+    private getRandomName() {
+        const timestamp = new Date().toISOString().replace(/[-:.]/g, "");
+        const random = ("" + Math.random()).substring(2, 8);
+        const randomNumber = timestamp + random;
+        return randomNumber;
+    }
 }

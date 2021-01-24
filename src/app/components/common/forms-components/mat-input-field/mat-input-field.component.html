@@ -1,7 +1,7 @@
 <ng-container [formGroup]="form">
   <mat-form-field color="accent" class="w-100" [ngClass]="{ 'h-xs-100p': hint }" appearance="outline">
     <mat-label>{{ label }}</mat-label>
-    <input formControlName="{{ fieldName }}"  matInput [type]="inputType" (input)="trimField(fieldName, form)">
+    <input formControlName="{{ fieldName }}"  matInput [type]="inputType" (input)="trimField(fieldName, form)" required="{{ isRequired }}">
     <!-- Pistas -->
     <mat-hint class="mt-2" *ngIf="hint">{{ hint }}</mat-hint>
     <!-- Errors -->

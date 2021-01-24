@@ -15,7 +15,7 @@ export class MatInputFieldComponent implements OnInit {
     @Input() private minLength?: number = null;
     @Input() private notBlank: boolean = false;
     @Input() private hint?: string = null;
-
+    private isRequired: boolean;
     // Only use for Password Type
     private isPasswordVisible: boolean = false;
     private isPasswordMode: boolean = false;
@@ -26,6 +26,7 @@ export class MatInputFieldComponent implements OnInit {
         if (this.inputType === 'password') {
             this.isPasswordMode = true;
         }
+        this.isRequired = this.form.controls[this.fieldName].errors?.required || false;
     }
 
     /**

@@ -88,7 +88,7 @@ export class DeliverFormComponent implements OnInit {
             image: [''],
             type: ['delivery'],
             vehicle_type: [''],
-            vehicle_image: [''],
+            vehicle_image: [null],
             empresa: [this.companyId],
         });
         if(this.configId) this.getDeliver();
@@ -139,7 +139,8 @@ export class DeliverFormComponent implements OnInit {
     }
 
     private onSubmit(form: FormGroup, image: string): void {
-        form.value.image = image;
+        const isUpdating = this.configId !== null;
+        form.value.image = this.formService.processImage(image, 'usuarioEmpresas', isUpdating);
         this.formGroupEmitter.emit(form);
     }
 }

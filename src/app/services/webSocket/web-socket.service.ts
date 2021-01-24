@@ -17,7 +17,6 @@ export class WebSocketService {
         authorization: authService.getAccessToken(),
       },
     })
-    console.log(this.socket)
   }
 
   listen(eventName:string) {

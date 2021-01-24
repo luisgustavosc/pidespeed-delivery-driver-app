@@ -19,6 +19,10 @@ export class DeliversService {
     return this.http.get(`${AUTH_SERVER}/usuario-empresa/list/one/${usuarioId}/delivery`, options);
   }
 
+  getDeliverByField(data) {
+    return this.http.post(`${AUTH_SERVER}/search-user-field`, data, options);
+  }
+
   createDeliver(data) {
     return this.http.post(`${AUTH_SERVER}/usuario-empresa/`, data, options);
   }
