@@ -36,7 +36,7 @@ export class ConfigUpdateDeliverComponent implements OnInit {
             this.deliversService.updateDeliver(form.value).subscribe(data => {
                 this.actionService.openSnackBar('Se ha actualizado exitosamente');
                 setTimeout(() => {
-                   this.router.navigateByUrl(this.goBackUrl);
+                    this.router.navigateByUrl(this.goBackUrl);
                 }, 2100);
             }, err => {
                 this.isFormLoading = false;

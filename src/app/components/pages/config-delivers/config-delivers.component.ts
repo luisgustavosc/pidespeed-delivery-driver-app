@@ -38,7 +38,6 @@ export class ConfigDeliversComponent implements OnInit {
      */
     disableDeliver = ($id: string): void => {
         const deliver = this.actionService.findItemInArrayById(this.delivers, $id);
-        console.log(deliver);
 
         const value = {
             _id: deliver._id,
@@ -46,7 +45,6 @@ export class ConfigDeliversComponent implements OnInit {
         }
 
         this.deliversService.updateDeliver(value).subscribe((data: any) => {
-            console.log(data)
             this.delivers[this.actionService.getIndex(data, this.delivers, '_id')].disabled = data.disabled;
             this.cdRef.detectChanges();
             this.actionService.openSnackBar(`Se ha ${data.disabled ?'desactivado' : 'activado'} a ${data.nombre}`);
