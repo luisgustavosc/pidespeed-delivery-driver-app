@@ -31,12 +31,12 @@ export class ConfigUpdateDeliverComponent implements OnInit {
     }
 
     private getForm(form: any): void {
+        this.isFormLoading = true;
         if (this.configId) {
             this.deliversService.updateDeliver(form.value).subscribe(data => {
-                console.log(data);
                 this.actionService.openSnackBar('Se ha actualizado exitosamente');
                 setTimeout(() => {
-                   // this.router.navigateByUrl(this.goBackUrl);
+                   this.router.navigateByUrl(this.goBackUrl);
                 }, 2100);
             }, err => {
                 this.isFormLoading = false;
@@ -49,8 +49,8 @@ export class ConfigUpdateDeliverComponent implements OnInit {
                 this.actionService.openSnackBar('Se ha creado exitosamente');
                 setTimeout(() => {
                     this.router.navigateByUrl(this.goBackUrl);
-                }, 2100);            }, err => {
-                console.log(err)
+                }, 2100);
+            }, err => {
                 this.isFormLoading = false;
                 this.actionService.getSwalError();
             });

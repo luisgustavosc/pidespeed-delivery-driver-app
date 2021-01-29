@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef} from '@angular/core';
 import { BottomNavModel } from 'src/app/model/bottomNav';
 import { BottomNavService } from 'src/app/services/bottomNav/bottom-nav.service';
 import { FormService } from 'src/app/services/form/form.service';
@@ -15,8 +15,8 @@ export class ConfigDeliversComponent implements OnInit {
     private deliverFormType: string = this.formService.getDeliverFormType();
     private currentPath: string = window.location.pathname;
     private delivers = null;
-    //public isFormLoading = false;
-    constructor(private bottomNavService: BottomNavService, private formService: FormService, private deliversService: DeliversService , private actionService: ActionService) { }
+    public isFormLoading = false;
+    constructor(private bottomNavService: BottomNavService, private formService: FormService, private deliversService: DeliversService , private actionService: ActionService, private cdRef: ChangeDetectorRef) { }
 
     ngOnInit() {
         this.getDelivers();
@@ -29,20 +29,30 @@ export class ConfigDeliversComponent implements OnInit {
             this.actionService.getSwalError();
         })
     }
+
     /**
      *  Desactivar repartidor por su Id
      *
-     * @param {number} $id
+     * @param {Deliver} $deliver
      * @return {boolean}
      */
-    disableDeliver = ($id: number): boolean => {
-        // TODO: Codigo para Desactivar un repartidor?
-        // Esto basicamente lo desactivaria para que no pueda recibir ordenes
-        alert('Haz DESACTIVADO al repartidor con el ' + $id);
-        if ($id) {
-            return true;
+    disableDeliver = ($id: string): void => {
+        const deliver = this.actionService.findItemInArrayById(this.delivers, $id);
+        console.log(deliver);
+
+        const value = {
+            _id: deliver._id,
+            disabled: !deliver.disabled
         }
-        return false;
+
+        this.deliversService.updateDeliver(value).subscribe((data: any) => {
+            console.log(data)
+            this.delivers[this.actionService.getIndex(data, this.delivers, '_id')].disabled = data.disabled;
+            this.cdRef.detectChanges();
+            this.actionService.openSnackBar(`Se ha ${data.disabled ?'desactivado' : 'activado'} a ${data.nombre}`);
+        }, err => {
+            this.actionService.getSwalError();
+        });
     }
 
     /**
@@ -50,9 +60,10 @@ export class ConfigDeliversComponent implements OnInit {
      * @return {Void}
      */
     deleteDeliver = ($id: number): void => {
-        this.deliversService.deleteById($id).subscribe(delivers => {
+        this.deliversService.deleteById($id).subscribe((data: any) => {
+            this.delivers.splice(this.actionService.getIndex(data, this.delivers, 'id'), 1);
+            this.cdRef.detectChanges();
             this.actionService.openSnackBar('Se ha borrado exitosamente');
-            //this.delivers = delivers;
         }, err => {
             this.actionService.getSwalError();
         })

@@ -13,6 +13,12 @@
   border-bottom: 3px solid rgba(182, 114, 114, 0.15);
   border-top: 3px solid theme-color('red');
   border-radius: 100%;
+  &.btn-loader {
+    width: 25px;
+    height: 25px;
+    border-bottom: 3px solid rgb(250 250 250);
+    border-top: 3px solid theme-color('white');
+  }
 }
 
 @-webkit-keyframes loader-rotation {

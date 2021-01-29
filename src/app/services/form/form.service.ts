@@ -123,18 +123,22 @@ export class FormService {
      * @param {Boolean} update
      * @param {String|Null} id
      */
-    public processImage(image: string, folder: string, update: boolean, id: string = null) {
-        const base64Parts = image.split(',');
-        const imageMapped = {
-            filename: this.getRandomName(),
-            filetype: base64Parts[0].split('/')[1].replace(';base64', ''),
-            value: base64Parts[1],
-            folder: folder,
-            update: update,
-            id: id
+    public processImage(image: string = null, folder: string, update: boolean, id: string = null) {
+        if (image) {
+            const base64Parts = image.split(',');
+            const imageMapped = {
+                filename: this.getRandomName(),
+                filetype: base64Parts[0].split('/')[1].replace(';base64', ''),
+                value: base64Parts[1],
+                folder: folder,
+                update: update,
+                id: id
+            }
+
+            return imageMapped;
         }
 
-        return imageMapped;
+        return null;
     }
 
     private getRandomName() {

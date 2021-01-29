@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import Swal from "sweetalert2";
-import {MatSnackBar} from '@angular/material/snack-bar';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({
     providedIn: 'root'
@@ -56,7 +56,24 @@ export class ActionService {
      */
     public openSnackBar(message: string, action: string = null, durationInSeconds: number = 2) {
         this._snackBar.open(message, action, {
-          duration: durationInSeconds * 1000,
+            duration: durationInSeconds * 1000,
         });
+    }
+
+    /**
+     * @param {Array} val
+     * @param {Array} array
+     * @param {String} position
+     */
+    public getIndex(val: Array<any>, array: Array<any>, position: string) {
+        return array.findIndex(item => item[position] === val[position])
+    }
+
+    /**
+     * @param {Array} array
+     * @param {String} id
+     */
+    public findItemInArrayById(array: Array<any>, id: string) {
+        return array.find(item => item._id === id);
     }
 }

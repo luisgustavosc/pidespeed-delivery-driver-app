@@ -1,7 +1,7 @@
 <app-nav [pageTitle]='pageTitle' [isVisibleGoBackButton]='true'></app-nav>
 
-<div *ngIf="delivers" class="dashboard-wrapper mt-5 pt-5 pb-4">
-  <div>
+<div *ngIf="delivers" class="dashboard-wrapper my-5 pt-5 pb-5">
+  <div class="pb-4">
     <app-admin-row
       *ngFor="let deliver of delivers"
       rowImg="{{deliver.img.url}}"
@@ -9,7 +9,7 @@
       rowTitle="{{deliver.nombre}} {{deliver.apellido}}"
       rowSubtitle="{{deliver.statusPedido}}"
       [hasActions]="true"
-      [isDisabled]='true'
+      [isDisabled]="deliver.disabled"
       [deleteAction]='deleteDeliver'
       [disabledAction]='disableDeliver'
       [formType]='deliverFormType'
