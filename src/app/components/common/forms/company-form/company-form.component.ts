@@ -86,8 +86,7 @@ export class CompanyFormComponent implements OnInit {
     }
 
     onSubmit(form: FormGroup, image: string): void {
-        const isUpdating = this.configId !== null;
-        form.value.image = this.formService.processImage(image, 'usuarioEmpresas', isUpdating);
+        form.value.image = this.formService.processImage(image, this.configId);
         this.formGroupEmitter.emit(form);
     }
 }

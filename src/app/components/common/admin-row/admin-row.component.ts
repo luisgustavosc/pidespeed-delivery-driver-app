@@ -20,7 +20,7 @@ export class AdminRowComponent implements OnInit {
     @Input() private disabledAction: (id: number) => boolean;
     @Input() private editAction: (id: number) => void;
     @Input() private formType: string;
-    IMAGE_SERVER = IMAGE_SERVER;
+    private IMAGE_SERVER = IMAGE_SERVER;
     constructor(private actionService: ActionService) { }
 
     ngOnInit() { }

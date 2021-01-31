@@ -123,7 +123,7 @@ export class FormService {
      * @param {Boolean} update
      * @param {String|Null} id
      */
-    public processImage(image: string = null, folder: string, update: boolean, id: string = null) {
+    public processImage(image: string = null, id: string = null, folder: string = null, update: boolean = false) {
         if (image) {
             const base64Parts = image.split(',');
             const imageMapped = {
@@ -138,7 +138,7 @@ export class FormService {
             return imageMapped;
         }
 
-        return null;
+        return id;
     }
 
     private getRandomName() {
