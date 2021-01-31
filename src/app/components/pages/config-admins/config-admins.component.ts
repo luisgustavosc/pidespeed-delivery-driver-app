@@ -18,24 +18,20 @@ export class ConfigAdminsComponent implements OnInit {
     ngOnInit() { }
 
     /**
-     * @param {Number} $id
-     * @return {Boolean}
+     * @param {string} $id
+     * @return {void}
      */
-    disableAdmin = ($id: number): Boolean => {
+    disableAdmin = ($id: string): void => {
         // TODO: Codigo para Desactivar un Admin?
         // Esto basicamente lo desactivaria para que no pueda acceder a su panel u acciones?
         alert('Haz DESACTIVADO al Admin con el ' + $id);
-        if ($id) {
-            return true;
-        }
-        return false;
     }
 
     /**
-     * @param {Number} $id
-     * @return {Void}
+     * @param {string} $id
+     * @return {void}
      */
-    deleteAdmin = ($id: number): void => {
+    deleteAdmin = ($id: string): void => {
         // TODO: Codigo para borrar un Admin
         alert('Haz BORRADO al Admin con el ' + $id)
     }

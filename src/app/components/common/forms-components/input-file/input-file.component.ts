@@ -20,7 +20,8 @@ export class InputFileComponent implements OnInit {
     private fileType: string = 'png';
     private formType: string = this.formService.getImageCropperType();
     private croppedImage: string = null;
-    private imageSettings: imageCropperSettings = {
+
+    @Input() private imageSettings: imageCropperSettings = {
         aspectRatio: 1 / 1,
         resizeToWidth: '800',
         resizeToHeight: '800',

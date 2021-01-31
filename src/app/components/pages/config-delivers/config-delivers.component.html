@@ -1,18 +1,18 @@
 <app-nav [pageTitle]='pageTitle' [isVisibleGoBackButton]='true'></app-nav>
 
-<div *ngIf="delivers" class="dashboard-wrapper my-5 pt-5 pb-5">
+<div *ngIf="delivers" class="dashboard-wrapper my-5 pt-5 pb-5 fade-animation">
   <div class="pb-4">
     <app-admin-row
       *ngFor="let deliver of delivers"
-      rowImg="{{deliver.img.url}}"
-      dataId="{{deliver.id}}"
+      [rowImg]="deliver.img.url"
+      [dataId]="deliver.id"
       rowTitle="{{deliver.nombre}} {{deliver.apellido}}"
-      rowSubtitle="{{deliver.statusPedido}}"
+      [rowSubtitle]="deliver.statusPedido"
       [hasActions]="true"
       [isDisabled]="deliver.disabled"
       [deleteAction]='deleteDeliver'
-      [disabledAction]='disableDeliver'
-      [formType]='deliverFormType'
+      [disabledAction]="disableDeliver"
+      [formType]="deliverFormType"
       EditRedirectTo="{{currentPath}}/{{deliver.id}}">
     </app-admin-row>
   </div>

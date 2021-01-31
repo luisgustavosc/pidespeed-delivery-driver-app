@@ -1,25 +1,31 @@
 <app-nav [pageTitle]='pageTitle' [isVisibleGoBackButton]='true'></app-nav>
 
-<div class="dashboard-wrapper">
-  <div class="container mt-5 pt-5 pb-4">
+<div *ngIf="companies" class="dashboard-wrapper my-5 pt-5 pb-5 fade-animation">
+  <div class="container pb-4">
     <div class="row no-gutters mx-auto">
       <div class="col-6">
         <app-card class="card mb-2 mx-1 h-xs-120p"
-          [dataId]="10"
-          [cardType]='3'
-          [cardTitle]="'Docs Food & Grill'"
-          [titleTextSize]='14'
-          [isDisabled]='true'
-          [deleteAction]='deleteCompany'
-          [disabledAction]='hideCompany'
-          [hasActions]='true'
-          [formType]='companyFormType'
-          [EditRedirectTo]="currentPath + '/2'">
+          *ngFor="let company of companies"
+          [dataId]="company.id"
+          [cardType]="3"
+          [cardTitle]="company.name"
+          [titleTextSize]="14"
+          [isDisabled]="company.publish"
+          [deleteAction]="deleteCompany"
+          [disabledAction]="hideCompany"
+          [hasActions]="true"
+          [formType]="companyFormType"
+          EditRedirectTo="{{currentPath}}/{{company.id}}">
         </app-card>
       </div>
     </div>
   </div>
 </div>
+<ng-container *ngIf="!companies">
+  <div class="h-100vh-in-app d-flex align-items-center">
+    <div class="lazyloader"></div>
+  </div>
+</ng-container>
 
 <app-bottom-nav [data]='bottomNavData'></app-bottom-nav>
 <app-floating-button [formType]='companyFormType' [link]="currentPath + '/add'"></app-floating-button>

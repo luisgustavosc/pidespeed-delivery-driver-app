@@ -16,7 +16,13 @@ export class ConfigDeliversComponent implements OnInit {
     private currentPath: string = window.location.pathname;
     private delivers = null;
     public isFormLoading = false;
-    constructor(private bottomNavService: BottomNavService, private formService: FormService, private deliversService: DeliversService , private actionService: ActionService, private cdRef: ChangeDetectorRef) { }
+    constructor(
+        private bottomNavService: BottomNavService,
+        private formService: FormService,
+        private deliversService: DeliversService ,
+        private actionService: ActionService,
+        private cdRef: ChangeDetectorRef
+    ) { }
 
     ngOnInit() {
         this.getDelivers();
@@ -33,8 +39,8 @@ export class ConfigDeliversComponent implements OnInit {
     /**
      *  Desactivar repartidor por su Id
      *
-     * @param {Deliver} $deliver
-     * @return {boolean}
+     * @param {string} $id
+     * @return {void}
      */
     disableDeliver = ($id: string): void => {
         const deliver = this.actionService.findItemInArrayById(this.delivers, $id);
@@ -54,10 +60,10 @@ export class ConfigDeliversComponent implements OnInit {
     }
 
     /**
-     * @param {Number} $id
-     * @return {Void}
+     * @param {string} $id
+     * @return {void}
      */
-    deleteDeliver = ($id: number): void => {
+    deleteDeliver = ($id: string): void => {
         this.deliversService.deleteById($id).subscribe((data: any) => {
             this.delivers.splice(this.actionService.getIndex(data, this.delivers, 'id'), 1);
             this.cdRef.detectChanges();
