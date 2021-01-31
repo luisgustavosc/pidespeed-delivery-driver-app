@@ -163,12 +163,13 @@ body,
 
 // Mat slide toggle
 .mat-slide-toggle {
+  transform: scale(1.15);
   .mat-slide-toggle-bar {
     background-color: theme-color('light-gray');
   }
   &.mat-checked {
     .mat-slide-toggle-bar {
-      background-color: theme-color('light-gray');
+      background-color: rgb(253 130 138);
     }
     .mat-slide-toggle-thumb {
       background-color: theme-color('red2');

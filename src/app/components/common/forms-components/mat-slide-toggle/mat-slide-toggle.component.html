@@ -1,3 +1,6 @@
 <ng-container [formGroup]="form">
-  <mat-slide-toggle formControlName="{{ fieldName }}">{{ label }}</mat-slide-toggle>
+  <div class="d-flex align-items-center justify-content-between py-4">
+    <label for="{{ fieldName }}" class="h6 mb-0">{{ label }}</label>
+    <mat-slide-toggle formControlName="{{ fieldName }}"></mat-slide-toggle>
+  </div>
 </ng-container>
