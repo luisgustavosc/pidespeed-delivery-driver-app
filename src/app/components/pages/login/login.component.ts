@@ -25,12 +25,13 @@ export class LoginComponent implements OnInit {
                 this.isFormLoading = false;
             }
             if (res.message == 'ok') {
-                this.authService.setToken(res.token, res.tokenAdmin);
+                this.authService.setAccessToken(res.token);
                 this.authService.setUser(res.user);
                 this.authService.setBusiness(res.empresa);
-                //TODO: remover cuando se solucione el problema de guard.
-                this.router.navigate(['/']);
-                //window.location.reload();
+                //TODO: encontrar forma de no refrecar y
+                //solo redirigir en login
+                //this.router.navigate(['/']);
+                window.location.reload();
             } else {
                 this.actionService.getSwalError('Usuario o contraseña incorrecto', null);
             }

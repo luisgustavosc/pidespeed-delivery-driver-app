@@ -130,8 +130,8 @@ export class FormService {
                 filename: this.getRandomName(),
                 filetype: base64Parts[0].split('/')[1].replace(';base64', ''),
                 value: base64Parts[1],
-                folder: folder,
-                update: update,
+                // folder: folder,
+                // update: update,
                 id: id
             }
 

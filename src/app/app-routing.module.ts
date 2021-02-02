@@ -17,79 +17,79 @@ import { HelpComponent } from 'src/app/components/pages/help/help.component';
 
 // Servicio de bloqueo de rutas
 import { AuthGuard } from 'src/app/guards/auth/auth.guard';
-import { SesionActivaGuard } from 'src/app/guards/sesion-activa/sesion-activa.guard';
+import { ActiveSessionGuard } from 'src/app/guards/active-session/active-session.guard';
 
 // TODO: revisar. Comentado guard por un error en el navegador
 const routes: Routes = [
     {
         path: '',
         component: DashboardComponent,
-        //canActivate: [AuthGuard]
+        canActivate: [AuthGuard]
     },
     {
         path: 'login',
         component: LoginComponent,
-        //canActivate: [AuthGuard]
+        canActivate: [ActiveSessionGuard]
     },
     {
         path: 'help',
         component: HelpComponent,
-        //canActivate: [AuthGuard]
+        canActivate: [AuthGuard]
     },
     {
         path: 'delivers',
         component: DeliversComponent,
-        //canActivate: [AuthGuard]
+        canActivate: [AuthGuard]
     },
     {
         path: 'delivers/location',
         component: DeliversLocationComponent,
-        //canActivate: [AuthGuard]
+        canActivate: [AuthGuard]
     },
     {
         path: 'settings/delivers',
         component: ConfigDeliversComponent,
-        //canActivate: [AuthGuard]
+        canActivate: [AuthGuard]
     },
     {
         path: 'settings/company',
         component: ConfigCompanyComponent,
-        //canActivate: [AuthGuard]
+        canActivate: [AuthGuard]
     },
     {
         path: 'settings/admins',
         component: ConfigAdminsComponent,
-        //canActivate: [AuthGuard]
+        canActivate: [AuthGuard]
     },
     {
         path: 'settings/delivers/add',
         component: ConfigUpdateDeliverComponent,
-        //canActivate: [AuthGuard]
+        canActivate: [AuthGuard]
     },
     {
         path: 'settings/company/add',
         component: ConfigUpdateCompaniesComponent,
-        //canActivate: [AuthGuard]
+        canActivate: [AuthGuard]
     },
     {
         path: 'settings/admins/add',
         component: ConfigUpdateAdminComponent,
-        //canActivate: [AuthGuard]
+        canActivate: [AuthGuard]
     },
     {
         path: 'settings/delivers/:id',
         component: ConfigUpdateDeliverComponent,
-        //canActivate: [AuthGuard]
+        canActivate: [AuthGuard]
     },
     {
         path: 'settings/company/:id',
         component: ConfigUpdateCompaniesComponent,
-        //canActivate: [AuthGuard]
+        canActivate: [AuthGuard]
     },
     {
         path: 'settings/admins/:id',
         component: ConfigUpdateAdminComponent,
-        //canActivate: [AuthGuard]
+        canActivate: [AuthGuard]
     },
     {
         path: 'error-503',

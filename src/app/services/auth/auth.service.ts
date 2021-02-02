@@ -18,7 +18,6 @@ export class AuthService {
     public logout(): void {
         this.token = '';
         localStorage.removeItem('ACCESS_TOKEN');
-        localStorage.removeItem('TOKEN_ADMIN');
         localStorage.removeItem('USER_ADMIN');
     }
 
@@ -42,11 +41,9 @@ export class AuthService {
         localStorage.setItem('BUSINES_ADMIN', businessString);
     }
 
-    public setToken(token: string, tokenAdmin: string): void {
+    public setAccessToken(token: string): void {
         this.token = token;
-        this.tokenAdmin = tokenAdmin;
         localStorage.setItem('ACCESS_TOKEN', token);
-        localStorage.setItem('TOKEN_ADMIN', tokenAdmin);
     }
 
     public getAccessToken(): string {
@@ -56,14 +53,7 @@ export class AuthService {
         return this.token;
     }
 
-    public getAdminToken(): string {
-        if (!this.tokenAdmin) {
-            this.tokenAdmin = localStorage.getItem('TOKEN_ADMIN');
-        }
-        return this.tokenAdmin;
-    }
-
-    public isTokenExpired(token) {
-        return this.jwtHelper.isTokenExpired(token);
-    }
+    public isTokenValid() {
+        return this.http.get(`${AUTH_SERVER}/example/test`, options);
+      }
 }
