@@ -13,9 +13,6 @@
         </button>
       </div>
       <div class="modal-body p-0">
-        <app-company-form *ngIf="isAffiliatedCompanyFormType"></app-company-form>
-        <app-admin-form *ngIf="isAdminFormType"></app-admin-form>
-        <app-deliver-form *ngIf="isDeliverFormType"></app-deliver-form>
         <app-image-cropper *ngIf="isImageCropperType"
           [imageEvent]="imageEvent"
           [imageURLToEdit]="imageURLToEdit"

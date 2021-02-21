@@ -28,9 +28,6 @@ export class AdminFormComponent implements OnInit {
         private authService: AuthService) { }
 
     ngOnInit() {
-        console.log(this.configId);
-
-
         this.companyId = this.authService.getCurrentUser().empresaDelivery;
         this.isPasswordVisible = this.configId ? false : true;
         this.formGroup = this.fb.group({

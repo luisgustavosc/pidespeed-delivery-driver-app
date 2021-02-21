@@ -19,7 +19,6 @@ export class ConfigAdminsComponent implements OnInit {
 
     constructor(
         private bottomNavService: BottomNavService,
-        private formService: FormService,
         private companyUsersService: CompanyUsersService,
         private actionService: ActionService,
         private cdRef: ChangeDetectorRef

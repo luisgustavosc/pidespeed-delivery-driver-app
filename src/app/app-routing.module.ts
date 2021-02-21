@@ -16,6 +16,7 @@ import { ConfigUpdateAdminComponent } from 'src/app/components/pages/config-upda
 import { HelpComponent } from 'src/app/components/pages/help/help.component';
 import { UpdateAccountComponent } from './components/pages/config-update/update-account/update-account.component';
 import { ConfigUpdateCompanyComponent } from './components/pages/config-update/config-update-company-profile/config-update-company.component';
+import { ListComponent } from './components/orders/pages/list/list.component';
 
 // Servicio de bloqueo de rutas
 import { AuthGuard } from 'src/app/components/auth/guard/auth/auth.guard';
@@ -60,6 +61,14 @@ const routes: Routes = [
             { path: 'delivers/add', component: ConfigUpdateDeliverComponent },
             { path: 'delivers/:id', component: ConfigUpdateDeliverComponent },
             { path: '', component: UpdateAccountComponent, pathMatch: 'full'}
+        ],
+        canActivate: [AuthGuard]
+    },
+    {
+        path: 'orders',
+        children: [
+            { path: ':status', component: ListComponent },
+            { path: '', component: ListComponent },
         ],
         canActivate: [AuthGuard]
     },

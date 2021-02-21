@@ -9,9 +9,6 @@ import { FormService } from 'src/app/components/forms/services/form/form.service
 export class ModalFormComponent implements OnInit {
     @Input() private formType: string;
     @Input() private isHeaderVisible: boolean = true;
-    private isDeliverFormType: boolean;
-    private isAdminFormType: boolean;
-    private isAffiliatedCompanyFormType: boolean;
     private isImageCropperType: boolean;
     private modalTitle: string;
     private modalDescription: string;
@@ -25,9 +22,6 @@ export class ModalFormComponent implements OnInit {
     constructor(private formService: FormService) { }
 
     ngOnInit() {
-        this.isDeliverFormType = this.formService.isDeliverFormType(this.formType);
-        this.isAdminFormType = this.formService.isAdminFormType(this.formType);
-        this.isAffiliatedCompanyFormType = this.formService.isAffiliatedCompanyFormType(this.formType);
         this.isImageCropperType = this.formService.isImageCropperType(this.formType);
     }
 

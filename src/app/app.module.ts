@@ -43,6 +43,8 @@ import { ConfigUpdateCompaniesComponent } from 'src/app/components/pages/config-
 import { ConfigUpdateAdminComponent } from 'src/app/components/pages/config-update/config-update-admin/config-update-admin.component';
 import { HelpComponent } from 'src/app/components/pages/help/help.component';
 import { ConfigUpdateCompanyComponent } from './components/pages/config-update/config-update-company-profile/config-update-company.component';
+import { ListComponent } from './components/orders/pages/list/list.component';
+import { OrderDetailComponent } from './components/orders/pages/order-detail/order-detail.component';
 
 // Forms
 import { UpdateAccountComponent } from './components/pages/config-update/update-account/update-account.component';
@@ -71,6 +73,7 @@ import { BottomNavComponent } from 'src/app/components/common/bottom-nav/bottom-
 import { ModalFormComponent } from 'src/app/components/common/modal-form/modal-form.component'
 import { FloatingButtonComponent } from 'src/app/components/common/button/floating-button/floating-button.component';
 import { PageLoaderComponent } from './components/common/page-loader/page-loader.component';
+import { ActionButtonComponent } from './components/common/button/action-button/action-button.component';
 
 /**
 * @Services
@@ -128,6 +131,9 @@ export function jwtTokenAdminGetter() {
         UpdateAccountComponent,
         ConfigUpdateCompanyComponent,
         CompanyProfileFormComponent,
+        ListComponent,
+        ActionButtonComponent,
+        OrderDetailComponent,
     ],
     imports: [
         BrowserModule,

@@ -6,15 +6,15 @@
     <div id="map" class="w-100 h-100"></div>
   </div>
 
-  <button *ngIf="!isDeliverListActive" id="delivers_btn" (click)="toggleList();" class="btn px-2 py-2 btn-white text-red2 d-flex align-items-center justify-content-end mr-2 fade-animation-in-right">
+  <button *ngIf="!isDeliverListActive" id="toggle_list_btn" (click)="toggleList();" class="btn px-2 py-2 btn-white text-red2 d-flex align-items-center justify-content-end mr-2 fade-animation-in-right">
     <span class="material-icons mr-2"> groups </span>
     <span class="small">Ver activos</span>
   </button>
-  <button *ngIf="isDeliverListActive" (click)="toggleList();" id="delivers_btn" mat-mini-fab class="bg-white text-dark mr-2 fade-animation-in-right">
+  <button *ngIf="isDeliverListActive" (click)="toggleList();" id="toggle_list_btn" mat-mini-fab class="bg-white text-dark mr-2 fade-animation-in-right">
     <mat-icon>close</mat-icon>
   </button>
 
-  <div id="delivers_list" class="position-relative d-none overflow-hidden z-index-10 custom-shadow-sm">
+  <div id="toggle_list" class="position-relative d-none overflow-hidden z-index-10 custom-shadow-sm">
     <div class="position-fixed right-0 left-0 bottom-0 container pt-3 bg-white">
       <div class="d-flex justify-content-between">
         <ul class="list-unstyled">

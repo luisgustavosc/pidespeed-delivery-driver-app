@@ -22,9 +22,9 @@ export class DeliversLocationComponent implements OnInit {
     toggleList(): void {
         this.isDeliverListActive = !this.isDeliverListActive;
 
-        const nav = document.getElementById('delivers_list');
-        const navChild = document.querySelector('#delivers_list > div');
-        document.querySelector('#delivers_btn').classList.remove('fade-animation-out-right')
+        const nav = document.getElementById('toggle_list');
+        const navChild = document.querySelector('#toggle_list > div');
+        document.querySelector('#toggle_list_btn').classList.remove('fade-animation-out-right')
 
         if (this.isDeliverListActive) {
             nav.classList.remove('d-none');

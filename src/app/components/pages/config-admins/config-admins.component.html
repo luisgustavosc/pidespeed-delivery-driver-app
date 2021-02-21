@@ -1,6 +1,6 @@
 <app-nav [pageTitle]='pageTitle' [isVisibleGoBackButton]='true'></app-nav>
 
-<div class="dashboard-wrapper">
+<div *ngIf="users" class="dashboard-wrapper">
   <div class="mt-5 pt-5 pb-4">
     <app-admin-row
     *ngFor="let user of users"
@@ -17,6 +17,9 @@
     </app-admin-row>
   </div>
 </div>
+<ng-container *ngIf="!users">
+  <app-page-loader></app-page-loader>
+</ng-container>
 
 <app-bottom-nav [data]='bottomNavData'></app-bottom-nav>
 <app-floating-button [formType]='adminFormType' [link]="currentPath + '/add'"></app-floating-button>
