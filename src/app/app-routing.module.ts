@@ -11,10 +11,11 @@ import { ConfigDeliversComponent } from 'src/app/components/pages/config-deliver
 import { ConfigCompanyComponent } from 'src/app/components/pages/config-company/config-company.component';
 import { ConfigAdminsComponent } from 'src/app/components/pages/config-admins/config-admins.component';
 import { ConfigUpdateDeliverComponent } from 'src/app/components/pages/config-update/config-update-deliver/config-update-deliver.component';
-import { ConfigUpdateCompaniesComponent } from 'src/app/components/pages/config-update/config-update-company/config-update-company.component';
+import { ConfigUpdateCompaniesComponent } from 'src/app/components/pages/config-update/config-update-affiliated-company/config-update-company.component';
 import { ConfigUpdateAdminComponent } from 'src/app/components/pages/config-update/config-update-admin/config-update-admin.component';
 import { HelpComponent } from 'src/app/components/pages/help/help.component';
 import { UpdateAccountComponent } from './components/pages/config-update/update-account/update-account.component';
+import { ConfigUpdateCompanyComponent } from './components/pages/config-update/config-update-company-profile/config-update-company.component';
 
 // Servicio de bloqueo de rutas
 import { AuthGuard } from 'src/app/components/auth/guard/auth/auth.guard';
@@ -52,6 +53,7 @@ const routes: Routes = [
             { path: 'admins/add', component: ConfigUpdateAdminComponent },
             { path: 'admins/:id', component: ConfigUpdateAdminComponent },
             { path: 'company', component: ConfigCompanyComponent },
+            { path: 'company-profile', component: ConfigUpdateCompanyComponent },
             { path: 'company/add', component: ConfigUpdateCompaniesComponent },
             { path: 'company/:id', component: ConfigUpdateCompaniesComponent },
             { path: 'delivers', component: ConfigDeliversComponent },

@@ -12,7 +12,7 @@ import { ActionService } from 'src/app/services/action/action.service';
 export class ConfigDeliversComponent implements OnInit {
     private pageTitle = 'Configuración de Repartidores';
     private bottomNavData: Array<BottomNavModel> =this.bottomNavService.getConfigBottomNavData();
-    private deliverFormType: string = this.formService.getDeliverFormType();
+    private deliverFormType: string = FormService.DELIVER_FORM_TYPE;
     private currentPath: string = window.location.pathname;
     private delivers = null;
     public isFormLoading = false;

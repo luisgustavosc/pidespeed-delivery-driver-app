@@ -10,7 +10,7 @@ import { CompanyUsersService } from 'src/app/services/company-users/company-user
     templateUrl: '../../../forms/config-template/config-update.component.html',
 })
 export class ConfigUpdateDeliverComponent implements OnInit {
-    private formType: string = this.formService.getDeliverFormType();
+    private formType: string = FormService.DELIVER_FORM_TYPE;
     private configId: string | null = this.activeRoute.snapshot.params.id || null;
     private formGroup: FormGroup;
     private isFormLoading = false;

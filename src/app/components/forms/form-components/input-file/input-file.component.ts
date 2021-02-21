@@ -18,7 +18,7 @@ export class InputFileComponent implements OnInit {
     private imageChangedEvent: Event = null;
     private fileName: string;
     private fileType: string = 'png';
-    private formType: string = this.formService.getImageCropperType();
+    private formType: string = FormService.IMAGE_CROPPER_TYPE;
     private croppedImage: string = null;
 
     @Input() private imageSettings: imageCropperSettings = {

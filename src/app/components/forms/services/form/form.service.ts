@@ -9,10 +9,12 @@ import { CompanyUsersService } from 'src/app/services/company-users/company-user
     providedIn: 'root'
 })
 export class FormService {
-    private companyFormType: string = 'company_form';
-    private adminFormType: string = 'admin_form';
-    private deliverFormType: string = 'deliver_form';
-    private imageCropperType: string = 'image_cropper';
+    public static readonly AFFILIATED_COMPANY_TYPE: string = 'affiliated_company_form';
+    public static readonly DELIVER_FORM_TYPE: string = 'deliver_form';
+    public static readonly ADMIN_FORM_TYPE: string = 'admin_form';
+    public static readonly IMAGE_CROPPER_TYPE: string = 'image_cropper';
+    public static readonly COMPANY_PROFILE_TYPE: string = 'company_profile'
+
     private emailPattern: RegExp = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     private spanishLettersPattern: string = "[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+"
     private textareaPattern: string = "[a-zA-ZñÑáéíóúÁÉÍÓÚ_.#-\s]*"
@@ -25,11 +27,23 @@ export class FormService {
         let type = null;
         switch (value) {
             case CompanyUsersService.TYPE_DELIVERY:
-                type = this.deliverFormType;
+                type = FormService.DELIVER_FORM_TYPE;
                 break;
 
             case CompanyUsersService.TYPE_COMPANY:
-                type = this.companyFormType;
+                type = FormService.AFFILIATED_COMPANY_TYPE;
+                break;
+
+            case FormService.ADMIN_FORM_TYPE:
+                type = FormService.ADMIN_FORM_TYPE;
+                break;
+
+            case FormService.IMAGE_CROPPER_TYPE:
+                type = FormService.IMAGE_CROPPER_TYPE;
+                break;
+
+            case FormService.COMPANY_PROFILE_TYPE:
+                type = FormService.COMPANY_PROFILE_TYPE;
                 break;
 
             default:
@@ -39,36 +53,24 @@ export class FormService {
         return type;
     }
 
-    public getCompanyFormType(): string {
-        return this.companyFormType;
-    }
-
-    public getAdminFormType(): string {
-        return this.adminFormType;
-    }
-
-    public getDeliverFormType(): string {
-        return this.deliverFormType;
-    }
-
-    public getImageCropperType(): string {
-        return this.imageCropperType;
-    }
-
-    public isCompanyFormType(type: string): boolean {
-        return this.companyFormType === type;
+    public isAffiliatedCompanyFormType(type: string): boolean {
+        return FormService.AFFILIATED_COMPANY_TYPE === type;
     }
 
     public isAdminFormType(type: string): boolean {
-        return this.adminFormType === type;
+        return FormService.ADMIN_FORM_TYPE === type;
     }
 
     public isDeliverFormType(type: string): boolean {
-        return this.deliverFormType === type;
+        return FormService.DELIVER_FORM_TYPE === type;
     }
 
     public isImageCropperType(type: string): boolean {
-        return this.imageCropperType === type;
+        return FormService.IMAGE_CROPPER_TYPE === type;
+    }
+
+    public isCompanyProfileType(type: string): boolean {
+        return FormService.COMPANY_PROFILE_TYPE === type;
     }
 
     public getEmailPattern(): RegExp {

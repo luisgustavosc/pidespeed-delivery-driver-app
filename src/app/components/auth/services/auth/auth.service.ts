@@ -55,5 +55,25 @@ export class AuthService {
 
     public isTokenValid() {
         return this.http.get(`${AUTH_SERVER}/example/test`, options);
-      }
+    }
+
+    public updatePassword(id, data) {
+        return this.http.put(`${AUTH_SERVER}/login/set-password-empresa`, data, options);
+    }
+
+    public recoveryPassword(data) {
+        return this.http.put(`${AUTH_SERVER}/mail/recuperar-pass/public`, data, options);
+    }
+
+    public setCode(code) {
+        localStorage.setItem('code', JSON.stringify(code));
+    }
+
+    public getCode() {
+        return JSON.parse(localStorage.getItem('code'));
+    }
+
+    public removeCode() {
+        localStorage.removeItem('code');
+    }
 }

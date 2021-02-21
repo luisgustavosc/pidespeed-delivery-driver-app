@@ -39,15 +39,17 @@ import { ConfigDeliversComponent } from 'src/app/components/pages/config-deliver
 import { ConfigCompanyComponent } from 'src/app/components/pages/config-company/config-company.component';
 import { ConfigAdminsComponent } from 'src/app/components/pages/config-admins/config-admins.component';
 import { ConfigUpdateDeliverComponent } from 'src/app/components/pages/config-update/config-update-deliver/config-update-deliver.component';
-import { ConfigUpdateCompaniesComponent } from 'src/app/components/pages/config-update/config-update-company/config-update-company.component';
+import { ConfigUpdateCompaniesComponent } from 'src/app/components/pages/config-update/config-update-affiliated-company/config-update-company.component';
 import { ConfigUpdateAdminComponent } from 'src/app/components/pages/config-update/config-update-admin/config-update-admin.component';
 import { HelpComponent } from 'src/app/components/pages/help/help.component';
+import { ConfigUpdateCompanyComponent } from './components/pages/config-update/config-update-company-profile/config-update-company.component';
 
 // Forms
 import { UpdateAccountComponent } from './components/pages/config-update/update-account/update-account.component';
 import { DeliverFormComponent } from 'src/app/components/forms/pages/deliver-form/deliver-form.component';
-import { CompanyFormComponent } from 'src/app/components/forms/pages/company-form/company-form.component';
+import { CompanyFormComponent } from 'src/app/components/forms/pages/affiliated-company-form/company-form.component';
 import { AdminFormComponent } from 'src/app/components/forms/pages/admin-form/admin-form.component';
+import { CompanyProfileFormComponent } from './components/forms/pages/company-profile-form/company-profile-form.component';
 
 // Form Components
 import { MatInputFieldComponent } from 'src/app/components/forms/form-components/mat-input-field/mat-input-field.component';
@@ -75,7 +77,7 @@ import { PageLoaderComponent } from './components/common/page-loader/page-loader
 */
 import { AuthService } from 'src/app/components/auth/services/auth/auth.service';
 import { DashboardService } from 'src/app/components/dashboard/services/dashboard/dashboard.service';
-import { ProfileService } from 'src/app/services/profile/profile.service';
+import { CompanyProfileService } from 'src/app/services/company-profile/companyProfile.service';
 import { WebSocketService } from 'src/app/services/webSocket/web-socket.service';
 import * as Sentry from '@sentry/angular';
 
@@ -124,6 +126,8 @@ export function jwtTokenAdminGetter() {
         MatSlideToggleComponent,
         PageLoaderComponent,
         UpdateAccountComponent,
+        ConfigUpdateCompanyComponent,
+        CompanyProfileFormComponent,
     ],
     imports: [
         BrowserModule,
@@ -168,7 +172,7 @@ export function jwtTokenAdminGetter() {
         // },
         AuthService,
         DashboardService,
-        ProfileService,
+        CompanyProfileService,
         WebSocketService,
         NgxImageCompressService
     ],

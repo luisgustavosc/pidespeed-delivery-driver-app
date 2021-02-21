@@ -10,10 +10,10 @@ import { ActionService } from 'src/app/services/action/action.service';
     templateUrl: '../../../forms/config-template/config-update.component.html',
 })
 export class ConfigUpdateCompaniesComponent implements OnInit {
-    private formType: string = this.formService.getCompanyFormType();
+    private formType: string = FormService.AFFILIATED_COMPANY_TYPE;
     private configId: string | null = this.activeRoute.snapshot.params.id || null;
     private formGroup: FormGroup;
-    private isCompanyFormType: boolean;
+    private isAffiliatedCompanyFormType: boolean;
     private pageTitle: string = this.configId ? 'Editar Username' : 'Agregar Empresa';
     private goBackUrl: string = '/settings/company'
     private isFormLoading: boolean = false;
@@ -27,7 +27,7 @@ export class ConfigUpdateCompaniesComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        this.isCompanyFormType = this.formService.isCompanyFormType(this.formType);
+        this.isAffiliatedCompanyFormType = this.formService.isAffiliatedCompanyFormType(this.formType);
     }
 
     private getForm(form: FormGroup): void {

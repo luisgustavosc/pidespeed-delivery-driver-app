@@ -11,7 +11,7 @@ export class ModalFormComponent implements OnInit {
     @Input() private isHeaderVisible: boolean = true;
     private isDeliverFormType: boolean;
     private isAdminFormType: boolean;
-    private isCompanyFormType: boolean;
+    private isAffiliatedCompanyFormType: boolean;
     private isImageCropperType: boolean;
     private modalTitle: string;
     private modalDescription: string;
@@ -27,7 +27,7 @@ export class ModalFormComponent implements OnInit {
     ngOnInit() {
         this.isDeliverFormType = this.formService.isDeliverFormType(this.formType);
         this.isAdminFormType = this.formService.isAdminFormType(this.formType);
-        this.isCompanyFormType = this.formService.isCompanyFormType(this.formType);
+        this.isAffiliatedCompanyFormType = this.formService.isAffiliatedCompanyFormType(this.formType);
         this.isImageCropperType = this.formService.isImageCropperType(this.formType);
     }
 

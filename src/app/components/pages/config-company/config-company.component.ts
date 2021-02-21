@@ -12,7 +12,7 @@ import { ActionService } from 'src/app/services/action/action.service';
 export class ConfigCompanyComponent implements OnInit {
     private pageTitle: string = 'Configuración de Empresas';
     private bottomNavData: Array<BottomNavModel> = this.bottomNavService.getConfigBottomNavData();
-    private companyFormType: string = this.formService.getCompanyFormType();
+    private companyFormType: string = FormService.AFFILIATED_COMPANY_TYPE;
     private currentPath: string = window.location.pathname;
     private companies? = null;
 

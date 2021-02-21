@@ -12,7 +12,8 @@ export class ActionService {
 
     constructor(
         private _snackBar: MatSnackBar,
-        private router: Router, private location: Location
+        private router: Router,
+        private location: Location
     ) {
         this.router.events.subscribe((event) => {
             if (event instanceof NavigationEnd) {

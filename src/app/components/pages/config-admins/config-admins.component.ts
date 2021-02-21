@@ -12,7 +12,7 @@ import { ActionService } from 'src/app/services/action/action.service';
 export class ConfigAdminsComponent implements OnInit {
     private pageTitle: string = 'Configuración de Usuarios';
     private bottomNavData: Array<BottomNavModel> =this.bottomNavService.getConfigBottomNavData();
-    private adminFormType: string = this.formService.getAdminFormType();
+    private adminFormType: string = FormService.ADMIN_FORM_TYPE;
     private currentPath: string = window.location.pathname;
     private users = null;
     public isFormLoading = false;
