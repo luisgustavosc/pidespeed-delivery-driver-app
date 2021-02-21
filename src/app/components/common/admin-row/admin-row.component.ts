@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActionService } from 'src/app/services/action/action.service';
-import { IMAGE_SERVER } from 'src/app/services/API';
 
 @Component({
     selector: 'app-admin-row',
@@ -20,7 +19,6 @@ export class AdminRowComponent implements OnInit {
     @Input() private disabledAction: (id: number) => boolean;
     @Input() private editAction: (id: number) => void;
     @Input() private formType: string;
-    private IMAGE_SERVER = IMAGE_SERVER;
     constructor(private actionService: ActionService) { }
 
     ngOnInit() { }

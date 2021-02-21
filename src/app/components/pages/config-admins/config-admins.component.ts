@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { BottomNavModel } from "src/app/model/bottomNav";
-import { FormService } from "src/app/components/forms/services/form/form.service";
-import { BottomNavService } from "src/app/services/bottomNav/bottom-nav.service";
+import { Component, OnInit, ChangeDetectorRef} from '@angular/core';
+import { BottomNavModel } from 'src/app/model/bottomNav';
+import { BottomNavService } from 'src/app/services/bottomNav/bottom-nav.service';
+import { FormService } from 'src/app/components/forms/services/form/form.service';
+import { CompanyUsersService } from 'src/app/services/company-users/company-users.service';
+import { ActionService } from 'src/app/services/action/action.service';
 
 @Component({
     selector: 'app-config-admins',
@@ -9,30 +11,65 @@ import { BottomNavService } from "src/app/services/bottomNav/bottom-nav.service"
 })
 export class ConfigAdminsComponent implements OnInit {
     private pageTitle: string = 'Configuración de Usuarios';
-    private bottomNavData: Array<BottomNavModel> = this.bottomNavService.getConfigBottomNavData();
+    private bottomNavData: Array<BottomNavModel> =this.bottomNavService.getConfigBottomNavData();
     private adminFormType: string = this.formService.getAdminFormType();
     private currentPath: string = window.location.pathname;
+    private users = null;
+    public isFormLoading = false;
 
-    constructor(private formService: FormService, private bottomNavService: BottomNavService ) { }
+    constructor(
+        private bottomNavService: BottomNavService,
+        private formService: FormService,
+        private companyUsersService: CompanyUsersService,
+        private actionService: ActionService,
+        private cdRef: ChangeDetectorRef
+    ) { }
 
-    ngOnInit() { }
+    ngOnInit() {
+        this.getUsers();
+    }
+    getUsers() {
+        this.companyUsersService.getAll().subscribe(users => {
+            this.users = users;
+        }, err => {
+            this.actionService.getSwalError();
+        })
+    }
 
     /**
+     *  Desactivar user por su Id
+     *
      * @param {string} $id
      * @return {void}
      */
-    disableAdmin = ($id: string): void => {
-        // TODO: Codigo para Desactivar un Admin?
-        // Esto basicamente lo desactivaria para que no pueda acceder a su panel u acciones?
-        alert('Haz DESACTIVADO al Admin con el ' + $id);
+    disableUser = ($id: string): void => {
+        const user = this.actionService.findItemInArrayById(this.users, $id);
+
+        const value = {
+            _id: user._id,
+            disabled: !user.disabled
+        }
+
+        this.companyUsersService.update(value).subscribe((data: any) => {
+            this.users[this.actionService.getIndex(data, this.users, '_id')].disabled = data.disabled;
+            this.cdRef.detectChanges();
+            this.actionService.openSnackBar(`Se ha ${data.disabled ?'desactivado' : 'activado'} a ${data.nombre}`);
+        }, err => {
+            this.actionService.getSwalError();
+        });
     }
 
     /**
      * @param {string} $id
      * @return {void}
      */
-    deleteAdmin = ($id: string): void => {
-        // TODO: Codigo para borrar un Admin
-        alert('Haz BORRADO al Admin con el ' + $id)
+    deleteUser = ($id: string): void => {
+        this.companyUsersService.deleteById($id).subscribe((data: any) => {
+            this.users.splice(this.actionService.getIndex(data, this.users, 'id'), 1);
+            this.cdRef.detectChanges();
+            this.actionService.openSnackBar('Se ha borrado exitosamente');
+        }, err => {
+            this.actionService.getSwalError();
+        })
     }
 }

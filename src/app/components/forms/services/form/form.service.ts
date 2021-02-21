@@ -3,6 +3,7 @@ import { AbstractControl } from "@angular/forms";
 import { of } from 'rxjs/internal/observable/of';
 import { catchError, map } from 'rxjs/operators';
 import { ActionService } from "src/app/services/action/action.service";
+import { CompanyUsersService } from 'src/app/services/company-users/company-users.service';
 
 @Injectable({
     providedIn: 'root'
@@ -19,6 +20,24 @@ export class FormService {
     private usernamePattern: string = "[a-z0-9-_.\s]+"
 
     constructor(private actionService: ActionService) { }
+
+    public getFormType(value: string) {
+        let type = null;
+        switch (value) {
+            case CompanyUsersService.TYPE_DELIVERY:
+                type = this.deliverFormType;
+                break;
+
+            case CompanyUsersService.TYPE_COMPANY:
+                type = this.companyFormType;
+                break;
+
+            default:
+                type = null
+                break;
+        }
+        return type;
+    }
 
     public getCompanyFormType(): string {
         return this.companyFormType;

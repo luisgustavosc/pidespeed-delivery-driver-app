@@ -25,11 +25,8 @@
       </mat-expansion-panel>
     </mat-accordion>
     <app-submit-button [buttonLabel]="'Guardar'" [isDisabled]="!formGroup.valid" [isFormLoading]="isFormLoading"></app-submit-button>
-    <!-- TODO: Inputs files para imagenes y isActive puede ser un checkbox o un select -->
   </ng-container>
   <ng-container *ngIf="configId && !isDataLoaded">
-    <div class="h-100vh-in-app d-flex align-items-center">
-      <div class="lazyloader"></div>
-    </div>
+    <app-page-loader></app-page-loader>
   </ng-container>
 </form>

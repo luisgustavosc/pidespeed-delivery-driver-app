@@ -1,13 +1,25 @@
 import { Injectable } from '@angular/core';
 import Swal from "sweetalert2";
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Location } from '@angular/common'
+import { Router, NavigationEnd } from '@angular/router'
 
 @Injectable({
     providedIn: 'root'
 })
 export class ActionService {
+    private history: string[] = [];
 
-    constructor(private _snackBar: MatSnackBar) { }
+    constructor(
+        private _snackBar: MatSnackBar,
+        private router: Router, private location: Location
+    ) {
+        this.router.events.subscribe((event) => {
+            if (event instanceof NavigationEnd) {
+                this.history.push(event.urlAfterRedirects)
+            }
+        })
+    }
 
     /**
      * This method call the Swal alert and receives the id of the
@@ -75,5 +87,14 @@ export class ActionService {
      */
     public findItemInArrayById(array: Array<any>, id: string) {
         return array.find(item => item._id === id);
+    }
+
+    public back(): void {
+        this.history.pop()
+        if (this.history.length > 0) {
+            this.location.back()
+        } else {
+            this.router.navigateByUrl('/')
+        }
     }
 }

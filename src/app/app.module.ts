@@ -23,6 +23,7 @@ import { NgxImageCompressService } from 'ngx-image-compress';
 */
 import { MesPipe } from './pipes/mes.pipe';
 import { HorariosPipe } from './pipes/horarios.pipe';
+import { ImagePipe } from './pipes/image.pipe';
 
 /**
 * @Components
@@ -42,16 +43,13 @@ import { ConfigUpdateCompaniesComponent } from 'src/app/components/pages/config-
 import { ConfigUpdateAdminComponent } from 'src/app/components/pages/config-update/config-update-admin/config-update-admin.component';
 import { HelpComponent } from 'src/app/components/pages/help/help.component';
 
-// Common
-import { NavComponent } from 'src/app/components/common/nav/nav.component';
-import { MobileMenuComponent } from 'src/app/components/common/mobile-menu/mobile-menu.component';
-import { CardComponent } from 'src/app/components/common/card/card.component';
-import { AdminRowComponent } from 'src/app/components/common/admin-row/admin-row.component';
-import { BottomNavComponent } from 'src/app/components/common/bottom-nav/bottom-nav.component';
-import { ModalFormComponent } from 'src/app/components/common/modal-form/modal-form.component'
+// Forms
+import { UpdateAccountComponent } from './components/pages/config-update/update-account/update-account.component';
 import { DeliverFormComponent } from 'src/app/components/forms/pages/deliver-form/deliver-form.component';
 import { CompanyFormComponent } from 'src/app/components/forms/pages/company-form/company-form.component';
 import { AdminFormComponent } from 'src/app/components/forms/pages/admin-form/admin-form.component';
+
+// Form Components
 import { MatInputFieldComponent } from 'src/app/components/forms/form-components/mat-input-field/mat-input-field.component';
 import { MatSelectFieldComponent } from 'src/app/components/forms/form-components/mat-select-field/mat-select-field.component';
 import { MatTextareaFieldComponent } from 'src/app/components/forms/form-components/mat-textarea-field/mat-textarea-field.component';
@@ -61,7 +59,16 @@ import { ImageCropperComponent } from 'src/app/components/forms/form-components/
 import { MatCheckboxComponent } from 'src/app/components/forms/form-components/mat-checkbox/mat-checkbox.component';
 import { MatRadioComponent } from 'src/app/components/forms/form-components/mat-radio/mat-radio.component';
 import { MatSlideToggleComponent } from 'src/app/components/forms/form-components/mat-slide-toggle/mat-slide-toggle.component';
+
+// Common
+import { NavComponent } from 'src/app/components/common/nav/nav.component';
+import { MobileMenuComponent } from 'src/app/components/common/mobile-menu/mobile-menu.component';
+import { CardComponent } from 'src/app/components/common/card/card.component';
+import { AdminRowComponent } from 'src/app/components/common/admin-row/admin-row.component';
+import { BottomNavComponent } from 'src/app/components/common/bottom-nav/bottom-nav.component';
+import { ModalFormComponent } from 'src/app/components/common/modal-form/modal-form.component'
 import { FloatingButtonComponent } from 'src/app/components/common/button/floating-button/floating-button.component';
+import { PageLoaderComponent } from './components/common/page-loader/page-loader.component';
 
 /**
 * @Services
@@ -71,7 +78,6 @@ import { DashboardService } from 'src/app/components/dashboard/services/dashboar
 import { ProfileService } from 'src/app/services/profile/profile.service';
 import { WebSocketService } from 'src/app/services/webSocket/web-socket.service';
 import * as Sentry from '@sentry/angular';
-import { PageLoaderComponent } from './components/common/page-loader/page-loader.component';
 
 export function jwtTokenGetter() {
     return localStorage.getItem('ACCESS_TOKEN');
@@ -97,6 +103,7 @@ export function jwtTokenAdminGetter() {
         AdminRowComponent,
         MesPipe,
         HorariosPipe,
+        ImagePipe,
         ModalFormComponent,
         CompanyFormComponent,
         DeliverFormComponent,
@@ -116,6 +123,7 @@ export function jwtTokenAdminGetter() {
         MatRadioComponent,
         MatSlideToggleComponent,
         PageLoaderComponent,
+        UpdateAccountComponent,
     ],
     imports: [
         BrowserModule,

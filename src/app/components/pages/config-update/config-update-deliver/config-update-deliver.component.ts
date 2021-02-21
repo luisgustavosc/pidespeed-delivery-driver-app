@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormService } from "src/app/components/forms/services/form/form.service";
 import { FormGroup } from "@angular/forms";
 import { Router, ActivatedRoute } from "@angular/router";
-import { DeliversService } from 'src/app/services/delivers/delivers.service';
 import { ActionService } from 'src/app/services/action/action.service';
+import { CompanyUsersService } from 'src/app/services/company-users/company-users.service';
 
 @Component({
     selector: 'app-config-update-deliver',
@@ -21,7 +21,7 @@ export class ConfigUpdateDeliverComponent implements OnInit {
     constructor(
         private formService: FormService,
         private activeRoute: ActivatedRoute,
-        private deliversService: DeliversService,
+        private companyUsersService: CompanyUsersService,
         private actionService: ActionService,
         private router: Router,
     ) { }
@@ -33,7 +33,7 @@ export class ConfigUpdateDeliverComponent implements OnInit {
     private getForm(form: any): void {
         this.isFormLoading = true;
         if (this.configId) {
-            this.deliversService.updateDeliver(form.value).subscribe(data => {
+            this.companyUsersService.update(form.value).subscribe(data => {
                 this.actionService.openSnackBar('Se ha actualizado exitosamente');
                 setTimeout(() => {
                     this.router.navigateByUrl(this.goBackUrl);
@@ -45,7 +45,7 @@ export class ConfigUpdateDeliverComponent implements OnInit {
         }
 
         if (!this.configId) {
-            this.deliversService.createDeliver(form.value).subscribe(data => {
+            this.companyUsersService.create(form.value).subscribe(data => {
                 this.actionService.openSnackBar('Se ha creado exitosamente');
                 setTimeout(() => {
                     this.router.navigateByUrl(this.goBackUrl);

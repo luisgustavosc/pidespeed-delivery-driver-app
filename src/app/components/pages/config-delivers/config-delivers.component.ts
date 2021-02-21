@@ -2,7 +2,7 @@ import { Component, OnInit, ChangeDetectorRef} from '@angular/core';
 import { BottomNavModel } from 'src/app/model/bottomNav';
 import { BottomNavService } from 'src/app/services/bottomNav/bottom-nav.service';
 import { FormService } from 'src/app/components/forms/services/form/form.service';
-import { DeliversService } from 'src/app/services/delivers/delivers.service';
+import { CompanyUsersService } from 'src/app/services/company-users/company-users.service';
 import { ActionService } from 'src/app/services/action/action.service';
 
 @Component({
@@ -19,7 +19,7 @@ export class ConfigDeliversComponent implements OnInit {
     constructor(
         private bottomNavService: BottomNavService,
         private formService: FormService,
-        private deliversService: DeliversService ,
+        private companyUsersService: CompanyUsersService,
         private actionService: ActionService,
         private cdRef: ChangeDetectorRef
     ) { }
@@ -29,7 +29,7 @@ export class ConfigDeliversComponent implements OnInit {
     }
 
     getDelivers() {
-        this.deliversService.getAll().subscribe(delivers => {
+        this.companyUsersService.getAll(CompanyUsersService.TYPE_DELIVERY).subscribe(delivers => {
             this.delivers = delivers;
         }, err => {
             this.actionService.getSwalError();
@@ -50,7 +50,7 @@ export class ConfigDeliversComponent implements OnInit {
             disabled: !deliver.disabled
         }
 
-        this.deliversService.updateDeliver(value).subscribe((data: any) => {
+        this.companyUsersService.update(value).subscribe((data: any) => {
             this.delivers[this.actionService.getIndex(data, this.delivers, '_id')].disabled = data.disabled;
             this.cdRef.detectChanges();
             this.actionService.openSnackBar(`Se ha ${data.disabled ?'desactivado' : 'activado'} a ${data.nombre}`);
@@ -64,7 +64,7 @@ export class ConfigDeliversComponent implements OnInit {
      * @return {void}
      */
     deleteDeliver = ($id: string): void => {
-        this.deliversService.deleteById($id).subscribe((data: any) => {
+        this.companyUsersService.deleteById($id).subscribe((data: any) => {
             this.delivers.splice(this.actionService.getIndex(data, this.delivers, 'id'), 1);
             this.cdRef.detectChanges();
             this.actionService.openSnackBar('Se ha borrado exitosamente');

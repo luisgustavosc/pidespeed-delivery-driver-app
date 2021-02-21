@@ -14,6 +14,7 @@ import { ConfigUpdateDeliverComponent } from 'src/app/components/pages/config-up
 import { ConfigUpdateCompaniesComponent } from 'src/app/components/pages/config-update/config-update-company/config-update-company.component';
 import { ConfigUpdateAdminComponent } from 'src/app/components/pages/config-update/config-update-admin/config-update-admin.component';
 import { HelpComponent } from 'src/app/components/pages/help/help.component';
+import { UpdateAccountComponent } from './components/pages/config-update/update-account/update-account.component';
 
 // Servicio de bloqueo de rutas
 import { AuthGuard } from 'src/app/components/auth/guard/auth/auth.guard';
@@ -37,62 +38,27 @@ const routes: Routes = [
     },
     {
         path: 'delivers',
-        component: DeliversComponent,
+        children: [
+            { path: 'location', component: DeliversLocationComponent },
+            { path: '', component: DeliversComponent },
+        ],
         canActivate: [AuthGuard]
     },
     {
-        path: 'delivers/location',
-        component: DeliversLocationComponent,
-        canActivate: [AuthGuard]
-    },
-    {
-        path: 'settings/account',
-        component: DeliversLocationComponent,
-        canActivate: [AuthGuard]
-    },
-    {
-        path: 'settings/delivers',
-        component: ConfigDeliversComponent,
-        canActivate: [AuthGuard]
-    },
-    {
-        path: 'settings/company',
-        component: ConfigCompanyComponent,
-        canActivate: [AuthGuard]
-    },
-    {
-        path: 'settings/admins',
-        component: ConfigAdminsComponent,
-        canActivate: [AuthGuard]
-    },
-    {
-        path: 'settings/delivers/add',
-        component: ConfigUpdateDeliverComponent,
-        canActivate: [AuthGuard]
-    },
-    {
-        path: 'settings/company/add',
-        component: ConfigUpdateCompaniesComponent,
-        canActivate: [AuthGuard]
-    },
-    {
-        path: 'settings/admins/add',
-        component: ConfigUpdateAdminComponent,
-        canActivate: [AuthGuard]
-    },
-    {
-        path: 'settings/delivers/:id',
-        component: ConfigUpdateDeliverComponent,
-        canActivate: [AuthGuard]
-    },
-    {
-        path: 'settings/company/:id',
-        component: ConfigUpdateCompaniesComponent,
-        canActivate: [AuthGuard]
-    },
-    {
-        path: 'settings/admins/:id',
-        component: ConfigUpdateAdminComponent,
+        path: 'settings',
+        children: [
+            { path: 'account', component: UpdateAccountComponent },
+            { path: 'admins', component: ConfigAdminsComponent },
+            { path: 'admins/add', component: ConfigUpdateAdminComponent },
+            { path: 'admins/:id', component: ConfigUpdateAdminComponent },
+            { path: 'company', component: ConfigCompanyComponent },
+            { path: 'company/add', component: ConfigUpdateCompaniesComponent },
+            { path: 'company/:id', component: ConfigUpdateCompaniesComponent },
+            { path: 'delivers', component: ConfigDeliversComponent },
+            { path: 'delivers/add', component: ConfigUpdateDeliverComponent },
+            { path: 'delivers/:id', component: ConfigUpdateDeliverComponent },
+            { path: '', component: UpdateAccountComponent, pathMatch: 'full'}
+        ],
         canActivate: [AuthGuard]
     },
     {

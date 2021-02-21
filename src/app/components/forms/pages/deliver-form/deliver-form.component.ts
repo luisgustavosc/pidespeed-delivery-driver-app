@@ -1,10 +1,11 @@
 import { Component, OnInit, Output, EventEmitter,Input } from '@angular/core';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { FormService } from 'src/app/components/forms/services/form/form.service';
-import { DeliversService } from 'src/app/services/delivers/delivers.service';
 import { ActionService } from 'src/app/services/action/action.service';
 import { AuthService } from 'src/app/components/auth/services/auth/auth.service';
 import { MatSelectOptions } from 'src/app/model/matSelectOptions';
+import { CompanyUsersService } from 'src/app/services/company-users/company-users.service';
+
 @Component({
     selector: 'app-deliver-form',
     templateUrl: './deliver-form.component.html',
@@ -37,7 +38,7 @@ export class DeliverFormComponent implements OnInit {
     constructor(
         private fb: FormBuilder,
         private formService: FormService,
-        private deliversService: DeliversService,
+        private companyUsersService: CompanyUsersService,
         private actionService: ActionService,
         private authService: AuthService) { }
 
@@ -86,7 +87,7 @@ export class DeliverFormComponent implements OnInit {
                 Validators.maxLength(100),
             ]],
             image: [''],
-            type: ['delivery'],
+            type: [CompanyUsersService.TYPE_DELIVERY],
             vehicle_type: [''],
             vehicle_image: [null],
             empresa: [this.companyId],
@@ -97,7 +98,7 @@ export class DeliverFormComponent implements OnInit {
     }
 
     private getDeliver() {
-        this.deliversService.getDeliverById(this.configId).subscribe((deliver: any) => {
+        this.companyUsersService.getById(this.configId, CompanyUsersService.TYPE_DELIVERY).subscribe((deliver: any) => {
             this.deliverImageUrl = deliver.img?.url;
             this.formGroup.patchValue({
                 nombre: deliver.nombre,
@@ -112,7 +113,7 @@ export class DeliverFormComponent implements OnInit {
         }, err => {
             this.isDataLoaded = true;
             this.isFormLoading = false;
-            this.actionService.getSwalError();
+            this.actionService.back();
         })
     }
 
