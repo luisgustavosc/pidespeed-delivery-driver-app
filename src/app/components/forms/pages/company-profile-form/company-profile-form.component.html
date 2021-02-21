@@ -7,4 +7,7 @@
     <app-mat-select-field [form]='formGroup' [label]="'Estado'" [fieldName]="'estado'" [options]="states" [optionSelected]="stateSelected.value"></app-mat-select-field>
     <app-submit-button [buttonLabel]="'Guardar'" [isDisabled]="!formGroup.valid" [isFormLoading]="isFormLoading"></app-submit-button>
   </ng-container>
+  <ng-container *ngIf="!isDataLoaded">
+    <app-page-loader></app-page-loader>
+  </ng-container>
 </form>

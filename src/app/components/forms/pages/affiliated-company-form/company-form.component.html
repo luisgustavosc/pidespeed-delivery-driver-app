@@ -9,4 +9,7 @@
     <app-mat-slide-toggle [form]='formGroup' [label]="'¿Es visible?'" [fieldName]="'publish'"></app-mat-slide-toggle>
     <app-submit-button [buttonLabel]="'Guardar'" [isDisabled]="!formGroup.valid" [isFormLoading]="isFormLoading"></app-submit-button>
   </ng-container>
+  <ng-container *ngIf="configId && !isDataLoaded">
+    <app-page-loader></app-page-loader>
+  </ng-container>
 </form>
