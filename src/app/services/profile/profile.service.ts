@@ -1,140 +1,39 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { tap } from 'rxjs/operators';
-import { isNullOrUndefined } from 'util';
-
-let headers = new HttpHeaders({
-  'Content-Type': 'application/json',
-  authorization: `bearer ${localStorage.getItem('ACCESS_TOKEN')}`
-});
-let options = { headers: headers };
+import { HttpClient } from '@angular/common/http';
+import { AUTH_SERVER, options } from '../API';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class ProfileService {
-  AUTH_SERVER: string = 'https://ssl.pidespeed.com';
 
-  constructor(private http: HttpClient) {}
+    constructor(private http: HttpClient) { }
 
-  getCurrentUser() {
-    let user_string = localStorage.getItem('USER_ADMIN');
-    if (!isNullOrUndefined(user_string)) {
-      let user = JSON.parse(user_string);
-      return user;
-    } else {
-      return null;
+    public getByField(data) {
+        return this.http.get(`${AUTH_SERVER}/public/one/${data.field}/${data.value}`, options);
     }
-  }
 
-  setCurrentEmpresa(data) {
-    localStorage.setItem('USER_ADMIN', JSON.stringify(data));
-  }
+    public update(data, empresaId) {
+        return this.http.put(`${AUTH_SERVER}/empresa-delivery/${empresaId}`, data, options);
+    }
 
-  getCategoria(id) {
-    return this.http.get(`${this.AUTH_SERVER}/api/categorias/one/${id}`, options);
-  }
+    public updatePassword(id, data) {
+        return this.http.put(`${AUTH_SERVER}/login/set-password-empresa`, data, options);
+    }
 
-  updateProfile(data, id) {
-    return this.http.put(
-      `${this.AUTH_SERVER}/api/empresas/${id}`,
-      data,
-      options
-    );
-  }
+    public recoveryPassword(data) {
+        return this.http.put(`${AUTH_SERVER}/mail/recuperar-pass/public`, data, options);
+    }
 
-  setImage(image, id) {
-    return this.http.post(
-      `${this.AUTH_SERVER}/api/empresas/image64/${id}`,
-      image,
-      options
-    );
-  }
+    public setCode(code) {
+        localStorage.setItem('code', JSON.stringify(code));
+    }
 
-  setImageLogo(image, id) {
-    return this.http.post(
-      `${this.AUTH_SERVER}/api/empresas/logo64/${id}`,
-      image,
-      options
-    );
-  }
+    public getCode() {
+        return JSON.parse(localStorage.getItem('code'));
+    }
 
-  CambiarPassword(id,data) {
-    return this.http.put(
-      `${this.AUTH_SERVER}/api/usuarios/password/${id}`,
-      data,
-      options
-    );
-  }
-
-  recuperarPassword(email,data) {
-    return this.http.put(
-      `${this.AUTH_SERVER}/sesiones/recuperarPasswordAdmin/${email}`,
-      data,
-      options
-    );
-  }
-
-  buscarEmpresaEmail(email) {
-    return this.http.get(
-      `${this.AUTH_SERVER}/sesiones/buscarEmpresaEmail/${email}`,
-      options
-    );
-  }
-
-  EnviarEmailRecuperar(data) {
-    return this.http.post(
-      `${this.AUTH_SERVER}/sesiones/recuperarPass`,
-      data,
-      options
-    );
-  }
-
-  EnviarEmailCambio(data) {
-    return this.http.post(
-      `${this.AUTH_SERVER}/api/mail/cambio`,
-      data,
-      options
-    );
-  }
-
-  public setCodigo(codigo) {
-    localStorage.setItem('codigo', JSON.stringify(codigo));
-  }
-
-  public getCodigo() {
-    return JSON.parse(localStorage.getItem('codigo'));
-  }
-
-  public removeCodigo() {
-    localStorage.removeItem('codigo');
-  }
-
-  getSubcategoria(ruta) {
-    return this.http.get(
-      `${this.AUTH_SERVER}/api/subcategorias/listByEmpresa/${ruta}`,
-      options
-    );
-  }
-
-  getEmpresa(id) {
-    return this.http.get(
-      `${this.AUTH_SERVER}/api/empresas/one/byId/${id}`,
-      options
-    );
-  }
-
-  getZonas(ciudad) {
-    return this.http.get(
-      `${this.AUTH_SERVER}/api/zonas/${ciudad}`,
-      options
-    );
-  }
-
-  getZona(id) {
-    return this.http.get(
-      `${this.AUTH_SERVER}/api/zonas/get/one/${id}`,
-      options
-    );
-  }
+    public removeCode() {
+        localStorage.removeItem('code');
+    }
 }

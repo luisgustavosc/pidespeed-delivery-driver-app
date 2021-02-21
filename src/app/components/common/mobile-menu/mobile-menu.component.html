@@ -76,14 +76,6 @@
               </ul>
             </div>
           </li>
-          <li class="nav-item d-lg-none">
-            <a [routerLink]="[ '/profile']" class="nav-link">
-              <span class="material-icons">
-                admin_panel_settings
-              </span>
-              Cuenta
-            </a>
-          </li>
           <li class="nav-item">
             <a
               [class.active]="rlaConfig?.isActive"
@@ -108,6 +100,12 @@
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" [routerLink]="[ '/settings/admins']" #rlaConfig="routerLinkActive" routerLinkActive="active">Administradores</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" [routerLink]="[ '/settings/admins']" #rlaConfig="routerLinkActive" routerLinkActive="active">Perfil de empresa</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" [routerLink]="[ '/settings/account']" #rlaConfig="routerLinkActive" routerLinkActive="active">Cuenta</a>
                 </li>
               </ul>
             </div>

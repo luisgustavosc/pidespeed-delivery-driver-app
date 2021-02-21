@@ -90,6 +90,7 @@ export class DeliverFormComponent implements OnInit {
             vehicle_type: [''],
             vehicle_image: [null],
             empresa: [this.companyId],
+            _id: [this.configId || null],
         });
         if(this.configId) this.getDeliver();
         this.setPasswordValidators();
@@ -97,7 +98,7 @@ export class DeliverFormComponent implements OnInit {
 
     private getDeliver() {
         this.deliversService.getDeliverById(this.configId).subscribe((deliver: any) => {
-            this.deliverImageUrl = deliver.img.url;
+            this.deliverImageUrl = deliver.img?.url;
             this.formGroup.patchValue({
                 nombre: deliver.nombre,
                 apellido: deliver.apellido,

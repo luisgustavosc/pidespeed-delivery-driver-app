@@ -50,6 +50,7 @@ export class CompanyFormComponent implements OnInit {
             image: ['', [Validators.required]],
             publish: [false],
             deliveryCompany: [this.companyId],
+            _id: [this.configId || null],
         });
         if (this.configId)  {
             this.getCompany();
@@ -59,7 +60,7 @@ export class CompanyFormComponent implements OnInit {
 
     private getCompany() {
         this.affiliatedCompanyService.getById(this.configId).subscribe((company: any) => {
-            this.companyImageUrl = company.img.url;
+            this.companyImageUrl = company.img?.url;
             this.formGroup.patchValue({
                 name: company.name,
                 description: company.description,
