@@ -10,10 +10,10 @@ export class CompanyProfileService {
     constructor(private http: HttpClient) { }
 
     public getById(companyId: string) {
-        return this.http.get(`${AUTH_SERVER}/public/one/id/${ companyId }`, options);
+        return this.http.get(`${AUTH_SERVER}/empresa-delivery/public/one/_id/${ companyId }`, options);
     }
 
-    public update(data, companyId) {
+    public update(data, companyId: string) {
         return this.http.put(`${AUTH_SERVER}/empresa-delivery/${ companyId }`, data, options);
     }
 }

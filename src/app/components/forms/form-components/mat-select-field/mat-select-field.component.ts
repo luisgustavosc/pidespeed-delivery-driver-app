@@ -21,6 +21,10 @@ export class MatSelectFieldComponent implements OnInit {
     constructor() { }
 
     ngOnInit() {
+        if (this.optionSelected) {
+            this.form.get(this.fieldName).setValue(this.optionSelected);
+        }
+
         // Examples
         /*
         this.options = [

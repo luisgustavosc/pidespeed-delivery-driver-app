@@ -69,7 +69,7 @@ export class FormService {
         return FormService.IMAGE_CROPPER_TYPE === type;
     }
 
-    public isCompanyProfileType(type: string): boolean {
+    public isCompanyProfileFormType(type: string): boolean {
         return FormService.COMPANY_PROFILE_TYPE === type;
     }
 

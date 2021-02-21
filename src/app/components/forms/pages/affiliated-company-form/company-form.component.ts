@@ -4,7 +4,6 @@ import { AuthService } from 'src/app/components/auth/services/auth/auth.service'
 import { AffiliatedCompanyService } from 'src/app/services/affiliated-company/affiliated-company.service';
 import { ActionService } from 'src/app/services/action/action.service';
 import { FormService } from 'src/app/components/forms/services/form/form.service';
-import { imageCropperSettings } from 'src/app/model/imageCropperSettings';
 
 @Component({
     selector: 'app-company-form',

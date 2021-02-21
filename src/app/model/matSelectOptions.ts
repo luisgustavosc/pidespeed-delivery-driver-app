@@ -1,4 +1,4 @@
 export interface MatSelectOptions {
     title: string;
-    value: string | object;
+    value: any;
 }
