@@ -49,9 +49,9 @@ import { CardComponent } from 'src/app/components/common/card/card.component';
 import { AdminRowComponent } from 'src/app/components/common/admin-row/admin-row.component';
 import { BottomNavComponent } from 'src/app/components/common/bottom-nav/bottom-nav.component';
 import { ModalFormComponent } from 'src/app/components/common/modal-form/modal-form.component'
-import { DeliverFormComponent } from 'src/app/components/common/forms/deliver-form/deliver-form.component';
-import { CompanyFormComponent } from 'src/app/components/common/forms/company-form/company-form.component';
-import { AdminFormComponent } from 'src/app/components/common/forms/admin-form/admin-form.component';
+import { DeliverFormComponent } from 'src/app/components/forms/deliver-form/deliver-form.component';
+import { CompanyFormComponent } from 'src/app/components/forms/company-form/company-form.component';
+import { AdminFormComponent } from 'src/app/components/forms/admin-form/admin-form.component';
 import { MatInputFieldComponent } from 'src/app/components/common/forms-components/mat-input-field/mat-input-field.component';
 import { MatSelectFieldComponent } from 'src/app/components/common/forms-components/mat-select-field/mat-select-field.component';
 import { MatTextareaFieldComponent } from 'src/app/components/common/forms-components/mat-textarea-field/mat-textarea-field.component';
