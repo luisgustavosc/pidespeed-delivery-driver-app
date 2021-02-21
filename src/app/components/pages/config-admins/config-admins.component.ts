@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BottomNavModel } from "src/app/model/bottomNav";
-import { FormService } from "src/app/services/form/form.service";
+import { FormService } from "src/app/components/forms/services/form/form.service";
 import { BottomNavService } from "src/app/services/bottomNav/bottom-nav.service";
 
 @Component({

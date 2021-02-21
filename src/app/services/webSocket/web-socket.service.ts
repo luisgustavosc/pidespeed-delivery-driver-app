@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import * as io from 'socket.io-client'
 import { Observable } from 'rxjs'
-import { AuthService } from '../auth/auth.service';
+import { AuthService } from '../../components/auth/services/auth/auth.service';
 @Injectable({
   providedIn: 'root'
 })

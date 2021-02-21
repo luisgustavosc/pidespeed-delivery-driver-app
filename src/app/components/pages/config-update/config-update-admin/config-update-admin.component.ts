@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormService } from "src/app/services/form/form.service";
+import { FormService } from "src/app/components/forms/services/form/form.service";
 import { ActivatedRoute } from "@angular/router";
 import { FormGroup } from "@angular/forms";
 
 @Component({
     selector: 'app-config-update-admin',
-    templateUrl: '../../../common/config-update/config-update.component.html',
+    templateUrl: '../../../forms/config-template/config-update.component.html',
 })
 export class ConfigUpdateAdminComponent implements OnInit {
     private formType: string = this.formService.getAdminFormType();

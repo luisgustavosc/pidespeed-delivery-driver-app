@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { imageCropperSettings } from 'src/app/model/imageCropperSettings';
-import { FormService } from 'src/app/services/form/form.service';
+import { FormService } from 'src/app/components/forms/services/form/form.service';
 
 @Component({
     selector: 'app-modal-form',

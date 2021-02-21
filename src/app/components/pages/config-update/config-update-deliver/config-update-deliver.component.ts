@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormService } from "src/app/services/form/form.service";
+import { FormService } from "src/app/components/forms/services/form/form.service";
 import { FormGroup } from "@angular/forms";
 import { Router, ActivatedRoute } from "@angular/router";
 import { DeliversService } from 'src/app/services/delivers/delivers.service';
@@ -7,7 +7,7 @@ import { ActionService } from 'src/app/services/action/action.service';
 
 @Component({
     selector: 'app-config-update-deliver',
-    templateUrl: '../../../common/config-update/config-update.component.html',
+    templateUrl: '../../../forms/config-template/config-update.component.html',
 })
 export class ConfigUpdateDeliverComponent implements OnInit {
     private formType: string = this.formService.getDeliverFormType();

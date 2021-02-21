@@ -2,9 +2,9 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 // Componentes
-import { DashboardComponent } from 'src/app/components/pages/dashboard/dashboard.component';
-import { LoginComponent } from 'src/app/components/pages/login/login.component';
-import { Error503Component } from 'src/app/components/pages/error503/error503.component';
+import { DashboardComponent } from 'src/app/components/dashboard/pages/dashboard/dashboard.component';
+import { LoginComponent } from 'src/app/components/auth/pages/login/login.component';
+import { Error503Component } from 'src/app/components/error/error503/error503.component';
 import { DeliversComponent } from 'src/app/components/pages/delivers/list/delivers.component';
 import { DeliversLocationComponent } from 'src/app/components/pages/delivers/location/delivers-location.component';
 import { ConfigDeliversComponent } from 'src/app/components/pages/config-delivers/config-delivers.component';
@@ -16,10 +16,9 @@ import { ConfigUpdateAdminComponent } from 'src/app/components/pages/config-upda
 import { HelpComponent } from 'src/app/components/pages/help/help.component';
 
 // Servicio de bloqueo de rutas
-import { AuthGuard } from 'src/app/guards/auth/auth.guard';
-import { ActiveSessionGuard } from 'src/app/guards/active-session/active-session.guard';
+import { AuthGuard } from 'src/app/components/auth/guard/auth/auth.guard';
+import { ActiveSessionGuard } from 'src/app/components/auth/guard/active-session/active-session.guard';
 
-// TODO: revisar. Comentado guard por un error en el navegador
 const routes: Routes = [
     {
         path: '',
@@ -43,6 +42,11 @@ const routes: Routes = [
     },
     {
         path: 'delivers/location',
+        component: DeliversLocationComponent,
+        canActivate: [AuthGuard]
+    },
+    {
+        path: 'settings/account',
         component: DeliversLocationComponent,
         canActivate: [AuthGuard]
     },

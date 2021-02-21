@@ -22,9 +22,7 @@
   </div>
 </div>
 <ng-container *ngIf="!companies">
-  <div class="h-100vh-in-app d-flex align-items-center">
-    <div class="lazyloader"></div>
-  </div>
+  <app-page-loader></app-page-loader>
 </ng-container>
 
 <app-bottom-nav [data]='bottomNavData'></app-bottom-nav>

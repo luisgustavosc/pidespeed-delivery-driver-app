@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormService } from "src/app/services/form/form.service";
+import { FormService } from "src/app/components/forms/services/form/form.service";
 import { Router, ActivatedRoute } from "@angular/router";
 import { FormGroup } from "@angular/forms";
 import { AffiliatedCompanyService } from 'src/app/services/affiliated-company/affiliated-company.service';
@@ -7,7 +7,7 @@ import { ActionService } from 'src/app/services/action/action.service';
 
 @Component({
     selector: 'app-config-update-company',
-    templateUrl: '../../../common/config-update/config-update.component.html',
+    templateUrl: '../../../forms/config-template/config-update.component.html',
 })
 export class ConfigUpdateCompaniesComponent implements OnInit {
     private formType: string = this.formService.getCompanyFormType();

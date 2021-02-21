@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
-import { AuthService } from '../app/services/auth/auth.service';
+import { AuthService } from './components/auth/services/auth/auth.service';
 import { WebSocketService } from '../app/services/webSocket/web-socket.service';
 import { Plugins } from '@capacitor/core';
 const { LocalNotifications, Network, App, BackgroundTask } = Plugins;

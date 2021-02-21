@@ -1,9 +1,9 @@
 import { Component, OnInit, Output, EventEmitter,Input } from '@angular/core';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
-import { FormService } from 'src/app/services/form/form.service';
+import { FormService } from 'src/app/components/forms/services/form/form.service';
 import { DeliversService } from 'src/app/services/delivers/delivers.service';
 import { ActionService } from 'src/app/services/action/action.service';
-import { AuthService } from 'src/app/services/auth/auth.service';
+import { AuthService } from 'src/app/components/auth/services/auth/auth.service';
 import { MatSelectOptions } from 'src/app/model/matSelectOptions';
 @Component({
     selector: 'app-deliver-form',

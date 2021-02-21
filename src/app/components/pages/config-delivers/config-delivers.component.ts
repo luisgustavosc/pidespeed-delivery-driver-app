@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectorRef} from '@angular/core';
 import { BottomNavModel } from 'src/app/model/bottomNav';
 import { BottomNavService } from 'src/app/services/bottomNav/bottom-nav.service';
-import { FormService } from 'src/app/services/form/form.service';
+import { FormService } from 'src/app/components/forms/services/form/form.service';
 import { DeliversService } from 'src/app/services/delivers/delivers.service';
 import { ActionService } from 'src/app/services/action/action.service';
 

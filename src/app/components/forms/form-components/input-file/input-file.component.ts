@@ -2,7 +2,7 @@ import { Component, OnInit, ChangeDetectorRef, Input, EventEmitter, Output } fro
 import { FormGroup } from '@angular/forms';
 import { NgxImageCompressService } from 'ngx-image-compress';
 import { imageCropperSettings } from 'src/app/model/imageCropperSettings';
-import { FormService } from 'src/app/services/form/form.service';
+import { FormService } from 'src/app/components/forms/services/form/form.service';
 import { IMAGE_SERVER } from 'src/app/services/API';
 declare var $: any;
 

@@ -1,9 +1,9 @@
 import { Component, EventEmitter, OnInit, Output,Input } from '@angular/core';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
-import { AuthService } from 'src/app/services/auth/auth.service';
+import { AuthService } from 'src/app/components/auth/services/auth/auth.service';
 import { AffiliatedCompanyService } from 'src/app/services/affiliated-company/affiliated-company.service';
 import { ActionService } from 'src/app/services/action/action.service';
-import { FormService } from 'src/app/services/form/form.service';
+import { FormService } from 'src/app/components/forms/services/form/form.service';
 import { imageCropperSettings } from 'src/app/model/imageCropperSettings';
 
 @Component({

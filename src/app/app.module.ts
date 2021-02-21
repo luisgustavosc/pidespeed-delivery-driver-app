@@ -29,9 +29,9 @@ import { HorariosPipe } from './pipes/horarios.pipe';
 */
 // Pages
 import { AppComponent } from 'src/app/app.component';
-import { DashboardComponent } from 'src/app/components/pages/dashboard/dashboard.component';
-import { LoginComponent } from 'src/app/components/pages/login/login.component';
-import { Error503Component } from 'src/app/components/pages/error503/error503.component';
+import { DashboardComponent } from 'src/app/components/dashboard/pages/dashboard/dashboard.component';
+import { LoginComponent } from 'src/app/components/auth/pages/login/login.component';
+import { Error503Component } from 'src/app/components/error/error503/error503.component';
 import { DeliversComponent } from 'src/app/components/pages/delivers/list/delivers.component';
 import { DeliversLocationComponent } from 'src/app/components/pages/delivers/location/delivers-location.component';
 import { ConfigDeliversComponent } from 'src/app/components/pages/config-delivers/config-delivers.component';
@@ -49,31 +49,29 @@ import { CardComponent } from 'src/app/components/common/card/card.component';
 import { AdminRowComponent } from 'src/app/components/common/admin-row/admin-row.component';
 import { BottomNavComponent } from 'src/app/components/common/bottom-nav/bottom-nav.component';
 import { ModalFormComponent } from 'src/app/components/common/modal-form/modal-form.component'
-import { DeliverFormComponent } from 'src/app/components/forms/deliver-form/deliver-form.component';
-import { CompanyFormComponent } from 'src/app/components/forms/company-form/company-form.component';
-import { AdminFormComponent } from 'src/app/components/forms/admin-form/admin-form.component';
-import { MatInputFieldComponent } from 'src/app/components/common/forms-components/mat-input-field/mat-input-field.component';
-import { MatSelectFieldComponent } from 'src/app/components/common/forms-components/mat-select-field/mat-select-field.component';
-import { MatTextareaFieldComponent } from 'src/app/components/common/forms-components/mat-textarea-field/mat-textarea-field.component';
+import { DeliverFormComponent } from 'src/app/components/forms/pages/deliver-form/deliver-form.component';
+import { CompanyFormComponent } from 'src/app/components/forms/pages/company-form/company-form.component';
+import { AdminFormComponent } from 'src/app/components/forms/pages/admin-form/admin-form.component';
+import { MatInputFieldComponent } from 'src/app/components/forms/form-components/mat-input-field/mat-input-field.component';
+import { MatSelectFieldComponent } from 'src/app/components/forms/form-components/mat-select-field/mat-select-field.component';
+import { MatTextareaFieldComponent } from 'src/app/components/forms/form-components/mat-textarea-field/mat-textarea-field.component';
+import { SubmitButtonComponent } from 'src/app/components/forms/form-components/submit-button/submit-button.component';
+import { InputFileComponent } from 'src/app/components/forms/form-components/input-file/input-file.component';
+import { ImageCropperComponent } from 'src/app/components/forms/form-components/image-cropper/image-cropper.component';
+import { MatCheckboxComponent } from 'src/app/components/forms/form-components/mat-checkbox/mat-checkbox.component';
+import { MatRadioComponent } from 'src/app/components/forms/form-components/mat-radio/mat-radio.component';
+import { MatSlideToggleComponent } from 'src/app/components/forms/form-components/mat-slide-toggle/mat-slide-toggle.component';
 import { FloatingButtonComponent } from 'src/app/components/common/button/floating-button/floating-button.component';
-import { SubmitButtonComponent } from 'src/app/components/common/button/submit-button/submit-button.component';
-import { InputFileComponent } from 'src/app/components/common/forms-components/input-file/input-file.component';
-import { ImageCropperComponent } from 'src/app/components/common/forms-components/image-cropper/image-cropper.component';
-import { MatCheckboxComponent } from 'src/app/components/common/forms-components/mat-checkbox/mat-checkbox.component';
-import { MatRadioComponent } from 'src/app/components/common/forms-components/mat-radio/mat-radio.component';
-import { MatSlideToggleComponent } from 'src/app/components/common/forms-components/mat-slide-toggle/mat-slide-toggle.component';
 
 /**
 * @Services
 */
-import { AuthService } from 'src/app/services/auth/auth.service';
-import { DashboardService } from 'src/app/services/dashboard/dashboard.service';
-import { InvoiceService } from 'src/app/services/invoice/invoice.service';
-import { OrdersService } from 'src/app/services/orders/orders.service'
+import { AuthService } from 'src/app/components/auth/services/auth/auth.service';
+import { DashboardService } from 'src/app/components/dashboard/services/dashboard/dashboard.service';
 import { ProfileService } from 'src/app/services/profile/profile.service';
-import { ProductosService } from 'src/app/services/productos/productos.service';
 import { WebSocketService } from 'src/app/services/webSocket/web-socket.service';
 import * as Sentry from '@sentry/angular';
+import { PageLoaderComponent } from './components/common/page-loader/page-loader.component';
 
 export function jwtTokenGetter() {
     return localStorage.getItem('ACCESS_TOKEN');
@@ -116,7 +114,8 @@ export function jwtTokenAdminGetter() {
         ImageCropperComponent,
         MatCheckboxComponent,
         MatRadioComponent,
-        MatSlideToggleComponent
+        MatSlideToggleComponent,
+        PageLoaderComponent,
     ],
     imports: [
         BrowserModule,
@@ -161,10 +160,7 @@ export function jwtTokenAdminGetter() {
         // },
         AuthService,
         DashboardService,
-        InvoiceService,
-        OrdersService,
         ProfileService,
-        ProductosService,
         WebSocketService,
         NgxImageCompressService
     ],

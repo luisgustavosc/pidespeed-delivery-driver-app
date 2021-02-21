@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { BottomNavModel } from "src/app/model/bottomNav";
-import { FormService } from "src/app/services/form/form.service";
+import { FormService } from "src/app/components/forms/services/form/form.service";
 import { BottomNavService } from "src/app/services/bottomNav/bottom-nav.service";
 import { AffiliatedCompanyService } from 'src/app/services/affiliated-company/affiliated-company.service';
 import { ActionService } from 'src/app/services/action/action.service';
