@@ -7,8 +7,8 @@ import { CompanyUsersService } from 'src/app/services/company-users/company-user
 import { AuthService } from 'src/app/components/auth/services/auth/auth.service';
 
 @Component({
-  selector: 'app-update-account',
-  templateUrl: './update-account.component.html',
+    selector: 'app-update-account',
+    templateUrl: './update-account.component.html',
 })
 export class UpdateAccountComponent implements OnInit {
     private user = this.authService.getCurrentUser();
@@ -34,9 +34,8 @@ export class UpdateAccountComponent implements OnInit {
         this.isAdminFormType = this.formService.isAdminFormType(this.formType);
     }
 
-  private getForm(form: any): void {
-    this.isFormLoading = true;
-    if (this.user) {
+    private getForm(form: any): void {
+        this.isFormLoading = true;
         this.companyUsersService.update(form.value).subscribe(data => {
             this.actionService.openSnackBar('Se ha actualizado exitosamente');
             setTimeout(() => {
@@ -47,17 +46,4 @@ export class UpdateAccountComponent implements OnInit {
             this.actionService.getSwalError();
         });
     }
-
-    if (!this.user) {
-        this.companyUsersService.create(form.value).subscribe(data => {
-            this.actionService.openSnackBar('Se ha creado exitosamente');
-            setTimeout(() => {
-                this.router.navigateByUrl(this.goBackUrl);
-            }, 2100);
-        }, err => {
-            this.isFormLoading = false;
-            this.actionService.getSwalError();
-        });
-    }
-}
 }
