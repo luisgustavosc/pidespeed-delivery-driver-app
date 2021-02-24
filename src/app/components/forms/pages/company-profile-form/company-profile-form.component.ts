@@ -6,6 +6,7 @@ import { CompanyProfileService } from 'src/app/services/company-profile/companyP
 import { LocationService } from 'src/app/services/location/location.service';
 import { LocationModel } from 'src/app/model/location.model';
 import { MatSelectOptions } from 'src/app/model/matSelectOptions';
+import { ImageModel } from 'src/app/model/imageModel';
 
 @Component({
     selector: 'app-company-profile-form',
@@ -19,7 +20,7 @@ export class CompanyProfileFormComponent implements OnInit {
 
     private formGroup: FormGroup;
     private isDataLoaded: boolean = false;
-    private companyImageUrl: string;
+    private companyImage: ImageModel;
     private imgResultAfterCompress: string;
     public cities : Array<MatSelectOptions> = null;
     public states : Array<MatSelectOptions> = null;
@@ -61,8 +62,8 @@ export class CompanyProfileFormComponent implements OnInit {
 
     private getDeliveryCompany() {
         this.companyProfileService.getById(this.configId).subscribe((company: any) => {
-            this.companyImageUrl = company.logo?.url;
-            if (this.companyImageUrl) {
+            this.companyImage = company.logo;
+            if (this.companyImage?.url) {
                 this.removeImageValidators();
             }
 
@@ -129,7 +130,7 @@ export class CompanyProfileFormComponent implements OnInit {
     }
 
     onSubmit(form: FormGroup, image: string): void {
-        form.value.logo = this.formService.processImage(image, this.configId);
+        form.value.logo = this.formService.processImage(image, this.companyImage?._id);
         this.formGroupEmitter.emit(form);
     }
 }

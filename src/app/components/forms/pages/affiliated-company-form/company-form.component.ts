@@ -4,6 +4,7 @@ import { AuthService } from 'src/app/components/auth/services/auth/auth.service'
 import { AffiliatedCompanyService } from 'src/app/services/affiliated-company/affiliated-company.service';
 import { ActionService } from 'src/app/services/action/action.service';
 import { FormService } from 'src/app/components/forms/services/form/form.service';
+import { ImageModel } from 'src/app/model/imageModel';
 
 @Component({
     selector: 'app-company-form',
@@ -18,7 +19,7 @@ export class CompanyFormComponent implements OnInit {
     private formGroup: FormGroup;
     private companyId: string;
     private isDataLoaded: boolean = false;
-    private companyImageUrl: string;
+    private companyImage: ImageModel;
     private imgResultAfterCompress: string;
 
     constructor(
@@ -59,7 +60,7 @@ export class CompanyFormComponent implements OnInit {
 
     private getCompany() {
         this.affiliatedCompanyService.getById(this.configId).subscribe((company: any) => {
-            this.companyImageUrl = company.img?.url;
+            this.companyImage = company.img;
             this.formGroup.patchValue({
                 name: company.name,
                 description: company.description,
@@ -86,7 +87,7 @@ export class CompanyFormComponent implements OnInit {
     }
 
     onSubmit(form: FormGroup, image: string): void {
-        form.value.image = this.formService.processImage(image, this.configId);
+        form.value.image = this.formService.processImage(image, this.companyImage?._id);
         this.formGroupEmitter.emit(form);
     }
 }

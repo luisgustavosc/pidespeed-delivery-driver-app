@@ -4,6 +4,7 @@ import { FormService } from 'src/app/components/forms/services/form/form.service
 import { ActionService } from 'src/app/services/action/action.service';
 import { AuthService } from 'src/app/components/auth/services/auth/auth.service';
 import { CompanyUsersService } from 'src/app/services/company-users/company-users.service';
+import { ImageModel } from 'src/app/model/imageModel';
 
 @Component({
     selector: 'app-admin-form',
@@ -15,7 +16,7 @@ export class AdminFormComponent implements OnInit {
     @Input() private configId: string;
     private formGroup: FormGroup;
     private imgResultAfterCompress: string;
-    private userImageUrl: string;
+    private userImageUrl: ImageModel;
     private companyId: string;
     private isDataLoaded: boolean = false;
     private isPasswordVisible: boolean;
@@ -93,7 +94,7 @@ export class AdminFormComponent implements OnInit {
                 direccion
             } = user;
 
-            this.userImageUrl = img?.url;
+            this.userImageUrl = img;
             this.formGroup.patchValue({
                 nombre: nombre,
                 apellido: apellido,
@@ -135,7 +136,7 @@ export class AdminFormComponent implements OnInit {
     }
 
     private onSubmit(form: FormGroup, image: string): void {
-        form.value.image = this.formService.processImage(image, this.configId);
+        form.value.image = this.formService.processImage(image, this.userImageUrl?._id);
         this.formGroupEmitter.emit(form);
     }
 }

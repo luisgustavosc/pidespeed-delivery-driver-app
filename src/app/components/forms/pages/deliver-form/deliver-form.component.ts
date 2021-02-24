@@ -5,6 +5,7 @@ import { ActionService } from 'src/app/services/action/action.service';
 import { AuthService } from 'src/app/components/auth/services/auth/auth.service';
 import { MatSelectOptions } from 'src/app/model/matSelectOptions';
 import { CompanyUsersService } from 'src/app/services/company-users/company-users.service';
+import { ImageModel } from 'src/app/model/imageModel';
 
 @Component({
     selector: 'app-deliver-form',
@@ -16,7 +17,7 @@ export class DeliverFormComponent implements OnInit {
     @Input() private configId: string;
     private formGroup: FormGroup;
     private imgResultAfterCompress: string;
-    private deliverImageUrl: string;
+    private deliverImage: ImageModel;
     private companyId: string;
     private isDataLoaded: boolean = false;
     private isPasswordVisible: boolean;
@@ -99,7 +100,8 @@ export class DeliverFormComponent implements OnInit {
 
     private getDeliver() {
         this.companyUsersService.getById(this.configId, CompanyUsersService.TYPE_DELIVERY).subscribe((deliver: any) => {
-            this.deliverImageUrl = deliver.img?.url;
+            this.deliverImage = deliver.img;
+
             this.formGroup.patchValue({
                 nombre: deliver.nombre,
                 apellido: deliver.apellido,
@@ -141,7 +143,7 @@ export class DeliverFormComponent implements OnInit {
     }
 
     private onSubmit(form: FormGroup, image: string): void {
-        form.value.image = this.formService.processImage(image, this.configId);
+        form.value.image = this.formService.processImage(image, this.deliverImage?._id);
         this.formGroupEmitter.emit(form);
     }
 }

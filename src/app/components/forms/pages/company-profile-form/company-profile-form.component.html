@@ -1,6 +1,6 @@
 <form [formGroup]="formGroup" (ngSubmit)="onSubmit(formGroup, imgResultAfterCompress)">
   <ng-container *ngIf="isDataLoaded">
-    <app-input-file [form]='formGroup' [fieldName]="'logo'" [imageURLToEdit]="companyImageUrl" (imgResultAfterCompress)="getImageCroppedAndCompressed($event)"></app-input-file>
+    <app-input-file [form]='formGroup' [fieldName]="'logo'" [imageURLToEdit]="companyImage?.url" (imgResultAfterCompress)="getImageCroppedAndCompressed($event)"></app-input-file>
     <app-mat-input-field [form]='formGroup' [label]="'Nombre'" [fieldName]="'nombre'"></app-mat-input-field>
     <app-mat-input-field [form]='formGroup' [label]="'Teléfono'" [fieldName]="'telefono'"></app-mat-input-field>
     <app-mat-select-field [form]='formGroup' [label]="'Ciudad'" [fieldName]="'ciudad'" [options]="cities" [optionSelected]="citySelected.value"></app-mat-select-field>

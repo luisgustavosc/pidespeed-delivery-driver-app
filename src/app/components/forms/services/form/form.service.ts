@@ -163,9 +163,10 @@ export class FormService {
     }
 
     private getRandomName() {
-        const timestamp = new Date().toISOString().replace(/[-:.]/g, "");
-        const random = ("" + Math.random()).substring(2, 8);
-        const randomNumber = timestamp + random;
+        const timestamp = new Date().toISOString().replace(/[-:.]/g, ""),
+                    random = ("" + Math.random()).substring(2, 8),
+                    randomNumber = timestamp + random;
+
         return randomNumber;
     }
 }
