@@ -112,7 +112,7 @@ export class FormService {
      * @returns {Boolean | Null}
      */
     public validateExistingData(
-        { fieldName, service } : validateExistingDataModel,
+        { fieldName, service, configId } : validateExistingDataModel,
         control:AbstractControl
     ): boolean | null {
 
@@ -123,10 +123,14 @@ export class FormService {
 
         return service.getByField(dataToValidate).pipe(
             map((data: any) => {
-                if (data)
+                if (data) {
+                    if (data.id === configId) {
+                        return null;
+                    }
                     return {
                         isNotAvailable: true
                     };
+                }
                 // return null for no errors
                 return null;
             }),

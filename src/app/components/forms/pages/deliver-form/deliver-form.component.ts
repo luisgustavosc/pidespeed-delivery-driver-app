@@ -66,6 +66,7 @@ export class DeliverFormComponent implements OnInit {
                 this.formService.validateExistingData.bind(this, {
                     fieldName: 'email',
                     service: this.companyUsersService,
+                    configId: this.configId,
                 })
             ],
             cedula: ['', [
@@ -80,6 +81,7 @@ export class DeliverFormComponent implements OnInit {
                 this.formService.validateExistingData.bind(this, {
                     fieldName: 'cedula',
                     service: this.companyUsersService,
+                    configId: this.configId,
                 })
             ],
             telefono: ['', [
@@ -91,6 +93,7 @@ export class DeliverFormComponent implements OnInit {
                 this.formService.validateExistingData.bind(this, {
                     fieldName: 'telefono',
                     service: this.companyUsersService,
+                    configId: this.configId,
                 })
             ],
             username: ['', [
@@ -102,6 +105,7 @@ export class DeliverFormComponent implements OnInit {
                 this.formService.validateExistingData.bind(this, {
                     fieldName: 'username',
                     service: this.companyUsersService,
+                    configId: this.configId,
                 })
             ],
             password: [''],
