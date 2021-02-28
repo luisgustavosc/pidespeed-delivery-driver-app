@@ -46,7 +46,13 @@ export class AdminFormComponent implements OnInit {
                     Validators.required,
                     Validators.pattern(this.formService.getEmailPattern())
                 ]),
-            ]],
+            ],
+                this.formService.validateExistingData.bind(this, {
+                    fieldName: 'email',
+                    service: this.companyUsersService,
+                    configId: this.configId,
+                })
+            ],
             cedula: ['', [
                 Validators.required,
                 Validators.compose([
@@ -55,19 +61,37 @@ export class AdminFormComponent implements OnInit {
                     Validators.minLength(7),
                     Validators.maxLength(8),
                 ]),
-            ]],
+            ],
+                this.formService.validateExistingData.bind(this, {
+                    fieldName: 'cedula',
+                    service: this.companyUsersService,
+                    configId: this.configId,
+                })
+            ],
             telefono: ['', [
                 Validators.required,
                 Validators.maxLength(11),
                 Validators.minLength(10),
                 Validators.pattern(this.formService.getNumericPattern())
-            ]],
+            ],
+                this.formService.validateExistingData.bind(this, {
+                    fieldName: 'telefono',
+                    service: this.companyUsersService,
+                    configId: this.configId,
+                })
+            ],
             username: ['', [
                 Validators.required,
                 Validators.pattern(this.formService.getUsernamePattern()),
                 Validators.minLength(4),
                 Validators.maxLength(20)
-            ]],
+            ],
+                this.formService.validateExistingData.bind(this, {
+                    fieldName: 'username',
+                    service: this.companyUsersService,
+                    configId: this.configId,
+                })
+            ],
             password: [''],
             direccion: ['', [
                 Validators.maxLength(100),
