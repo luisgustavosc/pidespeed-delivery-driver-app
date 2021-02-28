@@ -6,6 +6,7 @@ import { AuthService } from 'src/app/components/auth/services/auth/auth.service'
 import { MatSelectOptions } from 'src/app/model/matSelectOptions';
 import { CompanyUsersService } from 'src/app/services/company-users/company-users.service';
 import { ImageModel } from 'src/app/model/imageModel';
+import { validateExistingDataModel } from 'src/app/model/validateExistingData.model';
 
 @Component({
     selector: 'app-deliver-form',
@@ -61,7 +62,12 @@ export class DeliverFormComponent implements OnInit {
                     Validators.required,
                     Validators.pattern(this.formService.getEmailPattern())
                 ]),
-            ]],
+            ],
+                this.formService.validateExistingData.bind(this, {
+                    fieldName: 'email',
+                    service: this.companyUsersService,
+                })
+            ],
             cedula: ['', [
                 Validators.required,
                 Validators.compose([
@@ -70,19 +76,34 @@ export class DeliverFormComponent implements OnInit {
                     Validators.minLength(7),
                     Validators.maxLength(8),
                 ]),
-            ]],
+            ],
+                this.formService.validateExistingData.bind(this, {
+                    fieldName: 'cedula',
+                    service: this.companyUsersService,
+                })
+            ],
             telefono: ['', [
                 Validators.required,
                 Validators.maxLength(11),
                 Validators.minLength(10),
                 Validators.pattern(this.formService.getNumericPattern())
-            ]],
+            ],
+                this.formService.validateExistingData.bind(this, {
+                    fieldName: 'telefono',
+                    service: this.companyUsersService,
+                })
+            ],
             username: ['', [
                 Validators.required,
                 Validators.pattern(this.formService.getUsernamePattern()),
                 Validators.minLength(4),
                 Validators.maxLength(20)
-            ]],
+            ],
+                this.formService.validateExistingData.bind(this, {
+                    fieldName: 'username',
+                    service: this.companyUsersService,
+                })
+            ],
             password: [''],
             direccion: ['', [
                 Validators.maxLength(100),
