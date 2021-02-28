@@ -13,20 +13,19 @@ import { ImageModel } from 'src/app/model/imageModel';
     templateUrl: './company-profile-form.component.html',
 })
 export class CompanyProfileFormComponent implements OnInit {
-    @Input() private configId: string;
-    @Input() private isFormLoading: boolean = false;
+    @Input() public configId: string;
+    @Input() public isFormLoading: boolean = false;
     // To export values ​​to a parent component
-    @Output() private formGroupEmitter: EventEmitter<FormGroup> = new EventEmitter();
+    @Output() public formGroupEmitter: EventEmitter<FormGroup> = new EventEmitter();
 
-    private formGroup: FormGroup;
-    private isDataLoaded: boolean = false;
-    private companyImage: ImageModel;
-    private imgResultAfterCompress: string;
+    public formGroup: FormGroup;
+    public isDataLoaded: boolean = false;
+    public companyImage: ImageModel;
+    public imgResultAfterCompress: string;
     public cities : Array<MatSelectOptions> = null;
     public states : Array<MatSelectOptions> = null;
     public citySelected: MatSelectOptions;
     public stateSelected: MatSelectOptions;
-    private company = null;
 
     constructor(
         private fb: FormBuilder,
@@ -125,7 +124,7 @@ export class CompanyProfileFormComponent implements OnInit {
         imageField.updateValueAndValidity();
     }
 
-    private getImageCroppedAndCompressed(image: string): void {
+    getImageCroppedAndCompressed(image: string): void {
         this.imgResultAfterCompress = image;
     }
 

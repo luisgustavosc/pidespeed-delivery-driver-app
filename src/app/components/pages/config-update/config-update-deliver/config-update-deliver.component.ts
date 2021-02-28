@@ -10,13 +10,18 @@ import { CompanyUsersService } from 'src/app/services/company-users/company-user
     templateUrl: '../../../forms/config-template/config-update.component.html',
 })
 export class ConfigUpdateDeliverComponent implements OnInit {
-    private formType: string = FormService.DELIVER_FORM_TYPE;
-    private configId: string | null = this.activeRoute.snapshot.params.id || null;
-    private formGroup: FormGroup;
-    private isFormLoading = false;
-    private isDeliverFormType: boolean;
-    private pageTitle: string = this.configId ? 'Editar Username' : 'Agregar Repartidor';
-    private goBackUrl = '/settings/delivers';
+    public formType: string = FormService.DELIVER_FORM_TYPE;
+    public configId: string | null = this.activeRoute.snapshot.params.id || null;
+    public formGroup: FormGroup;
+    public isFormLoading = false;
+    public isDeliverFormType: boolean;
+    public pageTitle: string = this.configId ? 'Editar Username' : 'Agregar Repartidor';
+    public goBackUrl = '/settings/delivers';
+
+    //Mejorar esto para no tener que definirlas
+    isAffiliatedCompanyFormType = null;
+    isCompanyProfileFormType = null;
+    isAdminFormType = null;
 
     constructor(
         private formService: FormService,
@@ -30,7 +35,7 @@ export class ConfigUpdateDeliverComponent implements OnInit {
         this.isDeliverFormType = this.formService.isDeliverFormType(this.formType);
     }
 
-    private getForm(form: any): void {
+    getForm(form: any): void {
         this.isFormLoading = true;
         if (this.configId) {
             this.companyUsersService.update(form.value).subscribe(data => {

@@ -11,15 +11,15 @@ import { ImageModel } from 'src/app/model/imageModel';
     templateUrl: './admin-form.component.html',
 })
 export class AdminFormComponent implements OnInit {
-    @Output() private formGroupEmitter: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
-    @Input() private isFormLoading: boolean = false;
-    @Input() private configId: string;
-    private formGroup: FormGroup;
-    private imgResultAfterCompress: string;
-    private userImageUrl: ImageModel;
-    private companyId: string;
-    private isDataLoaded: boolean = false;
-    private isPasswordVisible: boolean;
+    @Output() public formGroupEmitter: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
+    @Input() public isFormLoading: boolean = false;
+    @Input() public configId: string;
+    public formGroup: FormGroup;
+    public imgResultAfterCompress: string;
+    public userImageUrl: ImageModel;
+    public companyId: string;
+    public isDataLoaded: boolean = false;
+    public isPasswordVisible: boolean;
 
     constructor(
         private fb: FormBuilder,
@@ -150,16 +150,16 @@ export class AdminFormComponent implements OnInit {
         passwordField.updateValueAndValidity();
     }
 
-    private getImageCroppedAndCompressed(image: string): void {
+    getImageCroppedAndCompressed(image: string): void {
         this.imgResultAfterCompress = image;
     }
 
-    private showPassword() {
+    showPassword() {
         this.isPasswordVisible = !this.isPasswordVisible;
         this.setPasswordValidators();
     }
 
-    private onSubmit(form: FormGroup, image: string): void {
+    onSubmit(form: FormGroup, image: string): void {
         form.value.image = this.formService.processImage(image, this.userImageUrl?._id);
         this.formGroupEmitter.emit(form);
     }

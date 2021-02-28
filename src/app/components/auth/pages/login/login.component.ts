@@ -9,7 +9,7 @@ import { AuthService } from 'src/app/components/auth/services/auth/auth.service'
 })
 export class LoginComponent implements OnInit {
     public isFormLoading: boolean = false;
-    private loginForm: FormGroup = new FormGroup({
+    public loginForm: FormGroup = new FormGroup({
         user: new FormControl('', [Validators.required]),
         password: new FormControl('', [Validators.required])
     });

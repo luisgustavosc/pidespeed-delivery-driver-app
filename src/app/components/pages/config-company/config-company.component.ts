@@ -10,11 +10,11 @@ import { ActionService } from 'src/app/services/action/action.service';
     templateUrl: './config-company.component.html',
 })
 export class ConfigCompanyComponent implements OnInit {
-    private pageTitle: string = 'Configuración de Empresas';
-    private bottomNavData: Array<BottomNavModel> = this.bottomNavService.getConfigBottomNavData();
-    private companyFormType: string = FormService.AFFILIATED_COMPANY_TYPE;
-    private currentPath: string = window.location.pathname;
-    private companies? = null;
+    public pageTitle: string = 'Configuración de Empresas';
+    public bottomNavData: Array<BottomNavModel> = this.bottomNavService.getConfigBottomNavData();
+    public companyFormType: string = FormService.AFFILIATED_COMPANY_TYPE;
+    public currentPath: string = window.location.pathname;
+    public companies? = null;
 
     constructor(
         private formService: FormService,
@@ -28,7 +28,7 @@ export class ConfigCompanyComponent implements OnInit {
         this.getCompanies();
     }
 
-    getCompanies() {
+    private getCompanies() {
         this.affiliatedCompanyService.getAll().subscribe(companies => {
             this.companies = companies;
         }, err => {

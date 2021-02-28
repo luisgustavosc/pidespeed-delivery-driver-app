@@ -8,16 +8,17 @@ import { CompanyUsersService } from 'src/app/services/company-users/company-user
     templateUrl: './delivers.component.html',
 })
 export class DeliversComponent implements OnInit {
-    private pageTitle: string = 'Repartidores';
-    private bottomNavData: Array<BottomNavModel> = this.bottomNavService.getDeliverBottomNavData();
-    private delivers = null;
+    public pageTitle: string = 'Repartidores';
+    public bottomNavData: Array<BottomNavModel> = this.bottomNavService.getDeliverBottomNavData();
+    public delivers = null;
+
     constructor(private bottomNavService: BottomNavService, private companyUsersService: CompanyUsersService, private actionService: ActionService) { }
 
     ngOnInit() {
         this.getDelivers();
     }
 
-    getDelivers() {
+    private getDelivers() {
         this.companyUsersService.getAll(CompanyUsersService.TYPE_DELIVERY).subscribe(delivers => {
             this.delivers = delivers;
         }, err => {

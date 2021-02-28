@@ -11,14 +11,14 @@ import { AuthService } from 'src/app/components/auth/services/auth/auth.service'
     templateUrl: './update-account.component.html',
 })
 export class UpdateAccountComponent implements OnInit {
-    private user = this.authService.getCurrentUser();
-    private formType: string;
-    private formGroup: FormGroup;
-    private isFormLoading = false;
-    private isDeliverFormType: boolean;
-    private isAdminFormType: boolean;
-    private pageTitle: string = 'Editar mi cuenta';
-    private goBackUrl = '/';
+    public user = this.authService.getCurrentUser();
+    public formType: string;
+    public formGroup: FormGroup;
+    public isFormLoading = false;
+    public isDeliverFormType: boolean;
+    public isAdminFormType: boolean;
+    public pageTitle: string = 'Editar mi cuenta';
+    public goBackUrl = '/';
 
     constructor(
         private formService: FormService,
@@ -34,7 +34,7 @@ export class UpdateAccountComponent implements OnInit {
         this.isAdminFormType = this.formService.isAdminFormType(this.formType);
     }
 
-    private getForm(form: any): void {
+    getForm(form: any): void {
         this.isFormLoading = true;
         this.companyUsersService.update(form.value).subscribe(data => {
             this.actionService.openSnackBar('Se ha actualizado exitosamente');

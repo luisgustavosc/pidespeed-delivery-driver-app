@@ -7,17 +7,17 @@ import { FormService } from 'src/app/components/forms/services/form/form.service
     templateUrl: './modal-form.component.html',
 })
 export class ModalFormComponent implements OnInit {
-    @Input() private formType: string;
-    @Input() private isHeaderVisible: boolean = true;
-    private isImageCropperType: boolean;
-    private modalTitle: string;
-    private modalDescription: string;
+    @Input() public formType: string;
+    @Input() public isHeaderVisible: boolean = true;
+    public isImageCropperType: boolean;
+    public modalTitle: string;
+    public modalDescription: string;
 
     // Only for ImageCropperType
-    @Input() private imageEvent: Event | null = null; // when a new image is loaded
-    @Input() private imageURLToEdit: string | null = null; // when loading an image that comes from our db
-    @Input() private imageSettings: imageCropperSettings;
-    @Output() private imgResultAfterCompress: EventEmitter<string|null> = new EventEmitter();
+    @Input() public imageEvent: Event | null = null; // when a new image is loaded
+    @Input() public imageURLToEdit: string | null = null; // when loading an image that comes from our db
+    @Input() public imageSettings: imageCropperSettings;
+    @Output() public imgResultAfterCompress: EventEmitter<string|null> = new EventEmitter();
 
     constructor(private formService: FormService) { }
 
@@ -25,7 +25,7 @@ export class ModalFormComponent implements OnInit {
         this.isImageCropperType = this.formService.isImageCropperType(this.formType);
     }
 
-    private getImageCroppedAndCompressed(image: string): void {
+    getImageCroppedAndCompressed(image: string): void {
         this.imgResultAfterCompress.emit(image);
     }
 }

@@ -12,16 +12,16 @@ declare var $: any;
     styleUrls: ['./input-file.component.scss'],
 })
 export class InputFileComponent implements OnInit {
-    @Input() private form: FormGroup;
-    @Input() private fieldName: string;
-    @Input() private imageURLToEdit: string = null;
-    private imageChangedEvent: Event = null;
-    private fileName: string;
-    private fileType: string = 'png';
-    private formType: string = FormService.IMAGE_CROPPER_TYPE;
-    private croppedImage: string = null;
+    @Input() public form: FormGroup;
+    @Input() public fieldName: string;
+    @Input() public imageURLToEdit: string = null;
+    public imageChangedEvent: Event = null;
+    public fileName: string;
+    public fileType: string = 'png';
+    public formType: string = FormService.IMAGE_CROPPER_TYPE;
+    public croppedImage: string = null;
 
-    @Input() private imageSettings: imageCropperSettings = {
+    @Input() public imageSettings: imageCropperSettings = {
         aspectRatio: 1 / 1,
         resizeToWidth: '800',
         resizeToHeight: '800',
@@ -44,11 +44,11 @@ export class InputFileComponent implements OnInit {
         if (this.imageURLToEdit) this.croppedImage = IMAGE_SERVER + '/' + this.imageURLToEdit;
     }
 
-    private openFileOption(): void {
+    openFileOption(): void {
         document.getElementById('upload_image').click();
     }
 
-    private loadFile(event): void {
+    loadFile(event): void {
         this.imageChangedEvent = event;
         this.fileName = event.target.files[0].name.replace(/ /g, '-');
         this.fileType = event.target.files[0].type;
@@ -56,19 +56,19 @@ export class InputFileComponent implements OnInit {
         $('#AppModal').modal({ backdrop: 'static', keyboard: false }, 'show');
     }
 
-    private clearPreview(): void {
+    clearPreview(): void {
         this.imageChangedEvent = null;
         this.croppedImage = null;
         (<HTMLInputElement>document.getElementById('upload_image')).value = null;
     }
 
-    private editFile(): void {
+    editFile(): void {
         this.imageURLToEdit = this.croppedImage;
         this.imageChangedEvent = null;
         $('#AppModal').modal({ backdrop: 'static', keyboard: false }, 'show');
     }
 
-    private getImageCroppedAndCompressed(image: string): void {
+    getImageCroppedAndCompressed(image: string): void {
         this.imgResultAfterCompress.emit(image);
         this.croppedImage = image;
     }

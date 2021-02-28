@@ -6,10 +6,11 @@ import { Router } from '@angular/router';
     templateUrl: './action-button.component.html',
 })
 export class ActionButtonComponent implements OnInit {
-    @Input() private bgColor: string = 'red2';
-    @Input() private link: string | null = null;
-    @Input() private action: Function = null;
-    @Input() private buttonLabel: string;
+    @Input() public bgColor: string = 'red2';
+    @Input() public link: string | null = null;
+    @Input() public action: Function = null;
+    @Input() public buttonLabel: string;
+    @Input() public isDisabled = false;
 
     constructor(
         private router: Router,
@@ -17,7 +18,7 @@ export class ActionButtonComponent implements OnInit {
 
     ngOnInit() { }
 
-    private actionButton() {
+    actionButton() {
         if (this.action) {
             this.action();
         } else if (this.link) {

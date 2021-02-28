@@ -8,15 +8,15 @@ import { MatSelectOptionsGroup } from 'src/app/model/matSelectOptionsGroup';
     templateUrl: './mat-select-field.component.html',
 })
 export class MatSelectFieldComponent implements OnInit {
-    @Input() private label: string;
-    @Input() private fieldName: string;
-    @Input() private form: FormGroup;
-    @Input() private options: Array<MatSelectOptions>;
-    @Input() private optionsGroup: Array<MatSelectOptionsGroup>;
-    @Input() private optionSelected: string = null;
-    @Input() private isMultiple: boolean = false;
-    @Input() private isOptionsPerGroup: boolean = false;
-    @Input() private maxLimitToChoose: number | null = null;
+    @Input() public label: string;
+    @Input() public fieldName: string;
+    @Input() public form: FormGroup;
+    @Input() public options: Array<MatSelectOptions>;
+    @Input() public optionsGroup: Array<MatSelectOptionsGroup>;
+    @Input() public optionSelected: any = null;
+    @Input() public isMultiple: boolean = false;
+    @Input() public isOptionsPerGroup: boolean = false;
+    @Input() public maxLimitToChoose: number | null = null;
 
     constructor() { }
 

@@ -11,14 +11,19 @@ import { CompanyProfileService } from 'src/app/services/company-profile/companyP
     templateUrl: '../../../forms/config-template/config-update.component.html',
 })
 export class ConfigUpdateCompanyComponent implements OnInit {
-    private user = this.authService.getCurrentUser();
-    private formType: string = FormService.COMPANY_PROFILE_TYPE;;
-    private formGroup: FormGroup;
-    private isFormLoading = false;
-    private isCompanyProfileFormType: boolean;
-    private pageTitle: string = 'Editar perfil de cuenta';
-    private goBackUrl = '/';
-    private configId = this.user.empresaDelivery;
+    public user = this.authService.getCurrentUser();
+    public formType: string = FormService.COMPANY_PROFILE_TYPE;;
+    public formGroup: FormGroup;
+    public isFormLoading = false;
+    public isCompanyProfileFormType: boolean;
+    public pageTitle: string = 'Editar perfil de cuenta';
+    public goBackUrl = '/';
+    public configId = this.user.empresaDelivery;
+
+    //Mejorar esto para no tener que definirlas
+    isAffiliatedCompanyFormType = null;
+    isDeliverFormType = null;
+    isAdminFormType = null;
 
     constructor(
         private formService: FormService,
@@ -32,7 +37,7 @@ export class ConfigUpdateCompanyComponent implements OnInit {
         this.isCompanyProfileFormType = this.formService.isCompanyProfileFormType(this.formType);
     }
 
-    private getForm(form: any): void {
+    getForm(form: any): void {
         this.isFormLoading = true;
         this.companyProfileService.update(form.value, this.user.empresaDelivery).subscribe(data => {
             this.actionService.openSnackBar('Se ha actualizado exitosamente');

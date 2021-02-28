@@ -11,16 +11,16 @@ import { ImageModel } from 'src/app/model/imageModel';
     templateUrl: './company-form.component.html',
 })
 export class CompanyFormComponent implements OnInit {
-    @Input() private configId: string;
-    @Input() private isFormLoading: boolean = false;
+    @Input() public configId: string;
+    @Input() public isFormLoading: boolean = false;
     // To export values ​​to a parent component
-    @Output() private formGroupEmitter: EventEmitter<FormGroup> = new EventEmitter();
+    @Output() public formGroupEmitter: EventEmitter<FormGroup> = new EventEmitter();
 
-    private formGroup: FormGroup;
-    private companyId: string;
-    private isDataLoaded: boolean = false;
-    private companyImage: ImageModel;
-    private imgResultAfterCompress: string;
+    public formGroup: FormGroup;
+    public companyId: string;
+    public isDataLoaded: boolean = false;
+    public companyImage: ImageModel;
+    public imgResultAfterCompress: string;
 
     constructor(
         private fb: FormBuilder,
@@ -82,7 +82,7 @@ export class CompanyFormComponent implements OnInit {
         imageField.updateValueAndValidity();
     }
 
-    private getImageCroppedAndCompressed(image: string): void {
+    getImageCroppedAndCompressed(image: string): void {
         this.imgResultAfterCompress = image;
     }
 

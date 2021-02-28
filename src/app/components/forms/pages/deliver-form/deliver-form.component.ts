@@ -13,16 +13,16 @@ import { validateExistingDataModel } from 'src/app/model/validateExistingData.mo
     templateUrl: './deliver-form.component.html',
 })
 export class DeliverFormComponent implements OnInit {
-    @Output() private formGroupEmitter: EventEmitter<any> = new EventEmitter<any>();
-    @Input() private isFormLoading = false;
-    @Input() private configId: string;
-    private formGroup: FormGroup;
-    private imgResultAfterCompress: string;
-    private deliverImage: ImageModel;
-    private companyId: string;
-    private isDataLoaded: boolean = false;
-    private isPasswordVisible: boolean;
-    private vehicleTypes: Array<MatSelectOptions> = [
+    @Output() public formGroupEmitter: EventEmitter<any> = new EventEmitter<any>();
+    @Input() public isFormLoading = false;
+    @Input() public configId: string;
+    public formGroup: FormGroup;
+    public imgResultAfterCompress: string;
+    public deliverImage: ImageModel;
+    public companyId: string;
+    public isDataLoaded: boolean = false;
+    public isPasswordVisible: boolean;
+    public vehicleTypes: Array<MatSelectOptions> = [
         {
             'title' : 'Moto',
             'value': 'motorcycle'
@@ -158,16 +158,16 @@ export class DeliverFormComponent implements OnInit {
         passwordField.updateValueAndValidity();
     }
 
-    private getImageCroppedAndCompressed(image: string): void {
+    getImageCroppedAndCompressed(image: string): void {
         this.imgResultAfterCompress = image;
     }
 
-    private showPassword() {
+    showPassword() {
         this.isPasswordVisible = !this.isPasswordVisible;
         this.setPasswordValidators();
     }
 
-    private onSubmit(form: FormGroup, image: string): void {
+    onSubmit(form: FormGroup, image: string): void {
         form.value.image = this.formService.processImage(image, this.deliverImage?._id);
         this.formGroupEmitter.emit(form);
     }
