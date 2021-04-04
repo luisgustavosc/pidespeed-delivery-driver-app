@@ -6,26 +6,26 @@ import { CompanyProfileService } from 'src/app/services/company-profile/companyP
 import { LocationService } from 'src/app/services/location/location.service';
 import { LocationModel } from 'src/app/model/location.model';
 import { MatSelectOptions } from 'src/app/model/matSelectOptions';
+import { ImageModel } from 'src/app/model/imageModel';
 
 @Component({
     selector: 'app-company-profile-form',
     templateUrl: './company-profile-form.component.html',
 })
 export class CompanyProfileFormComponent implements OnInit {
-    @Input() private configId: string;
-    @Input() private isFormLoading: boolean = false;
+    @Input() public configId: string;
+    @Input() public isFormLoading: boolean = false;
     // To export values ​​to a parent component
-    @Output() private formGroupEmitter: EventEmitter<FormGroup> = new EventEmitter();
+    @Output() public formGroupEmitter: EventEmitter<FormGroup> = new EventEmitter();
 
-    private formGroup: FormGroup;
-    private isDataLoaded: boolean = false;
-    private companyImageUrl: string;
-    private imgResultAfterCompress: string;
+    public formGroup: FormGroup;
+    public isDataLoaded: boolean = false;
+    public companyImage: ImageModel;
+    public imgResultAfterCompress: string;
     public cities : Array<MatSelectOptions> = null;
     public states : Array<MatSelectOptions> = null;
     public citySelected: MatSelectOptions;
     public stateSelected: MatSelectOptions;
-    private company = null;
 
     constructor(
         private fb: FormBuilder,
@@ -61,8 +61,8 @@ export class CompanyProfileFormComponent implements OnInit {
 
     private getDeliveryCompany() {
         this.companyProfileService.getById(this.configId).subscribe((company: any) => {
-            this.companyImageUrl = company.logo?.url;
-            if (this.companyImageUrl) {
+            this.companyImage = company.logo;
+            if (this.companyImage?.url) {
                 this.removeImageValidators();
             }
 
@@ -124,12 +124,12 @@ export class CompanyProfileFormComponent implements OnInit {
         imageField.updateValueAndValidity();
     }
 
-    private getImageCroppedAndCompressed(image: string): void {
+    getImageCroppedAndCompressed(image: string): void {
         this.imgResultAfterCompress = image;
     }
 
     onSubmit(form: FormGroup, image: string): void {
-        form.value.logo = this.formService.processImage(image, this.configId);
+        form.value.logo = this.formService.processImage(image, this.companyImage?._id);
         this.formGroupEmitter.emit(form);
     }
 }

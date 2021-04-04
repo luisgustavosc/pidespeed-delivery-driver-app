@@ -24,7 +24,7 @@ export class CompanyUsersService {
     }
 
     getByField(data) {
-        return this.http.post(`${ AUTH_SERVER }/search-user-field`, data, options);
+        return this.http.post(`${ AUTH_SERVER }/usuario-empresa/search-user-field`, data, options);
     }
 
     create(data) {

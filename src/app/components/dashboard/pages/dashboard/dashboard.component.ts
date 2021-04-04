@@ -6,7 +6,7 @@ import * as moment from 'moment';
     templateUrl: "./dashboard.component.html",
 })
 export class DashboardComponent implements OnInit {
-    private pageTitle: string = 'Inicio';
+    public pageTitle: string = 'Inicio';
 
     constructor(
     ) { }

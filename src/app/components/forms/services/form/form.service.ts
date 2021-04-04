@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { AbstractControl } from "@angular/forms";
 import { of } from 'rxjs/internal/observable/of';
 import { catchError, map } from 'rxjs/operators';
+import { validateExistingDataModel } from 'src/app/model/validateExistingData.model';
 import { ActionService } from "src/app/services/action/action.service";
 import { CompanyUsersService } from 'src/app/services/company-users/company-users.service';
 
@@ -94,43 +95,43 @@ export class FormService {
     }
 
     /**
-     *  Validation for an existing data.
-     *
-     * For some reason the parameters of the function do not come
-     * in the correct order. the function is declared in this order:
-     *
-     * this.formService.validateExistingData.bind(this, this.service.getUserByEmail, 'email');
-     *  1. this = $control,
-     *  2. this.service = $fetchData,
-     * '3. 'email' = $fieldName,
+     *  Data Validation on existing data
      *
      * how to use it:
      *      username: ["", [
      *          Validators.required,
      *      ],
-     *        this.formService.validateExistingData.bind(this, this.service.getUserByEmail, 'email');
+     *         this.formService.validateExistingData.bind(this, {
+                    fieldName: 'username',
+                    service: this.companyUsersService,
+                })
      *      ]
      *
-     * and it is returned in the following order:
-     *
-     * @param {Function} $fetchData
-     * @param {string} fieldName
+     * @param {validateExistingDataModel} validateData
      * @param {AbstractControl} control
      * @returns {Boolean | Null}
      */
-    public validateExistingData($fetchData: Function, $fieldName: string, $control: AbstractControl): boolean | null {
-        console.log($fetchData)
+    public validateExistingData(
+        { fieldName, service, configId } : validateExistingDataModel,
+        control:AbstractControl
+    ): boolean | null {
+
         const dataToValidate = {
-            field: $fieldName,
-            value: $control.value
+            field: fieldName,
+            value: control.value
         };
-        return $fetchData(dataToValidate).pipe(
-            map((response: any) => {
-                if (response.length)
+
+        return service.getByField(dataToValidate).pipe(
+            map((data: any) => {
+                if (data) {
+                    if (data.id === configId) {
+                        return null;
+                    }
                     return {
                         isNotAvailable: true
                     };
-                // Return null for no errors
+                }
+                // return null for no errors
                 return null;
             }),
             catchError(err => of(this.actionService.getSwalError()))
@@ -144,7 +145,12 @@ export class FormService {
      * @param {Boolean} update
      * @param {String|Null} id
      */
-    public processImage(image: string = null, id: string = null, folder: string = null, update: boolean = false) {
+    public processImage(
+        image: string = null,
+        id: string = null,
+        folder: string = null,
+        update: boolean = false
+    ) {
         if (image) {
             const base64Parts = image.split(',');
             const imageMapped = {
@@ -162,10 +168,12 @@ export class FormService {
         return id;
     }
 
-    private getRandomName() {
-        const timestamp = new Date().toISOString().replace(/[-:.]/g, "");
-        const random = ("" + Math.random()).substring(2, 8);
-        const randomNumber = timestamp + random;
+    private getRandomName(): string
+    {
+        const timestamp = new Date().toISOString().replace(/[-:.]/g, ""),
+                    random = ("" + Math.random()).substring(2, 8),
+                    randomNumber = timestamp + random;
+
         return randomNumber;
     }
 }

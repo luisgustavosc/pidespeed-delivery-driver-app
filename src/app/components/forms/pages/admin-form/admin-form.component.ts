@@ -4,21 +4,22 @@ import { FormService } from 'src/app/components/forms/services/form/form.service
 import { ActionService } from 'src/app/services/action/action.service';
 import { AuthService } from 'src/app/components/auth/services/auth/auth.service';
 import { CompanyUsersService } from 'src/app/services/company-users/company-users.service';
+import { ImageModel } from 'src/app/model/imageModel';
 
 @Component({
     selector: 'app-admin-form',
     templateUrl: './admin-form.component.html',
 })
 export class AdminFormComponent implements OnInit {
-    @Output() private formGroupEmitter: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
-    @Input() private isFormLoading: boolean = false;
-    @Input() private configId: string;
-    private formGroup: FormGroup;
-    private imgResultAfterCompress: string;
-    private userImageUrl: string;
-    private companyId: string;
-    private isDataLoaded: boolean = false;
-    private isPasswordVisible: boolean;
+    @Output() public formGroupEmitter: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
+    @Input() public isFormLoading: boolean = false;
+    @Input() public configId: string;
+    public formGroup: FormGroup;
+    public imgResultAfterCompress: string;
+    public userImageUrl: ImageModel;
+    public companyId: string;
+    public isDataLoaded: boolean = false;
+    public isPasswordVisible: boolean;
 
     constructor(
         private fb: FormBuilder,
@@ -45,7 +46,13 @@ export class AdminFormComponent implements OnInit {
                     Validators.required,
                     Validators.pattern(this.formService.getEmailPattern())
                 ]),
-            ]],
+            ],
+                this.formService.validateExistingData.bind(this, {
+                    fieldName: 'email',
+                    service: this.companyUsersService,
+                    configId: this.configId,
+                })
+            ],
             cedula: ['', [
                 Validators.required,
                 Validators.compose([
@@ -54,19 +61,37 @@ export class AdminFormComponent implements OnInit {
                     Validators.minLength(7),
                     Validators.maxLength(8),
                 ]),
-            ]],
+            ],
+                this.formService.validateExistingData.bind(this, {
+                    fieldName: 'cedula',
+                    service: this.companyUsersService,
+                    configId: this.configId,
+                })
+            ],
             telefono: ['', [
                 Validators.required,
                 Validators.maxLength(11),
                 Validators.minLength(10),
                 Validators.pattern(this.formService.getNumericPattern())
-            ]],
+            ],
+                this.formService.validateExistingData.bind(this, {
+                    fieldName: 'telefono',
+                    service: this.companyUsersService,
+                    configId: this.configId,
+                })
+            ],
             username: ['', [
                 Validators.required,
                 Validators.pattern(this.formService.getUsernamePattern()),
                 Validators.minLength(4),
                 Validators.maxLength(20)
-            ]],
+            ],
+                this.formService.validateExistingData.bind(this, {
+                    fieldName: 'username',
+                    service: this.companyUsersService,
+                    configId: this.configId,
+                })
+            ],
             password: [''],
             direccion: ['', [
                 Validators.maxLength(100),
@@ -93,7 +118,7 @@ export class AdminFormComponent implements OnInit {
                 direccion
             } = user;
 
-            this.userImageUrl = img?.url;
+            this.userImageUrl = img;
             this.formGroup.patchValue({
                 nombre: nombre,
                 apellido: apellido,
@@ -125,17 +150,17 @@ export class AdminFormComponent implements OnInit {
         passwordField.updateValueAndValidity();
     }
 
-    private getImageCroppedAndCompressed(image: string): void {
+    getImageCroppedAndCompressed(image: string): void {
         this.imgResultAfterCompress = image;
     }
 
-    private showPassword() {
+    showPassword() {
         this.isPasswordVisible = !this.isPasswordVisible;
         this.setPasswordValidators();
     }
 
-    private onSubmit(form: FormGroup, image: string): void {
-        form.value.image = this.formService.processImage(image, this.configId);
+    onSubmit(form: FormGroup, image: string): void {
+        form.value.image = this.formService.processImage(image, this.userImageUrl?._id);
         this.formGroupEmitter.emit(form);
     }
 }

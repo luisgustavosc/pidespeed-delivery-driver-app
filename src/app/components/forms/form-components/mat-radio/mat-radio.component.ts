@@ -7,10 +7,11 @@ import { MatSelectOptions } from 'src/app/model/matSelectOptions';
     templateUrl: './mat-radio.component.html',
 })
 export class MatRadioComponent implements OnInit {
-    @Input() private label: string;
-    @Input() private fieldName: string;
-    @Input() private form: FormGroup;
-    @Input() private options: Array<MatSelectOptions>;
+    @Input() public label: string;
+    @Input() public fieldName: string;
+    @Input() public form: FormGroup;
+    @Input() public options: Array<MatSelectOptions>;
+    @Input() public optionSelected: any = null;
 
     constructor() { }
 

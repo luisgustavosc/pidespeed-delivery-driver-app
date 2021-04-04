@@ -6,10 +6,10 @@ import { FormGroup } from '@angular/forms';
     templateUrl: './mat-textarea-field.component.html',
 })
 export class MatTextareaFieldComponent implements OnInit {
-    @Input() private label: string;
-    @Input() private fieldName: string;
-    @Input() private form: FormGroup;
-    @Input() private maxLength: number =  null;
+    @Input() public label: string;
+    @Input() public fieldName: string;
+    @Input() public form: FormGroup;
+    @Input() public maxLength: number =  null;
 
     constructor() { }
 

@@ -6,19 +6,20 @@ import { ActionService } from 'src/app/services/action/action.service';
     templateUrl: './admin-row.component.html',
 })
 export class AdminRowComponent implements OnInit {
-    @Input() private dataId?: number = null;
-    @Input() private rowTitle: string;
-    @Input() private rowImg: string
-    @Input() private rowSubtitle: string;
-    @Input() private rowStatus?: string = null;
-    @Input() private hasActions: boolean = false;
-    @Input() private hasModal: boolean = false;
-    @Input() private EditRedirectTo?: string = null;
-    @Input() private isDisabled: boolean = false;
+    @Input() public dataId?: number = null;
+    @Input() public rowTitle: string;
+    @Input() public rowImg: string
+    @Input() public rowSubtitle: string;
+    @Input() public rowStatus?: string = null;
+    @Input() public hasActions: boolean = false;
+    @Input() public hasModal: boolean = false;
+    @Input() public EditRedirectTo?: string = null;
+    @Input() public isDisabled: boolean = false;
     @Input() private deleteAction: (id: number) => void;
     @Input() private disabledAction: (id: number) => boolean;
     @Input() private editAction: (id: number) => void;
-    @Input() private formType: string;
+    @Input() public formType: string;
+
     constructor(private actionService: ActionService) { }
 
     ngOnInit() { }

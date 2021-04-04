@@ -8,12 +8,12 @@ import { BottomNavService } from 'src/app/services/bottomNav/bottom-nav.service'
     templateUrl: './list.component.html',
 })
 export class ListComponent implements OnInit {
-    private pageTitle: string = 'Ordenes';
-    private bottomNavData: Array<BottomNavModel> = this.bottomNavService.getOrdersBottomNavData();
-    private orderStatus: string | null = this.activeRoute.snapshot.params.status || 'to-do';
+    public pageTitle: string = 'Ordenes';
+    public bottomNavData: Array<BottomNavModel> = this.bottomNavService.getOrdersBottomNavData();
+    public orderStatus: string | null = this.activeRoute.snapshot.params.status || 'to-do';
 
-    private orders = true;
-    private isOrderDetailActive: boolean;
+    public orders = true;
+    public isOrderDetailActive: boolean;
 
     constructor(
         private activeRoute: ActivatedRoute,
@@ -41,7 +41,7 @@ export class ListComponent implements OnInit {
         }
     }
 
-    private getActiveOrder(id: string) {
+    getActiveOrder(id: string) {
         this.toggleOrderDetail();
         console.log(id);
     }

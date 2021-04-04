@@ -10,13 +10,18 @@ import { CompanyUsersService } from 'src/app/services/company-users/company-user
     templateUrl: '../../../forms/config-template/config-update.component.html',
 })
 export class ConfigUpdateAdminComponent implements OnInit {
-    private formType: string = FormService.ADMIN_FORM_TYPE;
-    private configId: string | null = this.activeRoute.snapshot.params.id || null;
-    private formGroup: FormGroup;
-    private isFormLoading = false;
-    private isAdminFormType: boolean;
-    private pageTitle: string = this.configId ? 'Editar Username' : 'Agregar Usuario';
-    private goBackUrl: string = '/settings/admins'
+    public formType: string = FormService.ADMIN_FORM_TYPE;
+    public configId: string | null = this.activeRoute.snapshot.params.id || null;
+    public formGroup: FormGroup;
+    public isFormLoading = false;
+    public isAdminFormType: boolean;
+    public pageTitle: string = this.configId ? 'Editar Username' : 'Agregar Usuario';
+    public goBackUrl: string = '/settings/admins';
+
+    //Mejorar esto para no tener que definirlas
+    isAffiliatedCompanyFormType = null;
+    isDeliverFormType = null;
+    isCompanyProfileFormType = null;
 
     constructor(
         private formService: FormService,
@@ -30,7 +35,7 @@ export class ConfigUpdateAdminComponent implements OnInit {
         this.isAdminFormType = this.formService.isAdminFormType(this.formType);
     }
 
-    private getForm(form: any): void {
+    getForm(form: any): void {
         this.isFormLoading = true;
         if (this.configId) {
             this.companyUsersService.update(form.value).subscribe(data => {

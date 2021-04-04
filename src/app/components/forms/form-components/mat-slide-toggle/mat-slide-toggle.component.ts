@@ -6,9 +6,9 @@ import { FormGroup } from '@angular/forms';
     templateUrl: './mat-slide-toggle.component.html',
 })
 export class MatSlideToggleComponent implements OnInit {
-    @Input() private label: string;
-    @Input() private fieldName: string;
-    @Input() private form: FormGroup;
+    @Input() public label: string;
+    @Input() public fieldName: string;
+    @Input() public form: FormGroup;
 
     constructor() { }
 

@@ -4,22 +4,23 @@ import { AuthService } from 'src/app/components/auth/services/auth/auth.service'
 import { AffiliatedCompanyService } from 'src/app/services/affiliated-company/affiliated-company.service';
 import { ActionService } from 'src/app/services/action/action.service';
 import { FormService } from 'src/app/components/forms/services/form/form.service';
+import { ImageModel } from 'src/app/model/imageModel';
 
 @Component({
     selector: 'app-company-form',
     templateUrl: './company-form.component.html',
 })
 export class CompanyFormComponent implements OnInit {
-    @Input() private configId: string;
-    @Input() private isFormLoading: boolean = false;
+    @Input() public configId: string;
+    @Input() public isFormLoading: boolean = false;
     // To export values ​​to a parent component
-    @Output() private formGroupEmitter: EventEmitter<FormGroup> = new EventEmitter();
+    @Output() public formGroupEmitter: EventEmitter<FormGroup> = new EventEmitter();
 
-    private formGroup: FormGroup;
-    private companyId: string;
-    private isDataLoaded: boolean = false;
-    private companyImageUrl: string;
-    private imgResultAfterCompress: string;
+    public formGroup: FormGroup;
+    public companyId: string;
+    public isDataLoaded: boolean = false;
+    public companyImage: ImageModel;
+    public imgResultAfterCompress: string;
 
     constructor(
         private fb: FormBuilder,
@@ -59,7 +60,7 @@ export class CompanyFormComponent implements OnInit {
 
     private getCompany() {
         this.affiliatedCompanyService.getById(this.configId).subscribe((company: any) => {
-            this.companyImageUrl = company.img?.url;
+            this.companyImage = company.img;
             this.formGroup.patchValue({
                 name: company.name,
                 description: company.description,
@@ -81,12 +82,12 @@ export class CompanyFormComponent implements OnInit {
         imageField.updateValueAndValidity();
     }
 
-    private getImageCroppedAndCompressed(image: string): void {
+    getImageCroppedAndCompressed(image: string): void {
         this.imgResultAfterCompress = image;
     }
 
     onSubmit(form: FormGroup, image: string): void {
-        form.value.image = this.formService.processImage(image, this.configId);
+        form.value.image = this.formService.processImage(image, this.companyImage?._id);
         this.formGroupEmitter.emit(form);
     }
 }

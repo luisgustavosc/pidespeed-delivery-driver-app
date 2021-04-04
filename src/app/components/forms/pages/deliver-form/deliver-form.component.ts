@@ -5,22 +5,24 @@ import { ActionService } from 'src/app/services/action/action.service';
 import { AuthService } from 'src/app/components/auth/services/auth/auth.service';
 import { MatSelectOptions } from 'src/app/model/matSelectOptions';
 import { CompanyUsersService } from 'src/app/services/company-users/company-users.service';
+import { ImageModel } from 'src/app/model/imageModel';
+import { validateExistingDataModel } from 'src/app/model/validateExistingData.model';
 
 @Component({
     selector: 'app-deliver-form',
     templateUrl: './deliver-form.component.html',
 })
 export class DeliverFormComponent implements OnInit {
-    @Output() private formGroupEmitter: EventEmitter<any> = new EventEmitter<any>();
-    @Input() private isFormLoading = false;
-    @Input() private configId: string;
-    private formGroup: FormGroup;
-    private imgResultAfterCompress: string;
-    private deliverImageUrl: string;
-    private companyId: string;
-    private isDataLoaded: boolean = false;
-    private isPasswordVisible: boolean;
-    private vehicleTypes: Array<MatSelectOptions> = [
+    @Output() public formGroupEmitter: EventEmitter<any> = new EventEmitter<any>();
+    @Input() public isFormLoading = false;
+    @Input() public configId: string;
+    public formGroup: FormGroup;
+    public imgResultAfterCompress: string;
+    public deliverImage: ImageModel;
+    public companyId: string;
+    public isDataLoaded: boolean = false;
+    public isPasswordVisible: boolean;
+    public vehicleTypes: Array<MatSelectOptions> = [
         {
             'title' : 'Moto',
             'value': 'motorcycle'
@@ -60,7 +62,13 @@ export class DeliverFormComponent implements OnInit {
                     Validators.required,
                     Validators.pattern(this.formService.getEmailPattern())
                 ]),
-            ]],
+            ],
+                this.formService.validateExistingData.bind(this, {
+                    fieldName: 'email',
+                    service: this.companyUsersService,
+                    configId: this.configId,
+                })
+            ],
             cedula: ['', [
                 Validators.required,
                 Validators.compose([
@@ -69,19 +77,37 @@ export class DeliverFormComponent implements OnInit {
                     Validators.minLength(7),
                     Validators.maxLength(8),
                 ]),
-            ]],
+            ],
+                this.formService.validateExistingData.bind(this, {
+                    fieldName: 'cedula',
+                    service: this.companyUsersService,
+                    configId: this.configId,
+                })
+            ],
             telefono: ['', [
                 Validators.required,
                 Validators.maxLength(11),
                 Validators.minLength(10),
                 Validators.pattern(this.formService.getNumericPattern())
-            ]],
+            ],
+                this.formService.validateExistingData.bind(this, {
+                    fieldName: 'telefono',
+                    service: this.companyUsersService,
+                    configId: this.configId,
+                })
+            ],
             username: ['', [
                 Validators.required,
                 Validators.pattern(this.formService.getUsernamePattern()),
                 Validators.minLength(4),
                 Validators.maxLength(20)
-            ]],
+            ],
+                this.formService.validateExistingData.bind(this, {
+                    fieldName: 'username',
+                    service: this.companyUsersService,
+                    configId: this.configId,
+                })
+            ],
             password: [''],
             direccion: ['', [
                 Validators.maxLength(100),
@@ -99,7 +125,8 @@ export class DeliverFormComponent implements OnInit {
 
     private getDeliver() {
         this.companyUsersService.getById(this.configId, CompanyUsersService.TYPE_DELIVERY).subscribe((deliver: any) => {
-            this.deliverImageUrl = deliver.img?.url;
+            this.deliverImage = deliver.img;
+
             this.formGroup.patchValue({
                 nombre: deliver.nombre,
                 apellido: deliver.apellido,
@@ -131,17 +158,17 @@ export class DeliverFormComponent implements OnInit {
         passwordField.updateValueAndValidity();
     }
 
-    private getImageCroppedAndCompressed(image: string): void {
+    getImageCroppedAndCompressed(image: string): void {
         this.imgResultAfterCompress = image;
     }
 
-    private showPassword() {
+    showPassword() {
         this.isPasswordVisible = !this.isPasswordVisible;
         this.setPasswordValidators();
     }
 
-    private onSubmit(form: FormGroup, image: string): void {
-        form.value.image = this.formService.processImage(image, this.configId);
+    onSubmit(form: FormGroup, image: string): void {
+        form.value.image = this.formService.processImage(image, this.deliverImage?._id);
         this.formGroupEmitter.emit(form);
     }
 }

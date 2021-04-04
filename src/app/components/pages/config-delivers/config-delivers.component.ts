@@ -10,11 +10,11 @@ import { ActionService } from 'src/app/services/action/action.service';
     templateUrl: './config-delivers.component.html',
 })
 export class ConfigDeliversComponent implements OnInit {
-    private pageTitle = 'Configuración de Repartidores';
-    private bottomNavData: Array<BottomNavModel> =this.bottomNavService.getConfigBottomNavData();
-    private deliverFormType: string = FormService.DELIVER_FORM_TYPE;
-    private currentPath: string = window.location.pathname;
-    private delivers = null;
+    public pageTitle = 'Configuración de Repartidores';
+    public bottomNavData: Array<BottomNavModel> =this.bottomNavService.getConfigBottomNavData();
+    public deliverFormType: string = FormService.DELIVER_FORM_TYPE;
+    public currentPath: string = window.location.pathname;
+    public delivers = null;
     public isFormLoading = false;
     constructor(
         private bottomNavService: BottomNavService,
@@ -28,7 +28,7 @@ export class ConfigDeliversComponent implements OnInit {
         this.getDelivers();
     }
 
-    getDelivers() {
+    private getDelivers() {
         this.companyUsersService.getAll(CompanyUsersService.TYPE_DELIVERY).subscribe(delivers => {
             this.delivers = delivers;
         }, err => {

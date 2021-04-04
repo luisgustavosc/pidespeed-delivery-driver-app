@@ -1,24 +1,24 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 
 @Component({
     selector: 'app-mat-input-field',
     templateUrl: './mat-input-field.component.html',
 })
 export class MatInputFieldComponent implements OnInit {
-    @Input() private label: string;
-    @Input() private fieldName: string;
-    @Input() private form: FormGroup;
-    @Input() private inputType: string = 'text';
-    @Input() private InputModeType?: 'text' | 'decimal' | 'numeric' | 'tel' | 'search' | 'email' | 'url' = null;
-    @Input() private maxLength?: number = null;
-    @Input() private minLength?: number = null;
-    @Input() private notBlank: boolean = false;
-    @Input() private hint?: string = null;
-    private isRequired: boolean;
+    @Input() public label: string;
+    @Input() public fieldName: string;
+    @Input() public form: FormGroup;
+    @Input() public inputType: string = 'text';
+    @Input() public InputModeType?: 'text' | 'decimal' | 'numeric' | 'tel' | 'search' | 'email' | 'url' = null;
+    @Input() public maxLength?: number = null;
+    @Input() public minLength?: number = null;
+    @Input() public notBlank: boolean = false;
+    @Input() public hint?: string = null;
+    public isRequired: boolean;
     // Only use for Password Type
-    private isPasswordVisible: boolean = false;
-    private isPasswordMode: boolean = false;
+    public isPasswordVisible: boolean = false;
+    public isPasswordMode: boolean = false;
 
     constructor() { }
 
@@ -34,7 +34,7 @@ export class MatInputFieldComponent implements OnInit {
      * Toggle password visibility by clicking on the eye icon
      *
      */
-    private updatePasswordVisibility() {
+    updatePasswordVisibility() {
         this.isPasswordVisible = !this.isPasswordVisible;
 
         if (this.isPasswordVisible) {
@@ -50,7 +50,7 @@ export class MatInputFieldComponent implements OnInit {
      * @param {string} fieldName
      * @param {FormControl} form
      */
-    private trimField(fieldName: string, form: FormControl) {
+    trimField(fieldName: string, form: FormGroup) {
         if (this.notBlank) {
             form.get(fieldName).setValue(form.get(fieldName).value.trim());
         }

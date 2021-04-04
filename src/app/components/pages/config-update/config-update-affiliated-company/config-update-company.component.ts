@@ -10,13 +10,18 @@ import { ActionService } from 'src/app/services/action/action.service';
     templateUrl: '../../../forms/config-template/config-update.component.html',
 })
 export class ConfigUpdateCompaniesComponent implements OnInit {
-    private formType: string = FormService.AFFILIATED_COMPANY_TYPE;
-    private configId: string | null = this.activeRoute.snapshot.params.id || null;
-    private formGroup: FormGroup;
-    private isAffiliatedCompanyFormType: boolean;
-    private pageTitle: string = this.configId ? 'Editar Username' : 'Agregar Empresa';
-    private goBackUrl: string = '/settings/company'
-    private isFormLoading: boolean = false;
+    public formType: string = FormService.AFFILIATED_COMPANY_TYPE;
+    public configId: string | null = this.activeRoute.snapshot.params.id || null;
+    public formGroup: FormGroup;
+    public isAffiliatedCompanyFormType: boolean;
+    public pageTitle: string = this.configId ? 'Editar Username' : 'Agregar Empresa';
+    public goBackUrl: string = '/settings/company'
+    public isFormLoading: boolean = false;
+
+    //Mejorar esto para no tener que definirlas
+    isDeliverFormType = null;
+    isCompanyProfileFormType = null;
+    isAdminFormType = null;
 
     constructor(
         private formService: FormService,
@@ -30,7 +35,7 @@ export class ConfigUpdateCompaniesComponent implements OnInit {
         this.isAffiliatedCompanyFormType = this.formService.isAffiliatedCompanyFormType(this.formType);
     }
 
-    private getForm(form: FormGroup): void {
+    getForm(form: FormGroup): void {
         this.isFormLoading = true;
         if (this.configId) {
             this.affiliatedCompanyService.update(form.value).subscribe(data => {

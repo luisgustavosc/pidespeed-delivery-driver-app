@@ -9,12 +9,12 @@ import { ActionService } from 'src/app/services/action/action.service';
     templateUrl: './image-cropper.component.html',
 })
 export class ImageCropperComponent implements OnInit {
-    @Input() private imageEvent: Event | null = null;
-    @Input() private imageSettings: imageCropperSettings;
-    @Input() private imageURLToEdit: string = null;
-    @Output() private imgResultAfterCompress: EventEmitter<string|null> = new EventEmitter();
+    @Input() public imageEvent: Event | null = null;
+    @Input() public imageSettings: imageCropperSettings;
+    @Input() public imageURLToEdit: string = null;
+    @Output() public imgResultAfterCompress: EventEmitter<string|null> = new EventEmitter();
 
-    private imageCompressed: string;
+    public imageCompressed: string;
     private canvasRotation: number = 0;
     private transform: ImageTransform = {};
     private rotation: number = 0;
@@ -31,7 +31,7 @@ export class ImageCropperComponent implements OnInit {
         this.imageURLToEdit = null;
     }
 
-    private imageCropped(event: ImageCroppedEvent, ) {
+    imageCropped(event: ImageCroppedEvent, ) {
         this.imageCompress.compressFile(event.base64, 50, 50).then( result => {
                 this.imageCompressed = result;
                 this.imgResultAfterCompress.emit(this.imageCompressed);
@@ -39,31 +39,31 @@ export class ImageCropperComponent implements OnInit {
         );
     }
 
-    private imageLoaded() {
+    imageLoaded() {
         // show cropper
     }
 
-    private cropperReady() {
+    cropperReady() {
         // cropper ready
     }
 
-    private loadImageFailed() {
+    loadImageFailed() {
         this.actionService.getSwalError('El formato no es válido', 'La imagen debe ser png, jpg o jpeg');
     }
 
-    private rotateLeft() {
+    rotateLeft() {
         this.canvasRotation--;
         this.flipAfterRotate();
         this.cdRef.detectChanges();
     }
 
-    private rotateRight() {
+    rotateRight() {
         this.canvasRotation++;
         this.flipAfterRotate();
         this.cdRef.detectChanges();
     }
 
-    private flipAfterRotate() {
+    flipAfterRotate() {
         const flippedH = this.transform.flipH;
         const flippedV = this.transform.flipV;
         this.transform = {

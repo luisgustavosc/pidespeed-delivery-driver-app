@@ -10,11 +10,11 @@ import { ActionService } from 'src/app/services/action/action.service';
     templateUrl: './config-admins.component.html',
 })
 export class ConfigAdminsComponent implements OnInit {
-    private pageTitle: string = 'Configuración de Usuarios';
-    private bottomNavData: Array<BottomNavModel> =this.bottomNavService.getConfigBottomNavData();
-    private adminFormType: string = FormService.ADMIN_FORM_TYPE;
-    private currentPath: string = window.location.pathname;
-    private users = null;
+    public pageTitle: string = 'Configuración de Usuarios';
+    public bottomNavData: Array<BottomNavModel> =this.bottomNavService.getConfigBottomNavData();
+    public adminFormType: string = FormService.ADMIN_FORM_TYPE;
+    public currentPath: string = window.location.pathname;
+    public users = null;
     public isFormLoading = false;
 
     constructor(

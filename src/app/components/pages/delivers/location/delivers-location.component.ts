@@ -9,9 +9,9 @@ declare var google;
     styleUrls: ['./delivers-location.scss']
 })
 export class DeliversLocationComponent implements OnInit {
-    private pageTitle: string = 'Ubicaciones';
-    private bottomNavData: Array<BottomNavModel> = this.bottomNavService.getDeliverBottomNavData();;
-    private isDeliverListActive: boolean = false;
+    public pageTitle: string = 'Ubicaciones';
+    public bottomNavData: Array<BottomNavModel> = this.bottomNavService.getDeliverBottomNavData();;
+    public isDeliverListActive: boolean = false;
 
     constructor(private bottomNavService: BottomNavService) { }
 

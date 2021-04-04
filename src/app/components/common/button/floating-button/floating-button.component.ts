@@ -5,11 +5,11 @@ import { Component, Input, OnInit } from '@angular/core';
     templateUrl: './floating-button.component.html',
 })
 export class FloatingButtonComponent implements OnInit {
-    @Input() private bgColor: string = 'red2';
-    @Input() private icon: string = 'add';
-    @Input() private hasModal: boolean = false;
-    @Input()  private formType: string | null =  null;
-    @Input()  private link: string | null = null;
+    @Input() public bgColor: string = 'red2';
+    @Input() public icon: string = 'add';
+    @Input() public hasModal: boolean = false;
+    @Input() public formType: string | null =  null;
+    @Input() public link: string | null = null;
 
     constructor() { }
 
