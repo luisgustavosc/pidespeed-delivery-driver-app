@@ -5,7 +5,7 @@ import { Subscription } from 'rxjs';
 import { AuthService } from './components/auth/services/auth/auth.service';
 import { WebSocketService } from '../app/services/webSocket/web-socket.service';
 import { Plugins } from '@capacitor/core';
-const { LocalNotifications, Network, App, BackgroundTask } = Plugins;
+const { LocalNotifications, Network, App, BackgroundTask, Geolocation } = Plugins;
 import Swal from 'sweetalert2';
 @Component({
     selector: 'app-root',
@@ -14,7 +14,7 @@ import Swal from 'sweetalert2';
 export class AppComponent implements OnInit, OnDestroy {
     subscription: Subscription;
     title = 'admin-pideSpeed';
-    company: any;
+    currentUser: any;
     constructor(private router: Router, private webService: WebSocketService, private authService: AuthService) { }
 
     async ngOnInit() {
@@ -36,7 +36,7 @@ export class AppComponent implements OnInit, OnDestroy {
         // })
 
         //VERIFICAR CONEXION A INTERNET
-        let status = await Network.getStatus();
+        const status = await Network.getStatus();
         if (!status.connected) {
             this.router.navigateByUrl('/error503')
         }
@@ -45,31 +45,29 @@ export class AppComponent implements OnInit, OnDestroy {
             .subscribe(() => window.scrollTo(0, 0));
 
         //PERMISOS Y EJECUCION DE LA NOTIFICACION
+        this.currentUser = this.authService.getCurrentUser();
         this.solicitarPermisos();
-        this.company = this.authService.getCurrentUser();
-        if (this.company) {
-            this.webService.listen('pedido:actualizado').subscribe((data: any) => {
-                if (data.userId == this.company.id) {
-                    this.pushNoti(data);
-                }
-            })
-        }
+        this.webService.listen('pedido:actualizado').subscribe((data: any) => {
+            this.pushNoti(data);
+        })
+
+        this.saveCoords();
 
         //TAREA DE BACKGROUND
 
         App.addListener('appStateChange', (state) => {
-
             if (!state.isActive) {
-
                 let taskId = BackgroundTask.beforeExit(async () => {
-
-                    if (this.company) {
+                    if (this.currentUser) {
                         this.webService.listen('pedido:actualizado').subscribe((data: any) => {
-                            if (data.userId == this.company.id) {
+                            if (data.userId == this.currentUser.id) {
                                 this.pushNoti(data);
                             }
                         })
                     }
+                    this.webService.listen('renew-coords').subscribe( async () => {
+                        this.saveCoords();
+                    })
 
                     BackgroundTask.finish({
                         taskId
@@ -78,6 +76,13 @@ export class AppComponent implements OnInit, OnDestroy {
             }
         })
     }
+
+    async saveCoords() {
+        const coordinates = await Geolocation.getCurrentPosition();
+        const coords = `(${coordinates.coords.latitude}, ${coordinates.coords.longitude})`;
+        this.webService.emit('save-coords', { id: this.currentUser.id, coords, });
+    }
+
     async solicitarPermisos() {
         const response = await LocalNotifications.requestPermission();
         if (!response.granted) {
