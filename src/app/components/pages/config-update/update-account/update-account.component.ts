@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormService } from "src/app/components/forms/services/form/form.service";
-import { FormGroup } from "@angular/forms";
-import { Router } from "@angular/router";
+import { FormService } from 'src/app/components/forms/services/form/form.service';
+import { FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ActionService } from 'src/app/services/action/action.service';
 import { CompanyUsersService } from 'src/app/services/company-users/company-users.service';
 import { AuthService } from 'src/app/components/auth/services/auth/auth.service';
@@ -17,7 +17,7 @@ export class UpdateAccountComponent implements OnInit {
     public isFormLoading = false;
     public isDeliverFormType: boolean;
     public isAdminFormType: boolean;
-    public pageTitle: string = 'Editar mi cuenta';
+    public pageTitle = 'Editar mi cuenta';
     public goBackUrl = '/';
 
     constructor(

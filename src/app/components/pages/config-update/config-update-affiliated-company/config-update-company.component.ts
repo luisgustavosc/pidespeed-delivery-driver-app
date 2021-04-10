@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormService } from "src/app/components/forms/services/form/form.service";
-import { Router, ActivatedRoute } from "@angular/router";
-import { FormGroup } from "@angular/forms";
+import { FormService } from 'src/app/components/forms/services/form/form.service';
+import { Router, ActivatedRoute } from '@angular/router';
+import { FormGroup } from '@angular/forms';
 import { AffiliatedCompanyService } from 'src/app/services/affiliated-company/affiliated-company.service';
 import { ActionService } from 'src/app/services/action/action.service';
 
@@ -15,10 +15,10 @@ export class ConfigUpdateCompaniesComponent implements OnInit {
     public formGroup: FormGroup;
     public isAffiliatedCompanyFormType: boolean;
     public pageTitle: string = this.configId ? 'Editar Username' : 'Agregar Empresa';
-    public goBackUrl: string = '/settings/company'
-    public isFormLoading: boolean = false;
+    public goBackUrl = '/settings/company'
+    public isFormLoading = false;
 
-    //Mejorar esto para no tener que definirlas
+    // Mejorar esto para no tener que definirlas
     isDeliverFormType = null;
     isCompanyProfileFormType = null;
     isAdminFormType = null;

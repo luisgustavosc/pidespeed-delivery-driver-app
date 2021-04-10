@@ -23,11 +23,12 @@ import 'hammerjs';
  platformBrowserDynamic()
    .bootstrapModule(AppModule)
    .then(ref => {
+       const ngRef = 'ngRef';
      // Ensure Angular destroys itself on hot reloads.
-     if (window['ngRef']) {
-       window['ngRef'].destroy();
+     if (window[ngRef]) {
+       window[ngRef].destroy();
      }
-     window['ngRef'] = ref;
+     window[ngRef] = ref;
 
     //  Otherwise, log the boot error
    })

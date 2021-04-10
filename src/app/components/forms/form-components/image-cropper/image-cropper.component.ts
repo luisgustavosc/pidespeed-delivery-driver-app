@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectorRef, Input, EventEmitter, Output } from '@angular/core';
 import { NgxImageCompressService } from 'ngx-image-compress';
 import { ImageCroppedEvent, ImageTransform } from 'ngx-image-cropper'
-import { imageCropperSettings } from 'src/app/model/imageCropperSettings';
+import { ImageCropperSettings } from 'src/app/model/imageCropperSettings';
 import { ActionService } from 'src/app/services/action/action.service';
 
 @Component({
@@ -10,14 +10,14 @@ import { ActionService } from 'src/app/services/action/action.service';
 })
 export class ImageCropperComponent implements OnInit {
     @Input() public imageEvent: Event | null = null;
-    @Input() public imageSettings: imageCropperSettings;
+    @Input() public imageSettings: ImageCropperSettings;
     @Input() public imageURLToEdit: string = null;
     @Output() public imgResultAfterCompress: EventEmitter<string|null> = new EventEmitter();
 
     public imageCompressed: string;
-    private canvasRotation: number = 0;
+    private canvasRotation = 0;
     private transform: ImageTransform = {};
-    private rotation: number = 0;
+    private rotation = 0;
 
     constructor(private cdRef: ChangeDetectorRef, private actionService: ActionService, private imageCompress: NgxImageCompressService) { }
 

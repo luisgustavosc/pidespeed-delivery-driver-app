@@ -11,10 +11,10 @@ export class AdminRowComponent implements OnInit {
     @Input() public rowImg: string
     @Input() public rowSubtitle: string;
     @Input() public rowStatus?: string = null;
-    @Input() public hasActions: boolean = false;
-    @Input() public hasModal: boolean = false;
+    @Input() public hasActions = false;
+    @Input() public hasModal = false;
     @Input() public EditRedirectTo?: string = null;
-    @Input() public isDisabled: boolean = false;
+    @Input() public isDisabled = false;
     @Input() private deleteAction: (id: number) => void;
     @Input() private disabledAction: (id: number) => boolean;
     @Input() private editAction: (id: number) => void;
@@ -24,18 +24,10 @@ export class AdminRowComponent implements OnInit {
 
     ngOnInit() { }
 
-    /**
-     * @param {Number} $id
-     * @return {Void}
-     */
     disabled($id: number): void {
         this.isDisabled = this.disabledAction($id);
     }
 
-    /**
-     * @param {Number} $id
-     * @return {Void}
-     */
     delete($id: number): void {
         this.actionService.getSwalToDelete($id, this.deleteAction);
     }

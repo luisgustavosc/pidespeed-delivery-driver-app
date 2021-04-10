@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectorRef, Input, EventEmitter, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { NgxImageCompressService } from 'ngx-image-compress';
-import { imageCropperSettings } from 'src/app/model/imageCropperSettings';
+import { ImageCropperSettings } from 'src/app/model/imageCropperSettings';
 import { FormService } from 'src/app/components/forms/services/form/form.service';
 import { IMAGE_SERVER } from 'src/app/services/API';
 declare var $: any;
@@ -14,14 +14,14 @@ declare var $: any;
 export class InputFileComponent implements OnInit {
     @Input() public form: FormGroup;
     @Input() public fieldName: string;
-    @Input() public imageURLToEdit: string = null;
-    public imageChangedEvent: Event = null;
+    @Input() public imageURLToEdit?: string = null;
+    public imageChangedEvent?: Event = null;
     public fileName: string;
-    public fileType: string = 'png';
+    public fileType = 'png';
     public formType: string = FormService.IMAGE_CROPPER_TYPE;
-    public croppedImage: string = null;
+    public croppedImage?: string = null;
 
-    @Input() public imageSettings: imageCropperSettings = {
+    @Input() public imageSettings: ImageCropperSettings = {
         aspectRatio: 1 / 1,
         resizeToWidth: '800',
         resizeToHeight: '800',
@@ -59,7 +59,7 @@ export class InputFileComponent implements OnInit {
     clearPreview(): void {
         this.imageChangedEvent = null;
         this.croppedImage = null;
-        (<HTMLInputElement>document.getElementById('upload_image')).value = null;
+        (document.getElementById('upload_image') as HTMLInputElement).value = null;
     }
 
     editFile(): void {

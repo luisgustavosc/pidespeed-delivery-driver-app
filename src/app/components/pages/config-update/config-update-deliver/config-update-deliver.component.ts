@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormService } from "src/app/components/forms/services/form/form.service";
-import { FormGroup } from "@angular/forms";
-import { Router, ActivatedRoute } from "@angular/router";
+import { FormService } from 'src/app/components/forms/services/form/form.service';
+import { FormGroup } from '@angular/forms';
+import { Router, ActivatedRoute } from '@angular/router';
 import { ActionService } from 'src/app/services/action/action.service';
 import { CompanyUsersService } from 'src/app/services/company-users/company-users.service';
 
@@ -18,7 +18,7 @@ export class ConfigUpdateDeliverComponent implements OnInit {
     public pageTitle: string = this.configId ? 'Editar Username' : 'Agregar Repartidor';
     public goBackUrl = '/settings/delivers';
 
-    //Mejorar esto para no tener que definirlas
+    // Mejorar esto para no tener que definirlas
     isAffiliatedCompanyFormType = null;
     isCompanyProfileFormType = null;
     isAdminFormType = null;

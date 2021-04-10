@@ -8,7 +8,7 @@ import { AuthService } from 'src/app/components/auth/services/auth/auth.service'
     templateUrl: './login.component.html',
 })
 export class LoginComponent implements OnInit {
-    public isFormLoading: boolean = false;
+    public isFormLoading = false;
     public loginForm: FormGroup = new FormGroup({
         user: new FormControl('', [Validators.required]),
         password: new FormControl('', [Validators.required])
@@ -24,13 +24,13 @@ export class LoginComponent implements OnInit {
             if (res) {
                 this.isFormLoading = false;
             }
-            if (res.message == 'ok') {
+            if (res.message === 'ok') {
                 this.authService.setAccessToken(res.token);
                 this.authService.setUser(res.user);
                 this.authService.setBusiness(res.empresa);
-                //TODO: encontrar forma de no refrecar y
-                //solo redirigir en login
-                //this.router.navigate(['/']);
+                // TODO: encontrar forma de no refrecar y
+                // solo redirigir en login
+                // this.router.navigate(['/']);
                 window.location.reload();
             } else {
                 this.actionService.getSwalError('Usuario o contraseña incorrecto', null);

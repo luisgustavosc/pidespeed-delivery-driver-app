@@ -8,7 +8,7 @@ import { BottomNavService } from 'src/app/services/bottomNav/bottom-nav.service'
     templateUrl: './list.component.html',
 })
 export class ListComponent implements OnInit {
-    public pageTitle: string = 'Ordenes';
+    public pageTitle = 'Ordenes';
     public bottomNavData: Array<BottomNavModel> = this.bottomNavService.getOrdersBottomNavData();
     public orderStatus: string | null = this.activeRoute.snapshot.params.status || 'to-do';
 

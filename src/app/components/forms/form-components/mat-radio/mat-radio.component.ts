@@ -18,16 +18,16 @@ export class MatRadioComponent implements OnInit {
     ngOnInit() {
         this.options = [
             {
-                'title' : 'juan',
-                'value': '1'
+                title : 'juan',
+                value: '1'
             },
             {
-                'title' : 'juan',
-                'value': '2'
+                title : 'juan',
+                value: '2'
             },
             {
-                'title' : 'juan',
-                'value': '3'
+                title : 'juan',
+                value: '3'
             }
         ]
     }

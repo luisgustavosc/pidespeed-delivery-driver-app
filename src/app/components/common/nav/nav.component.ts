@@ -6,7 +6,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class NavComponent implements OnInit {
     @Input() public pageTitle: string;
-    @Input() public isVisibleGoBackButton: boolean = false;
+    @Input() public isVisibleGoBackButton = false;
     @Input() public goBackUrl?: string = null
 
     constructor() { }

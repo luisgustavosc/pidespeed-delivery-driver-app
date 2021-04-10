@@ -14,8 +14,8 @@ export class MatSelectFieldComponent implements OnInit {
     @Input() public options: Array<MatSelectOptions>;
     @Input() public optionsGroup: Array<MatSelectOptionsGroup>;
     @Input() public optionSelected: any = null;
-    @Input() public isMultiple: boolean = false;
-    @Input() public isOptionsPerGroup: boolean = false;
+    @Input() public isMultiple = false;
+    @Input() public isOptionsPerGroup = false;
     @Input() public maxLimitToChoose: number | null = null;
 
     constructor() { }

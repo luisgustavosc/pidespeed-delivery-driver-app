@@ -1,6 +1,6 @@
 /**
-* @Angular
-*/
+ * @Angular
+ */
 import { APP_INITIALIZER, ErrorHandler, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
@@ -10,8 +10,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 
 /**
-* @Packages
-*/
+ * @Packages
+ */
 import { JwtModule } from '@auth0/angular-jwt';
 import { MaterialModule } from './material.module';
 import { ImageCropperModule } from 'ngx-image-cropper';
@@ -19,15 +19,15 @@ import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 import { NgxImageCompressService } from 'ngx-image-compress';
 
 /**
-* @Pipes
-*/
+ * @Pipes
+ */
 import { MesPipe } from './pipes/mes.pipe';
 import { HorariosPipe } from './pipes/horarios.pipe';
 import { ImagePipe } from './pipes/image.pipe';
 
 /**
-* @Components
-*/
+ * @Components
+ */
 // Pages
 import { AppComponent } from 'src/app/app.component';
 import { DashboardComponent } from 'src/app/components/dashboard/pages/dashboard/dashboard.component';
@@ -76,8 +76,8 @@ import { PageLoaderComponent } from './components/common/page-loader/page-loader
 import { ActionButtonComponent } from './components/common/button/action-button/action-button.component';
 
 /**
-* @Services
-*/
+ * @Services
+ */
 import { AuthService } from 'src/app/components/auth/services/auth/auth.service';
 import { DashboardService } from 'src/app/components/dashboard/services/dashboard/dashboard.service';
 import { CompanyProfileService } from 'src/app/services/company-profile/companyProfile.service';

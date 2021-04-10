@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { BottomNavModel } from "src/app/model/bottomNav";
-import { BottomNavService } from "src/app/services/bottomNav/bottom-nav.service";
+import { BottomNavModel } from 'src/app/model/bottomNav';
+import { BottomNavService } from 'src/app/services/bottomNav/bottom-nav.service';
 declare var google;
 
 @Component({
@@ -9,9 +9,9 @@ declare var google;
     styleUrls: ['./delivers-location.scss']
 })
 export class DeliversLocationComponent implements OnInit {
-    public pageTitle: string = 'Ubicaciones';
+    public pageTitle = 'Ubicaciones';
     public bottomNavData: Array<BottomNavModel> = this.bottomNavService.getDeliverBottomNavData();;
-    public isDeliverListActive: boolean = false;
+    public isDeliverListActive = false;
 
     constructor(private bottomNavService: BottomNavService) { }
 
@@ -40,9 +40,8 @@ export class DeliversLocationComponent implements OnInit {
     }
 
     initGoogleMaps(): void {
-        var map, infoWindow;
-        infoWindow = new google.maps.InfoWindow();
-        map = new google.maps.Map(document.getElementById('map'), {
+        const infoWindow = new google.maps.InfoWindow();
+        const map = new google.maps.Map(document.getElementById('map'), {
             center: { lat: 11.404351396194043, lng: -69.66383233025513 },
             zoom: 13
         });

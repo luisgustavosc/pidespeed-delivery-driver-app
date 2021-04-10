@@ -19,7 +19,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
     async ngOnInit() {
 
-        //ACCIONES DE LA NOTIFICACION
+        // ACCIONES DE LA NOTIFICACION
         // LocalNotifications.registerActionTypes({
         //     types: [
         //         {
@@ -35,7 +35,7 @@ export class AppComponent implements OnInit, OnDestroy {
         //     ]
         // })
 
-        //VERIFICAR CONEXION A INTERNET
+        // VERIFICAR CONEXION A INTERNET
         const status = await Network.getStatus();
         if (!status.connected) {
             this.router.navigateByUrl('/error503')
@@ -44,7 +44,7 @@ export class AppComponent implements OnInit, OnDestroy {
             .pipe(filter(event => event instanceof NavigationEnd))
             .subscribe(() => window.scrollTo(0, 0));
 
-        //PERMISOS Y EJECUCION DE LA NOTIFICACION
+        // PERMISOS Y EJECUCION DE LA NOTIFICACION
         this.currentUser = this.authService.getCurrentUser();
         this.solicitarPermisos();
         this.webService.listen('pedido:actualizado').subscribe((data: any) => {
@@ -53,14 +53,14 @@ export class AppComponent implements OnInit, OnDestroy {
 
         this.saveCoords();
 
-        //TAREA DE BACKGROUND
+        // TAREA DE BACKGROUND
 
         App.addListener('appStateChange', (state) => {
             if (!state.isActive) {
-                let taskId = BackgroundTask.beforeExit(async () => {
+                const taskId = BackgroundTask.beforeExit(async () => {
                     if (this.currentUser) {
                         this.webService.listen('pedido:actualizado').subscribe((data: any) => {
-                            if (data.userId == this.currentUser.id) {
+                            if (data.userId === this.currentUser.id) {
                                 this.pushNoti(data);
                             }
                         })

@@ -7,7 +7,7 @@ import { AUTH_SERVER, options } from '../../../../services/API';
 })
 export class AuthService {
     private token: string;
-    private user: Object;
+    private user: object;
     private tokenAdmin: string;
     constructor(private http: HttpClient, private jwtHelper: JwtHelperService) { }
 
@@ -22,21 +22,21 @@ export class AuthService {
     }
 
     public getCurrentUser() {
-        let user_string = localStorage.getItem('USER_ADMIN');
-        if (user_string !== null || user_string !== undefined) {
-            let user = JSON.parse(user_string);
+        const userString = localStorage.getItem('USER_ADMIN');
+        if (userString !== null || userString !== undefined) {
+            const user = JSON.parse(userString);
             return user;
         }
 
         return null;
     }
 
-    public setUser(user: Object): void {
+    public setUser(user: object): void {
         const userString = JSON.stringify(user);
         localStorage.setItem('USER_ADMIN', userString);
     }
 
-    public setBusiness(user: Object): void {
+    public setBusiness(user: object): void {
         const businessString = JSON.stringify(user);
         localStorage.setItem('BUSINES_ADMIN', businessString);
     }

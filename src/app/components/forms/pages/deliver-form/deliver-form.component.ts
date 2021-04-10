@@ -6,7 +6,6 @@ import { AuthService } from 'src/app/components/auth/services/auth/auth.service'
 import { MatSelectOptions } from 'src/app/model/matSelectOptions';
 import { CompanyUsersService } from 'src/app/services/company-users/company-users.service';
 import { ImageModel } from 'src/app/model/imageModel';
-import { validateExistingDataModel } from 'src/app/model/validateExistingData.model';
 
 @Component({
     selector: 'app-deliver-form',
@@ -20,20 +19,20 @@ export class DeliverFormComponent implements OnInit {
     public imgResultAfterCompress: string;
     public deliverImage: ImageModel;
     public companyId: string;
-    public isDataLoaded: boolean = false;
+    public isDataLoaded = false;
     public isPasswordVisible: boolean;
     public vehicleTypes: Array<MatSelectOptions> = [
         {
-            'title' : 'Moto',
-            'value': 'motorcycle'
+            title : 'Moto',
+            value: 'motorcycle'
         },
         {
-            'title' : 'Carro',
-            'value': 'car'
+            title : 'Carro',
+            value: 'car'
         },
         {
-            'title' : 'Bicicleta',
-            'value': 'bike'
+            title : 'Bicicleta',
+            value: 'bike'
         },
     ];
 

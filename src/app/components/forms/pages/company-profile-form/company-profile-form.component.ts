@@ -14,12 +14,12 @@ import { ImageModel } from 'src/app/model/imageModel';
 })
 export class CompanyProfileFormComponent implements OnInit {
     @Input() public configId: string;
-    @Input() public isFormLoading: boolean = false;
+    @Input() public isFormLoading = false;
     // To export values ​​to a parent component
     @Output() public formGroupEmitter: EventEmitter<FormGroup> = new EventEmitter();
 
     public formGroup: FormGroup;
-    public isDataLoaded: boolean = false;
+    public isDataLoaded = false;
     public companyImage: ImageModel;
     public imgResultAfterCompress: string;
     public cities : Array<MatSelectOptions> = null;
@@ -69,8 +69,8 @@ export class CompanyProfileFormComponent implements OnInit {
             const { nombre, telefono, ciudad, estado } = company;
 
             this.formGroup.patchValue({
-                nombre: nombre,
-                telefono: telefono,
+                nombre,
+                telefono,
                 ciudad: { nombre: ciudad.nombre, _id: ciudad._id },
                 estado: { nombre: estado.nombre, _id: estado._id },
             });
@@ -91,8 +91,8 @@ export class CompanyProfileFormComponent implements OnInit {
                 return {
                     title: nombre,
                     value: {
-                        nombre: nombre,
-                        _id: _id
+                        nombre,
+                        _id
                     }
                 }
             });
@@ -107,8 +107,8 @@ export class CompanyProfileFormComponent implements OnInit {
                 return {
                     title: nombre,
                     value: {
-                        nombre: nombre,
-                        _id: _id
+                        nombre,
+                        _id
                     }
                 }
             });

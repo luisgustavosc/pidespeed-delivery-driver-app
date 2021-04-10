@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BottomNavModel } from "src/app/model/bottomNav";
+import { BottomNavModel } from 'src/app/model/bottomNav';
 
 @Injectable({
     providedIn: 'root'

@@ -12,13 +12,13 @@ import { ImageModel } from 'src/app/model/imageModel';
 })
 export class CompanyFormComponent implements OnInit {
     @Input() public configId: string;
-    @Input() public isFormLoading: boolean = false;
+    @Input() public isFormLoading = false;
     // To export values ​​to a parent component
     @Output() public formGroupEmitter: EventEmitter<FormGroup> = new EventEmitter();
 
     public formGroup: FormGroup;
     public companyId: string;
-    public isDataLoaded: boolean = false;
+    public isDataLoaded = false;
     public companyImage: ImageModel;
     public imgResultAfterCompress: string;
 

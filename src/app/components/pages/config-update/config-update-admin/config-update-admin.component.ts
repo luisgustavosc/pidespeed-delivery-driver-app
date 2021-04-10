@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormService } from "src/app/components/forms/services/form/form.service";
-import { FormGroup } from "@angular/forms";
-import { Router, ActivatedRoute } from "@angular/router";
+import { FormService } from 'src/app/components/forms/services/form/form.service';
+import { FormGroup } from '@angular/forms';
+import { Router, ActivatedRoute } from '@angular/router';
 import { ActionService } from 'src/app/services/action/action.service';
 import { CompanyUsersService } from 'src/app/services/company-users/company-users.service';
 
@@ -16,9 +16,9 @@ export class ConfigUpdateAdminComponent implements OnInit {
     public isFormLoading = false;
     public isAdminFormType: boolean;
     public pageTitle: string = this.configId ? 'Editar Username' : 'Agregar Usuario';
-    public goBackUrl: string = '/settings/admins';
+    public goBackUrl = '/settings/admins';
 
-    //Mejorar esto para no tener que definirlas
+    // Mejorar esto para no tener que definirlas
     isAffiliatedCompanyFormType = null;
     isDeliverFormType = null;
     isCompanyProfileFormType = null;

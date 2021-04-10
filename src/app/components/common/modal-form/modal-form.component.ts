@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { imageCropperSettings } from 'src/app/model/imageCropperSettings';
+import { ImageCropperSettings } from 'src/app/model/imageCropperSettings';
 import { FormService } from 'src/app/components/forms/services/form/form.service';
 
 @Component({
@@ -8,7 +8,7 @@ import { FormService } from 'src/app/components/forms/services/form/form.service
 })
 export class ModalFormComponent implements OnInit {
     @Input() public formType: string;
-    @Input() public isHeaderVisible: boolean = true;
+    @Input() public isHeaderVisible = true;
     public isImageCropperType: boolean;
     public modalTitle: string;
     public modalDescription: string;
@@ -16,7 +16,7 @@ export class ModalFormComponent implements OnInit {
     // Only for ImageCropperType
     @Input() public imageEvent: Event | null = null; // when a new image is loaded
     @Input() public imageURLToEdit: string | null = null; // when loading an image that comes from our db
-    @Input() public imageSettings: imageCropperSettings;
+    @Input() public imageSettings: ImageCropperSettings;
     @Output() public imgResultAfterCompress: EventEmitter<string|null> = new EventEmitter();
 
     constructor(private formService: FormService) { }

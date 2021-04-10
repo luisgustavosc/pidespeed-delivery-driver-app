@@ -6,7 +6,7 @@ describe('CompanyProfileService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: CompanyProfileService = TestBed.get(CompanyProfileService);
+    const service: CompanyProfileService = TestBed.inject(CompanyProfileService);
     expect(service).toBeTruthy();
   });
 });

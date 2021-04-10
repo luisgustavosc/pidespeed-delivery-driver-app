@@ -12,15 +12,15 @@ import { CompanyProfileService } from 'src/app/services/company-profile/companyP
 })
 export class ConfigUpdateCompanyComponent implements OnInit {
     public user = this.authService.getCurrentUser();
-    public formType: string = FormService.COMPANY_PROFILE_TYPE;;
+    public formType: string = FormService.COMPANY_PROFILE_TYPE;
     public formGroup: FormGroup;
     public isFormLoading = false;
     public isCompanyProfileFormType: boolean;
-    public pageTitle: string = 'Editar perfil de cuenta';
+    public pageTitle = 'Editar perfil de cuenta';
     public goBackUrl = '/';
     public configId = this.user.empresaDelivery;
 
-    //Mejorar esto para no tener que definirlas
+    // Mejorar esto para no tener que definirlas
     isAffiliatedCompanyFormType = null;
     isDeliverFormType = null;
     isAdminFormType = null;

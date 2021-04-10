@@ -16,32 +16,24 @@ export class CardComponent implements OnInit {
 
     // Card type 3
     @Input() public dataId?: number = null;
-    @Input() public titleTextSize: number = 12;
-    @Input() public hasActions: boolean = false;
-    @Input() public isDisabled: boolean = false;
+    @Input() public titleTextSize = 12;
+    @Input() public hasActions = false;
+    @Input() public isDisabled = false;
     @Input() private deleteAction: (id: number) => void;
     @Input() private disabledAction: (id: number) => boolean;
     @Input() public editAction: (id: number) => void;
     @Input() public formType: string;
     @Input() public EditRedirectTo?: string = null;
-    @Input() public hasModal: boolean = false;
+    @Input() public hasModal = false;
 
     constructor(private actionService: ActionService) { }
 
     ngOnInit() { }
 
-    /**
-     * @param {Number} $id
-     * @return {Void}
-     */
     disabled($id: number): void {
         this.isDisabled = this.disabledAction($id);
     }
 
-    /**
-     * @param {Number} $id
-     * @return {Void}
-     */
     delete($id: number): void {
         this.actionService.getSwalToDelete($id, this.deleteAction);
     }

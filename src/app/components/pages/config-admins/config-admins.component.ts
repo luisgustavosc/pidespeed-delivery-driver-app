@@ -10,7 +10,7 @@ import { ActionService } from 'src/app/services/action/action.service';
     templateUrl: './config-admins.component.html',
 })
 export class ConfigAdminsComponent implements OnInit {
-    public pageTitle: string = 'Configuración de Usuarios';
+    public pageTitle = 'Configuración de Usuarios';
     public bottomNavData: Array<BottomNavModel> =this.bottomNavService.getConfigBottomNavData();
     public adminFormType: string = FormService.ADMIN_FORM_TYPE;
     public currentPath: string = window.location.pathname;
@@ -35,12 +35,6 @@ export class ConfigAdminsComponent implements OnInit {
         })
     }
 
-    /**
-     *  Desactivar user por su Id
-     *
-     * @param {string} $id
-     * @return {void}
-     */
     disableUser = ($id: string): void => {
         const user = this.actionService.findItemInArrayById(this.users, $id);
 
@@ -58,10 +52,6 @@ export class ConfigAdminsComponent implements OnInit {
         });
     }
 
-    /**
-     * @param {string} $id
-     * @return {void}
-     */
     deleteUser = ($id: string): void => {
         this.companyUsersService.deleteById($id).subscribe((data: any) => {
             this.users.splice(this.actionService.getIndex(data, this.users, 'id'), 1);

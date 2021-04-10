@@ -36,12 +36,6 @@ export class ConfigDeliversComponent implements OnInit {
         })
     }
 
-    /**
-     *  Desactivar repartidor por su Id
-     *
-     * @param {string} $id
-     * @return {void}
-     */
     disableDeliver = ($id: string): void => {
         const deliver = this.actionService.findItemInArrayById(this.delivers, $id);
 
@@ -59,10 +53,6 @@ export class ConfigDeliversComponent implements OnInit {
         });
     }
 
-    /**
-     * @param {string} $id
-     * @return {void}
-     */
     deleteDeliver = ($id: string): void => {
         this.companyUsersService.deleteById($id).subscribe((data: any) => {
             this.delivers.splice(this.actionService.getIndex(data, this.delivers, 'id'), 1);

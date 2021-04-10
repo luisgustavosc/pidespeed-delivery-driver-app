@@ -12,13 +12,13 @@ import { ImageModel } from 'src/app/model/imageModel';
 })
 export class AdminFormComponent implements OnInit {
     @Output() public formGroupEmitter: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
-    @Input() public isFormLoading: boolean = false;
+    @Input() public isFormLoading = false;
     @Input() public configId: string;
     public formGroup: FormGroup;
     public imgResultAfterCompress: string;
     public userImageUrl: ImageModel;
     public companyId: string;
-    public isDataLoaded: boolean = false;
+    public isDataLoaded = false;
     public isPasswordVisible: boolean;
 
     constructor(
@@ -120,13 +120,13 @@ export class AdminFormComponent implements OnInit {
 
             this.userImageUrl = img;
             this.formGroup.patchValue({
-                nombre: nombre,
-                apellido: apellido,
-                email: email,
-                cedula: cedula,
-                telefono: telefono,
-                username: username,
-                direccion: direccion,
+                nombre,
+                apellido,
+                email,
+                cedula,
+                telefono,
+                username,
+                direccion,
             });
             this.isDataLoaded = true;
         }, err => {

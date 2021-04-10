@@ -6,9 +6,9 @@ import { Router } from '@angular/router';
     templateUrl: './action-button.component.html',
 })
 export class ActionButtonComponent implements OnInit {
-    @Input() public bgColor: string = 'red2';
+    @Input() public bgColor = 'red2';
     @Input() public link: string | null = null;
-    @Input() public action: Function = null;
+    @Input() public action: () => void = null;
     @Input() public buttonLabel: string;
     @Input() public isDisabled = false;
 

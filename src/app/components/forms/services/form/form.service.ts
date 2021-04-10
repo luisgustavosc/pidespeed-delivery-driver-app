@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { AbstractControl } from "@angular/forms";
+import { AbstractControl } from '@angular/forms';
 import { of } from 'rxjs/internal/observable/of';
 import { catchError, map } from 'rxjs/operators';
-import { validateExistingDataModel } from 'src/app/model/validateExistingData.model';
-import { ActionService } from "src/app/services/action/action.service";
+import { ValidateExistingDataModel } from 'src/app/model/validateExistingData.model';
+import { ActionService } from 'src/app/services/action/action.service';
 import { CompanyUsersService } from 'src/app/services/company-users/company-users.service';
 
 @Injectable({
@@ -16,11 +16,11 @@ export class FormService {
     public static readonly IMAGE_CROPPER_TYPE: string = 'image_cropper';
     public static readonly COMPANY_PROFILE_TYPE: string = 'company_profile'
 
-    private emailPattern: RegExp = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    private spanishLettersPattern: string = "[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+"
-    private textareaPattern: string = "[a-zA-ZñÑáéíóúÁÉÍÓÚ_.#-\s]*"
-    private numericPattern: string ="[0-9]*";
-    private usernamePattern: string = "[a-z0-9-_.\s]+"
+    private emailPattern = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    private spanishLettersPattern = '[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+'
+    private textareaPattern = '[a-zA-ZñÑáéíóúÁÉÍÓÚ_.#-\s]*'
+    private numericPattern ='[0-9]*';
+    private usernamePattern = '[a-z0-9-_.\s]+'
 
     constructor(private actionService: ActionService) { }
 
@@ -98,23 +98,26 @@ export class FormService {
      *  Data Validation on existing data
      *
      * how to use it:
-     *      username: ["", [
-     *          Validators.required,
-     *      ],
-     *         this.formService.validateExistingData.bind(this, {
-                    fieldName: 'username',
-                    service: this.companyUsersService,
-                })
-     *      ]
      *
-     * @param {validateExistingDataModel} validateData
-     * @param {AbstractControl} control
-     * @returns {Boolean | Null}
+     * username: ['', [
+     *      Validators.required,
+     *    ],
+     *    this.formService.validateExistingData.bind(this,
+     *     {
+     *        fieldName: 'telefono',
+     *        service: this.companyUsersService,
+     *        configId: this.configId,
+     *       }
+     *    )
+     * ]
+     *
      */
     public validateExistingData(
-        { fieldName, service, configId } : validateExistingDataModel,
+        values : ValidateExistingDataModel,
         control:AbstractControl
     ): boolean | null {
+
+        const { fieldName, service, configId } = values;
 
         const dataToValidate = {
             field: fieldName,
@@ -138,13 +141,6 @@ export class FormService {
         );
     }
 
-    /**
-     *
-     * @param {String} image
-     * @param {String} folder
-     * @param {Boolean} update
-     * @param {String|Null} id
-     */
     public processImage(
         image: string = null,
         id: string = null,
@@ -159,7 +155,7 @@ export class FormService {
                 value: base64Parts[1],
                 // folder: folder,
                 // update: update,
-                id: id
+                id
             }
 
             return imageMapped;
@@ -170,9 +166,9 @@ export class FormService {
 
     private getRandomName(): string
     {
-        const timestamp = new Date().toISOString().replace(/[-:.]/g, ""),
-                    random = ("" + Math.random()).substring(2, 8),
-                    randomNumber = timestamp + random;
+        const timestamp = new Date().toISOString().replace(/[-:.]/g, '');
+        const random = ('' + Math.random()).substring(2, 8);
+        const randomNumber = timestamp + random;
 
         return randomNumber;
     }

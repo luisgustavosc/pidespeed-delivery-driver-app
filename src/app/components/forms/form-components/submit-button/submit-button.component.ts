@@ -6,8 +6,8 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class SubmitButtonComponent implements OnInit {
     @Input() public buttonLabel: string;
-    @Input() public isDisabled: boolean = false;
-    @Input() public isFormLoading: boolean = true;
+    @Input() public isDisabled = false;
+    @Input() public isFormLoading = true;
 
     // TODO: Preguntar a Eduardo para revisar si se puede hacer una funcion que espere por la respuesta del submit
     // y asi poder manejar el `isFormLoading` desde aqui al momento que la consulta regrese algo.

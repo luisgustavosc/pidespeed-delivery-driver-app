@@ -9,16 +9,16 @@ export class MatInputFieldComponent implements OnInit {
     @Input() public label: string;
     @Input() public fieldName: string;
     @Input() public form: FormGroup;
-    @Input() public inputType: string = 'text';
+    @Input() public inputType = 'text';
     @Input() public InputModeType?: 'text' | 'decimal' | 'numeric' | 'tel' | 'search' | 'email' | 'url' = null;
     @Input() public maxLength?: number = null;
     @Input() public minLength?: number = null;
-    @Input() public notBlank: boolean = false;
+    @Input() public notBlank = false;
     @Input() public hint?: string = null;
     public isRequired: boolean;
     // Only use for Password Type
-    public isPasswordVisible: boolean = false;
-    public isPasswordMode: boolean = false;
+    public isPasswordVisible = false;
+    public isPasswordMode = false;
 
     constructor() { }
 
@@ -44,12 +44,6 @@ export class MatInputFieldComponent implements OnInit {
         }
     }
 
-    /**
-     * Trim field to do not allow to type blank space
-     *
-     * @param {string} fieldName
-     * @param {FormControl} form
-     */
     trimField(fieldName: string, form: FormGroup) {
         if (this.notBlank) {
             form.get(fieldName).setValue(form.get(fieldName).value.trim());

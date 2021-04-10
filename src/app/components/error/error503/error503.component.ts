@@ -17,7 +17,7 @@ export class Error503Component implements OnInit {
 
     async comprobarConexion() {
         this.lazyloader = true;
-        let status = await Network.getStatus();
+        const status = await Network.getStatus();
         if (status.connected) {
             window.history.back();
         } else {

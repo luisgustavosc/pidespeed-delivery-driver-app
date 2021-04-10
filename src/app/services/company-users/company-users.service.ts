@@ -7,9 +7,9 @@ import { AuthService } from '../../components/auth/services/auth/auth.service';
     providedIn: 'root'
 })
 export class CompanyUsersService {
-    private user;
     public static readonly TYPE_DELIVERY = 'delivery';
     public static readonly TYPE_COMPANY = 'empresa';
+    private user;
 
     constructor(private http: HttpClient, private authService: AuthService) {
         this.user = this.authService.getCurrentUser();
