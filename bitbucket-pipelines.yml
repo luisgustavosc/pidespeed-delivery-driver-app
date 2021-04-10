@@ -1,24 +1,58 @@
-#  Template NodeJS build
-
-#  This template allows you to validate your NodeJS code.
-#  The workflow allows running tests and code linting on the default branch.
-
 image: node:10.15.3
 
 pipelines:
   default:
+    - step:
+        name: Install dependencies
+        caches:
+          - node
+        script: # Modify the commands below to build your repository.
+          - npm install
+        artifacts:
+          - node_modules/**  # copy these files to later steps
     - parallel:
+      - step:
+          name: Check coding and scss standards
+          script:
+            - npm run lint
+            # - npm run lint:sass
+      - step:
+          name: Check Build
+          script:
+            - npm run build:prod
+      # - step:
+      #     name: Check vulnerability
+      #     script:
+      #       - npm run nsp
+      # - step:
+      #     name: Execute unit test cases
+      #     script:
+      #       - npm run test
+  branches:
+    develop:
+      - step:
+        name: Install dependencies
+        caches:
+          - node
+        script: # Modify the commands below to build your repository.
+          - npm install
+        artifacts:
+          - node_modules/**  # copy these files to later steps
+      - parallel:
         - step:
-            name: Build and Test
-            caches:
-              - node
-            script:
-              - npm install
-              - npm test
+          name: Check coding and scss standards
+          script:
+            - npm run lint
+            # - npm run lint:sass
         - step:
-            name: Code linting
-            script:
-              - npm install eslint
-              - npx eslint .
-            caches:
-              - node
+          name: Check Build
+          script:
+            - npm run build:prod
+        # - step:
+        #   name: Check vulnerability
+        #   script:
+        #     - npm run nsp
+        # - step:
+        #   name: Execute unit test cases
+        #   script:
+        #     - npm run test
