@@ -22,7 +22,7 @@ export class ActionService {
         })
     }
 
-    public getSwalToDelete($id: number, $delete: () => void): void {
+    public getSwalToDelete($id: number, $delete: (id: number) => void): void {
         Swal.fire({
             title: '¿Seguro que quieres hacerlo?',
             text: 'Esta acción no se puede deshacer.',
