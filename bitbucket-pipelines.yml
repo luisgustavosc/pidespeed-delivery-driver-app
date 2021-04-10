@@ -28,26 +28,26 @@ pipelines:
       #     name: Execute unit test cases
       #     script:
       #       - npm run test
-  branches:
-    development:
-      - step:
-        name: Install dependencies
-        caches:
-          - node
-        script: # Modify the commands below to build your repository.
-          - npm install
-        artifacts:
-          - node_modules/**  # copy these files to later steps
-      - parallel:
-        - step:
-          name: Check coding and scss standards
-          script:
-            - npm run lint
-            # - npm run lint:sass
-        - step:
-          name: Check Build
-          script:
-            - npm run build:prod
+  # branches:
+  #   development:
+  #     - step:
+  #       name: Install dependencies
+  #       caches:
+  #         - node
+  #       script: # Modify the commands below to build your repository.
+  #         - npm install
+  #       artifacts:
+  #         - node_modules/**  # copy these files to later steps
+  #     - parallel:
+  #       - step:
+  #         name: Check coding and scss standards
+  #         script:
+  #           - npm run lint
+  #           # - npm run lint:sass
+  #       - step:
+  #         name: Check Build
+  #         script:
+  #           - npm run build:prod
         # - step:
         #   name: Check vulnerability
         #   script:

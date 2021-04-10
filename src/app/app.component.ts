@@ -51,7 +51,9 @@ export class AppComponent implements OnInit, OnDestroy {
             this.pushNoti(data);
         })
 
-        this.saveCoords();
+        if (this.currentUser) {
+            this.saveCoords();
+        }
 
         // TAREA DE BACKGROUND
 
