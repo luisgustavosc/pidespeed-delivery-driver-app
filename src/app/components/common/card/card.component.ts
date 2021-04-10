@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ActionService } from "src/app/services/action/action.service";
+import { ActionService } from 'src/app/services/action/action.service';
 
 @Component({
     selector: 'app-card',
@@ -7,41 +7,33 @@ import { ActionService } from "src/app/services/action/action.service";
 })
 export class CardComponent implements OnInit {
     // All cards
-    @Input() private cardType: number;
-    @Input() private cardTitle?: string = null;
-    @Input() private cardSubtitle?: string = null;
+    @Input() public cardType: number;
+    @Input() public cardTitle?: string = null;
+    @Input() public cardSubtitle?: string = null;
 
     // Card type 2
-    @Input() private isPidespeedOrder: boolean;
+    @Input() public isPidespeedOrder: boolean;
 
     // Card type 3
-    @Input() private dataId?: number = null;
-    @Input() private titleTextSize: number = 12;
-    @Input() private hasActions: boolean = false;
-    @Input() private isDisabled: boolean = false;
+    @Input() public dataId?: number = null;
+    @Input() public titleTextSize = 12;
+    @Input() public hasActions = false;
+    @Input() public isDisabled = false;
     @Input() private deleteAction: (id: number) => void;
     @Input() private disabledAction: (id: number) => boolean;
-    @Input() private editAction: (id: number) => void;
-    @Input() private formType: string;
-    @Input() private EditRedirectTo?: string = null;
-    @Input() private hasModal: boolean = false;
+    @Input() public editAction: (id: number) => void;
+    @Input() public formType: string;
+    @Input() public EditRedirectTo?: string = null;
+    @Input() public hasModal = false;
 
     constructor(private actionService: ActionService) { }
 
     ngOnInit() { }
 
-    /**
-     * @param {Number} $id
-     * @return {Void}
-     */
     disabled($id: number): void {
         this.isDisabled = this.disabledAction($id);
     }
 
-    /**
-     * @param {Number} $id
-     * @return {Void}
-     */
     delete($id: number): void {
         this.actionService.getSwalToDelete($id, this.deleteAction);
     }

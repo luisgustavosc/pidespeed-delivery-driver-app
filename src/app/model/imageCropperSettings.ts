@@ -1,4 +1,4 @@
-export interface imageCropperSettings {
+export interface ImageCropperSettings {
     aspectRatio: number;
     resizeToWidth: string;
     resizeToHeight: string;

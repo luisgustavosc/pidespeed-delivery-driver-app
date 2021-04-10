@@ -1,0 +1,42 @@
+<div class="row no-gutters mx-auto border-bottom py-3 px-2 {{ isDisabled ? 'bg-whisper' : 'bg-white'}}">
+  <div class="col-2 px-1 ">
+    <img src="{{ rowImg | image_from_server }}" class="img-fluid" alt="">
+  </div>
+  <div class="col-8 px-2 text-left align-self-center">
+    <h3 class="h6 mb-1 p-0">{{ rowTitle }}</h3>
+    <p class="mb-0">{{ rowSubtitle }} </p>
+  </div>
+  <div class="col-2 text-right align-self-end mb-2">
+    <ng-container *ngIf="hasActions">
+      <button mat-icon-button [matMenuTriggerFor]="menu">
+        <mat-icon class="font-24">more_vert</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="disabled(dataId)">
+          <mat-icon>{{ isDisabled ? 'location_on' : 'location_off' }}</mat-icon>
+          <span>{{ isDisabled ? 'Activar' : 'Desactivar' }}</span>
+        </button>
+        <ng-container *ngIf="hasModal">
+          <button mat-menu-item data-toggle="modal" data-target="#AppModal">
+            <mat-icon>create</mat-icon>
+            <span>Editar</span>
+          </button>
+        </ng-container>
+        <ng-container *ngIf="!hasModal && EditRedirectTo">
+          <button mat-menu-item [routerLink]="[EditRedirectTo]">
+            <mat-icon>create</mat-icon>
+            <span>Editar</span>
+          </button>
+        </ng-container>
+        <button *ngIf="dataId" mat-menu-item (click)="delete(dataId)">
+          <mat-icon>delete</mat-icon>
+          <span>Eliminar</span>
+        </button>
+      </mat-menu>
+    </ng-container>
+    <small *ngIf="rowStatus" class="text-capitalize" [ngClass]="rowStatus === 'activo' ? 'text-green' : rowStatus === 'inactivo' ? 'text-red' : 'text-warning'"><b>{{ rowStatus }}</b></small>
+  </div>
+</div>
+<ng-container *ngIf="hasModal">
+  <app-modal-form [formType]='formType'></app-modal-form>
+</ng-container>

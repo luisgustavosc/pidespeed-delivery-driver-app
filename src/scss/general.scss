@@ -17,6 +17,9 @@ body {
   display: none;
 } */
 
+.h-100vh-in-app {
+  height: calc(100vh - 11rem);
+}
 .ecommerce-widget,
 .componentContainer {
   animation: fadeIn 1.2s ease;
@@ -70,6 +73,10 @@ ul {
 
 .text-grey {
   color: #333;
+}
+
+.lead-sm {
+  font-size: 1.1rem;
 }
 
 .text-p-medium {

@@ -13,14 +13,10 @@
         </button>
       </div>
       <div class="modal-body p-0">
-        <app-company-form *ngIf="isCompanyFormType"></app-company-form>
-        <app-user-form *ngIf="isUserFormType"></app-user-form>
-        <app-repartidor-form *ngIf="isRepartidorFormType"></app-repartidor-form>
         <app-image-cropper *ngIf="isImageCropperType"
           [imageEvent]="imageEvent"
           [imageURLToEdit]="imageURLToEdit"
           [imageSettings]="imageSettings"
-          (croppedImage)="getImageCropped($event)"
           (imgResultAfterCompress)="getImageCroppedAndCompressed($event)">
         </app-image-cropper>
       </div>

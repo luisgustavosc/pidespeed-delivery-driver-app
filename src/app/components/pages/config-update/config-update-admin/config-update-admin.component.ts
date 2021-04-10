@@ -1,29 +1,64 @@
 import { Component, OnInit } from '@angular/core';
-import { FormService } from "src/app/services/form/form.service";
-import { ActivatedRoute } from "@angular/router";
-import { FormGroup } from "@angular/forms";
+import { FormService } from 'src/app/components/forms/services/form/form.service';
+import { FormGroup } from '@angular/forms';
+import { Router, ActivatedRoute } from '@angular/router';
+import { ActionService } from 'src/app/services/action/action.service';
+import { CompanyUsersService } from 'src/app/services/company-users/company-users.service';
 
 @Component({
     selector: 'app-config-update-admin',
-    templateUrl: '../../../common/config-update/config-update.component.html',
+    templateUrl: '../../../forms/config-template/config-update.component.html',
 })
 export class ConfigUpdateAdminComponent implements OnInit {
-    private formType: string = this.formService.getUserFormType();
-    private configId: string | null = this.activeRoute.snapshot.params.id || null;
-    private formGroup: FormGroup;
-    private isUserFormType: boolean;
-    private pageTitle: string = this.configId ? 'Editar Username' : 'Agregar Usuario';
-    private goBackUrl: string = '/configuracion/admins'
-    private isLoading: boolean = false;
+    public formType: string = FormService.ADMIN_FORM_TYPE;
+    public configId: string | null = this.activeRoute.snapshot.params.id || null;
+    public formGroup: FormGroup;
+    public isFormLoading = false;
+    public isAdminFormType: boolean;
+    public pageTitle: string = this.configId ? 'Editar Username' : 'Agregar Usuario';
+    public goBackUrl = '/settings/admins';
 
-    constructor(private formService: FormService, private activeRoute: ActivatedRoute) { }
+    // Mejorar esto para no tener que definirlas
+    isAffiliatedCompanyFormType = null;
+    isDeliverFormType = null;
+    isCompanyProfileFormType = null;
+
+    constructor(
+        private formService: FormService,
+        private activeRoute: ActivatedRoute,
+        private companyUsersService: CompanyUsersService,
+        private actionService: ActionService,
+        private router: Router,
+    ) { }
 
     ngOnInit() {
-        this.isUserFormType = this.formService.isUserFormType(this.formType);
+        this.isAdminFormType = this.formService.isAdminFormType(this.formType);
     }
 
-    private getForm(form: FormGroup): void {
-        this.formGroup = form;
-        console.log(this.formGroup);
+    getForm(form: any): void {
+        this.isFormLoading = true;
+        if (this.configId) {
+            this.companyUsersService.update(form.value).subscribe(data => {
+                this.actionService.openSnackBar('Se ha actualizado exitosamente');
+                setTimeout(() => {
+                    this.router.navigateByUrl(this.goBackUrl);
+                }, 2100);
+            }, err => {
+                this.isFormLoading = false;
+                this.actionService.getSwalError();
+            });
+        }
+
+        if (!this.configId) {
+            this.companyUsersService.create(form.value).subscribe(data => {
+                this.actionService.openSnackBar('Se ha creado exitosamente');
+                setTimeout(() => {
+                    this.router.navigateByUrl(this.goBackUrl);
+                }, 2100);
+            }, err => {
+                this.isFormLoading = false;
+                this.actionService.getSwalError();
+            });
+        }
     }
 }

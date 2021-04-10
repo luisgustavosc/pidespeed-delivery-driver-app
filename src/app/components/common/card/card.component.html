@@ -19,7 +19,7 @@
 <div *ngIf="cardType === 2" class="card mb-2 border-3 w-100 border-top h-xs-145p" [ngClass]="isPidespeedOrder ? 'border-red2' : 'border-cyan'">
   <div class="card-body">
     <div class="d-flex align-items-center">
-      <img *ngIf="isPidespeedOrder" src="https://ssl.pidespeed.com/web/6.png" class="w-xs-20p mr-2" alt="">
+      <img *ngIf="isPidespeedOrder" src="https://storage.googleapis.com/pidespeed-storage/web/6.png" class="w-xs-20p mr-2" alt="">
       <span *ngIf="!isPidespeedOrder" class="material-icons mr-2 font-20">
         shopping_basket
       </span>
@@ -39,7 +39,7 @@
 <div *ngIf="cardType === 3" class="card-body p-2 {{ isDisabled ? 'bg-whisper' : 'bg-white'}}">
   <div *ngIf="hasActions" class="row no-gutters mx-auto">
     <div class="col-9">
-      <div class="w-100 h-xs-55p border-rounded-md" style="background-image: url('https://ssl.pidespeed.com/empresas/vecchio-pizza-18-portada'); background-position: center; background-size: cover;">
+      <div class="w-100 h-xs-55p border-rounded-md" style="background-image: url('https://storage.googleapis.com/pidespeed-storage/empresas/vecchio-pizza-18-portada'); background-position: center; background-size: cover;">
       </div>
     </div>
     <div class="col-3 pl-2 d-flex flex-column">

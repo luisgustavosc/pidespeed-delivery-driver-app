@@ -1,82 +1,94 @@
 /**
-* @Angular
-*/
-import { APP_INITIALIZER, ErrorHandler, NgModule } from "@angular/core";
-import { BrowserModule } from "@angular/platform-browser";
-import { CommonModule } from "@angular/common";
-import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { HttpClientModule } from "@angular/common/http";
-import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { AppRoutingModule } from "./app-routing.module";
+ * @Angular
+ */
+import { APP_INITIALIZER, ErrorHandler, NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AppRoutingModule } from './app-routing.module';
 
 /**
-* @Packages
-*/
-import { JwtModule } from "@auth0/angular-jwt";
-import { MaterialModule } from "./material.module";
-import { ImageCropperModule } from "ngx-image-cropper";
-import { NgxMaterialTimepickerModule } from "ngx-material-timepicker";
+ * @Packages
+ */
+import { JwtModule } from '@auth0/angular-jwt';
+import { MaterialModule } from './material.module';
+import { ImageCropperModule } from 'ngx-image-cropper';
+import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 import { NgxImageCompressService } from 'ngx-image-compress';
 
 /**
-* @Pipes
-*/
-import { MesPipe } from "./pipes/mes.pipe";
-import { HorariosPipe } from "./pipes/horarios.pipe";
+ * @Pipes
+ */
+import { MesPipe } from './pipes/mes.pipe';
+import { HorariosPipe } from './pipes/horarios.pipe';
+import { ImagePipe } from './pipes/image.pipe';
 
 /**
-* @Components
-*/
+ * @Components
+ */
 // Pages
-import { AppComponent } from "src/app/app.component";
-import { DashboardComponent } from "src/app/components/pages/dashboard/dashboard.component";
-import { LoginComponent } from "src/app/components/pages/login/login.component";
-import { Error503Component } from "src/app/components/pages/error503/error503.component";
-import { RepartidoresComponent } from "src/app/components/pages/repartidores/list/repartidores.component";
-import { RepartidoresUbicacionComponent } from "src/app/components/pages/repartidores/ubicacion/repartidores-ubicacion.component";
-import { ConfigRepartidoresComponent } from "src/app/components/pages/config-repartidores/config-repartidores.component";
-import { ConfigEmpresasComponent } from "src/app/components/pages/config-empresas/config-empresas.component";
-import { ConfigAdminsComponent } from "src/app/components/pages/config-admins/config-admins.component";
-import { ConfigUpdateRepartidorComponent } from "src/app/components/pages/config-update/config-update-repartidor/config-update-repartidor.component";
-import { ConfigUpdateEmpresaComponent } from "src/app/components/pages/config-update/config-update-empresa/config-update-empresa.component";
-import { ConfigUpdateAdminComponent } from "src/app/components/pages/config-update/config-update-admin/config-update-admin.component";
+import { AppComponent } from 'src/app/app.component';
+import { DashboardComponent } from 'src/app/components/dashboard/pages/dashboard/dashboard.component';
+import { LoginComponent } from 'src/app/components/auth/pages/login/login.component';
+import { Error503Component } from 'src/app/components/error/error503/error503.component';
+import { DeliversComponent } from 'src/app/components/pages/delivers/list/delivers.component';
+import { DeliversLocationComponent } from 'src/app/components/pages/delivers/location/delivers-location.component';
+import { ConfigDeliversComponent } from 'src/app/components/pages/config-delivers/config-delivers.component';
+import { ConfigCompanyComponent } from 'src/app/components/pages/config-company/config-company.component';
+import { ConfigAdminsComponent } from 'src/app/components/pages/config-admins/config-admins.component';
+import { ConfigUpdateDeliverComponent } from 'src/app/components/pages/config-update/config-update-deliver/config-update-deliver.component';
+import { ConfigUpdateCompaniesComponent } from 'src/app/components/pages/config-update/config-update-affiliated-company/config-update-company.component';
+import { ConfigUpdateAdminComponent } from 'src/app/components/pages/config-update/config-update-admin/config-update-admin.component';
 import { HelpComponent } from 'src/app/components/pages/help/help.component';
+import { ConfigUpdateCompanyComponent } from './components/pages/config-update/config-update-company-profile/config-update-company.component';
+import { ListComponent } from './components/orders/pages/list/list.component';
+import { OrderDetailComponent } from './components/orders/pages/order-detail/order-detail.component';
+
+// Forms
+import { UpdateAccountComponent } from './components/pages/config-update/update-account/update-account.component';
+import { DeliverFormComponent } from 'src/app/components/forms/pages/deliver-form/deliver-form.component';
+import { CompanyFormComponent } from 'src/app/components/forms/pages/affiliated-company-form/company-form.component';
+import { AdminFormComponent } from 'src/app/components/forms/pages/admin-form/admin-form.component';
+import { CompanyProfileFormComponent } from './components/forms/pages/company-profile-form/company-profile-form.component';
+
+// Form Components
+import { MatInputFieldComponent } from 'src/app/components/forms/form-components/mat-input-field/mat-input-field.component';
+import { MatSelectFieldComponent } from 'src/app/components/forms/form-components/mat-select-field/mat-select-field.component';
+import { MatTextareaFieldComponent } from 'src/app/components/forms/form-components/mat-textarea-field/mat-textarea-field.component';
+import { SubmitButtonComponent } from 'src/app/components/forms/form-components/submit-button/submit-button.component';
+import { InputFileComponent } from 'src/app/components/forms/form-components/input-file/input-file.component';
+import { ImageCropperComponent } from 'src/app/components/forms/form-components/image-cropper/image-cropper.component';
+import { MatCheckboxComponent } from 'src/app/components/forms/form-components/mat-checkbox/mat-checkbox.component';
+import { MatRadioComponent } from 'src/app/components/forms/form-components/mat-radio/mat-radio.component';
+import { MatSlideToggleComponent } from 'src/app/components/forms/form-components/mat-slide-toggle/mat-slide-toggle.component';
 
 // Common
-import { NavComponent } from "src/app/components/common/nav/nav.component";
-import { MobileMenuComponent } from "src/app/components/common/mobile-menu/mobile-menu.component";
-import { CardComponent } from "src/app/components/common/card/card.component";
-import { UserRowComponent } from "src/app/components/common/user-row/user-row.component";
-import { BottomNavComponent } from "src/app/components/common/bottom-nav/bottom-nav.component";
-import { ModalFormComponent } from "src/app/components/common/modal-form/modal-form.component"
-import { RepartidorFormComponent } from "src/app/components/common/forms/repartidor-form/repartidor-form.component";
-import { CompanyFormComponent } from "src/app/components/common/forms/company-form/company-form.component";
-import { UserFormComponent } from "src/app/components/common/forms/user-form/user-form.component";
-import { MatInputFieldComponent } from "src/app/components/common/forms-components/mat-input-field/mat-input-field.component";
-import { MatSelectFieldComponent } from "src/app/components/common/forms-components/mat-select-field/mat-select-field.component";
-import { MatTextareaFieldComponent } from "src/app/components/common/forms-components/mat-textarea-field/mat-textarea-field.component";
-import { FloatingButtonComponent } from "src/app/components/common/button/floating-button/floating-button.component";
-import { SubmitButtonComponent } from "src/app/components/common/button/submit-button/submit-button.component";
-import { InputFileComponent } from "src/app/components/common/forms-components/input-file/input-file.component";
-import { ImageCropperComponent } from 'src/app/components/common/forms-components/image-cropper/image-cropper.component';
+import { NavComponent } from 'src/app/components/common/nav/nav.component';
+import { MobileMenuComponent } from 'src/app/components/common/mobile-menu/mobile-menu.component';
+import { CardComponent } from 'src/app/components/common/card/card.component';
+import { AdminRowComponent } from 'src/app/components/common/admin-row/admin-row.component';
+import { BottomNavComponent } from 'src/app/components/common/bottom-nav/bottom-nav.component';
+import { ModalFormComponent } from 'src/app/components/common/modal-form/modal-form.component'
+import { FloatingButtonComponent } from 'src/app/components/common/button/floating-button/floating-button.component';
+import { PageLoaderComponent } from './components/common/page-loader/page-loader.component';
+import { ActionButtonComponent } from './components/common/button/action-button/action-button.component';
 
 /**
-* @Services
-*/
-import { AuthService } from "src/app/services/auth/auth.service";
-import { DashboardService } from "src/app/services/dashboard/dashboard.service";
-import { InvoiceService } from "src/app/services/invoice/invoice.service";
-import { OrdersService } from "src/app/services/orders/orders.service"
-import { ProfileService } from "src/app/services/profile/profile.service";
-import { ProductosService } from "src/app/services/productos/productos.service";
-import { WebSocketService } from "src/app/services/webSocket/web-socket.service";
+ * @Services
+ */
+import { AuthService } from 'src/app/components/auth/services/auth/auth.service';
+import { DashboardService } from 'src/app/components/dashboard/services/dashboard/dashboard.service';
+import { CompanyProfileService } from 'src/app/services/company-profile/companyProfile.service';
+import { WebSocketService } from 'src/app/services/webSocket/web-socket.service';
 import * as Sentry from '@sentry/angular';
 
 export function jwtTokenGetter() {
-    return localStorage.getItem("ACCESS_TOKEN");
+    return localStorage.getItem('ACCESS_TOKEN');
 }
 export function jwtTokenAdminGetter() {
-    return localStorage.getItem("TOKEN_ADMIN");
+    return localStorage.getItem('TOKEN_ADMIN');
 }
 @NgModule({
     declarations: [
@@ -86,31 +98,42 @@ export function jwtTokenAdminGetter() {
         Error503Component,
         NavComponent,
         MobileMenuComponent,
-        RepartidoresComponent,
+        DeliversComponent,
         CardComponent,
         BottomNavComponent,
-        RepartidoresUbicacionComponent,
-        ConfigRepartidoresComponent,
-        ConfigEmpresasComponent,
+        DeliversLocationComponent,
+        ConfigDeliversComponent,
+        ConfigCompanyComponent,
         ConfigAdminsComponent,
-        UserRowComponent,
+        AdminRowComponent,
         MesPipe,
         HorariosPipe,
+        ImagePipe,
         ModalFormComponent,
         CompanyFormComponent,
-        RepartidorFormComponent,
-        UserFormComponent,
+        DeliverFormComponent,
+        AdminFormComponent,
         MatInputFieldComponent,
         MatSelectFieldComponent,
         MatTextareaFieldComponent,
         FloatingButtonComponent,
         SubmitButtonComponent,
-        ConfigUpdateRepartidorComponent,
-        ConfigUpdateEmpresaComponent,
+        ConfigUpdateDeliverComponent,
+        ConfigUpdateCompaniesComponent,
         ConfigUpdateAdminComponent,
         HelpComponent,
         InputFileComponent,
         ImageCropperComponent,
+        MatCheckboxComponent,
+        MatRadioComponent,
+        MatSlideToggleComponent,
+        PageLoaderComponent,
+        UpdateAccountComponent,
+        ConfigUpdateCompanyComponent,
+        CompanyProfileFormComponent,
+        ListComponent,
+        ActionButtonComponent,
+        OrderDetailComponent,
     ],
     imports: [
         BrowserModule,
@@ -155,10 +178,7 @@ export function jwtTokenAdminGetter() {
         // },
         AuthService,
         DashboardService,
-        InvoiceService,
-        OrdersService,
-        ProfileService,
-        ProductosService,
+        CompanyProfileService,
         WebSocketService,
         NgxImageCompressService
     ],

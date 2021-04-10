@@ -47,7 +47,8 @@
               "crypto-js/sha256",
               "util",
               "hammerjs",
-              "debug"
+              "debug",
+              "of"
             ]
           },
           "configurations": {

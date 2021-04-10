@@ -21,15 +21,15 @@
               class="nav-link"
               data-toggle="collapse"
               aria-expanded="false"
-              data-target="#repartidores-submenu"
-              aria-controls="repartidores-submenu">
+              data-target="#delivers-submenu"
+              aria-controls="delivers-submenu">
               <span class="material-icons">groups</span>
               Repartidores
             </a>
-            <div id="repartidores-submenu" class="collapse submenu">
+            <div id="delivers-submenu" class="collapse submenu">
               <ul class="nav flex-column">
                 <li class="nav-item">
-                  <a class="nav-link" [routerLink]="[ '/repartidores']" #rla="routerLinkActive" routerLinkActive="active">Ver Repartidores</a>
+                  <a class="nav-link" [routerLink]="[ '/delivers']" #rla="routerLinkActive" routerLinkActive="active">Ver Repartidores</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" [routerLink]="[ '/products/accompaniments']" routerLinkActive="active">Ubicación</a>
@@ -38,17 +38,17 @@
             </div>
           </li> -->
           <li class="nav-item ">
-            <a [routerLink]="[ '/repartidores']" routerLinkActive="active" class="nav-link text-capitalize">
+            <a [routerLink]="[ '/delivers']" routerLinkActive="active" class="nav-link text-capitalize">
               <span class="material-icons">groups</span>
               Repartidores
             </a>
           </li>
           <li class="nav-item ">
-            <a [routerLink]="[ '/orders']" routerLinkActive="active" class="nav-link text-capitalize">
+            <a [routerLink]="[ '/orders/to-do']" routerLinkActive="active" class="nav-link text-capitalize">
               <span class="material-icons">
                 list_alt
               </span>
-              <span matBadge="{{ cantidadPendientes }}" matBadgeColor="white">Órdenes </span>
+              <span matBadge="{{ '2' }}" matBadgeColor="white">Órdenes </span>
             </a>
           </li>
           <li class="nav-item">
@@ -76,14 +76,6 @@
               </ul>
             </div>
           </li>
-          <li class="nav-item d-lg-none">
-            <a [routerLink]="[ '/profile']" class="nav-link">
-              <span class="material-icons">
-                admin_panel_settings
-              </span>
-              Cuenta
-            </a>
-          </li>
           <li class="nav-item">
             <a
               [class.active]="rlaConfig?.isActive"
@@ -101,13 +93,19 @@
             <div id="settings-submenu" class="collapse submenu">
               <ul class="nav flex-column">
                 <li class="nav-item">
-                  <a class="nav-link" [routerLink]="[ '/configuracion/repartidores']" #rlaConfig="routerLinkActive" routerLinkActive="active">Repartidores</a>
+                  <a class="nav-link" [routerLink]="[ '/settings/delivers']" #rlaConfig="routerLinkActive" routerLinkActive="active">Repartidores</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" [routerLink]="[ '/configuracion/empresas']" #rlaConfig="routerLinkActive" routerLinkActive="active">Empresas afiliadas</a>
+                  <a class="nav-link" [routerLink]="[ '/settings/company']" #rlaConfig="routerLinkActive" routerLinkActive="active">Empresas afiliadas</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" [routerLink]="[ '/configuracion/admins']" #rlaConfig="routerLinkActive" routerLinkActive="active">Administradores</a>
+                  <a class="nav-link" [routerLink]="[ '/settings/admins']" #rlaConfig="routerLinkActive" routerLinkActive="active">Usuarios</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" [routerLink]="[ '/settings/company-profile']" #rlaConfig="routerLinkActive" routerLinkActive="active">Perfil de empresa</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" [routerLink]="[ '/settings/account']" #rlaConfig="routerLinkActive" routerLinkActive="active">Cuenta</a>
                 </li>
               </ul>
             </div>

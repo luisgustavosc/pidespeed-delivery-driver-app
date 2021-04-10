@@ -1,20 +1,25 @@
 <app-nav [pageTitle]='pageTitle' [isVisibleGoBackButton]='true'></app-nav>
 
-<div class="dashboard-wrapper">
+<div *ngIf="users" class="dashboard-wrapper">
   <div class="mt-5 pt-5 pb-4">
-    <app-user-row
-      [dataId]="10"
-      [rowTitle]="'Juan Lopez'"
+    <app-admin-row
+    *ngFor="let user of users"
+      [dataId]="user.id"
+      [rowTitle]="user.nombre"
       [rowSubtitle]="'Administrador'"
+      [rowImg]="user.img?.url"
       [hasActions]="true"
-      [isDisabled]='false'
-      [deleteAction]='deleteAdmin'
-      [disabledAction]='disableAdmin'
-      [formType]='userFormType'
-      [EditRedirectTo]="currentPath + '/2'">
-    </app-user-row>
+      [isDisabled]="user.disabled"
+      [deleteAction]="deleteUser"
+      [disabledAction]="disableUser"
+      [formType]="adminFormType"
+      EditRedirectTo="{{currentPath}}/{{user.id}}">
+    </app-admin-row>
   </div>
 </div>
+<ng-container *ngIf="!users">
+  <app-page-loader></app-page-loader>
+</ng-container>
 
 <app-bottom-nav [data]='bottomNavData'></app-bottom-nav>
-<app-floating-button [formType]='userFormType' [link]="currentPath + '/add'"></app-floating-button>
+<app-floating-button [formType]='adminFormType' [link]="currentPath + '/add'"></app-floating-button>

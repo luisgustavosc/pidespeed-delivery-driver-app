@@ -1,0 +1,15 @@
+<form [formGroup]="formGroup" (ngSubmit)="onSubmit(formGroup, imgResultAfterCompress)">
+  <ng-container *ngIf="!configId || isDataLoaded">
+    <app-input-file [form]='formGroup' [fieldName]="'image'" [imageURLToEdit]="companyImage?.url" (imgResultAfterCompress)="getImageCroppedAndCompressed($event)"></app-input-file>
+    <app-mat-input-field [form]='formGroup' [label]="'Nombre'" [fieldName]="'name'"></app-mat-input-field>
+    <app-mat-textarea-field [form]='formGroup' [label]="'Descripción'" [fieldName]="'description'" [maxLength]="60"></app-mat-textarea-field>
+    <!-- TODO: cambiar por google maps -->
+    <app-mat-input-field [form]='formGroup' [label]="'Cordenadas'" [fieldName]="'coordinates'"></app-mat-input-field>
+    <app-mat-textarea-field [form]='formGroup' [label]="'Dirección'" [fieldName]="'addresss'" [maxLength]="60"></app-mat-textarea-field>
+    <app-mat-slide-toggle [form]='formGroup' [label]="'¿Es visible?'" [fieldName]="'publish'"></app-mat-slide-toggle>
+    <app-submit-button [buttonLabel]="'Guardar'" [isDisabled]="!formGroup.valid" [isFormLoading]="isFormLoading"></app-submit-button>
+  </ng-container>
+  <ng-container *ngIf="configId && !isDataLoaded">
+    <app-page-loader></app-page-loader>
+  </ng-container>
+</form>

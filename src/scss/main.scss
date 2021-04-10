@@ -2,6 +2,7 @@
 @import "../../node_modules/bootstrap/scss/bootstrap";
 @import "../../node_modules/animate.css/animate.min";
 
+@import "shared/colors";
 @import "variables";
 @import "theme";
 
@@ -20,3 +21,4 @@
 @import "components/time-picker";
 @import "components/buttons";
 @import "components/nav";
+@import "shared/toggleList"

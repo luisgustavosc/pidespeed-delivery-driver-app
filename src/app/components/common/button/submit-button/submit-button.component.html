@@ -1,7 +1,0 @@
-<ng-container *ngIf="isLoading; then loadingTemplate; else buttonTemplate"></ng-container>
-<ng-template #buttonTemplate>
-  <button [disabled]='isDisabled' type="submit" class="btn btn-red btn-shadow-red w-100 mt-3">{{ buttonLabel }}</button>
-</ng-template>
-<ng-template #loadingTemplate>
-  <div class="lazyloader"></div>
-</ng-template>

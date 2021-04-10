@@ -5,7 +5,7 @@ import { Component, OnInit } from '@angular/core';
     templateUrl: './help.component.html',
 })
 export class HelpComponent implements OnInit {
-    private pageTitle: string = 'Ayuda';
+    public pageTitle = 'Ayuda';
 
     constructor() { }
 
