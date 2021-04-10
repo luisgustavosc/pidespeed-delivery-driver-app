@@ -29,7 +29,7 @@ pipelines:
       #     script:
       #       - npm run test
   branches:
-    develop:
+    development:
       - step:
         name: Install dependencies
         caches:
