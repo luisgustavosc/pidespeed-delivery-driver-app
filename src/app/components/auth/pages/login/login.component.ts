@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActionService } from 'src/app/services/action/action.service';
+import { UtilsService } from 'src/app/services/utils/utils.service';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/components/auth/services/auth/auth.service';
@@ -14,7 +14,7 @@ export class LoginComponent implements OnInit {
         password: new FormControl('', [Validators.required])
     });
 
-    constructor(private authService: AuthService, private router: Router, private actionService: ActionService) { }
+    constructor(private authService: AuthService, private router: Router, private utils: UtilsService) { }
 
     ngOnInit() { }
 
@@ -33,12 +33,12 @@ export class LoginComponent implements OnInit {
                 // this.router.navigate(['/']);
                 window.location.reload();
             } else {
-                this.actionService.getSwalError('Usuario o contraseña incorrecto', null);
+                this.utils.getSwalError('Usuario o contraseña incorrecto', null);
             }
         },
         err => {
             this.isFormLoading = false;
-            this.actionService.getSwalError();
+            this.utils.getSwalError();
         });
     }
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ActionService } from 'src/app/services/action/action.service';
+import { UtilsService } from 'src/app/services/utils/utils.service';
 
 @Component({
     selector: 'app-card',
@@ -26,7 +26,7 @@ export class CardComponent implements OnInit {
     @Input() public EditRedirectTo?: string = null;
     @Input() public hasModal = false;
 
-    constructor(private actionService: ActionService) { }
+    constructor(private utils: UtilsService) { }
 
     ngOnInit() { }
 
@@ -35,6 +35,6 @@ export class CardComponent implements OnInit {
     }
 
     delete($id: number): void {
-        this.actionService.getSwalToDelete($id, this.deleteAction);
+        this.utils.getSwalToDelete($id, this.deleteAction);
     }
 }

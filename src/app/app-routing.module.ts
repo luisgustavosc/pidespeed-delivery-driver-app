@@ -5,18 +5,18 @@ import { Routes, RouterModule } from '@angular/router';
 import { DashboardComponent } from 'src/app/components/dashboard/pages/dashboard/dashboard.component';
 import { LoginComponent } from 'src/app/components/auth/pages/login/login.component';
 import { Error503Component } from 'src/app/components/error/error503/error503.component';
-import { DeliversComponent } from 'src/app/components/pages/delivers/list/delivers.component';
-import { DeliversLocationComponent } from 'src/app/components/pages/delivers/location/delivers-location.component';
-import { ConfigDeliversComponent } from 'src/app/components/pages/config-delivers/config-delivers.component';
-import { ConfigCompanyComponent } from 'src/app/components/pages/config-company/config-company.component';
-import { ConfigAdminsComponent } from 'src/app/components/pages/config-admins/config-admins.component';
-import { ConfigUpdateDeliverComponent } from 'src/app/components/pages/config-update/config-update-deliver/config-update-deliver.component';
-import { ConfigUpdateCompaniesComponent } from 'src/app/components/pages/config-update/config-update-affiliated-company/config-update-company.component';
-import { ConfigUpdateAdminComponent } from 'src/app/components/pages/config-update/config-update-admin/config-update-admin.component';
-import { HelpComponent } from 'src/app/components/pages/help/help.component';
-import { UpdateAccountComponent } from './components/pages/config-update/update-account/update-account.component';
-import { ConfigUpdateCompanyComponent } from './components/pages/config-update/config-update-company-profile/config-update-company.component';
-import { ListComponent } from './components/orders/pages/list/list.component';
+import { DeliversComponent } from 'src/app/components/users/delivers/list/delivers.component';
+import { DeliversLocationComponent } from 'src/app/components/users/delivers/location/delivers-location.component';
+import { ConfigDeliversComponent } from 'src/app/components/users/delivers/list-config/config-delivers.component';
+import { ConfigCompanyComponent } from 'src/app/components/affiliated-company/component/list/config-company.component';
+import { ConfigAdminsComponent } from 'src/app/components/users/admins/list-config/config-admins.component';
+import { ConfigUpdateDeliverComponent } from 'src/app/components/users/delivers/update/config-update-deliver.component';
+import { ConfigUpdateCompaniesComponent } from 'src/app/components/affiliated-company/component/update/config-update-company.component';
+import { ConfigUpdateAdminComponent } from 'src/app/components/users/admins/update/config-update-admin.component';
+import { HelpComponent } from 'src/app/components/help/page/help.component';
+import { UpdateAccountComponent } from 'src/app/components/profile/component/account/update-account.component';
+import { ConfigUpdateCompanyComponent } from 'src/app/components/profile/component/company/config-update-company.component';
+import { OrderListComponent } from './components/orders/pages/list/list.component';
 
 // Servicio de bloqueo de rutas
 import { AuthGuard } from 'src/app/components/auth/guard/auth/auth.guard';
@@ -67,8 +67,8 @@ const routes: Routes = [
     {
         path: 'orders',
         children: [
-            { path: ':status', component: ListComponent },
-            { path: '', component: ListComponent },
+            { path: ':status', component: OrderListComponent },
+            { path: '', component: OrderListComponent },
         ],
         canActivate: [AuthGuard]
     },

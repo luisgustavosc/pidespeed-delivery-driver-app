@@ -3,8 +3,8 @@ import { AbstractControl } from '@angular/forms';
 import { of } from 'rxjs/internal/observable/of';
 import { catchError, map } from 'rxjs/operators';
 import { ValidateExistingDataModel } from 'src/app/model/validateExistingData.model';
-import { ActionService } from 'src/app/services/action/action.service';
-import { CompanyUsersService } from 'src/app/services/company-users/company-users.service';
+import { UtilsService } from 'src/app/services/utils/utils.service';
+import { CompanyUsersService } from 'src/app/components/users/services/company-users/company-users.service';
 
 @Injectable({
     providedIn: 'root'
@@ -22,7 +22,7 @@ export class FormService {
     private numericPattern ='[0-9]*';
     private usernamePattern = '[a-z0-9-_.\s]+'
 
-    constructor(private actionService: ActionService) { }
+    constructor(private utils: UtilsService) { }
 
     public getFormType(value: string) {
         let type = null;
@@ -137,7 +137,7 @@ export class FormService {
                 // return null for no errors
                 return null;
             }),
-            catchError(err => of(this.actionService.getSwalError()))
+            catchError(err => of(this.utils.getSwalError()))
         );
     }
 

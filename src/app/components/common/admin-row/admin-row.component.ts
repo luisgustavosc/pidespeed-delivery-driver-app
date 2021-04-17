@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ActionService } from 'src/app/services/action/action.service';
+import { UtilsService } from 'src/app/services/utils/utils.service';
 
 @Component({
     selector: 'app-admin-row',
@@ -20,7 +20,7 @@ export class AdminRowComponent implements OnInit {
     @Input() private editAction: (id: number) => void;
     @Input() public formType: string;
 
-    constructor(private actionService: ActionService) { }
+    constructor(private utils: UtilsService) { }
 
     ngOnInit() { }
 
@@ -29,6 +29,6 @@ export class AdminRowComponent implements OnInit {
     }
 
     delete($id: number): void {
-        this.actionService.getSwalToDelete($id, this.deleteAction);
+        this.utils.getSwalToDelete($id, this.deleteAction);
     }
 }

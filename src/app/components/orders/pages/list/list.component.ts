@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BottomNavModel } from 'src/app/model/bottomNav';
-import { BottomNavService } from 'src/app/services/bottomNav/bottom-nav.service';
+import { BottomNavService } from 'src/app/components/common/bottom-nav/service/bottom-nav.service';
 
 @Component({
     selector: 'app-list',
     templateUrl: './list.component.html',
 })
-export class ListComponent implements OnInit {
+export class OrderListComponent implements OnInit {
     public pageTitle = 'Ordenes';
     public bottomNavData: Array<BottomNavModel> = this.bottomNavService.getOrdersBottomNavData();
     public orderStatus: string | null = this.activeRoute.snapshot.params.status || 'to-do';

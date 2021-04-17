@@ -1,8 +1,8 @@
 import { Component, EventEmitter, OnInit, Output,Input } from '@angular/core';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
-import { ActionService } from 'src/app/services/action/action.service';
+import { UtilsService } from 'src/app/services/utils/utils.service';
 import { FormService } from 'src/app/components/forms/services/form/form.service';
-import { CompanyProfileService } from 'src/app/services/company-profile/companyProfile.service';
+import { CompanyProfileService } from 'src/app/components/profile/service/companyProfile.service';
 import { LocationService } from 'src/app/services/location/location.service';
 import { LocationModel } from 'src/app/model/location.model';
 import { MatSelectOptions } from 'src/app/model/matSelectOptions';
@@ -29,7 +29,7 @@ export class CompanyProfileFormComponent implements OnInit {
 
     constructor(
         private fb: FormBuilder,
-        private actionService: ActionService,
+        private utils: UtilsService,
         private formService: FormService,
         private companyProfileService: CompanyProfileService,
         private locationService: LocationService,
@@ -81,7 +81,7 @@ export class CompanyProfileFormComponent implements OnInit {
         }, err => {
             this.isDataLoaded = true;
             this.isFormLoading = false;
-            this.actionService.back();
+            this.utils.back();
         })
     }
 
@@ -97,7 +97,7 @@ export class CompanyProfileFormComponent implements OnInit {
                 }
             });
         }, err => {
-            this.actionService.getSwalError();
+            this.utils.getSwalError();
         });
     }
 
@@ -113,7 +113,7 @@ export class CompanyProfileFormComponent implements OnInit {
                 }
             });
         }, err => {
-            this.actionService.getSwalError();
+            this.utils.getSwalError();
         });
     }
 
