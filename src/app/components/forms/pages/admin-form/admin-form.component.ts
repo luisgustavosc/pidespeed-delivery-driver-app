@@ -6,6 +6,7 @@ import { AuthService } from 'src/app/components/auth/services/auth/auth.service'
 import { CompanyUsersService } from 'src/app/components/users/services/company-users/company-users.service';
 import { ImageModel } from 'src/app/model/imageModel';
 import { Router } from '@angular/router';
+import { RolesService } from 'src/app/components/users/services/roles/roles.service';
 
 @Component({
     selector: 'app-admin-form',
@@ -29,11 +30,17 @@ export class AdminFormComponent implements OnInit {
         private utils: UtilsService,
         private authService: AuthService,
         private router: Router,
+        private rolesService: RolesService,
     ) { }
 
     ngOnInit() {
         this.companyId = this.authService.getCurrentUser().empresaDelivery;
         this.isPasswordVisible = this.configId ? false : true;
+        this.initForm();
+        this.setPasswordValidators();
+    }
+
+    initForm() {
         this.formGroup = this.fb.group({
             nombre: ['', [
                 Validators.required,
@@ -101,24 +108,44 @@ export class AdminFormComponent implements OnInit {
             ]],
             image: [''],
             type: [CompanyUsersService.COMPANY_TYPE_DELIVER],
-            role: [CompanyUsersService.ROLE_ADMIN],
+            role: [''],
             empresa: [this.companyId],
             _id: [this.configId || null],
         });
-        if (this.configId) this.getUser();
-        this.setPasswordValidators();
+
+        if ( this.configId ) {
+            this.getUser();
+        }
+
+        this.setRole();
     }
 
-    private getUser() {
+    getUser() {
         this.companyUsersService.getById(this.configId).subscribe((user: any) => {
-
-            this.userImageUrl = user.img;
-            this.formGroup.patchValue({ ...user });
             this.isDataLoaded = true;
+            this.setFormData(user);
         }, err => {
             this.isDataLoaded = true;
             this.isFormLoading = false;
-            this.utils.back();
+            this.utils.redirectBack();
+        })
+    }
+
+    setFormData(user) {
+        this.userImageUrl = user.img;
+        this.formGroup.patchValue({
+            ...user,
+        });
+    }
+
+    setRole() {
+        this.rolesService.getAll().subscribe((roles: any) => {
+            this.formGroup.patchValue({
+                role: roles.find(item => item.name === CompanyUsersService.ROLE_ADMIN),
+            });
+        }, err => {
+            this.isDataLoaded = true;
+            this.isFormLoading = false;
         })
     }
 

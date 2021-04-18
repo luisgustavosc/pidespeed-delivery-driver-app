@@ -7,6 +7,7 @@ import { MatSelectOptions } from 'src/app/model/matSelectOptions';
 import { CompanyUsersService } from 'src/app/components/users/services/company-users/company-users.service';
 import { ImageModel } from 'src/app/model/imageModel';
 import { Router } from '@angular/router';
+import { RolesService } from 'src/app/components/users/services/roles/roles.service';
 
 @Component({
     selector: 'app-deliver-form',
@@ -45,11 +46,17 @@ export class DeliverFormComponent implements OnInit {
         private utils: UtilsService,
         private authService: AuthService,
         private router: Router,
+        private rolesService: RolesService
         ) { }
 
     ngOnInit() {
         this.companyId = this.authService.getCurrentUser().empresaDelivery;
         this.isPasswordVisible = this.configId ? false : true;
+        this.initForm();
+        this.setPasswordValidators();
+    }
+
+    private initForm() {
         this.formGroup = this.fb.group({
             nombre: ['', [
                 Validators.required,
@@ -117,30 +124,46 @@ export class DeliverFormComponent implements OnInit {
             ]],
             image: [''],
             type: [CompanyUsersService.COMPANY_TYPE_DELIVER],
-            role: [CompanyUsersService.ROLE_WORKER],
+            role: [''],
             vehicle_type: [''],
             vehicle_image: [null],
             empresa: [this.companyId],
             _id: [this.configId || null],
         });
 
-        if(this.configId) this.getDeliver();
+        if ( this.configId ) {
+            this.getDeliver();
+        }
 
-        this.setPasswordValidators();
+        this.setRole();
     }
 
     private getDeliver() {
         this.companyUsersService.getById(this.configId).subscribe((deliver: any) => {
-            this.deliverImage = deliver.img;
-
-            this.formGroup.patchValue({
-                ...deliver
-            });
             this.isDataLoaded = true;
+            this.setFormData(deliver);
         }, err => {
             this.isDataLoaded = true;
             this.isFormLoading = false;
-            this.utils.back();
+            this.utils.redirectBack();
+        })
+    }
+
+    private setFormData(deliver) {
+        this.deliverImage = deliver.img;
+        this.formGroup.patchValue({
+            ...deliver,
+        });
+    }
+
+    setRole() {
+        this.rolesService.getAll().subscribe((roles: any) => {
+            this.formGroup.patchValue({
+                role: roles.find(item => item.name === CompanyUsersService.ROLE_WORKER),
+            });
+        }, err => {
+            this.isDataLoaded = true;
+            this.isFormLoading = false;
         })
     }
 

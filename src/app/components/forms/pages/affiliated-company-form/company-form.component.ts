@@ -85,7 +85,7 @@ export class CompanyFormComponent implements OnInit {
         }, err => {
             this.isDataLoaded = true;
             this.isFormLoading = false;
-            this.utils.back();
+            this.utils.redirectBack();
         })
     }
 

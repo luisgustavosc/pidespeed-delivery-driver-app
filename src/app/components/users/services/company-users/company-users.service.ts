@@ -17,11 +17,17 @@ export class CompanyUsersService {
     }
 
     getAll(role: string) {
-        return this.http.get(`${ AUTH_SERVER }/usuario-empresa/${ this.user.empresaDelivery }/${ CompanyUsersService.COMPANY_TYPE_DELIVER }/${ role }`, options);
+        return this.http.get(
+            `${ AUTH_SERVER }/usuario-empresa/${ this.user.empresaDelivery }/${ CompanyUsersService.COMPANY_TYPE_DELIVER }/${ role }`,
+            options
+        );
     }
 
     getById(userId: string) {
-        return this.http.get(`${ AUTH_SERVER }/usuario-empresa/list/one/${ userId }/${ CompanyUsersService.COMPANY_TYPE_DELIVER }`, options);
+        return this.http.get(
+            `${ AUTH_SERVER }/usuario-empresa/list/one/${ userId }/${ CompanyUsersService.COMPANY_TYPE_DELIVER }`,
+            options
+        );
     }
 
     getByField(data) {

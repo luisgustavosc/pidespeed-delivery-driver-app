@@ -62,12 +62,12 @@ export class UtilsService {
         return array.find(item => item._id === id);
     }
 
-    public back(): void {
-        this.history.pop()
+    public redirectBack(): void {
+        this.history.pop();
         if (this.history.length > 0) {
-            this.location.back()
+            this.location.back();
         } else {
-            this.router.navigateByUrl('/')
+            this.router.navigateByUrl('/');
         }
     }
 }

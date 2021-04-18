@@ -103,6 +103,7 @@ import * as Sentry from '@sentry/angular';
  * @Directive
  */
 import { AppFormDirective } from './components/forms/directive/directive';
+import { RolesService } from './components/users/services/roles/roles.service';
 
 export function jwtTokenGetter() {
     return localStorage.getItem('ACCESS_TOKEN');
@@ -202,7 +203,8 @@ export function jwtTokenAdminGetter() {
         CompanyProfileService,
         WebSocketService,
         NgxImageCompressService,
-        ResolveFormComponentService
+        ResolveFormComponentService,
+        RolesService,
     ],
     bootstrap: [AppComponent]
 })
