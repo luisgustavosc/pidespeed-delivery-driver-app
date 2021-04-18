@@ -6,13 +6,13 @@ import { AuthService } from 'src/app/components/auth/services/auth/auth.service'
 import { MatSelectOptions } from 'src/app/model/matSelectOptions';
 import { CompanyUsersService } from 'src/app/components/users/services/company-users/company-users.service';
 import { ImageModel } from 'src/app/model/imageModel';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-deliver-form',
     templateUrl: './deliver-form.component.html',
 })
 export class DeliverFormComponent implements OnInit {
-    @Output() public formGroupEmitter: EventEmitter<any> = new EventEmitter<any>();
     @Input() public isFormLoading = false;
     @Input() public configId: string;
     public formGroup: FormGroup;
@@ -21,6 +21,8 @@ export class DeliverFormComponent implements OnInit {
     public companyId: string;
     public isDataLoaded = false;
     public isPasswordVisible: boolean;
+    public goBackUrl = '/settings/delivers';
+
     public vehicleTypes: Array<MatSelectOptions> = [
         {
             title : 'Moto',
@@ -41,7 +43,9 @@ export class DeliverFormComponent implements OnInit {
         private formService: FormService,
         private companyUsersService: CompanyUsersService,
         private utils: UtilsService,
-        private authService: AuthService) { }
+        private authService: AuthService,
+        private router: Router,
+        ) { }
 
     ngOnInit() {
         this.companyId = this.authService.getCurrentUser().empresaDelivery;
@@ -112,28 +116,25 @@ export class DeliverFormComponent implements OnInit {
                 Validators.maxLength(100),
             ]],
             image: [''],
-            type: [CompanyUsersService.TYPE_DELIVERY],
+            type: [CompanyUsersService.COMPANY_TYPE_DELIVER],
+            role: [CompanyUsersService.ROLE_WORKER],
             vehicle_type: [''],
             vehicle_image: [null],
             empresa: [this.companyId],
             _id: [this.configId || null],
         });
+
         if(this.configId) this.getDeliver();
+
         this.setPasswordValidators();
     }
 
     private getDeliver() {
-        this.companyUsersService.getById(this.configId, CompanyUsersService.TYPE_DELIVERY).subscribe((deliver: any) => {
+        this.companyUsersService.getById(this.configId).subscribe((deliver: any) => {
             this.deliverImage = deliver.img;
 
             this.formGroup.patchValue({
-                nombre: deliver.nombre,
-                apellido: deliver.apellido,
-                email: deliver.email,
-                cedula: deliver.cedula,
-                telefono: deliver.telefono,
-                username: deliver.username,
-                direccion: deliver.direccion,
+                ...deliver
             });
             this.isDataLoaded = true;
         }, err => {
@@ -168,6 +169,29 @@ export class DeliverFormComponent implements OnInit {
 
     onSubmit(form: FormGroup, image: string): void {
         form.value.image = this.formService.processImage(image, this.deliverImage?._id);
-        this.formGroupEmitter.emit(form);
+        this.isFormLoading = true;
+        if (this.configId) {
+            this.companyUsersService.update(form.value).subscribe(data => {
+                this.utils.openSnackBar('Se ha actualizado exitosamente');
+                setTimeout(() => {
+                    this.router.navigateByUrl(this.goBackUrl);
+                }, 2100);
+            }, err => {
+                this.isFormLoading = false;
+                this.utils.getSwalError();
+            });
+        }
+
+        if (!this.configId) {
+            this.companyUsersService.create(form.value).subscribe(data => {
+                this.utils.openSnackBar('Se ha creado exitosamente');
+                setTimeout(() => {
+                    this.router.navigateByUrl(this.goBackUrl);
+                }, 2100);
+            }, err => {
+                this.isFormLoading = false;
+                this.utils.getSwalError();
+            });
+        }
     }
 }

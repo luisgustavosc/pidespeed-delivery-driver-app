@@ -1,49 +1,48 @@
-import { Component, OnInit } from '@angular/core';
-import { FormService } from 'src/app/components/forms/services/form/form.service';
-import { FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
-import { UtilsService } from 'src/app/services/utils/utils.service';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { CompanyUsersService } from 'src/app/components/users/services/company-users/company-users.service';
 import { AuthService } from 'src/app/components/auth/services/auth/auth.service';
+import { AppFormDirective } from 'src/app/components/forms/directive/directive';
+import { ResolveFormComponentService } from 'src/app/components/forms/services/resolve-component/resolveFormComponent.service';
 
 @Component({
     selector: 'app-update-account',
-    templateUrl: './update-account.component.html',
+    templateUrl: '../../../forms/config-template/config-update.component.html',
 })
 export class UpdateAccountComponent implements OnInit {
+    @ViewChild(AppFormDirective, { static: true })
+    appFormDirective: AppFormDirective;
+
     public user = this.authService.getCurrentUser();
     public formType: string;
-    public formGroup: FormGroup;
     public isFormLoading = false;
-    public isDeliverFormType: boolean;
-    public isAdminFormType: boolean;
     public pageTitle = 'Editar mi cuenta';
     public goBackUrl = '/';
 
     constructor(
-        private formService: FormService,
-        private companyUsersService: CompanyUsersService,
-        private utils: UtilsService,
-        private router: Router,
-        private authService: AuthService
+        private authService: AuthService,
+        private resolveForm: ResolveFormComponentService
+
     ) { }
 
     ngOnInit() {
-        this.formType = this.formService.getFormType(this.user.type);
-        this.isDeliverFormType = this.formService.isDeliverFormType(this.formType);
-        this.isAdminFormType = this.formService.isAdminFormType(this.formType);
+        if (this.user) {
+            this.formType = this.user.role === CompanyUsersService.ROLE_ADMIN
+                    ? ResolveFormComponentService.ADMIN_FORM_TYPE
+                    :  ResolveFormComponentService.DELIVER_FORM_TYPE;
+
+            this.initForm();
+        }
     }
 
-    getForm(form: any): void {
-        this.isFormLoading = true;
-        this.companyUsersService.update(form.value).subscribe(data => {
-            this.utils.openSnackBar('Se ha actualizado exitosamente');
-            setTimeout(() => {
-                this.router.navigateByUrl(this.goBackUrl);
-            }, 2100);
-        }, err => {
-            this.isFormLoading = false;
-            this.utils.getSwalError();
-        });
+    initForm() {
+        const viewContainerRef = this.appFormDirective.viewContainerRef;
+        this.resolveForm.loadComponent(
+            viewContainerRef,
+            this.formType,
+            {
+                isFormLoading: this.isFormLoading,
+                configId: this.user._id,
+            }
+        );
     }
 }

@@ -1,9 +1,9 @@
 import { Component, OnInit, ChangeDetectorRef} from '@angular/core';
 import { BottomNavModel } from 'src/app/model/bottomNav';
 import { BottomNavService } from 'src/app/components/common/bottom-nav/service/bottom-nav.service';
-import { FormService } from 'src/app/components/forms/services/form/form.service';
 import { CompanyUsersService } from 'src/app/components/users/services/company-users/company-users.service';
 import { UtilsService } from 'src/app/services/utils/utils.service';
+import { ResolveFormComponentService } from 'src/app/components/forms/services/resolve-component/resolveFormComponent.service';
 
 @Component({
     selector: 'app-config-admins',
@@ -12,7 +12,7 @@ import { UtilsService } from 'src/app/services/utils/utils.service';
 export class ConfigAdminsComponent implements OnInit {
     public pageTitle = 'Configuración de Usuarios';
     public bottomNavData: Array<BottomNavModel> =this.bottomNavService.getConfigBottomNavData();
-    public adminFormType: string = FormService.ADMIN_FORM_TYPE;
+    public formType: string = ResolveFormComponentService.ADMIN_FORM_TYPE;
     public currentPath: string = window.location.pathname;
     public users = null;
     public isFormLoading = false;
@@ -28,7 +28,7 @@ export class ConfigAdminsComponent implements OnInit {
         this.getUsers();
     }
     getUsers() {
-        this.companyUsersService.getAll().subscribe(users => {
+        this.companyUsersService.getAll(CompanyUsersService.ROLE_ADMIN).subscribe(users => {
             this.users = users;
         }, err => {
             this.utils.getSwalError();

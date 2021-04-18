@@ -1,6 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ImageCropperSettings } from 'src/app/model/imageCropperSettings';
-import { FormService } from 'src/app/components/forms/services/form/form.service';
 
 @Component({
     selector: 'app-modal-form',
@@ -19,10 +18,10 @@ export class ModalFormComponent implements OnInit {
     @Input() public imageSettings: ImageCropperSettings;
     @Output() public imgResultAfterCompress: EventEmitter<string|null> = new EventEmitter();
 
-    constructor(private formService: FormService) { }
+    constructor() { }
 
     ngOnInit() {
-        this.isImageCropperType = this.formService.isImageCropperType(this.formType);
+        this.isImageCropperType = true; // necesita actualizar a dynamic component
     }
 
     getImageCroppedAndCompressed(image: string): void {

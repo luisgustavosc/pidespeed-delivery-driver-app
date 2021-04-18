@@ -3,6 +3,7 @@ import { BottomNavModel } from 'src/app/model/bottomNav';
 import { BottomNavService } from 'src/app/components/common/bottom-nav/service/bottom-nav.service';
 import { UtilsService } from 'src/app/services/utils/utils.service';
 import { CompanyUsersService } from 'src/app/components/users/services/company-users/company-users.service';
+
 @Component({
     selector: 'app-delivers',
     templateUrl: './delivers.component.html',
@@ -23,10 +24,9 @@ export class DeliversComponent implements OnInit {
     }
 
     private getDelivers() {
-        this.companyUsersService.getAll(CompanyUsersService.TYPE_DELIVERY).subscribe(delivers => {
+        this.companyUsersService.getAll(CompanyUsersService.ROLE_WORKER).subscribe(delivers => {
             this.delivers = delivers;
         }, err => {
-            // this.isFormLoading = false;
             this.utils.getSwalError();
         })
     }

@@ -1,9 +1,8 @@
-import { Component, OnInit, ChangeDetectorRef, Input, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { NgxImageCompressService } from 'ngx-image-compress';
 import { ImageCropperSettings } from 'src/app/model/imageCropperSettings';
-import { FormService } from 'src/app/components/forms/services/form/form.service';
 import { IMAGE_SERVER } from 'src/app/services/API';
+import { ResolveFormComponentService } from '../../services/resolve-component/resolveFormComponent.service';
 declare var $: any;
 
 @Component({
@@ -14,11 +13,21 @@ declare var $: any;
 export class InputFileComponent implements OnInit {
     @Input() public form: FormGroup;
     @Input() public fieldName: string;
+
+    /**
+     * For now we will only allow the user to upload another image,
+     * not edit the current one but this property is for that end, maybe a future feature
+     *
+     *    if (this.imageURLToEdit) {
+     *      this.croppedImage = this.imageURLToEdit = IMAGE_SERVER + '/' + this.imageURLToEdit;
+     *    }
+     */
     @Input() public imageURLToEdit?: string = null;
+
     public imageChangedEvent?: Event = null;
     public fileName: string;
     public fileType = 'png';
-    public formType: string = FormService.IMAGE_CROPPER_TYPE;
+    public formType: string = ResolveFormComponentService.IMAGE_CROPPER_TYPE;
     public croppedImage?: string = null;
 
     @Input() public imageSettings: ImageCropperSettings = {
@@ -30,17 +39,9 @@ export class InputFileComponent implements OnInit {
 
     @Output() private imgResultAfterCompress: EventEmitter<string> = new EventEmitter();
 
-
-    constructor(private imageCompress: NgxImageCompressService, private cdRef: ChangeDetectorRef, private formService: FormService,) { }
+    constructor() { }
 
     ngOnInit() {
-        /*
-        * - Load image when user already have one
-        * NOTE: Commented for now due to CORS errors. For now we will only allow
-        * the user to upload another image, not edit the current one
-        if (this.imageURLToEdit) {
-            this.croppedImage = this.imageURLToEdit = IMAGE_SERVER + '/' + this.imageURLToEdit;
-        }*/
         if (this.imageURLToEdit) this.croppedImage = IMAGE_SERVER + '/' + this.imageURLToEdit;
     }
 

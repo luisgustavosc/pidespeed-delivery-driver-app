@@ -130,6 +130,13 @@ export class CompanyProfileFormComponent implements OnInit {
 
     onSubmit(form: FormGroup, image: string): void {
         form.value.logo = this.formService.processImage(image, this.companyImage?._id);
-        this.formGroupEmitter.emit(form);
+        this.isFormLoading = true;
+        this.companyProfileService.update(form.value, this.configId).subscribe(data => {
+            this.utils.openSnackBar('Se ha actualizado exitosamente');
+            this.isFormLoading = false;
+        }, err => {
+            this.isFormLoading = false;
+            this.utils.getSwalError();
+        });
     }
 }

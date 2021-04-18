@@ -96,7 +96,13 @@ import { AuthService } from 'src/app/components/auth/services/auth/auth.service'
 import { DashboardService } from 'src/app/components/dashboard/services/dashboard/dashboard.service';
 import { CompanyProfileService } from 'src/app/components/profile/service/companyProfile.service';
 import { WebSocketService } from 'src/app/services/webSocket/web-socket.service';
+import { ResolveFormComponentService } from 'src/app/components/forms/services/resolve-component/resolveFormComponent.service';
 import * as Sentry from '@sentry/angular';
+
+/**
+ * @Directive
+ */
+import { AppFormDirective } from './components/forms/directive/directive';
 
 export function jwtTokenGetter() {
     return localStorage.getItem('ACCESS_TOKEN');
@@ -148,6 +154,7 @@ export function jwtTokenAdminGetter() {
         OrderListComponent,
         ActionButtonComponent,
         OrderDetailComponent,
+        AppFormDirective,
     ],
     imports: [
         BrowserModule,
@@ -194,7 +201,8 @@ export function jwtTokenAdminGetter() {
         DashboardService,
         CompanyProfileService,
         WebSocketService,
-        NgxImageCompressService
+        NgxImageCompressService,
+        ResolveFormComponentService
     ],
     bootstrap: [AppComponent]
 })

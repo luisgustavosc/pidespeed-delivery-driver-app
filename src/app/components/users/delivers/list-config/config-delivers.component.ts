@@ -1,9 +1,9 @@
 import { Component, OnInit, ChangeDetectorRef} from '@angular/core';
 import { BottomNavModel } from 'src/app/model/bottomNav';
 import { BottomNavService } from 'src/app/components/common/bottom-nav/service/bottom-nav.service';
-import { FormService } from 'src/app/components/forms/services/form/form.service';
 import { CompanyUsersService } from 'src/app/components/users/services/company-users/company-users.service';
 import { UtilsService } from 'src/app/services/utils/utils.service';
+import { ResolveFormComponentService } from 'src/app/components/forms/services/resolve-component/resolveFormComponent.service';
 
 @Component({
     selector: 'app-config-delivers',
@@ -12,13 +12,12 @@ import { UtilsService } from 'src/app/services/utils/utils.service';
 export class ConfigDeliversComponent implements OnInit {
     public pageTitle = 'Configuración de Repartidores';
     public bottomNavData: Array<BottomNavModel> =this.bottomNavService.getConfigBottomNavData();
-    public deliverFormType: string = FormService.DELIVER_FORM_TYPE;
+    public formType: string = ResolveFormComponentService.DELIVER_FORM_TYPE;
     public currentPath: string = window.location.pathname;
     public delivers = null;
     public isFormLoading = false;
     constructor(
         private bottomNavService: BottomNavService,
-        private formService: FormService,
         private companyUsersService: CompanyUsersService,
         private utils: UtilsService,
         private cdRef: ChangeDetectorRef
@@ -29,7 +28,7 @@ export class ConfigDeliversComponent implements OnInit {
     }
 
     private getDelivers() {
-        this.companyUsersService.getAll(CompanyUsersService.TYPE_DELIVERY).subscribe(delivers => {
+        this.companyUsersService.getAll(CompanyUsersService.ROLE_WORKER).subscribe(delivers => {
             this.delivers = delivers;
         }, err => {
             this.utils.getSwalError();

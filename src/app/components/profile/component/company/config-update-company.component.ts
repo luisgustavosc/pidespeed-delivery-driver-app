@@ -1,50 +1,41 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AuthService } from 'src/app/components/auth/services/auth/auth.service';
-import { FormService } from 'src/app/components/forms/services/form/form.service';
-import { UtilsService } from 'src/app/services/utils/utils.service';
-import { CompanyProfileService } from 'src/app/components/profile/service/companyProfile.service';
+import { ResolveFormComponentService } from 'src/app/components/forms/services/resolve-component/resolveFormComponent.service';
+import { AppFormDirective } from 'src/app/components/forms/directive/directive';
 
 @Component({
     selector: 'app-config-update-company',
     templateUrl: '../../../forms/config-template/config-update.component.html',
 })
 export class ConfigUpdateCompanyComponent implements OnInit {
+    @ViewChild(AppFormDirective, { static: true })
+    appFormDirective: AppFormDirective;
+
     public user = this.authService.getCurrentUser();
-    public formType: string = FormService.COMPANY_PROFILE_TYPE;
-    public formGroup: FormGroup;
+    public formType: string = ResolveFormComponentService.COMPANY_PROFILE_TYPE;
     public isFormLoading = false;
-    public isCompanyProfileFormType: boolean;
-    public pageTitle = 'Editar perfil de cuenta';
+    public pageTitle = 'Editar perfil de empresa';
     public goBackUrl = '/';
     public configId = this.user.empresaDelivery;
 
-    // Mejorar esto para no tener que definirlas
-    isAffiliatedCompanyFormType = null;
-    isDeliverFormType = null;
-    isAdminFormType = null;
-
     constructor(
-        private formService: FormService,
-        private utils: UtilsService,
-        private router: Router,
         private authService: AuthService,
-        private companyProfileService: CompanyProfileService,
+        private resolveForm: ResolveFormComponentService
     ) { }
 
     ngOnInit() {
-        this.isCompanyProfileFormType = this.formService.isCompanyProfileFormType(this.formType);
+        this.initForm();
     }
 
-    getForm(form: any): void {
-        this.isFormLoading = true;
-        this.companyProfileService.update(form.value, this.user.empresaDelivery).subscribe(data => {
-            this.utils.openSnackBar('Se ha actualizado exitosamente');
-            this.isFormLoading = false;
-        }, err => {
-            this.isFormLoading = false;
-            this.utils.getSwalError();
-        });
+    initForm() {
+        const viewContainerRef = this.appFormDirective.viewContainerRef;
+        this.resolveForm.loadComponent(
+            viewContainerRef,
+            this.formType,
+            {
+                isFormLoading: this.isFormLoading,
+                configId: this.configId,
+            }
+        );
     }
 }

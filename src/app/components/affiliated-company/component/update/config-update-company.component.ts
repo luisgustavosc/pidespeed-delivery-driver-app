@@ -1,64 +1,40 @@
-import { Component, OnInit } from '@angular/core';
-import { FormService } from 'src/app/components/forms/services/form/form.service';
-import { Router, ActivatedRoute } from '@angular/router';
-import { FormGroup } from '@angular/forms';
-import { AffiliatedCompanyService } from 'src/app/components/affiliated-company/service/affiliated-company.service';
-import { UtilsService } from 'src/app/services/utils/utils.service';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { ResolveFormComponentService } from 'src/app/components/forms/services/resolve-component/resolveFormComponent.service';
+import { AppFormDirective } from 'src/app/components/forms/directive/directive';
 
 @Component({
     selector: 'app-config-update-company',
     templateUrl: '../../../forms/config-template/config-update.component.html',
 })
 export class ConfigUpdateCompaniesComponent implements OnInit {
-    public formType: string = FormService.AFFILIATED_COMPANY_TYPE;
+    @ViewChild(AppFormDirective, { static: true })
+    appFormDirective: AppFormDirective;
+
+    public formType: string = ResolveFormComponentService.AFFILIATED_COMPANY_TYPE;
     public configId: string | null = this.activeRoute.snapshot.params.id || null;
-    public formGroup: FormGroup;
-    public isAffiliatedCompanyFormType: boolean;
-    public pageTitle: string = this.configId ? 'Editar Username' : 'Agregar Empresa';
+    public pageTitle: string = this.configId ? 'Editar Empresa' : 'Agregar Empresa';
     public goBackUrl = '/settings/company'
     public isFormLoading = false;
 
-    // Mejorar esto para no tener que definirlas
-    isDeliverFormType = null;
-    isCompanyProfileFormType = null;
-    isAdminFormType = null;
-
     constructor(
-        private formService: FormService,
         private activeRoute: ActivatedRoute,
-        private affiliatedCompanyService: AffiliatedCompanyService,
-        private utils: UtilsService,
-        private router: Router,
+        private resolveForm: ResolveFormComponentService
     ) { }
 
     ngOnInit() {
-        this.isAffiliatedCompanyFormType = this.formService.isAffiliatedCompanyFormType(this.formType);
+        this.initForm()
     }
 
-    getForm(form: FormGroup): void {
-        this.isFormLoading = true;
-        if (this.configId) {
-            this.affiliatedCompanyService.update(form.value).subscribe(data => {
-                this.utils.openSnackBar('Se ha actualizado exitosamente');
-                setTimeout(() => {
-                    this.router.navigateByUrl(this.goBackUrl);
-                }, 2100);
-            }, err => {
-                this.isFormLoading = false;
-                this.utils.getSwalError();
-            });
-        }
-
-        if (!this.configId) {
-            this.affiliatedCompanyService.create(form.value).subscribe(data => {
-                this.utils.openSnackBar('Se ha creado exitosamente');
-                setTimeout(() => {
-                    this.router.navigateByUrl(this.goBackUrl);
-                }, 2100);
-            }, err => {
-                this.isFormLoading = false;
-                this.utils.getSwalError();
-            });
-        }
+    initForm() {
+        const viewContainerRef = this.appFormDirective.viewContainerRef;
+        this.resolveForm.loadComponent(
+            viewContainerRef,
+            this.formType,
+            {
+                isFormLoading: this.isFormLoading,
+                configId: this.configId,
+            }
+        );
     }
 }

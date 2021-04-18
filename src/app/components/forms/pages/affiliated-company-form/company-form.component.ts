@@ -5,6 +5,7 @@ import { AffiliatedCompanyService } from 'src/app/components/affiliated-company/
 import { UtilsService } from 'src/app/services/utils/utils.service';
 import { FormService } from 'src/app/components/forms/services/form/form.service';
 import { ImageModel } from 'src/app/model/imageModel';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-company-form',
@@ -21,6 +22,8 @@ export class CompanyFormComponent implements OnInit {
     public isDataLoaded = false;
     public companyImage: ImageModel;
     public imgResultAfterCompress: string;
+    public goBackUrl = '/settings/company'
+
 
     constructor(
         private fb: FormBuilder,
@@ -28,6 +31,7 @@ export class CompanyFormComponent implements OnInit {
         private affiliatedCompanyService: AffiliatedCompanyService,
         private utils: UtilsService,
         private formService: FormService,
+        private router: Router,
     ) { }
 
     ngOnInit() {
@@ -59,14 +63,23 @@ export class CompanyFormComponent implements OnInit {
     }
 
     private getCompany() {
-        this.affiliatedCompanyService.getById(this.configId).subscribe((company: any) => {
-            this.companyImage = company.img;
+        this.affiliatedCompanyService.getById(this.configId).subscribe((
+            {
+                name,
+                description,
+                coordinates,
+                addresss,
+                publish,
+                img
+            }: any
+        ) => {
+            this.companyImage = img;
             this.formGroup.patchValue({
-                name: company.name,
-                description: company.description,
-                coordinates: company.coordinates,
-                addresss: company.addresss,
-                publish: company.publish,
+                name,
+                description,
+                coordinates,
+                addresss,
+                publish,
             });
             this.isDataLoaded = true;
         }, err => {
@@ -88,6 +101,30 @@ export class CompanyFormComponent implements OnInit {
 
     onSubmit(form: FormGroup, image: string): void {
         form.value.image = this.formService.processImage(image, this.companyImage?._id);
-        this.formGroupEmitter.emit(form);
+        this.isFormLoading = true;
+
+        if (this.configId) {
+            this.affiliatedCompanyService.update(form.value).subscribe(data => {
+                this.utils.openSnackBar('Se ha actualizado exitosamente');
+                setTimeout(() => {
+                    this.router.navigateByUrl(this.goBackUrl);
+                }, 2100);
+            }, err => {
+                this.isFormLoading = false;
+                this.utils.getSwalError();
+            });
+        }
+
+        if (!this.configId) {
+            this.affiliatedCompanyService.create(form.value).subscribe(data => {
+                this.utils.openSnackBar('Se ha creado exitosamente');
+                setTimeout(() => {
+                    this.router.navigateByUrl(this.goBackUrl);
+                }, 2100);
+            }, err => {
+                this.isFormLoading = false;
+                this.utils.getSwalError();
+            });
+        }
     }
 }
