@@ -7,7 +7,6 @@ import { MatSelectOptions } from 'src/app/model/matSelectOptions';
 import { CompanyUsersService } from 'src/app/components/users/services/company-users/company-users.service';
 import { ImageModel } from 'src/app/model/imageModel';
 import { Router } from '@angular/router';
-import { RolesService } from 'src/app/components/users/services/roles/roles.service';
 
 @Component({
     selector: 'app-deliver-form',
@@ -46,7 +45,6 @@ export class DeliverFormComponent implements OnInit {
         private utils: UtilsService,
         private authService: AuthService,
         private router: Router,
-        private rolesService: RolesService
         ) { }
 
     ngOnInit() {
@@ -124,7 +122,7 @@ export class DeliverFormComponent implements OnInit {
             ]],
             image: [''],
             type: [CompanyUsersService.COMPANY_TYPE_DELIVER],
-            role: [''],
+            role: [CompanyUsersService.ROLE_WORKER],
             vehicle_type: [''],
             vehicle_image: [null],
             empresa: [this.companyId],
@@ -134,8 +132,6 @@ export class DeliverFormComponent implements OnInit {
         if ( this.configId ) {
             this.getDeliver();
         }
-
-        this.setRole();
     }
 
     private getDeliver() {
@@ -154,17 +150,6 @@ export class DeliverFormComponent implements OnInit {
         this.formGroup.patchValue({
             ...deliver,
         });
-    }
-
-    setRole() {
-        this.rolesService.getAll().subscribe((roles: any) => {
-            this.formGroup.patchValue({
-                role: roles.find(item => item.name === CompanyUsersService.ROLE_WORKER),
-            });
-        }, err => {
-            this.isDataLoaded = true;
-            this.isFormLoading = false;
-        })
     }
 
     private setPasswordValidators() {

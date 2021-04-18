@@ -6,7 +6,6 @@ import { AuthService } from 'src/app/components/auth/services/auth/auth.service'
 import { CompanyUsersService } from 'src/app/components/users/services/company-users/company-users.service';
 import { ImageModel } from 'src/app/model/imageModel';
 import { Router } from '@angular/router';
-import { RolesService } from 'src/app/components/users/services/roles/roles.service';
 
 @Component({
     selector: 'app-admin-form',
@@ -30,7 +29,6 @@ export class AdminFormComponent implements OnInit {
         private utils: UtilsService,
         private authService: AuthService,
         private router: Router,
-        private rolesService: RolesService,
     ) { }
 
     ngOnInit() {
@@ -108,7 +106,7 @@ export class AdminFormComponent implements OnInit {
             ]],
             image: [''],
             type: [CompanyUsersService.COMPANY_TYPE_DELIVER],
-            role: [''],
+            role: [CompanyUsersService.ROLE_ADMIN],
             empresa: [this.companyId],
             _id: [this.configId || null],
         });
@@ -116,8 +114,6 @@ export class AdminFormComponent implements OnInit {
         if ( this.configId ) {
             this.getUser();
         }
-
-        this.setRole();
     }
 
     getUser() {
@@ -136,17 +132,6 @@ export class AdminFormComponent implements OnInit {
         this.formGroup.patchValue({
             ...user,
         });
-    }
-
-    setRole() {
-        this.rolesService.getAll().subscribe((roles: any) => {
-            this.formGroup.patchValue({
-                role: roles.find(item => item.name === CompanyUsersService.ROLE_ADMIN),
-            });
-        }, err => {
-            this.isDataLoaded = true;
-            this.isFormLoading = false;
-        })
     }
 
     private setPasswordValidators() {
