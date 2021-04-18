@@ -15,6 +15,7 @@ export class ConfigUpdateDeliverComponent implements OnInit {
     public configId: string | null = this.activeRoute.snapshot.params.id || null;
     public isFormLoading = false;
     public pageTitle: string = this.configId ? 'Editar Username' : 'Agregar Repartidor';
+    public goBackUrl = '/settings/delivers';
 
     constructor(
         private activeRoute: ActivatedRoute,

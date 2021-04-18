@@ -15,6 +15,7 @@ export class ConfigUpdateAdminComponent implements OnInit {
     public configId: string | null = this.activeRoute.snapshot.params.id || null;
     public isFormLoading = false;
     public pageTitle: string = this.configId ? 'Editar Username' : 'Agregar Usuario';
+    public goBackUrl = '/settings/admins';
 
     constructor(
         private activeRoute: ActivatedRoute,
