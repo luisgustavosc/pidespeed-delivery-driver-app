@@ -18,9 +18,10 @@ import { UpdateAccountComponent } from 'src/app/components/profile/component/acc
 import { ConfigUpdateCompanyComponent } from 'src/app/components/profile/component/company/config-update-company.component';
 import { OrderListComponent } from './components/orders/pages/list/list.component';
 
-// Servicio de bloqueo de rutas
+// Guards
 import { AuthGuard } from 'src/app/components/auth/guard/auth/auth.guard';
 import { ActiveSessionGuard } from 'src/app/components/auth/guard/active-session/active-session.guard';
+import { AdminRoleGuard } from 'src/app/components/auth/guard/admin-role/admim-role.guard';
 
 const routes: Routes = [
     {
@@ -49,18 +50,65 @@ const routes: Routes = [
     {
         path: 'settings',
         children: [
-            { path: 'account', component: UpdateAccountComponent },
-            { path: 'admins', component: ConfigAdminsComponent },
-            { path: 'admins/add', component: ConfigUpdateAdminComponent },
-            { path: 'admins/:id', component: ConfigUpdateAdminComponent },
-            { path: 'company', component: ConfigCompanyComponent },
-            { path: 'company-profile', component: ConfigUpdateCompanyComponent },
-            { path: 'company/add', component: ConfigUpdateCompaniesComponent },
-            { path: 'company/:id', component: ConfigUpdateCompaniesComponent },
-            { path: 'delivers', component: ConfigDeliversComponent },
-            { path: 'delivers/add', component: ConfigUpdateDeliverComponent },
-            { path: 'delivers/:id', component: ConfigUpdateDeliverComponent },
-            { path: '', component: UpdateAccountComponent, pathMatch: 'full'}
+            {
+                path: 'account',
+                component: UpdateAccountComponent,
+            },
+            {
+                path: 'admins',
+                component: ConfigAdminsComponent,
+                canActivate: [AdminRoleGuard]
+            },
+            {
+                path: 'admins/add',
+                component: ConfigUpdateAdminComponent,
+                canActivate: [AdminRoleGuard]
+            },
+            {
+                path: 'admins/:id',
+                component: ConfigUpdateAdminComponent,
+                canActivate: [AdminRoleGuard]
+            },
+            {
+                path: 'company',
+                component: ConfigCompanyComponent,
+                canActivate: [AdminRoleGuard]
+            },
+            {
+                path: 'company-profile',
+                component: ConfigUpdateCompanyComponent,
+                canActivate: [AdminRoleGuard]
+            },
+            {
+                path: 'company/add',
+                component: ConfigUpdateCompaniesComponent,
+                canActivate: [AdminRoleGuard]
+            },
+            {
+                path: 'company/:id',
+                component: ConfigUpdateCompaniesComponent,
+                canActivate: [AdminRoleGuard]
+            },
+            {
+                path: 'delivers',
+                component: ConfigDeliversComponent,
+                canActivate: [AdminRoleGuard]
+            },
+            {
+                path: 'delivers/add',
+                component: ConfigUpdateDeliverComponent,
+                canActivate: [AdminRoleGuard]
+            },
+            {
+                path: 'delivers/:id',
+                component: ConfigUpdateDeliverComponent,
+                canActivate: [AdminRoleGuard]
+            },
+            {
+                path: '',
+                component: UpdateAccountComponent,
+                pathMatch: 'full',
+            }
         ],
         canActivate: [AuthGuard]
     },
