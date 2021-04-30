@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BottomNavModel } from 'src/app/model/bottomNav';
 import { BottomNavService } from 'src/app/components/common/bottom-nav/service/bottom-nav.service';
+import { OrderService } from '../../services/order/order.service';
+import { UtilsService } from 'src/app/services/utils/utils.service';
+import { DateService } from 'src/app/services/utils/dateService/dates.service';
 
 @Component({
     selector: 'app-list',
@@ -12,15 +15,22 @@ export class OrderListComponent implements OnInit {
     public bottomNavData: Array<BottomNavModel> = this.bottomNavService.getOrdersBottomNavData();
     public orderStatus: string | null = this.activeRoute.snapshot.params.status || 'to-do';
 
-    public orders = true;
+    public orders = null;
+    public activeOrder = null
     public isOrderDetailActive: boolean;
+    public defaultImage = 'https://storage.googleapis.com/pidespeed-storage/web/default_user.svg';
 
     constructor(
         private activeRoute: ActivatedRoute,
         private bottomNavService: BottomNavService,
+        private orderService: OrderService,
+        private utils: UtilsService,
+        private dateService: DateService
     ) { }
 
-    ngOnInit() { }
+    ngOnInit() {
+        this.getOrders();
+    }
 
     private toggleOrderDetail(): void {
         this.isOrderDetailActive = !this.isOrderDetailActive;
@@ -41,8 +51,22 @@ export class OrderListComponent implements OnInit {
         }
     }
 
-    getActiveOrder(id: string) {
+    private getOrders() {
+        this.orderService.getAll().subscribe(orders => {
+            this.orders = orders;
+            console.log(orders);
+
+        }, err => {
+            this.utils.getSwalError();
+        })
+    }
+
+    setActiveOrder(order: object) {
         this.toggleOrderDetail();
-        console.log(id);
+        this.activeOrder = order
+    }
+
+    getTimeFromCreated(createdAt: string) {
+        return this.dateService.getTimeAgo(createdAt);
     }
 }

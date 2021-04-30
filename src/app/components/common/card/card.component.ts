@@ -13,6 +13,9 @@ export class CardComponent implements OnInit {
 
     // Card type 2
     @Input() public isPidespeedOrder: boolean;
+    @Input() public imageSrc: string;
+    @Input() public imageAlt: string;
+    @Input() public subText: string;
 
     // Card type 3
     @Input() public dataId?: number = null;

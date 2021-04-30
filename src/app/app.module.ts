@@ -97,6 +97,7 @@ import { DashboardService } from 'src/app/components/dashboard/services/dashboar
 import { CompanyProfileService } from 'src/app/components/profile/service/companyProfile.service';
 import { WebSocketService } from 'src/app/services/webSocket/web-socket.service';
 import { ResolveFormComponentService } from 'src/app/components/forms/services/resolve-component/resolveFormComponent.service';
+import { DateService } from './services/utils/dateService/dates.service';
 import * as Sentry from '@sentry/angular';
 
 /**
@@ -205,6 +206,7 @@ export function jwtTokenAdminGetter() {
         NgxImageCompressService,
         ResolveFormComponentService,
         RolesService,
+        DateService,
     ],
     bootstrap: [AppComponent]
 })
