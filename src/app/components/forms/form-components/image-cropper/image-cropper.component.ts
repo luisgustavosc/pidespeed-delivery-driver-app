@@ -2,7 +2,7 @@ import { Component, OnInit, ChangeDetectorRef, Input, EventEmitter, Output } fro
 import { NgxImageCompressService } from 'ngx-image-compress';
 import { ImageCroppedEvent, ImageTransform } from 'ngx-image-cropper'
 import { ImageCropperSettings } from 'src/app/model/imageCropperSettings';
-import { ActionService } from 'src/app/services/action/action.service';
+import { UtilsService } from 'src/app/services/utils/utils.service';
 
 @Component({
     selector: 'app-image-cropper',
@@ -19,7 +19,7 @@ export class ImageCropperComponent implements OnInit {
     private transform: ImageTransform = {};
     private rotation = 0;
 
-    constructor(private cdRef: ChangeDetectorRef, private actionService: ActionService, private imageCompress: NgxImageCompressService) { }
+    constructor(private cdRef: ChangeDetectorRef, private utils: UtilsService, private imageCompress: NgxImageCompressService) { }
 
     ngOnInit() {
         /*
@@ -48,7 +48,7 @@ export class ImageCropperComponent implements OnInit {
     }
 
     loadImageFailed() {
-        this.actionService.getSwalError('El formato no es válido', 'La imagen debe ser png, jpg o jpeg');
+        this.utils.getSwalError('El formato no es válido', 'La imagen debe ser png, jpg o jpeg');
     }
 
     rotateLeft() {

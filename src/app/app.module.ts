@@ -30,28 +30,42 @@ import { ImagePipe } from './pipes/image.pipe';
  */
 // Pages
 import { AppComponent } from 'src/app/app.component';
-import { DashboardComponent } from 'src/app/components/dashboard/pages/dashboard/dashboard.component';
-import { LoginComponent } from 'src/app/components/auth/pages/login/login.component';
-import { Error503Component } from 'src/app/components/error/error503/error503.component';
-import { DeliversComponent } from 'src/app/components/pages/delivers/list/delivers.component';
-import { DeliversLocationComponent } from 'src/app/components/pages/delivers/location/delivers-location.component';
-import { ConfigDeliversComponent } from 'src/app/components/pages/config-delivers/config-delivers.component';
-import { ConfigCompanyComponent } from 'src/app/components/pages/config-company/config-company.component';
-import { ConfigAdminsComponent } from 'src/app/components/pages/config-admins/config-admins.component';
-import { ConfigUpdateDeliverComponent } from 'src/app/components/pages/config-update/config-update-deliver/config-update-deliver.component';
-import { ConfigUpdateCompaniesComponent } from 'src/app/components/pages/config-update/config-update-affiliated-company/config-update-company.component';
-import { ConfigUpdateAdminComponent } from 'src/app/components/pages/config-update/config-update-admin/config-update-admin.component';
-import { HelpComponent } from 'src/app/components/pages/help/help.component';
-import { ConfigUpdateCompanyComponent } from './components/pages/config-update/config-update-company-profile/config-update-company.component';
-import { ListComponent } from './components/orders/pages/list/list.component';
-import { OrderDetailComponent } from './components/orders/pages/order-detail/order-detail.component';
 
-// Forms
-import { UpdateAccountComponent } from './components/pages/config-update/update-account/update-account.component';
+import { DashboardComponent } from 'src/app/components/dashboard/pages/dashboard/dashboard.component';
+// Auth
+import { LoginComponent } from 'src/app/components/auth/pages/login/login.component';
+
+// Errors
+import { Error503Component } from 'src/app/components/error/error503/error503.component';
+
+// Delivers
+import { DeliversComponent } from 'src/app/components/users/delivers/list/delivers.component';
+import { DeliversLocationComponent } from 'src/app/components/users/delivers/location/delivers-location.component';
+import { ConfigUpdateDeliverComponent } from 'src/app/components/users/delivers/update/config-update-deliver.component';
+import { ConfigDeliversComponent } from 'src/app/components/users/delivers/list-config/config-delivers.component';
 import { DeliverFormComponent } from 'src/app/components/forms/pages/deliver-form/deliver-form.component';
+
+// Affiliated company
+import { ConfigCompanyComponent } from 'src/app/components/affiliated-company/component/list/config-company.component';
+import { ConfigUpdateCompaniesComponent } from 'src/app/components/affiliated-company/component/update/config-update-company.component';
 import { CompanyFormComponent } from 'src/app/components/forms/pages/affiliated-company-form/company-form.component';
+
+// Admins
+import { ConfigAdminsComponent } from 'src/app/components/users/admins/list-config/config-admins.component';
+import { ConfigUpdateAdminComponent } from 'src/app/components/users/admins/update/config-update-admin.component';
 import { AdminFormComponent } from 'src/app/components/forms/pages/admin-form/admin-form.component';
+
+// Help
+import { HelpComponent } from 'src/app/components/help/page/help.component';
+
+// Profile
+import { ConfigUpdateCompanyComponent } from 'src/app/components/profile/component/company/config-update-company.component';
+import { UpdateAccountComponent } from 'src/app/components/profile/component/account/update-account.component';
 import { CompanyProfileFormComponent } from './components/forms/pages/company-profile-form/company-profile-form.component';
+
+// Orders
+import { OrderListComponent } from './components/orders/pages/list/list.component';
+import { OrderDetailComponent } from './components/orders/pages/order-detail/order-detail.component';
 
 // Form Components
 import { MatInputFieldComponent } from 'src/app/components/forms/form-components/mat-input-field/mat-input-field.component';
@@ -69,7 +83,7 @@ import { NavComponent } from 'src/app/components/common/nav/nav.component';
 import { MobileMenuComponent } from 'src/app/components/common/mobile-menu/mobile-menu.component';
 import { CardComponent } from 'src/app/components/common/card/card.component';
 import { AdminRowComponent } from 'src/app/components/common/admin-row/admin-row.component';
-import { BottomNavComponent } from 'src/app/components/common/bottom-nav/bottom-nav.component';
+import { BottomNavComponent } from 'src/app/components/common/bottom-nav/component/bottom-nav.component';
 import { ModalFormComponent } from 'src/app/components/common/modal-form/modal-form.component'
 import { FloatingButtonComponent } from 'src/app/components/common/button/floating-button/floating-button.component';
 import { PageLoaderComponent } from './components/common/page-loader/page-loader.component';
@@ -80,9 +94,17 @@ import { ActionButtonComponent } from './components/common/button/action-button/
  */
 import { AuthService } from 'src/app/components/auth/services/auth/auth.service';
 import { DashboardService } from 'src/app/components/dashboard/services/dashboard/dashboard.service';
-import { CompanyProfileService } from 'src/app/services/company-profile/companyProfile.service';
+import { CompanyProfileService } from 'src/app/components/profile/service/companyProfile.service';
 import { WebSocketService } from 'src/app/services/webSocket/web-socket.service';
+import { ResolveFormComponentService } from 'src/app/components/forms/services/resolve-component/resolveFormComponent.service';
+import { DateService } from './services/utils/dateService/dates.service';
 import * as Sentry from '@sentry/angular';
+
+/**
+ * @Directive
+ */
+import { AppFormDirective } from './components/forms/directive/directive';
+import { RolesService } from './components/users/services/roles/roles.service';
 
 export function jwtTokenGetter() {
     return localStorage.getItem('ACCESS_TOKEN');
@@ -131,9 +153,10 @@ export function jwtTokenAdminGetter() {
         UpdateAccountComponent,
         ConfigUpdateCompanyComponent,
         CompanyProfileFormComponent,
-        ListComponent,
+        OrderListComponent,
         ActionButtonComponent,
         OrderDetailComponent,
+        AppFormDirective,
     ],
     imports: [
         BrowserModule,
@@ -180,7 +203,10 @@ export function jwtTokenAdminGetter() {
         DashboardService,
         CompanyProfileService,
         WebSocketService,
-        NgxImageCompressService
+        NgxImageCompressService,
+        ResolveFormComponentService,
+        RolesService,
+        DateService,
     ],
     bootstrap: [AppComponent]
 })

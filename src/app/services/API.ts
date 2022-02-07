@@ -5,6 +5,7 @@ const headers = new HttpHeaders({
 });
 const options = { headers };
 const AUTH_SERVER = 'http://localhost:5000/api';
+// const AUTH_SERVER = 'https://d7bf5c73d0e3.ngrok.io/api';
 // const AUTH_SERVER = 'https://server.pidespeed.com/api';
 const IMAGE_SERVER = 'https://storage.googleapis.com/pidespeed-storage';
 

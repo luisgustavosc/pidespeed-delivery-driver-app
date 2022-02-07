@@ -4,33 +4,34 @@
   <div class="mt-5 pt-5 pb-4">
     <div class="row mx-auto">
       <app-card
-        (click)="getActiveOrder(2);"
+      *ngFor="let order of orders"
+        (click)="setActiveOrder(order);"
         class="col-6 mb-3"
         [cardType]='2'
         [isPidespeedOrder]='true'
         [cardTitle]="'Docs Food & Grill'"
-        [cardSubtitle]="'Eduardo lopez'">
+        [cardSubtitle]="order.worker ? order.worker.name : 'Sin Asignar'"
+        [subText]="getTimeFromCreated(order.createdAt)"
+        [imageSrc]='order.worker ? order.worker.img : defaultImage'
+        [imageAlt]="'Deliver Profile Image'"
+        >
       </app-card>
-
-      <app-card
-      (click)="getActiveOrder(1);"
-      class="col-6 mb-3"
-      [cardType]='2'
-      [isPidespeedOrder]='false'
-      [cardTitle]="'Docs Food & Grill'"
-      [cardSubtitle]="'Eduardo lopez'">
-    </app-card>
-
     </div>
   </div>
 
-  <button *ngIf="isOrderDetailActive" (click)="toggleOrderDetail();" id="toggle_list_btn" mat-mini-fab class="bg-white text-dark mr-2 fade-animation-in-right">
+  <button
+    *ngIf="isOrderDetailActive"
+    (click)="toggleOrderDetail();"
+    id="toggle_list_btn"
+    mat-mini-fab
+    class="bg-white text-dark mr-2 fade-animation-in-right"
+  >
     <mat-icon>close</mat-icon>
   </button>
 
   <div id="toggle_list" class="position-relative d-none overflow-hidden z-index-10 custom-shadow-sm">
     <div class="position-fixed right-0 left-0 bottom-0 container pt-3 bg-white">
-      <app-order-detail [order]="order"></app-order-detail>
+      <app-order-detail [order]="activeOrder"></app-order-detail>
     </div>
   </div>
 </div>

@@ -14,18 +14,18 @@ export class AuthGuard implements CanActivate {
 
     canActivate() {
         this.authService.isTokenValid().subscribe(() => { }, err => {
-          console.log(err.error)
-          if (err.error.message && (err.error.message === 'Invalid session' || err.error.message === 'Expired session')) {
-            this.router.navigate(['/login']);
-            this.authService.logout();
-          }
+            console.log(err.error)
+            if (err.error.message && (err.error.message === 'Invalid session' || err.error.message === 'Expired session')) {
+                this.router.navigate(['/login']);
+                this.authService.logout();
+            }
         })
         if (this.authService.getAccessToken()) {
-          return true;
+            return true;
         } else {
-          this.router.navigate(['/login']);
-          this.authService.logout();
-          return false;
+            this.router.navigate(['/login']);
+            this.authService.logout();
+            return false;
         }
-      }
+    }
 }

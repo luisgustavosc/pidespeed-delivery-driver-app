@@ -5,22 +5,23 @@ import { Routes, RouterModule } from '@angular/router';
 import { DashboardComponent } from 'src/app/components/dashboard/pages/dashboard/dashboard.component';
 import { LoginComponent } from 'src/app/components/auth/pages/login/login.component';
 import { Error503Component } from 'src/app/components/error/error503/error503.component';
-import { DeliversComponent } from 'src/app/components/pages/delivers/list/delivers.component';
-import { DeliversLocationComponent } from 'src/app/components/pages/delivers/location/delivers-location.component';
-import { ConfigDeliversComponent } from 'src/app/components/pages/config-delivers/config-delivers.component';
-import { ConfigCompanyComponent } from 'src/app/components/pages/config-company/config-company.component';
-import { ConfigAdminsComponent } from 'src/app/components/pages/config-admins/config-admins.component';
-import { ConfigUpdateDeliverComponent } from 'src/app/components/pages/config-update/config-update-deliver/config-update-deliver.component';
-import { ConfigUpdateCompaniesComponent } from 'src/app/components/pages/config-update/config-update-affiliated-company/config-update-company.component';
-import { ConfigUpdateAdminComponent } from 'src/app/components/pages/config-update/config-update-admin/config-update-admin.component';
-import { HelpComponent } from 'src/app/components/pages/help/help.component';
-import { UpdateAccountComponent } from './components/pages/config-update/update-account/update-account.component';
-import { ConfigUpdateCompanyComponent } from './components/pages/config-update/config-update-company-profile/config-update-company.component';
-import { ListComponent } from './components/orders/pages/list/list.component';
+import { DeliversComponent } from 'src/app/components/users/delivers/list/delivers.component';
+import { DeliversLocationComponent } from 'src/app/components/users/delivers/location/delivers-location.component';
+import { ConfigDeliversComponent } from 'src/app/components/users/delivers/list-config/config-delivers.component';
+import { ConfigCompanyComponent } from 'src/app/components/affiliated-company/component/list/config-company.component';
+import { ConfigAdminsComponent } from 'src/app/components/users/admins/list-config/config-admins.component';
+import { ConfigUpdateDeliverComponent } from 'src/app/components/users/delivers/update/config-update-deliver.component';
+import { ConfigUpdateCompaniesComponent } from 'src/app/components/affiliated-company/component/update/config-update-company.component';
+import { ConfigUpdateAdminComponent } from 'src/app/components/users/admins/update/config-update-admin.component';
+import { HelpComponent } from 'src/app/components/help/page/help.component';
+import { UpdateAccountComponent } from 'src/app/components/profile/component/account/update-account.component';
+import { ConfigUpdateCompanyComponent } from 'src/app/components/profile/component/company/config-update-company.component';
+import { OrderListComponent } from './components/orders/pages/list/list.component';
 
-// Servicio de bloqueo de rutas
+// Guards
 import { AuthGuard } from 'src/app/components/auth/guard/auth/auth.guard';
 import { ActiveSessionGuard } from 'src/app/components/auth/guard/active-session/active-session.guard';
+import { AdminRoleGuard } from 'src/app/components/auth/guard/admin-role/admim-role.guard';
 
 const routes: Routes = [
     {
@@ -49,26 +50,73 @@ const routes: Routes = [
     {
         path: 'settings',
         children: [
-            { path: 'account', component: UpdateAccountComponent },
-            { path: 'admins', component: ConfigAdminsComponent },
-            { path: 'admins/add', component: ConfigUpdateAdminComponent },
-            { path: 'admins/:id', component: ConfigUpdateAdminComponent },
-            { path: 'company', component: ConfigCompanyComponent },
-            { path: 'company-profile', component: ConfigUpdateCompanyComponent },
-            { path: 'company/add', component: ConfigUpdateCompaniesComponent },
-            { path: 'company/:id', component: ConfigUpdateCompaniesComponent },
-            { path: 'delivers', component: ConfigDeliversComponent },
-            { path: 'delivers/add', component: ConfigUpdateDeliverComponent },
-            { path: 'delivers/:id', component: ConfigUpdateDeliverComponent },
-            { path: '', component: UpdateAccountComponent, pathMatch: 'full'}
+            {
+                path: 'account',
+                component: UpdateAccountComponent,
+            },
+            {
+                path: 'admins',
+                component: ConfigAdminsComponent,
+                canActivate: [AdminRoleGuard]
+            },
+            {
+                path: 'admins/add',
+                component: ConfigUpdateAdminComponent,
+                canActivate: [AdminRoleGuard]
+            },
+            {
+                path: 'admins/:id',
+                component: ConfigUpdateAdminComponent,
+                canActivate: [AdminRoleGuard]
+            },
+            {
+                path: 'company',
+                component: ConfigCompanyComponent,
+                canActivate: [AdminRoleGuard]
+            },
+            {
+                path: 'company-profile',
+                component: ConfigUpdateCompanyComponent,
+                canActivate: [AdminRoleGuard]
+            },
+            {
+                path: 'company/add',
+                component: ConfigUpdateCompaniesComponent,
+                canActivate: [AdminRoleGuard]
+            },
+            {
+                path: 'company/:id',
+                component: ConfigUpdateCompaniesComponent,
+                canActivate: [AdminRoleGuard]
+            },
+            {
+                path: 'delivers',
+                component: ConfigDeliversComponent,
+                canActivate: [AdminRoleGuard]
+            },
+            {
+                path: 'delivers/add',
+                component: ConfigUpdateDeliverComponent,
+                canActivate: [AdminRoleGuard]
+            },
+            {
+                path: 'delivers/:id',
+                component: ConfigUpdateDeliverComponent,
+                canActivate: [AdminRoleGuard]
+            },
+            {
+                path: '',
+                component: UpdateAccountComponent,
+                pathMatch: 'full',
+            }
         ],
         canActivate: [AuthGuard]
     },
     {
         path: 'orders',
         children: [
-            { path: ':status', component: ListComponent },
-            { path: '', component: ListComponent },
+            { path: ':status', component: OrderListComponent },
+            { path: '', component: OrderListComponent },
         ],
         canActivate: [AuthGuard]
     },

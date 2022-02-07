@@ -1,17 +1,17 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { FormService } from 'src/app/components/forms/services/form/form.service';
-import { ActionService } from 'src/app/services/action/action.service';
+import { UtilsService } from 'src/app/services/utils/utils.service';
 import { AuthService } from 'src/app/components/auth/services/auth/auth.service';
-import { CompanyUsersService } from 'src/app/services/company-users/company-users.service';
+import { CompanyUsersService } from 'src/app/components/users/services/company-users/company-users.service';
 import { ImageModel } from 'src/app/model/imageModel';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-admin-form',
     templateUrl: './admin-form.component.html',
 })
 export class AdminFormComponent implements OnInit {
-    @Output() public formGroupEmitter: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
     @Input() public isFormLoading = false;
     @Input() public configId: string;
     public formGroup: FormGroup;
@@ -20,17 +20,25 @@ export class AdminFormComponent implements OnInit {
     public companyId: string;
     public isDataLoaded = false;
     public isPasswordVisible: boolean;
+    public goBackUrl = '/settings/admins';
 
     constructor(
         private fb: FormBuilder,
         private formService: FormService,
         private companyUsersService: CompanyUsersService,
-        private actionService: ActionService,
-        private authService: AuthService) { }
+        private utils: UtilsService,
+        private authService: AuthService,
+        private router: Router,
+    ) { }
 
     ngOnInit() {
         this.companyId = this.authService.getCurrentUser().empresaDelivery;
         this.isPasswordVisible = this.configId ? false : true;
+        this.initForm();
+        this.setPasswordValidators();
+    }
+
+    initForm() {
         this.formGroup = this.fb.group({
             nombre: ['', [
                 Validators.required,
@@ -97,43 +105,33 @@ export class AdminFormComponent implements OnInit {
                 Validators.maxLength(100),
             ]],
             image: [''],
-            type: [CompanyUsersService.TYPE_COMPANY],
+            type: [CompanyUsersService.COMPANY_TYPE_DELIVER],
+            role: [CompanyUsersService.ROLE_ADMIN],
             empresa: [this.companyId],
             _id: [this.configId || null],
         });
-        if (this.configId) this.getUser();
-        this.setPasswordValidators();
+
+        if ( this.configId ) {
+            this.getUser();
+        }
     }
 
-    private getUser() {
+    getUser() {
         this.companyUsersService.getById(this.configId).subscribe((user: any) => {
-            const {
-                nombre,
-                apellido,
-                img,
-                email,
-                cedula,
-                telefono,
-                username,
-                direccion
-            } = user;
-
-            this.userImageUrl = img;
-            this.formGroup.patchValue({
-                nombre,
-                apellido,
-                email,
-                cedula,
-                telefono,
-                username,
-                direccion,
-            });
             this.isDataLoaded = true;
+            this.setFormData(user);
         }, err => {
             this.isDataLoaded = true;
             this.isFormLoading = false;
-            this.actionService.back();
+            this.utils.redirectBack();
         })
+    }
+
+    setFormData(user) {
+        this.userImageUrl = user.img;
+        this.formGroup.patchValue({
+            ...user,
+        });
     }
 
     private setPasswordValidators() {
@@ -161,6 +159,30 @@ export class AdminFormComponent implements OnInit {
 
     onSubmit(form: FormGroup, image: string): void {
         form.value.image = this.formService.processImage(image, this.userImageUrl?._id);
-        this.formGroupEmitter.emit(form);
+        this.isFormLoading = true;
+
+        if (this.configId) {
+            this.companyUsersService.update(form.value).subscribe(data => {
+                this.utils.openSnackBar('Se ha actualizado exitosamente');
+                setTimeout(() => {
+                    this.router.navigateByUrl(this.goBackUrl);
+                }, 2100);
+            }, err => {
+                this.isFormLoading = false;
+                this.utils.getSwalError();
+            });
+        }
+
+        if (!this.configId) {
+            this.companyUsersService.create(form.value).subscribe(data => {
+                this.utils.openSnackBar('Se ha creado exitosamente');
+                setTimeout(() => {
+                    this.router.navigateByUrl(this.goBackUrl);
+                }, 2100);
+            }, err => {
+                this.isFormLoading = false;
+                this.utils.getSwalError();
+            });
+        }
     }
 }

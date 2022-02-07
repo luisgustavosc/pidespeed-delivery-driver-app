@@ -14,67 +14,19 @@
               <span class="material-icons">home</span> Inicio
             </a>
           </li>
-          <!-- <li class="nav-item">
-            <a
-              [class.active]="rla?.isActive"
-              routerLinkActive="active"
-              class="nav-link"
-              data-toggle="collapse"
-              aria-expanded="false"
-              data-target="#delivers-submenu"
-              aria-controls="delivers-submenu">
-              <span class="material-icons">groups</span>
-              Repartidores
-            </a>
-            <div id="delivers-submenu" class="collapse submenu">
-              <ul class="nav flex-column">
-                <li class="nav-item">
-                  <a class="nav-link" [routerLink]="[ '/delivers']" #rla="routerLinkActive" routerLinkActive="active">Ver Repartidores</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" [routerLink]="[ '/products/accompaniments']" routerLinkActive="active">Ubicación</a>
-                </li>
-              </ul>
-            </div>
-          </li> -->
-          <li class="nav-item ">
+          <li class="nav-item" *ngIf="isAdmin()">
             <a [routerLink]="[ '/delivers']" routerLinkActive="active" class="nav-link text-capitalize">
               <span class="material-icons">groups</span>
               Repartidores
             </a>
           </li>
-          <li class="nav-item ">
+          <li class="nav-item">
             <a [routerLink]="[ '/orders/to-do']" routerLinkActive="active" class="nav-link text-capitalize">
               <span class="material-icons">
                 list_alt
               </span>
               <span matBadge="{{ '2' }}" matBadgeColor="white">Órdenes </span>
             </a>
-          </li>
-          <li class="nav-item">
-            <a
-              [class.active]="rlaInvoice?.isActive"
-              routerLinkActive="active"
-              class="nav-link"
-              data-toggle="collapse"
-              aria-expanded="false"
-              data-target="#invoices-submenu"
-              aria-controls="invoices-submenu">
-              <span class="material-icons">
-                receipt
-              </span>
-              Facturación
-            </a>
-            <div id="invoices-submenu" class="collapse submenu">
-              <ul class="nav flex-column">
-                <li class="nav-item">
-                  <a class="nav-link" [routerLink]="[ '/invoice/resume']" routerLinkActive="active">Resumen</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" [routerLink]="[ '/invoice']" #rlaInvoice="routerLinkActive" routerLinkActive="active">Recibos</a>
-                </li>
-              </ul>
-            </div>
           </li>
           <li class="nav-item">
             <a
@@ -92,19 +44,19 @@
             </a>
             <div id="settings-submenu" class="collapse submenu">
               <ul class="nav flex-column">
-                <li class="nav-item">
+                <li class="nav-item" *ngIf="isAdmin()">
                   <a class="nav-link" [routerLink]="[ '/settings/delivers']" #rlaConfig="routerLinkActive" routerLinkActive="active">Repartidores</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" *ngIf="isAdmin()">
                   <a class="nav-link" [routerLink]="[ '/settings/company']" #rlaConfig="routerLinkActive" routerLinkActive="active">Empresas afiliadas</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" *ngIf="isAdmin()">
                   <a class="nav-link" [routerLink]="[ '/settings/admins']" #rlaConfig="routerLinkActive" routerLinkActive="active">Usuarios</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" *ngIf="isAdmin()">
                   <a class="nav-link" [routerLink]="[ '/settings/company-profile']" #rlaConfig="routerLinkActive" routerLinkActive="active">Perfil de empresa</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" *ngIf="isWorker()">
                   <a class="nav-link" [routerLink]="[ '/settings/account']" #rlaConfig="routerLinkActive" routerLinkActive="active">Cuenta</a>
                 </li>
               </ul>

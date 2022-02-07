@@ -3,7 +3,6 @@
 @import "../../node_modules/animate.css/animate.min";
 
 @import "shared/colors";
-@import "variables";
 @import "theme";
 
 // Theme styles
@@ -11,7 +10,7 @@
 @import "components/theme-custom-style";
 
 // Our Styles
-@import "material-theme";
+@import "vendor/material-theme";
 @import "custom-material-styles";
 @import "general";
 

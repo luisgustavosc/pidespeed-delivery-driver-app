@@ -23,11 +23,11 @@
       <span *ngIf="!isPidespeedOrder" class="material-icons mr-2 font-20">
         shopping_basket
       </span>
-      <small>Algun motivo</small>
+      <small>{{ subText }}</small>
     </div>
     <h5  class="h6 mb-2 mt-3">{{ cardTitle }}</h5>
     <div class="d-flex align-items-center">
-      <img src="https://generated.photos/vue-static/home/hero/6.png" class="w-xs-25p mr-2" alt="">
+      <img src="{{ imageSrc }}" class="w-xs-25p mr-2" alt="{{ imageAlt }}">
       <small class="mb-0">{{ cardSubtitle }}</small>
     </div>
   </div>

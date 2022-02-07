@@ -1,4 +1,4 @@
-<h5>Order: 545w4dw</h5>
+<h5>Order: {{ order?.code }}</h5>
 <mat-accordion>
   <mat-expansion-panel class="card mt-3">
     <mat-expansion-panel-header class="px-3">
@@ -7,8 +7,9 @@
       </mat-panel-title>
     </mat-expansion-panel-header>
     <ul class="px-2">
-      <li>Nombre: Luis Sanchez</li>
-      <li>Telefono: 412541554</li>
+      <li>Nombre: {{ client?.nombre }} {{ client?.apellido }}</li>
+      <li>Telefono: {{ client?.telefono1 }}</li>
+      <li>Correo: {{ client?.email }}</li>
     </ul>
   </mat-expansion-panel>
 </mat-accordion>
